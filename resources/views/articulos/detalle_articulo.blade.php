@@ -13,7 +13,7 @@
 						<span>
 							<h2>Detalles de Articulo<h2>
 						</span>
-						<a  href="{{ route('mostrarTodosArt')}}" 
+						<a  href="redirect()->back()" 
 							class="btn btn-primary btn-sm">
 							Volver ...
 						</a>

@@ -13,7 +13,7 @@
                         <span>
                           Agregar Articulo
                         </span>
-                        <a href="{{route('bienvenidos')}}" class="btn btn-primary btn-sm">
+                        <a href="{{route('dashboard')}}" class="btn btn-primary btn-sm">
                             Volver ...
                         </a>
                     </div>

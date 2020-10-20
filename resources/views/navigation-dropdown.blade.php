@@ -40,18 +40,11 @@
                     {{ __('Crear Articulo') }}
                 
                     </x-jet-nav-link>
- 
-                        <!-- 
-                            <x-slot name="trigger">
-                                <button>Show More...</button>
-                            </x-slot>
-
-                            <ul>
-                                <li><button wire:click="archive">Archive</button></li>
-                                <li><button wire:click="delete">Delete</button></li>
-                            </ul>
-                         -->
-                            
+                    <x-jet-nav-link href="{{ route('nueva_venta') }}" 
+                    :active="request()->routeIs('nueva_venta')">
+                {{ __('Nueva Venta') }}
+            
+                </x-jet-nav-link> 
                         
                     
                 </div>
