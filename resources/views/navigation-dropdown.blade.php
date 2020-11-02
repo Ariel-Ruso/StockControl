@@ -36,17 +36,27 @@
                                     
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('crear_articulo') }}" 
-                        :active="request()->routeIs('crear_articulo')">
-                    {{ __('Crear Articulo') }}
+                                    :active="request()->routeIs('crear_articulo')">
+                                        {{ __('Crear Articulo') }}
                 
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('nueva_venta') }}" 
-                    :active="request()->routeIs('nueva_venta')">
-                {{ __('Nueva Venta') }}
+                                    :active="request()->routeIs('nueva_venta')">
+                                        {{ __('Nueva Venta') }}
             
-                </x-jet-nav-link> 
-                        
-                    
+                    </x-jet-nav-link> 
+                    <x-jet-nav-link href="{{ route('mostrarTodos') }}" 
+                                    :active="request()->routeIs('mostrarTodos')">
+                                        {{ __('Mostrar Usuarios') }}
+                    </x-jet-nav-link> 
+                    <x-jet-nav-link href="{{ route('trabajos') }}" 
+                                    :active="request()->routeIs('trabajos')">
+                                        {{ __('Traza') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="" 
+                                    :active="request()->routeIs('trabajos')">
+                                        {{ __('Carrito')   }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

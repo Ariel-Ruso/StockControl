@@ -4,8 +4,15 @@
             {{ __('Carrito Compras') }}
         </h2>
     </x-slot>
+     <!-- espacio para mensajes -->
+     <div class="alert alert-success mt-3">
+        @if (session('mensaje'))
+           {{ session( 'mensaje' ) }}        
+        @endif
+     </div>
+    <br>
     
-    <div class="container mt-10">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -16,9 +23,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif             
-                
-                    <?php $valor=0 ?>
-                    
                     @if(session('carrito'))
                         <table class="table table-bordered">
                             <thead >
@@ -30,7 +34,7 @@
                                         Precio Unitario
                                     </th>
                                     <th>
-                                        Cantidad
+                                        Cant / Disp
                                     </th>
                                    
                                     {{-- <th>
@@ -46,18 +50,20 @@
                             </thead>
 
                         @foreach (session('carrito') as $id => $detalle)
+                        
                         <!-- recorro carrito  -->
-                            <?php $valor += $detalle['Precio'] * $detalle['Cantidad'] ?>
+                            <?php $total += $detalle['Precio'] * $detalle['Cantidad'] ?>
 
                             <tr>
                                 <th  class="font-weight-normal" >
                                     {{ $detalle['Nombre'] }}
                                 </th>
                                 <th  class="font-weight-normal" >
-                                    $ {{ $detalle['Precio'] }}
+                                    $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
                                 <th  class="font-weight-normal" > 
                                     {{ $detalle['Cantidad'] }}
+                                    / {{ $detalle['Disponible'] }}
                                 </th>
                                 <th>
                                     <a  href="{{ url ('agregar/' .$id )  }}"
@@ -70,7 +76,7 @@
                                     </a>
                                 </th>
                                 <th  class="font-weight-normal" >
-                                    $ {{ $detalle['Precio'] * $detalle['Cantidad'] }}
+                                    $ {{ number_format($detalle['SubTotal'],2) }}
                                 </th>
                                 {{-- <th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
@@ -81,7 +87,7 @@
                         <tr>
                             <td colspan= "12" align="right" >
                                 <h3>
-                                    Total $ {{ $valor }}
+                                    Total $ {{ number_format ($total,2) }}
                                 </h3>
                             </td>
                         </tr>
@@ -94,18 +100,26 @@
                     @endif
                     
                     <div>
-                        <a href=" {{ route('nueva_venta') }}" class="btn btn-warning" >
-                            Seguir Comprando
+                        <a  href=" {{ route('nueva_venta') }}" 
+                            class="btn btn-warning" >
+                                Seguir Comprando
                         </a>
-                        <a href=" {{ route('nueva_venta') }}" class="btn btn-success align= right" >
-                            Terminar Compra
+                        <a  href=" {{ route('detallePedido') }}" 
+                            class="btn btn-success align= right" >
+                                Terminar Compra
                         </a>
                     </div>
                     <div>
                         <br>
-                        <a href="{{ url('verSession') }}" class= "btn btn-secondary">
-                            Ver Session             
+                        <a  href="{{ url('verSession') }}" 
+                            class= "btn btn-secondary">
+                                Ver Session             
                         </a>
+                        <a  href="{{ url('borrarCarr') }}" 
+                            class= "btn btn-danger">
+                                Vaciar Carrito
+                        </a>
+                        
                     </div>
                     <br>
                     <tr colspane> 
@@ -128,10 +142,10 @@
                                     </button>
                                 </div>
                             </form>
-                    </tr>
+                        </tr>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </x-app-layout>

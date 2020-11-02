@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catergoria;
+use App\Models\Factura;
 use Illuminate\Http\Request;
 
-class CatergoriaController extends Controller
+class FacturaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CatergoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Catergoria  $catergoria
+     * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Catergoria $catergoria)
+    public function show(Factura $factura)
     {
         //
     }
@@ -52,10 +52,10 @@ class CatergoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Catergoria  $catergoria
+     * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catergoria $catergoria)
+    public function edit(Factura $factura)
     {
         //
     }
@@ -64,10 +64,10 @@ class CatergoriaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Catergoria  $catergoria
+     * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catergoria $catergoria)
+    public function update(Request $request, Factura $factura)
     {
         //
     }
@@ -75,10 +75,10 @@ class CatergoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Catergoria  $catergoria
+     * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catergoria $catergoria)
+    public function destroy(Factura $factura)
     {
         //
     }

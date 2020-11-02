@@ -13,7 +13,7 @@
 						<span>
 							<h2>Detalles de Articulo<h2>
 						</span>
-						<a  href="redirect()->back()" 
+						<a  href=" {{ route('mostrarTodosArt')}}" 
 							class="btn btn-primary btn-sm">
 							Volver ...
 						</a>
@@ -23,7 +23,7 @@
 					Id: {{ $art->id }} <br>
 					Nombre: {{ $art->nombre }} <br>
 					Cantidad: {{ $art->cantidad }} <br>
-					Precio: {{ $art->precio }} <br>
+					Precio: $ {{ $art->precio }} <br>
 					<!-- traigo nombre de rol desde user -->
 					Categoria: {{ $cates[ ($art->categorias_id)-1 ]->nombre }} <br>
 					<!-- traigo nombre de provee desde user -->

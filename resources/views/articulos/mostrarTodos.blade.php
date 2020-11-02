@@ -124,10 +124,10 @@
       <tr>
     @endforeach
   </tbody>
-
+  
 
 </form>
-
+{{ $arts->links() }}
 </x-app-layout>
 
 

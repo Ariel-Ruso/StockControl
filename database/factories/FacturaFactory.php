@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Proveedor;
+use App\Models\Factura;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProveedorFactory extends Factory
+class FacturaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Proveedor::class;
+    protected $model = Factura::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,7 @@ class ProveedorFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=> $this->faker->name,
-            'contacto'=> $this->faker->name,
-            'correo' => $this->faker->safeEmail,
-            'direccion'=> $this->faker->address
+            //
         ];
     }
 }

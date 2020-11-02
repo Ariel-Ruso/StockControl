@@ -6,6 +6,10 @@ use App\Models\Venta;
 use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
+use App\Models\Factura;
+use App\Models\Carrito;
+use App\Models\Session;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class VentaController extends Controller
@@ -15,79 +19,88 @@ class VentaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function nuevaVenta()
+    public function nueva_Venta()
     {
-        //$arts= Articulo::paginate(5);
         $arts= Articulo::paginate(15);
         $cates= Categoria::all();
         $proves= Proveedor::all();
-        //dd($arts, $cates);
+        
     	return view ('venta.nuevaVenta', compact ('arts', 'cates', 'proves'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function finalizar_Venta() {
+        
+        $fact= new Factura;
+        $ventas= new Venta;
+        $user= auth()->id();
+        $carrito= session()->get('carrito');
+        $cantC= count($carrito);
+        $arts= Articulo::all();
+        $cantA= count($arts);
+        $cart= new Carrito();
+        $cart->total();
+        $total= $this->total;       
+        //dd($cantA);
+        //dd($user);
+        //dd($cant);
+        //recorro art 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        for($x=1; $x <= $cantA; $x++){
+          
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Venta $venta)
-    {
-        //
-    }
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Venta $venta)
-    {
-        //
-    }
+        for($y=1; $y <= $cantC; $y++){
+            
+/* 
+            $ventas->articulos_id= $carrito[$y+1]["Art_id"];
+            $ventas->cantidad= $carrito[$y+1]["Cantidad"];
+            $ventas->total= $carrito[$y+1]["SubTotal"];
+            $ventas->iva= ($carrito[$y+1]["SubTotal"]) *0.21;
+            $ventas->users_id= $user;
+            
+            $fact->descripcion='nueva factura ' .$x;
+            $fact->save();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Venta $venta)
-    {
-        //
-    }
+            $ventas->facturas_id= 1 ;
+            $ventas->save(); */
+        }    
+            //dd ($carrito[$x+1]["Art_id"]);
+            //dd ($arts[1]["id"]);           
+            //dd($arts[0]["id"]);
+            //dd($carrito[2]);
+            //dd($carrito[$x+1]["Cantidad"]);
+            //dd($carrito[2]["Precio"]);
+            //dd($carrito[2]["SubTotal"]);
+           // $ventas->articulos_id= $carrito()->id;
+            //$ventas->save();
+        
+            /* $carrito[$x]
+                [
+                    "Cantidad",
+                    Precio,
+                    Total,
+                ]; */
+            
+            /* 
+            $fact->descripcion='nueva factura ' .$x;
+            $fact->save();
+            $ventas->articulos_id= 2;
+            $ventas->cantidad= 100;
+            $ventas->total= 100;
+            $ventas->users_id= $user;
+            $ventas->iva= 100*0.21;
+            $ventas->facturas_id= 1 ;
+            $ventas->save();     */
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Venta $venta)
-    {
-        //
+        //$articulo= Articulo::Findorfail($id);
+
+        //$carrito[$id]['Cantidad']++;
+
+            //carrito en memo lo vuelco en ventas
+            //cuenta elementos
+            //dd(count($carrito));
+            return view ('venta.finalizarVenta', compact('carrito', 'arts', 'total'));
+
+        }
     }
-}

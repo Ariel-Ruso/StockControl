@@ -69,7 +69,7 @@ class ArticuloController extends Controller
     public function mostrarTodos (){
        
         //$arts= Articulo::paginate(5);
-        $arts= Articulo::paginate(15);
+        $arts= Articulo::paginate(5);
         $cates= Categoria::all();
         $proves= Proveedor::all();
         //dd($arts, $cates);

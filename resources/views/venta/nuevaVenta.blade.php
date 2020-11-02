@@ -4,18 +4,17 @@
             {{ __('Nueva Venta') }}
         </h2>
     </x-slot>
-    
     <!-- espacio para mensajes -->
-    <div class="alert alert-success">
+    <div class="alert alert-success mt-3">
         @if (session('mensaje'))
-        {{ session( 'mensaje' ) }}        
+            {{ session( 'mensaje' ) }}        
         @endif
     <br>
     <!-- link hasta carrito  -->
     <a   href=" {{ route ('verCarrito') }}"
             class="badge badge-success"> 
                 Ver carrito 
-        </a>
+    </a>
     </div>
 
     <div class="container mt-10">
@@ -44,7 +43,7 @@
                                 <div class="card-body">
                                     <span> {{$item->nombre}} <br></span>   
                                     <span> $ {{$item->precio}} <br></span>   
-                                    
+                                    <span> Stock: {{$item->cantidad}} <br></span>   
                                 </div>
 
                                 <a   href=" {{ url('agregar/'.$item->id) }}" 
@@ -66,4 +65,7 @@
             </div>
         </div>
     </div>
+
+       
+
 </x-app-layout>

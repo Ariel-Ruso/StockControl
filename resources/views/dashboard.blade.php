@@ -11,12 +11,14 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                   <x-tarjeta>
                     <x-slot name="title">
-                        <h1>Componente</h1>
+                        <h1>Control de Stock </h1>
                     </x-slot>
                     <x-slot name="cuerpo">
-                        Q importa
+                        Los hermanitos
+
                     </x-slot>
-                    
+
+                    @liverwire('cart')
                   </x-tarjeta>
 
                                

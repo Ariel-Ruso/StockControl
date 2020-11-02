@@ -5,11 +5,11 @@
         </h2>
     </x-slot>
 
-    <div class="container mt-10">
-        <div class="row justify-content-center">
+    <div class="container mt-10 ">
+        <div class="row justify-content-center ">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card bg-white shadow">
+                    <div class="card-header px-4 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span>
                           Agregar Articulo
                         </span>
@@ -119,7 +119,7 @@
                                 </div> 
                               </form>-->
                                                 
-                        <button class="btn btn-primary btn-block" 
+                        <button class="btn btn-success btn-block mt-3" 
                                 type="submit">
                           Agregar
                         </button>

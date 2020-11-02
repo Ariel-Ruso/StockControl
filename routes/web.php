@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TrazaController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -12,6 +14,18 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+//traza
+Route::get ('traza/Trabajos', [TrazaController::class, 'Trabajos'])
+            ->name('trabajos');
+
+//users
+Route::get ('usuarios/mostrarTodos', [UserController::class, 'mostrarTodos'])
+            ->name('mostrarTodos');
+
+//sesion
+Route::get('verSession', [CarritoController::class, 'verSession'])
+    ->name('verSession');
 
 //abm articulos
 
@@ -43,15 +57,24 @@ Route::put ('articulos/editar/{id}', [ArticuloController::class, 'actualizar_art
             ->name('actualizar_articulo'); 
 
 //ventas
-Route::get ('venta/nueva_venta', [VentaController::class, 'nuevaVenta'])
+Route::get ('venta/nueva_venta', [VentaController::class, 'nueva_Venta'])
             ->name('nueva_venta');
 
 //carrito
-Route::get('venta/carrito', [CarritoController::class, 'verCarrito'])
+
+Route::get ('venta/detallePedido', [CarritoController::class, 'detallePedido'])
+            ->name('detallePedido');
+
+
+Route::get('venta/verCarrito', [CarritoController::class, 'verCarrito'])
     ->name('verCarrito');
+
 
 Route::get('agregar/{id}', [CarritoController::class, 'agregar'])
     ->name('agregar');
 
 Route::get('eliminarCarr/{id}', [CarritoController::class, 'eliminarCarr'])
     ->name('eliminarCarr');
+
+Route::get('borrarCarr', [CarritoController::class, 'borrarCarr'])
+    ->name('borrarCarr');

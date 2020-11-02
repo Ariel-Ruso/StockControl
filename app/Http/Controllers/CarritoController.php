@@ -8,42 +8,71 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
-    public function agregar($id)
+    //chek si existe carrito o no
+    public function __construct()
     {
+        if(!session()->has('carrito')) session()->put('carrito', array());
+    }
+
+    public function agregar($id){
         $articulo= Articulo::Findorfail($id);
         $carrito= session()->get('carrito');
         
-        //si carro vacio, es 1 Articulo
-        if(!$carrito){
-            $carrito= [
-                $id => [
-                    "Nombre" => $articulo->nombre,
-                    "Cantidad" => 1,
-                    "Precio" => $articulo->precio,
-                    /* "Imagen" => $Articulo->Imagen */
-                    ]
+        //si carro vacio, es 1 Articulo d ese tipo y verifico disponibilidad
+            if(!$carrito){
+                $carrito= [
+                    $id => [
+                        "Art_id" => $articulo->id,
+                        "Nombre" => $articulo->nombre,
+                        "Cantidad" => 1,
+                        "Precio" => $articulo->precio,
+                        "Disponible"=> $articulo->cantidad,
+                        "SubTotal" => $articulo->precio,
+                        /* "Imagen" => $Articulo->Imagen */
+                        ]
+                    ];
+                    if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ){
+                        session()->put ('carrito', $carrito);
+                        return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
+                    }else{
+                        return redirect()->back()->with('mensaje', 'Stock insuficiente');
+                    }
+            }
+
+            //si carrito ya tiene ese item agrego otro 
+            if(isset($carrito[$id])) {
+                    $carrito[$id]['Cantidad']++;
+                    $carrito[$id]['SubTotal'] += $carrito[$id]['SubTotal'];
+                    
+                    /* session()->put('carrito', $carrito);
+                    return redirect()->back()->with('mensaje', ' Articulo mismo item agregado al carrito');
+                     */
+                    if( ($carrito[$id]['Disponible']) >= ($carrito[$id]['Cantidad']) ){
+                        session()->put ('carrito', $carrito);
+                        return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
+                    }else{
+                        return redirect()->back()->with('mensaje', 'Stock insuficiente');
+                    }
+            }
+
+            //si item no existe lo agrego
+            $carrito[$id] = [
+                "Art_id" => $articulo->id,
+                "Nombre" => $articulo->nombre,
+                "Cantidad" => 1,
+                "Precio" => $articulo->precio,
+                "Disponible"=> $articulo->cantidad,
+                "SubTotal" => $articulo->precio,
+                /* "Imagen" => $Articulo->Imagen */
                 ];
-            session()->put ('carrito', $carrito);
-            return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
-        }
-
-        //si carrito ya tiene ese item agrego otro
-        if(isset($carrito[$id])) {
-            $carrito[$id]['Cantidad']++;
-            session()->put('carrito', $carrito);
-            return redirect()->back()->with('mensaje', ' Articulo mismo item agregado al carrito');
-        }
-
-        //si item no existe lo agrego
-        $carrito[$id] = [
-            "Nombre" => $articulo->nombre,
-            "Cantidad" => 1,
-            "Precio" => $articulo->precio,
-            /* "Imagen" => $Articulo->Imagen */
-             ];
-        
-    session()->put ('carrito', $carrito);
-    return redirect()->back()->with('mensaje', 'Articulo agregado al carrito ');
+            
+                
+            if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ){
+                    session()->put ('carrito', $carrito);
+                    return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
+                }else{
+                    return redirect()->back()->with('mensaje', 'Stock insuficiente g');
+                }
     }
     
     public function eliminarCarr($id)
@@ -67,87 +96,36 @@ class CarritoController extends Controller
 
     public function verCarrito()
     {
-        return view ('venta/carrito');
-    }
-//funcion d prueba para trabajar final carrito, operar e insertar datos en base
-   /*  public function verSession()
-    {
-        dd( \Session::get('carrito'));
-        return view ('verSession', compact ('carrito'));
-    } */
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+        $total= $this->total();
+        return view ('venta/verCarrito', compact('total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    //funcion d prueba para trabajar final carrito, operar e insertar datos en base
+    public function verSession()
     {
-        //
+        dd( session()->get('carrito'));       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function borrarCarr(){
+        session()->forget('carrito');
+        return view ('venta/verCarrito');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carrito $carrito)
-    {
-        //
+    public function total(){
+        $carrito= session()->get('carrito');
+        $total= 0;
+        foreach ($carrito as $item){
+            $total += $item["SubTotal"];
+        }
+        //dd($total);
+        return $total;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Carrito $carrito)
-    {
-        //
+    public function detallePedido(){
+        $total= $this->total();
+        $carrito= session()->get('carrito');
+
+        return view('venta/detallePedido', compact('total', 'carrito'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Carrito $carrito)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Carrito $carrito)
-    {
-        //
-    }
 }
