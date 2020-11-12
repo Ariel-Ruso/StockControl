@@ -11,27 +11,22 @@ use Illuminate\Http\Request;
 class ArticuloController extends Controller
 {
     public function buscaPorAr(Request $request){
-        //dd($request);
-        //$nombre= $request->get('buscarPorNombre');  
+        
         $buscar= $request->get('buscarPor');  
         $tipo= $request->get('tipo');  
         $cates= Categoria::all();
         $proves= Proveedor::all();
         //invoco funcion scopeNombre
         $arts= Articulo::buscarPor($tipo, $buscar)->paginate(5);
-        //$arts= Articulo::where($categorias->id,'like',"1")->paginate(5);
         return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves'));
     }
 
     public function mostrarxCate (Request $request){
         
         $cates_id= $request->get('categorias');
-        //dd($nombre);
-        //$arts= Articulo::paginate(5);
         $arts= Articulo::BuscarporCate($cates_id)->paginate(5);
         $proves= Proveedor::all();
         $cates= Categoria::all();
-        //dd($arts, $cates);
     	return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves'));
     }
 
@@ -43,7 +38,6 @@ class ArticuloController extends Controller
     }
 
     public function crear_articulo2 (Request $request){
-       // dd( $request->file('imagen'));
         //https://www.youtube.com/watch?v=PjEutNUZjj0&ab_channel=Aprendible
         //subir imagen
         //$request->file('imagen')->store('imagenes');

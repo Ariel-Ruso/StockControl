@@ -13,13 +13,16 @@
                         <span>
                           Agregar Articulo
                         </span>
-                        <a href="{{route('dashboard')}}" class="btn btn-primary btn-sm">
-                            Volver ...
+                        <a href="{{route('dashboard')}}" 
+                           class="btn btn-primary btn-sm">
+                              Volver ...
                         </a>
                     </div>
                     <div class="card-body">     
                       @if ( session('mensaje') )
-                        <div class="alert alert-success">{{ session('mensaje') }}</div>
+                        <div class="alert alert-success">
+                            {{ session('mensaje') }}  
+                        </div>
                       @endif
                       <form   action="{{ route('crear_articulo2') }}" 
                               method="POST"
@@ -27,105 +30,107 @@
                               >
                         @csrf
                         
-                    <div class="container" name= "errores">
-                     @error('nombre')
-                          <div class="alert alert-success">
-                              Nombre obligatorio
-                          </div>
-                        @enderror
-                        @error('cantidad')
-                          <div class="alert alert-success">
-                              Cantidad obligatorio
-                          </div>
-                        @enderror
-                        @error('precio')
-                          <div class="alert alert-success">
-                              Precio obligatorio
-                          </div>
-                        @enderror
-                        @error('categorias_id')
-                          <div class="alert alert-success">
-                              Categoria obligatorio
-                          </div>
-                        @enderror
-                    </div>
-                    <div class="container" name="etiquetas">
-                        <input
-                          type="text"
-                          name="nombre"
-                          placeholder="Nombre"
-                          class="form-control mb-2"
-                        />                  
-                        <input
-                          type="number"
-                          name="cantidad"
-                          placeholder="Cantidad"
-                          class="form-control mb-2"
-                        />
-                        <input
-                          type="number"
-                          name="precio"
-                          placeholder="Precio"
-                          class="form-control mb-2"
-                        />
-                          <div class="form-row align-items-center">
-                            <div class="col-auto my-1">
-                              <select class="custom-select mr-sm-2" 
-                                      id="inlineFormCustomSelect" 
-                                      name= "categorias_id">
-                                <option selected>
-                                  Categorias...
-                                </option>
-                                @foreach($cates as $item)
-                                  <option value= "{{$item->id}}" >
-                                     {{ $item->nombre }}
+                        <div class="container" name= "errores">
+                        @error('nombre')
+                              <div class="alert alert-success">
+                                  Nombre obligatorio
+                              </div>
+                            @enderror
+                            @error('cantidad')
+                              <div class="alert alert-success">
+                                  Cantidad obligatorio
+                              </div>
+                            @enderror
+                            @error('precio')
+                              <div class="alert alert-success">
+                                  Precio obligatorio
+                              </div>
+                            @enderror
+                            @error('categorias_id')
+                              <div class="alert alert-success">
+                                  Categoria obligatorio
+                              </div>
+                            @enderror
+                        </div>
+                        <div class="container" name="etiquetas">
+                          <input
+                            type="text"
+                            name="nombre"
+                            placeholder="Nombre"
+                            class="form-control mb-2"
+                          />                  
+                          <input
+                            type="number"
+                            name="cantidad"
+                            placeholder="Cantidad"
+                            class="form-control mb-2"
+                          />
+                          <input
+                            type="number"
+                            name="precio"
+                            placeholder="Precio"
+                            class="form-control mb-2"
+                          />
+                            <div class="form-row align-items-center">
+                              <div class="col-auto my-1">
+                                <select class="custom-select mr-sm-2" 
+                                        id="inlineFormCustomSelect" 
+                                        name= "categorias_id">
+                                  <option selected>
+                                    Categorias...
                                   </option>
-                                @endforeach
-                              </select>
-                              <br>
-                            </div>
-                          </div>       
-    
-                          <div class="form-row align-items-center">
-                            <div class="col-auto my-1">
-                              <select class="custom-select mr-sm-2" 
-                                      id="inlineFormCustomSelect" 
-                                      name= "proveedors_id">
-                                <option selected>
-                                  Proveedores...
-                                </option>
-                                @foreach($proves as $item2)
-                                  <option value= "{{$item2->id}}" >
-                                     {{ $item2->nombre }}
-                                  </option>
-                                @endforeach
-                              </select>
-                              <br>
-                            </div>
-                          </div>     
-    
-                          <!-- <form>
+                                  @foreach($cates as $item)
+                                    <option value= "{{$item->id}}" >
+                                      {{ $item->nombre }}
+                                    </option>
+                                  @endforeach
+                                </select>
                                 <br>
-                              
-                                <div class="form-group">
-                                  <label for="exampleFormControlFile1">
-                                      Seleccione imagen
-                                    </label>
-                                  <input  type="file" 
-                                          class="form-control-file" 
-                                          id="imagen"
-                                          name= "imagen">
-                                          
-                                </div> 
-                              </form>-->
-                                                
-                        <button class="btn btn-success btn-block mt-3" 
-                                type="submit">
-                          Agregar
-                        </button>
+                              </div>
+                            </div>       
+      
+                            <div class="form-row align-items-center">
+                              <div class="col-auto my-1">
+                                <select class="custom-select mr-sm-2" 
+                                        id="inlineFormCustomSelect" 
+                                        name= "proveedors_id">
+                                  <option selected>
+                                    Proveedores...
+                                  </option>
+                                  @foreach($proves as $item2)
+                                    <option value= "{{$item2->id}}" >
+                                      {{ $item2->nombre }}
+                                    </option>
+                                  @endforeach
+                                </select>
+                                <br>
+                              </div>
+                            </div>     
+      
+                            <!-- <form>
+                                  <br>
+                                
+                                  <div class="form-group">
+                                    <label for="exampleFormControlFile1">
+                                        Seleccione imagen
+                                      </label>
+                                    <input  type="file" 
+                                            class="form-control-file" 
+                                            id="imagen"
+                                            name= "imagen">
+                                            
+                                  </div> 
+                                </form>-->
+                                                  
+                          <button class="btn btn-success mt-3" 
+                                  type="submit">
+                            Agregar
+                          </button>
                       </form>
                     </div>
+                      
                 </div>
+                
             </div>
         </div>
     </div>

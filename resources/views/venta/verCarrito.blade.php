@@ -44,7 +44,7 @@
                                         Accion
                                     </th>
                                     <th>
-                                        Precio Total
+                                        SubTotal
                                     </th>
                                 </tr>
                             </thead>
@@ -52,8 +52,6 @@
                         @foreach (session('carrito') as $id => $detalle)
                         
                         <!-- recorro carrito  -->
-                            <?php $total += $detalle['Precio'] * $detalle['Cantidad'] ?>
-
                             <tr>
                                 <th  class="font-weight-normal" >
                                     {{ $detalle['Nombre'] }}
@@ -81,7 +79,6 @@
                                 {{-- <th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
-                               
                             </tr>
                         @endforeach
                         <tr>
@@ -91,15 +88,13 @@
                                 </h3>
                             </td>
                         </tr>
-                    
                         </table>
                     @else
                         <div class="alert alert success">
                             "No hay productos"
                         </div>
-                    @endif
-                    
-                    <div>
+                    @endif        
+                    <div name="opciones compra">
                         <a  href=" {{ route('nueva_venta') }}" 
                             class="btn btn-warning" >
                                 Seguir Comprando
@@ -109,7 +104,7 @@
                                 Terminar Compra
                         </a>
                     </div>
-                    <div>
+                    <div name="testing">
                         <br>
                         <a  href="{{ url('verSession') }}" 
                             class= "btn btn-secondary">

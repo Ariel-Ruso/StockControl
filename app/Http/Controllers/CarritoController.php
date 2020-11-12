@@ -82,10 +82,13 @@ class CarritoController extends Controller
 
         //si carrito ya tiene ese item borro uno
         if(isset($carrito[$id])) {
+            $carrito[$id]['SubTotal'] = $carrito[$id]['SubTotal'] - $carrito[$id]['Precio'];
             $carrito[$id]['Cantidad']--;
             if($carrito[$id]['Cantidad']== 0){
                 unset($carrito[$id]);
+                
             }
+            
             session()->put('carrito', $carrito);
             return redirect()->back()->with('mensaje', ' Articulo eliminado del carrito');
         }
@@ -117,14 +120,12 @@ class CarritoController extends Controller
         foreach ($carrito as $item){
             $total += $item["SubTotal"];
         }
-        //dd($total);
         return $total;
     }
 
     public function detallePedido(){
         $total= $this->total();
         $carrito= session()->get('carrito');
-
         return view('venta/detallePedido', compact('total', 'carrito'));
     }
 

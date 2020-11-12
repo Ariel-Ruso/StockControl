@@ -60,6 +60,9 @@ Route::put ('articulos/editar/{id}', [ArticuloController::class, 'actualizar_art
 Route::get ('venta/nueva_venta', [VentaController::class, 'nueva_Venta'])
             ->name('nueva_venta');
 
+Route::post ('finalizarVenta', [VentaController::class, 'finalizarVenta'])
+            ->name('finalizarVenta');            
+
 //carrito
 
 Route::get ('venta/detallePedido', [CarritoController::class, 'detallePedido'])
