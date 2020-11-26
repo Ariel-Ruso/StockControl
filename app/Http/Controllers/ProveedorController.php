@@ -7,24 +7,29 @@ use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function crear_proveedor()
     {
-        //
+        return view ('proveedores.crear_proveedor');
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function crear_proveedor2 (Request $request){
+        
+    	$request-> validate ([
+            'nombre' => 'required',
+            'correo' => 'required',
+            'contacto' => 'required',
+            'direccion' => 'required',
+        ]);
+      
+        $prove = new proveedor;
+        $prove->nombre = $request->nombre;
+        $prove->correo = $request->correo;
+        $prove->contacto = $request->contacto;
+        $prove->direccion = $request->direccion;
+        $prove->save();
+        return back()->with('mensaje', 'Proveedor agregado correctamente');
+        
     }
 
     /**

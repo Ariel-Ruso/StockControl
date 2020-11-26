@@ -18,14 +18,7 @@ class Articulo extends Model
         return $this->belongsTo (Proveedor::class); 
     }
 
-  /*  public function scopeNombre($query, $nombre){
-
-    if($nombre){
-        return $query->where('nombre', 'like', "%$nombre%");
-        
-    }
-   } */
-
+    //busquedas 
     public function scopeBuscarpor($query, $tipo, $buscar) {
     	if ( ($tipo) && ($buscar) ) {
     		return $query->where($tipo,'like',"%$buscar%");
@@ -33,9 +26,23 @@ class Articulo extends Model
     } 
  
     public function scopeBuscarporCate($query, $categoria) {
-        //dd($cates);
+        
     	if($categoria) {
     		return $query->where('categorias_id','like',"$categoria");
         }
     } 
+    
+    //eventos
+    public function vender_articulo($cant, $id)
+    {
+        /* $request-> validate ([
+            'cantidad' => 'required',
+            ]); */
+
+        $art= Articulo::FindOrFail($id);
+        //dd($art->cantidad);
+        $art->cantidad -= $cant;
+        $art->save();
+        return back()->with('mensaje', 'Articulo vendido correctamente');    
+    }
 }

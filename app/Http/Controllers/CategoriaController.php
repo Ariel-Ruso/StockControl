@@ -7,24 +7,23 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function crear_categoria(){
+        return view ('categorias.crear_categoria');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function crear_categoria2 (Request $request){
+        //https://www.youtube.com/watch?v=PjEutNUZjj0&ab_channel=Aprendible
+        //subir imagen
+        //$request->file('imagen')->store('imagenes');
+    	$request-> validate ([
+            'nombre' => 'required',
+        ]);
+      
+        $cate = new categoria;
+        $cate->nombre = $request->nombre;
+        $cate->save();
+        return back()->with('mensaje', 'Categoria agregada correctamente');
+        
     }
 
     /**

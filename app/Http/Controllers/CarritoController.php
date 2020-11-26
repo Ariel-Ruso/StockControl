@@ -28,6 +28,7 @@ class CarritoController extends Controller
                         "Precio" => $articulo->precio,
                         "Disponible"=> $articulo->cantidad,
                         "SubTotal" => $articulo->precio,
+                        
                         /* "Imagen" => $Articulo->Imagen */
                         ]
                     ];
@@ -99,8 +100,8 @@ class CarritoController extends Controller
 
     public function verCarrito()
     {
-        $total= $this->total();
-        return view ('venta/verCarrito', compact('total'));
+        $subtotal= $this->subtotal();
+        return view ('venta/verCarrito', compact('subtotal'));
     }
 
     //funcion d prueba para trabajar final carrito, operar e insertar datos en base
@@ -114,19 +115,35 @@ class CarritoController extends Controller
         return view ('venta/verCarrito');
     }
 
-    public function total(){
+    public function subtotal(){
         $carrito= session()->get('carrito');
-        $total= 0;
+        $subtotal= 0;
         foreach ($carrito as $item){
-            $total += $item["SubTotal"];
+            $subtotal += $item["SubTotal"];
         }
-        return $total;
+        //dd($subtotal);
+        return $subtotal;
     }
 
-    public function detallePedido(){
-        $total= $this->total();
+    public function iva(){
         $carrito= session()->get('carrito');
-        return view('venta/detallePedido', compact('total', 'carrito'));
+        $iva= 0;
+        foreach ($carrito as $item){
+            $iva += $item["SubTotal"] * 0.21;
+        }
+        return $iva;
+    }
+    
+
+    public function detallePedido(){
+        
+        $carrito= session()->get('carrito');
+        
+        
+        $iva= $this->iva();
+        $subtotal= $this->subtotal();
+        $total= $iva + $subtotal;
+        return view('venta/detallePedido', compact('subtotal', 'iva', 'carrito', 'total'));
     }
 
 }

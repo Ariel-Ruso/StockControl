@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Proveedor extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre', 'correo', 'contacto', 'direccion',
+    ];
+    
+    public function articulo(){
+        //Proveedor tiene varios articulos
+        return $this->hasmany (Articulo::class);
+    }
 }

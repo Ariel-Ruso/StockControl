@@ -4,19 +4,21 @@
             {{ __('Articulo  Nuevo') }}
         </h2>
     </x-slot>
-
+    <div class="container ">
+        <a href="{{route('dashboard')}}" 
+                class="btn btn-primary float-right">
+                     Volver ...
+         </a>
+    </div>
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card bg-white shadow">
-                    <div class="card-header px-4 bg-blue-200 d-flex justify-content-between align-items-center">
-                        <span>
+                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
+                        <span class="text-center mx-auto font text-2xl">
                           Agregar Articulo
                         </span>
-                        <a href="{{route('dashboard')}}" 
-                           class="btn btn-primary btn-sm">
-                              Volver ...
-                        </a>
+                       
                     </div>
                     <div class="card-body">     
                       @if ( session('mensaje') )
@@ -31,7 +33,7 @@
                         @csrf
                         
                         <div class="container" name= "errores">
-                        @error('nombre')
+                            @error('nombre')
                               <div class="alert alert-success">
                                   Nombre obligatorio
                               </div>
@@ -51,6 +53,11 @@
                                   Categoria obligatorio
                               </div>
                             @enderror
+                            @error('proveedors_id')
+                              <div class="alert alert-success">
+                                Proveedor obligatorio
+                              </div>
+                            @enderror
                         </div>
                         <div class="container" name="etiquetas">
                           <input
@@ -68,7 +75,7 @@
                           <input
                             type="number"
                             name="precio"
-                            placeholder="Precio"
+                            placeholder="Precio de Compra"
                             class="form-control mb-2"
                           />
                             <div class="form-row align-items-center">

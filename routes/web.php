@@ -6,22 +6,52 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TrazaController;
-
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\CajaController;
+use App\Http\Controllers\UsuarioController;
 Route::get('/', function () {
-    return view('auth.login');
-})->name('bienvenidos');
+    return view('welcome');
+})->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+//caja
+
+Route::get ('/cajaDiaria',[CajaController::class, 'cajaDiaria'])
+    ->name('cajaDiaria');  
+
+//users
+Route::get ('/crear_usuario',[UsuarioController::class, 'crear_usuario'])
+    ->name('crear_usuario');  
+
+Route::post ('/crear_usuario2', [UsuarioController::class, 'crear_usuario2'])
+    ->name('crear_usuario2');           
+
+Route::get ('usuarios/mostrarTodos', [UsuarioController::class, 'mostrarTodos'])
+            ->name('mostrarTodos');
+
 //traza
 Route::get ('traza/Trabajos', [TrazaController::class, 'Trabajos'])
             ->name('trabajos');
 
-//users
-Route::get ('usuarios/mostrarTodos', [UserController::class, 'mostrarTodos'])
-            ->name('mostrarTodos');
+//categ
+            
+Route::get ('/crear_categoria',[CategoriaController::class, 'crear_categoria'])
+    ->name('crear_categoria');  
+
+Route::post ('/crear_categoria2', [CategoriaController::class, 'crear_categoria2'])
+    ->name('crear_categoria2');           
+
+    //provee    
+Route::get ('/crear_proveedor',[ProveedorController::class, 'crear_proveedor'])
+    ->name('crear_proveedor');  
+
+Route::post ('/crear_proveedor2', [ProveedorController::class, 'crear_proveedor2'])
+    ->name('crear_proveedor2');           
+
 
 //sesion
 Route::get('verSession', [CarritoController::class, 'verSession'])
@@ -53,8 +83,11 @@ Route::get ('articulos/detalle_articulo/{id}', [ArticuloController::class, 'deta
 Route::get ('articulos/editar_articulo/{id}', [ArticuloController::class, 'editar_articulo'])
             ->name('editar_articulo'); 
 
-Route::put ('articulos/editar/{id}', [ArticuloController::class, 'actualizar_articulo'])
+Route::put ('articulos/actualizar_articulo/{id}', [ArticuloController::class, 'actualizar_articulo'])
             ->name('actualizar_articulo'); 
+
+Route::put ('articulos/vender_articulo/{id}', [ArticuloController::class, 'vender_articulo'])
+            ->name('vender_articulo'); 
 
 //ventas
 Route::get ('venta/nueva_venta', [VentaController::class, 'nueva_Venta'])

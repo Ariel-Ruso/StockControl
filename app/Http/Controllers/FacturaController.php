@@ -7,14 +7,13 @@ use Illuminate\Http\Request;
 
 class FacturaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+   
+
+    public function mostrarTodasFact()
     {
-        //
+        $fact= Factura::paginate(5);
+        
+        return $fact;
     }
 
     /**

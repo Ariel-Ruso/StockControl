@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //Articulo::factory(10)->create();
-        $user= User::factory()->times(6)->create();
+        $this->call(RolSeeder::class);
+        //$user= User::factory()->times(6)->create();
         $proveedor= Proveedor::factory()->times(3)->create();
         $this->call(CategoriaSeeder::class);
-        $this->call(RolSeeder::class);
-        $articulo= Articulo::factory()->times(6)->create();
         
+        $articulo= Articulo::factory()->times(6)->create();
 
     }
 }

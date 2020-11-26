@@ -5,18 +5,24 @@
         </h2>
     </x-slot>
      <!-- espacio para mensajes -->
-     <div class="alert alert-success mt-3">
-        @if (session('mensaje'))
-           {{ session( 'mensaje' ) }}        
-        @endif
+     <div class="col-md-4 mx-auto">
+        <div class="alert alert-success mt-3">
+            @if (session('mensaje'))
+                {{ session( 'mensaje' ) }}        
+            @endif
+        </div>
      </div>
     <br>
     
     <div class="container ">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Tu Carrito</div>
+            <div class="col-md-10">
+                <div class="card bg-white shadow">
+                    <div class=" py-3 px-8 bg-orange-300 d-flex justify-content-between align-items-center">
+                        <span class="text-center mx-auto font text-2xl">
+                            Tu Carrito
+                        </span>
+                    </div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -24,7 +30,7 @@
                             </div>
                         @endif             
                     @if(session('carrito'))
-                        <table class="table table-bordered">
+                        <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead >
                                 <tr>
                                     <th>
@@ -53,7 +59,7 @@
                         
                         <!-- recorro carrito  -->
                             <tr>
-                                <th  class="font-weight-normal" >
+                                <th  class="font-weight-normal " >
                                     {{ $detalle['Nombre'] }}
                                 </th>
                                 <th  class="font-weight-normal" >
@@ -84,26 +90,29 @@
                         <tr>
                             <td colspan= "12" align="right" >
                                 <h3>
-                                    Total $ {{ number_format ($total,2) }}
+                                    Total $ {{ number_format ($subtotal,2) }}
                                 </h3>
                             </td>
                         </tr>
                         </table>
                     @else
-                        <div class="alert alert success">
-                            "No hay productos"
-                        </div>
+                    <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
+                            Sin productos
+                        </span>
+                    </div>
                     @endif        
-                    <div name="opciones compra">
-                        <a  href=" {{ route('nueva_venta') }}" 
-                            class="btn btn-warning" >
+                    <div name="opciones compra " class="mt-15">
+                        <a  href=" {{ route('mostrarTodosArt') }}" 
+                            class="btn btn-outline-warning" >
                                 Seguir Comprando
                         </a>
                         <a  href=" {{ route('detallePedido') }}" 
-                            class="btn btn-success align= right" >
+                            class="btn btn-outline-success align= right" >
                                 Terminar Compra
                         </a>
                     </div>
+                    <!-- 
                     <div name="testing">
                         <br>
                         <a  href="{{ url('verSession') }}" 
@@ -115,11 +124,12 @@
                                 Vaciar Carrito
                         </a>
                         
-                    </div>
+                    </div> -->
                     <br>
                     <tr colspane> 
                             <form method="post" action="{{ url('nuevaVenta') }}">
                                 @csrf
+<!-- 
                                 <div class= "alert alert-success">
                                     <div class= "form-group">
                                         <label >
@@ -136,11 +146,15 @@
                                         Pagar
                                     </button>
                                 </div>
+                                 -->
                             </form>
                         </tr>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+    .
     </div>
 </x-app-layout>
