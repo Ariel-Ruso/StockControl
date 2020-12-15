@@ -1,15 +1,12 @@
-<x-app-layout>
-  <x-slot name="header">
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          {{ __('Editar articulo') }}
-      </h2>
-  </x-slot>
-  <div class="container ">
-        <a href="{{route('mostrarTodosArt')}}" 
-            class="btn btn-primary float-right ">
-              Volver ...
-         </a>
-  </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
 
   <div class="container mt-10 ">
         <div class="row justify-content-center ">
@@ -21,11 +18,6 @@
                         </span>
                     </div>
                     <div class="card-body">     
-                      @if ( session('mensaje') )
-                        <div class="alert alert-success">
-                            {{ session('mensaje') }}
-                        </div>
-                      @endif
                       
                       <form  action="{{ route('actualizar_articulo', $arts->id) }}" 
                              method="POST">
@@ -108,8 +100,5 @@
               </div>
           </div>
       </div>
-      <div class="footer mt5">
-      .
-      </div>
 
-</x-app-layout>
+@endsection

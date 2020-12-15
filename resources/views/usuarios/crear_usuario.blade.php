@@ -1,20 +1,28 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nuevo Usuario') }}
-        </h2>
-    </x-slot>
-    <div class="container ">
-        <a href="{{route('dashboard')}}" 
-                class="btn btn-primary float-right">
-                     Volver ...
-         </a>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+
+<div class="container col-md-6 ">
+    <br>
+            <div class="row justify-content-center ">
+                    <div class="container mx-auto ">
+                        <img src="Storage/user.png" height="700" width="600" >
+                    </div>
+            </div>      
+</div>    
+
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
                 <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
+                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between 
+                    align-items-center">
                         <span class="text-center mx-auto font text-2xl">
                           Agregar Usuario
                         </span>                       
@@ -51,7 +59,7 @@
                                         Correo obligatorio
                                     </div>
                                 @enderror
-                                @error('rol')
+                                @error('rols_id')
                                     <div class="alert alert-success">
                                         Rol obligatorio
                                     </div>
@@ -109,4 +117,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

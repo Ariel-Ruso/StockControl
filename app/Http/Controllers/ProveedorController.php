@@ -32,59 +32,17 @@ class ProveedorController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function mostrar_proveedores()
     {
-        //
+        $proves= Proveedor::all();
+        return view ('proveedores.mostrar_proveedores', compact('proves'));
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Proveedor $proveedor)
+    public function eliminar_proveedor($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Proveedor $proveedor)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Proveedor $proveedor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Proveedor  $proveedor
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Proveedor $proveedor)
-    {
-        //
+        $prov= Proveedor::FindOrFail($id);
+        $prov->delete();
+        return back()->with('mensaje', 'Proveedor eliminado correctamente');    
     }
 }

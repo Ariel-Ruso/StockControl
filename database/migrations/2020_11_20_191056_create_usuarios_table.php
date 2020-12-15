@@ -17,14 +17,13 @@ class CreateUsuariosTable extends Migration
             $table->id()
                     ->unique();
             $table->string ('nombre');
-            
             $table->string ('password');
             $table->string ('correo');
             $table->string ('direccion');
-            $table->foreignId('rols_id')
+           /*  $table->foreignId('rols_id')
                     ->references('id')
                     ->on('rols')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade'); */
             $table->timestamps();
         });
     }

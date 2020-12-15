@@ -21,7 +21,7 @@ class UsuarioController extends Controller
             'password' => 'required',
             'direccion' => 'required',
             'correo' => 'required',
-            'rols_id' => 'required',
+            // 'rols_id' => 'required',
             
         ]);
       
@@ -30,7 +30,7 @@ class UsuarioController extends Controller
         $user->password = $request->password;
         $user->direccion = $request->direccion;
         $user->correo = $request->correo;
-        $user->rols_id = $request->rols_id;
+        // $user->rols_id = $request->rols_id;
         
         $user->save();
         return back()->with('mensaje', 'Usuario agregado correctamente');

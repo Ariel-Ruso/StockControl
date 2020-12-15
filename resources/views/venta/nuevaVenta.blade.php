@@ -1,25 +1,13 @@
-<x-app-layout>
-<br>
-    <x-slot name="header">
-    <div class="container">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
-                    {{ __('Articulos para Vender') }}
-            </h2> 
-    </div>
-    </x-slot>
-    <!-- espacio para mensajes -->
-    <div class="col-md-4 mx-auto">
-        <div class="alert alert-success mt-3">
-            @if (session('mensaje'))
-                {{ session( 'mensaje' ) }}        
-            @endif
-            <!-- link hasta carrito  -->
-            <a  href=" {{ route ('verCarrito') }}"
-                class="badge badge-success"> 
-                    Ver carrito 
-            </a>
-        </div>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+  
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+    
     
 <div class="container mt-10" name="busqueda" >
   <nav class="navbar navbar-light float-right">
@@ -123,4 +111,4 @@
     </div>      
     -->    
 
-</x-app-layout>
+@endsection

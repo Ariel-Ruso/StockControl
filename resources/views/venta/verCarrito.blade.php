@@ -1,18 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Carrito Compras') }}
-        </h2>
-    </x-slot>
-     <!-- espacio para mensajes -->
-     <div class="col-md-4 mx-auto">
-        <div class="alert alert-success mt-3">
-            @if (session('mensaje'))
-                {{ session( 'mensaje' ) }}        
-            @endif
-        </div>
-     </div>
-    <br>
+@extends('layouts.app')
+
+@section('content')
+  
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
     
     <div class="container ">
         <div class="row justify-content-center">
@@ -24,11 +18,7 @@
                         </span>
                     </div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif             
+                                  
                     @if(session('carrito'))
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead >
@@ -95,24 +85,27 @@
                             </td>
                         </tr>
                         </table>
+                        <a  href=" {{ route('detallePedido') }}" 
+                            class="btn btn-outline-success align= right" >
+                                Terminar Compra
+                        </a>
+
                     @else
                     <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
                         <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
                             Sin productos
                         </span>
                     </div>
+                    
                     @endif        
                     <div name="opciones compra " class="mt-15">
                         <a  href=" {{ route('mostrarTodosArt') }}" 
                             class="btn btn-outline-warning" >
                                 Seguir Comprando
                         </a>
-                        <a  href=" {{ route('detallePedido') }}" 
-                            class="btn btn-outline-success align= right" >
-                                Terminar Compra
-                        </a>
-                    </div>
-                    <!-- 
+                       
+                    </div> 
+                    
                     <div name="testing">
                         <br>
                         <a  href="{{ url('verSession') }}" 
@@ -124,7 +117,7 @@
                                 Vaciar Carrito
                         </a>
                         
-                    </div> -->
+                    </div> 
                     <br>
                     <tr colspane> 
                             <form method="post" action="{{ url('nuevaVenta') }}">
@@ -157,4 +150,4 @@
     <div class="container">
     .
     </div>
-</x-app-layout>
+@endsection

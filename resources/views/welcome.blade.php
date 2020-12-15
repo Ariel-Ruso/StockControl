@@ -30,12 +30,15 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/panel') }}" class="text-sm text-gray-700 underline">panel</a>
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">
+                            dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">
+                        Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">
+                            Register</a>
                         @endif
                     @endif
                 </div>
@@ -51,31 +54,18 @@
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-1">
                         <div class="p-4">
-                            <img src="Storage/icono usuario.jpg" height="400" width="400" >
+                            <img src="Storage/ico-inicio.jpg" height="400" width="400" >
                         </div>
-
-                       
-                    </div>
-                </div>
-
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        
-                    </div>
-
-                    <div class="footer ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                       Traza Digital 2020
                     </div>
                 </div>
             </div>
+            
         </div>
         
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-         <script>
-            document.addEventListener('DOMContentLoaded', function(){
-                M.autoinit();
-            });
-        </script> 
+        
     </body>
+    
+    
 </html>

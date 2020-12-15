@@ -53,14 +53,7 @@ class VentaController extends Controller
                     $fact->subtotal= $subtot;
                     $fact->iva= $iva;
                     $fact->users_id= auth()->id();    
-                    //calculo tipo de pago
-                    if ($request->tipoPago == 1){
-                        $fact->total= $tot;
-                    }elseif($request->tipoPago == 2){
-                        $fact->total= $tot + ($tot*0.1);
-                    }elseif($request->tipoPago == 3){
-                        $fact->total= $tot + ($tot*0.2);
-                    }
+                    $fact->total= $tot;
                     $fact->tipoPago= $request->tipoPago;
                     $fact->save();  
                 }

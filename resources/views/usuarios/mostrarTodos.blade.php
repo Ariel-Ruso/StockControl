@@ -1,10 +1,21 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Todos los Usuarios') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+
+<div class="container col-md-6 ">
+    <br>
+            <div class="row justify-content-center ">
+                    <div class="container mx-auto ">
+                        <!-- <img src="Storage/user.png" height="700" width="600" > -->
+                    </div>
+            </div>      
+    </div>    
 <!--
   Tailwind UI components require Tailwind CSS v1.8 and the @tailwindcss/ui plugin.
   Read the documentation to get started: https://tailwindui.com/documentation
@@ -19,16 +30,20 @@
               <table class=" min-w-full divide-y divide-green-300">
                 <thead>
                   <tr>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                    font-medium text-gray-500 uppercase tracking-wider">
                       Nombre
                     </th>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                    font-medium text-gray-500 uppercase tracking-wider">
                       Direccion
                     </th>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                    font-medium text-gray-500 uppercase tracking-wider">
                       Correo
                     </th>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                    font-medium text-gray-500 uppercase tracking-wider">
                       Rol
                     </th>
                     <th class="px-6 py-3 bg-gray-50"></th>
@@ -75,5 +90,5 @@
       </div>
     </div>
   </div>
- 
-</x-app-layout>
+  </div>
+@endsection

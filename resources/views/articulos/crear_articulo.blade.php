@@ -1,15 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Articulo  Nuevo') }}
-        </h2>
-    </x-slot>
-    <div class="container ">
-        <a href="{{route('dashboard')}}" 
-                class="btn btn-primary float-right">
-                     Volver ...
-         </a>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
@@ -18,14 +16,9 @@
                         <span class="text-center mx-auto font text-2xl">
                           Agregar Articulo
                         </span>
-                       
                     </div>
                     <div class="card-body">     
-                      @if ( session('mensaje') )
-                        <div class="alert alert-success">
-                            {{ session('mensaje') }}  
-                        </div>
-                      @endif
+                      
                       <form   action="{{ route('crear_articulo2') }}" 
                               method="POST"
                               enctype= "multipart/form-data"
@@ -48,11 +41,7 @@
                                   Precio obligatorio
                               </div>
                             @enderror
-                            @error('categorias_id')
-                              <div class="alert alert-success">
-                                  Categoria obligatorio
-                              </div>
-                            @enderror
+                           
                             @error('proveedors_id')
                               <div class="alert alert-success">
                                 Proveedor obligatorio
@@ -74,20 +63,44 @@
                           />
                           <input
                             type="number"
-                            name="precio"
+                            name="precioCompra"
                             placeholder="Precio de Compra"
+                            class="form-control mb-2"
+                          />
+                          <input
+                            type="number"
+                            name="iva"
+                            placeholder="IVA"
+                            class="form-control mb-2"
+                          />
+                          <input
+                            type="number"
+                            name="precioVenta"
+                            placeholder="Precio de Venta"
+                            class="form-control mb-2"
+                          />
+                          <input
+                            type="text"
+                            name="marca"
+                            placeholder="Marca"
+                            class="form-control mb-2"
+                          />
+                          <input
+                            type="text"
+                            name="modelo"
+                            placeholder="Modelo"
                             class="form-control mb-2"
                           />
                             <div class="form-row align-items-center">
                               <div class="col-auto my-1">
                                 <select class="custom-select mr-sm-2" 
-                                        id="inlineFormCustomSelect" 
+                                        id="categorias_id" 
                                         name= "categorias_id">
                                   <option selected>
                                     Categorias...
                                   </option>
                                   @foreach($cates as $item)
-                                    <option value= "{{$item->id}}" >
+                                    <option value= "{{ $item->id }}" >
                                       {{ $item->nombre }}
                                     </option>
                                   @endforeach
@@ -99,13 +112,13 @@
                             <div class="form-row align-items-center">
                               <div class="col-auto my-1">
                                 <select class="custom-select mr-sm-2" 
-                                        id="inlineFormCustomSelect" 
+                                        id="proveedors_id" 
                                         name= "proveedors_id">
                                   <option selected>
                                     Proveedores...
                                   </option>
                                   @foreach($proves as $item2)
-                                    <option value= "{{$item2->id}}" >
+                                    <option value= "{{ $item2->id }}" >
                                       {{ $item2->nombre }}
                                     </option>
                                   @endforeach
@@ -113,7 +126,6 @@
                                 <br>
                               </div>
                             </div>     
-      
                             <!-- <form>
                                   <br>
                                 
@@ -131,16 +143,12 @@
                                                   
                           <button class="btn btn-success mt-3" 
                                   type="submit">
-                            Agregar
+                                    Agregar
                           </button>
                       </form>
                     </div>
-                      
                 </div>
-                
             </div>
         </div>
     </div>
-
-
-</x-app-layout>
+@endsection

@@ -1,16 +1,14 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Articulo Detallado') }}
-        </h2>
-	</x-slot>
-	
-	<div class="container ">
-        <a href="{{route('mostrarTodosArt')}}" 
-            class="btn btn-primary float-right">
-                     Volver ...
-         </a>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+     
+</div> 
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
@@ -23,11 +21,13 @@
 						</span>						
 					</div>
 					<div class="card-body">    
-
+						
 						Id: {{ $art->id }} <br>
 						Nombre: {{ $art->nombre }} <br>
 						Cantidad: {{ $art->cantidad }} <br>
-						Precio: $ {{ $art->precio }} <br>
+						Precio: $ {{ $art->precioVenta }} <br>
+						Marca:  {{ $art->marca }} <br>
+						Modelo:  {{ $art->modelo }} <br>
 						<!-- traigo nombre de rol desde user -->
 						Categoria: {{ $cates[ ($art->categorias_id)-1 ]->nombre }} <br>
 						<!-- traigo nombre de provee desde user -->
@@ -39,5 +39,9 @@
 			</div>
 		</div>
 	</div>	
-
-</x-app-layout>
+	<div class="container mx-auto">
+		<a href=" {{ route ('detalle_articuloPdf', $art->id) }}" class="btn btn-success" >
+			Imprimir en pdf 
+		</a>
+	</div>
+@endsection

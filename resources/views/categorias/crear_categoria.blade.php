@@ -1,15 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Categoria  Nueva') }}
-        </h2>
-    </x-slot>
-    <div class="container ">
-        <a href="{{route('dashboard')}}" 
-                class="btn btn-primary float-right">
-                     Volver ...
-         </a>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
@@ -58,5 +56,4 @@
         </div>
     </div>
 
-
-</x-app-layout>
+@endsection

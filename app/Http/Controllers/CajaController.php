@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Caja;
 use Illuminate\Http\Request;
 use App\Models\Factura;
+use App\Models\User;
 
 class CajaController extends Controller
 {
     public function cajaDiaria()
     {
-        
+        $users= User::all();
         $todas= Factura::all();
         //$todas= $this->mostrarTodasFact
         //dd('$todas');
-        return view ('caja', compact('todas'));
+        return view ('caja', compact('todas', 'users'));
     }
 
     /**

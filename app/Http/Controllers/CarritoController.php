@@ -25,9 +25,9 @@ class CarritoController extends Controller
                         "Art_id" => $articulo->id,
                         "Nombre" => $articulo->nombre,
                         "Cantidad" => 1,
-                        "Precio" => $articulo->precio,
+                        "Precio" => $articulo->precioVenta,
                         "Disponible"=> $articulo->cantidad,
-                        "SubTotal" => $articulo->precio,
+                        "SubTotal" => $articulo->precioVenta,
                         
                         /* "Imagen" => $Articulo->Imagen */
                         ]
@@ -61,9 +61,9 @@ class CarritoController extends Controller
                 "Art_id" => $articulo->id,
                 "Nombre" => $articulo->nombre,
                 "Cantidad" => 1,
-                "Precio" => $articulo->precio,
+                "Precio" => $articulo->precioVenta,
                 "Disponible"=> $articulo->cantidad,
-                "SubTotal" => $articulo->precio,
+                "SubTotal" => $articulo->precioVenta,
                 /* "Imagen" => $Articulo->Imagen */
                 ];
             

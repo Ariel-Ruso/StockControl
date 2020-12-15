@@ -1,15 +1,13 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Nuevo Proveedor') }}
-        </h2>
-    </x-slot>
-    <div class="container ">
-        <a href="{{route('dashboard')}}" 
-                class="btn btn-primary float-right">
-                     Volver ...
-         </a>
-    </div>
+@extends('layouts.app')
+
+@section('content')
+
+@component('components.volver')
+@endcomponent
+
+@component('components.mensajes')
+@endcomponent
+
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
@@ -20,11 +18,7 @@
                         </span>                       
                     </div>
                     <div class="card-body">     
-                      @if ( session('mensaje') )
-                        <div class="alert alert-success">
-                            {{ session('mensaje') }}  
-                        </div>
-                      @endif
+                    
                       <form   action="{{ route('crear_proveedor2') }}" 
                               method="POST"
                               enctype= "multipart/form-data"
@@ -89,4 +83,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

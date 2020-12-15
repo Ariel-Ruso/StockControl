@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $proveedor= Proveedor::factory()->times(3)->create();
         $this->call(CategoriaSeeder::class);
         
-        $articulo= Articulo::factory()->times(6)->create();
+        $articulo= Articulo::factory()->times(7)->create();
 
     }
 }

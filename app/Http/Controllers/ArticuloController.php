@@ -6,6 +6,7 @@ use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 
+
 use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
@@ -44,6 +45,8 @@ class ArticuloController extends Controller
             'nombre' => 'required',
             'cantidad' => 'required',
             'precio' => 'required',
+            'iva' => 'required',
+            'marca'  => 'required',
             'categorias_id' => 'required',
             'proveedors_id' => 'required',
         ]);
@@ -52,8 +55,11 @@ class ArticuloController extends Controller
         $art->nombre = $request->nombre;
         $art->cantidad = $request->cantidad;
         $art->precio = $request->precio;
+        $art->iva = $request->iva;
         $art->categorias_id = $request->categorias_id;
         $art->proveedors_id = $request->proveedors_id;
+        $art->marca= $request->marca;
+        $art->descripcion= $request->descripcion;
         $art->save();
         return back()->with('mensaje', 'Articulo agregado correctamente');
         

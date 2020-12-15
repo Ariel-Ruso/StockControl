@@ -23,11 +23,16 @@ class ArticuloFactory extends Factory
     {
         
          return [
-                'nombre'=> $this->faker->sentence(2),
+                'nombre'=> $this->faker->sentence(1),
+                'descripcion'=> $this->faker->sentence(5),
+                'marca'=> $this->faker->sentence(1),
+                'modelo'=> $this->faker->sentence(1),
                 'categorias_id'=>rand(10, 1),
                 'proveedors_id'=>rand(4, 1),
                 'cantidad'=>rand(2, 500),
-                'precio'=> rand(3,5000),
+                'precioCompra'=> rand(3,500),
+                'precioVenta'=> rand(3,5000),
+                'iva'=> rand(2,100),
                 'created_at'=> now(),
             
         ]; 

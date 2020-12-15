@@ -10,15 +10,41 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CajaController;
 use App\Http\Controllers\UsuarioController;
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+use App\Http\Controllers\PdfController;
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+ Route::get('/', function () {
+    return view('welcome');
+})->name('welcome'); 
+
+//impresion pdfs
+
+Route::get('/detalle_articuloPdf/{id}', [pdfController::class, 'detalle_articuloPdf'])
+    ->name('detalle_articuloPdf');
+
+Route::get('/articulosPdf', [pdfController::class, 'articulosPdf'])
+    ->name('articulosPdf');
+
+Route::get('/articulosPdfHoriz', [pdfController::class, 'articulosPdfHoriz'])
+    ->name('articulosPdfHoriz');
+
+/* Route::get('/', function () {
+    return view('home');
+})->name('home'); */
+
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+/* 
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/dash2', function () {
+    return view('dash2');
+})->name('dashboard'); */
 
 //caja
+Route::get('/dash', function () {
+    return view('dash2');
+})->name('dash2');
+
 
 Route::get ('/cajaDiaria',[CajaController::class, 'cajaDiaria'])
     ->name('cajaDiaria');  
@@ -33,9 +59,6 @@ Route::post ('/crear_usuario2', [UsuarioController::class, 'crear_usuario2'])
 Route::get ('usuarios/mostrarTodos', [UsuarioController::class, 'mostrarTodos'])
             ->name('mostrarTodos');
 
-//traza
-Route::get ('traza/Trabajos', [TrazaController::class, 'Trabajos'])
-            ->name('trabajos');
 
 //categ
             
@@ -43,14 +66,28 @@ Route::get ('/crear_categoria',[CategoriaController::class, 'crear_categoria'])
     ->name('crear_categoria');  
 
 Route::post ('/crear_categoria2', [CategoriaController::class, 'crear_categoria2'])
-    ->name('crear_categoria2');           
+    ->name('crear_categoria2');    
+    
+Route::delete ('categorias/eliminar_categoria/{id}', [CategoriaController::class, 'eliminar_categoria'])
+     ->name('eliminar_categoria'); 
+
+    
+    
+Route::get ('/mostrar_categorias',[CategoriaController::class, 'mostrar_categorias'])
+->name('mostrar_categorias'); 
 
     //provee    
 Route::get ('/crear_proveedor',[ProveedorController::class, 'crear_proveedor'])
     ->name('crear_proveedor');  
 
 Route::post ('/crear_proveedor2', [ProveedorController::class, 'crear_proveedor2'])
-    ->name('crear_proveedor2');           
+    ->name('crear_proveedor2'); 
+    
+Route::get ('/mostrar_proveedores',[ProveedorController::class, 'mostrar_proveedores'])
+->name('mostrar_proveedores');    
+
+Route::delete ('/eliminar_proveedor/{id}', [ProveedorController::class, 'eliminar_proveedor'])
+     ->name('eliminar_proveedor');         
 
 
 //sesion
@@ -114,3 +151,10 @@ Route::get('eliminarCarr/{id}', [CarritoController::class, 'eliminarCarr'])
 
 Route::get('borrarCarr', [CarritoController::class, 'borrarCarr'])
     ->name('borrarCarr');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
