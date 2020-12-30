@@ -14,36 +14,35 @@
                 <div class="card bg-white shadow">
                     <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
-                          Agregar Categoria
+                          Ingrese Monto Inicial
                         </span>                       
                     </div>
                     <div class="card-body">     
                      
-                      <form   action="{{ route('crear_categoria2') }}" 
+                      <form   action="{{ route('guardarCaja') }}" 
                               method="POST"
                               enctype= "multipart/form-data"
                               >
                         @csrf
-                        
                             <div class="container" name= "errores">
-                                @error('nombre')
+                                @error('monto')
                                 <div class="alert alert-success">
-                                    Nombre obligatorio
+                                    Monto obligatorio
                                 </div>
                                 @enderror
                             </div>
                             <div class="container" name="etiquetas">
                             <br>
                             <input
-                                type="text"
-                                name="nombre"
-                                placeholder="Nombre"
+                                type="number"
+                                name="monto"
+                                placeholder="Monto inicial"
                                 class="form-control mb-2"
                             />     
                             </div>
                             <button class="btn btn-success mt-3" 
                                     type="submit">
-                                Agregar
+                                Guardar
                           </button>
                       </form>
                     </div>

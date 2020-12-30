@@ -7,8 +7,6 @@
 
 @component('components.mensajes')
 @endcomponent
-<script type="text/javascript" src="{{ URL::asset('js/logica.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
@@ -24,7 +22,6 @@
                       <form   action="{{ route('crear_articulo2') }}" 
                               method="POST"
                               enctype= "multipart/form-data"
-                              name="calc"
                               >
                         @csrf
                         
@@ -51,10 +48,7 @@
                               </div>
                             @enderror
                         </div>
-
                         <div class="container" name="etiquetas">
-                        <div class="row justify-content-center ">
-                            <div class="col-md-8">
                           <input
                             type="text"
                             name="nombre"
@@ -66,42 +60,63 @@
                             name="cantidad"
                             placeholder="Cantidad"
                             class="form-control mb-2"
-                          /> 
-                            <label class="alert alert-info " for="">
-                            <label for="">Precio de compra</label>
-                            <input
-                              type="number"
-                              id="precioCompra"
-                              name="precioCompra"
-                              placeholder=""
-                              class="form-control mb-2"
-                              onchange="checkInput('precioCompra');"
-                            />
-                            <label for="">IVA</label>
-                            <input
-                              type="number"
-                              name="iva"
-                              placeholder="21"
-                              class="form-control mb-2"
-                              onchange="checkInput('precioCompra');"
-                            />
-                            <label for="">Ganancia</label>
-                            <input
-                              type="number"
-                              id="ganancia"
-                              name="ganancia"
-                              placeholder="18"
-                              class="form-control mb-2"
-                              onchange="checkInput('precioCompra');"
-                            />
-                            <input
-                              type="number"
-                              name="precioVenta"
-                              placeholder="Precio de Venta"
-                              class="form-control mb-2"
-                            />
-                            </label>
-                         
+                          />
+                          <input
+                            type="number"
+                            name="precioCompra"
+                            placeholder="Precio de Compra"
+                            class="form-control mb-2"
+                          /><!-- 
+                          <label for="">Precio Compra</label>
+                          <input class="form-control mb-2" type="text" id="preciocompra" 
+                                  name="num1" onchange="checkInput('num1');" /> -->
+                          
+                          <div class="input-group mb-3">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" 
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                        Iva
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a class="dropdown-item" href="#" id="iva21">
+                                    21 %
+                                 </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#" id="iva10"> 
+                                    10.5 %
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <input
+                            type="number"
+                            name="iva"
+                            placeholder="IVA"
+                            class="form-control mb-2"
+                          />
+                              <!-- 
+                          
+                          <label for="">IVA</label>
+
+                          <input  class="form-control mb-2" type="text" id="iva" value="" 
+                                  onchange="checkInput('num1');">
+                           -->
+                          <label for="">Ganancia</label>
+                          <input class="form-control mb-2" type="text" id="ganancia" 
+                                name="num1" value="30" onchange="checkInput('num1');" /> 
+                          <br /> 
+                                
+                          <input
+                            type="number"
+                            name="precioVenta"
+                            placeholder="Precio de Venta"
+                            class="form-control mb-2"
+                          />
+                          <label for="">Precio Final</label>
+                          <input  class="form-control mb-2" type="text" 
+                                name="fieldname" id="garca" />  
+                          
                           <input
                             type="text"
                             name="marca"
@@ -114,22 +129,11 @@
                             placeholder="Modelo"
                             class="form-control mb-2"
                           />
-               
                             <div class="form-row align-items-center">
                               <div class="col-auto my-1">
-                                <svg id="barcode2"></svg>
-                                <input type="text"    
-                                  name="codbar"
-                                  placeholder="Codigo de Barras"
-                                  class="form-control mb-2"
-                                />
-                                  <button type="button" onclick="randomInt();"
-                                      class="btn btn-secondary">Generar
-                                  </button><br><br>
                                 <select class="custom-select mr-sm-2" 
                                         id="categorias_id" 
                                         name= "categorias_id">
-                                        <br></br>
                                   <option selected>
                                     Categorias...
                                   </option>
@@ -161,6 +165,8 @@
                               </div>
                             </div>     
                             <!-- <form>
+                                  <br>
+                                
                                   <div class="form-group">
                                     <label for="exampleFormControlFile1">
                                         Seleccione imagen
@@ -168,43 +174,30 @@
                                     <input  type="file" 
                                             class="form-control-file" 
                                             id="imagen"
-                                            name= "imagen">   
+                                            name= "imagen">
+                                            
                                   </div> 
                                 </form>-->
                                                   
-                          <button class="btn btn-success mt-3 " 
+                          <button class="btn btn-success mt-3" 
                                   type="submit">
                                     Agregar
                           </button>
                       </form>
+
                       </div>
-                    </div>     
-                  </div>
+
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-
+    </div>
 <script>
-function checkInput(precioCompra) { 
-    var Precio = document.calc.precioCompra.value; 
-    var iva = document.calc.iva.value; 
-    var gano = document.calc.ganancia.value; 
-
-    var pre = document.calc.precioVenta.value = Precio * iva /100 ;
-    var renta = document.calc.precioVenta.value = Precio * gano /100 ;
-    var final = Number(Precio) + Number(pre) + Number(renta);
-      document.calc.precioVenta.value = final ;
-
-}
-
-function randomInt() {
-  var codbar =  Math.round(Math.random()*10) * 154657897987 * 1375;
-  document.calc.codbar.value = codbar ;
-  JsBarcode("#barcode2", codbar);
-
-}
+    $(document).ready(function(){
+	      $("dropdown-item[id="iva21"]").change(function(){
+                alert($('Eligio'));
+            $('input[name=valor1]').val($(this).val());
+        });
 </script>
-
+    
 @endsection

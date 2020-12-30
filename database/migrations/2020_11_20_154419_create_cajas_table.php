@@ -14,7 +14,13 @@ class CreateCajasTable extends Migration
     public function up()
     {
         Schema::create('cajas', function (Blueprint $table) {
-            $table->id();
+            $table->id()
+                ->unique();
+            $table->double('monto');
+            $table->foreignId('users_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

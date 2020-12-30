@@ -45,9 +45,9 @@
                         Menu Usuarios
                     </a>
                     <div  class="dropdown-menu" aria-labelledby="dropdownbutton">
-                            <a href="{{ route('crear_usuario') }}" class="dropdown-item">
+                            <!-- <a href="{{ route('crear_usuario') }}" class="dropdown-item">
                                 Crear usuario
-                            </a>
+                            </a> -->
                             <a href="{{ route('mostrarTodos') }}" class="dropdown-item">
                                 Mostrar Usuarios
                             </a>
@@ -130,7 +130,7 @@
                 </li> 
                  <!-- caja -->
                  <li class="nav-item active">
-                    <a  href=" {{ route('cajaDiaria') }} "
+                    <a  href=" {{ route('mostrarCaja') }} "
                             class="btn btn-outline-primary"
                             role="button" 
                             id="dropdownbutton"    

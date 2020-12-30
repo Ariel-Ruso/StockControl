@@ -28,7 +28,7 @@ class CarritoController extends Controller
                         "Precio" => $articulo->precioVenta,
                         "Disponible"=> $articulo->cantidad,
                         "SubTotal" => $articulo->precioVenta,
-                        
+                        "Iva"=> $articulo->iva,
                         /* "Imagen" => $Articulo->Imagen */
                         ]
                     ];
@@ -44,7 +44,8 @@ class CarritoController extends Controller
             if(isset($carrito[$id])) {
                     $carrito[$id]['Cantidad']++;
                     $carrito[$id]['SubTotal'] += $carrito[$id]['SubTotal'];
-                    
+                    $carrito[$id]['Iva'] += $carrito[$id]['Iva'];
+
                     /* session()->put('carrito', $carrito);
                     return redirect()->back()->with('mensaje', ' Articulo mismo item agregado al carrito');
                      */
@@ -64,6 +65,7 @@ class CarritoController extends Controller
                 "Precio" => $articulo->precioVenta,
                 "Disponible"=> $articulo->cantidad,
                 "SubTotal" => $articulo->precioVenta,
+                "Iva"=> $articulo->iva,
                 /* "Imagen" => $Articulo->Imagen */
                 ];
             
@@ -129,7 +131,7 @@ class CarritoController extends Controller
         $carrito= session()->get('carrito');
         $iva= 0;
         foreach ($carrito as $item){
-            $iva += $item["SubTotal"] * 0.21;
+            $iva += $item["Iva"];
         }
         return $iva;
     }
@@ -138,12 +140,11 @@ class CarritoController extends Controller
     public function detallePedido(){
         
         $carrito= session()->get('carrito');
-        
-        
         $iva= $this->iva();
-        $subtotal= $this->subtotal();
-        $total= $iva + $subtotal;
-        return view('venta/detallePedido', compact('subtotal', 'iva', 'carrito', 'total'));
+        $total= $this->subtotal();
+        $subtotal= (($this->subtotal())- $iva);
+        
+        return view('venta/detallePedido', compact('subtotal', 'carrito', 'total'));
     }
 
 }

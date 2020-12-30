@@ -76,9 +76,7 @@
                                                             <th>
                                                                 SubTotal
                                                             </th>
-                                                            <th>
-                                                                IVA
-                                                            </th>
+                                                           
                                                         </th> 
                                                         </tr>   
                                                     </thead>
@@ -98,9 +96,7 @@
                                                             <th  class="font-weight-normal" > 
                                                                 $ {{ number_format($detalle['SubTotal'],2) }}    
                                                             </th>  
-                                                            <th  class="font-weight-normal" > 
-                                                                $ {{ number_format( ($detalle['SubTotal'])*0.21 ,2) }}    
-                                                            </th>
+                                                            
                                                         </th>
                                                         </tbody>                        
                                                         @endforeach
@@ -122,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <br>
+            <br><br>
             <h3 style="text-align:center">
                 Forma De Pago
             </h3><br>
@@ -145,6 +141,8 @@
                                                             1 pago de $ {{ number_format( $total, 2) }}<br>
                                                         </label>
                                                     </div>
+                                                    <div class="w-500"></div>
+                                                    <hr noshade="noshade" />
                                                     <div class="form-check">
                                                         <input  class="form-check-input" type="radio" 
                                                                 name="tipoPago" id="exampleRadios2" 
@@ -160,8 +158,8 @@
                                                                     class="form-control mb-2"
                                                             />  %
                                                         </div> -->
-                                                        
                                                     </div>
+                                                    <hr noshade="noshade" />
                                                     <div class="form-check">
                                                         <input  class="form-check-input" type="radio" 
                                                                 name="tipoPago" id="exampleRadios3" 
@@ -172,17 +170,24 @@
                                                             Total: $ {{  number_format($total ,2) }}<br>
                                                         </label>
                                                     </div>
+                                                    <hr noshade="noshade" />
                                                     <div class="form-check">
                                                         <input  class="form-check-input" type="radio" 
                                                                 name="tipoPago" id="exampleRadios4" 
                                                                 value="4">
-                                                        <label class="form-check-label" for="exampleRadios4">
+                                                        <label class="form-check-label" for="exampleRadios4" >
                                                             Tarjeta Credito - <br>
-                                                             Mas de 1 pago
-                                                            Total: $ {{  number_format($total + ($total*0.18) ,2) }}<br>
+                                                            <!--  Mas de 1 pago
+                                                            Total: $ {{  number_format($total + ($total*0.18) ,2) }} -->
+                                                           
+                                                        </label >
+                                                        <input  type="number"  name="noBancaria4" class="border border-primary" >
+                                                        </input>
+                                                            <br>
                                                             12 cuotas  $ {{  number_format( ($total + ($total*0.18) )/12 ,2) }}<br>
                                                         </label>
                                                     </div>
+                                                    <hr noshade="noshade" />
                                                     <div class="form-check">
                                                         <input  class="form-check-input" type="radio" 
                                                                 name="tipoPago" id="exampleRadios5" 
@@ -191,7 +196,7 @@
                                                             Tarjeta Credito <br>
                                                             No Bancaria- 
                                                         </label>
-                                                        <input type="integer" class=" border rounded-br">
+                                                        <input type="number"  name="noBancaria5" class="border border-primary">
                                                         </input>
                                                     </div>
                                                 </div>
@@ -204,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="container col-md-2">
                 <button class="btn btn-success mt-3 align-right" 
                         type="submit">

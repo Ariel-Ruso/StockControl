@@ -44,9 +44,11 @@ class ArticuloController extends Controller
     	$request-> validate ([
             'nombre' => 'required',
             'cantidad' => 'required',
-            'precio' => 'required',
+            'precioVenta' => 'required',
             'iva' => 'required',
+            'precioCompra' => 'required',
             'marca'  => 'required',
+            'modelo'  => 'required',
             'categorias_id' => 'required',
             'proveedors_id' => 'required',
         ]);
@@ -54,11 +56,13 @@ class ArticuloController extends Controller
         $art = new Articulo;
         $art->nombre = $request->nombre;
         $art->cantidad = $request->cantidad;
-        $art->precio = $request->precio;
+        $art->precioVenta = $request->precioVenta;
+        $art->precioCompra = $request->precioCompra;
         $art->iva = $request->iva;
         $art->categorias_id = $request->categorias_id;
         $art->proveedors_id = $request->proveedors_id;
         $art->marca= $request->marca;
+        $art->modelo= $request->modelo;
         $art->descripcion= $request->descripcion;
         $art->save();
         return back()->with('mensaje', 'Articulo agregado correctamente');

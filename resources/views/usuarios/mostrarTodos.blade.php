@@ -34,18 +34,18 @@
                     font-medium text-gray-500 uppercase tracking-wider">
                       Nombre
                     </th>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                   <!--  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
                     font-medium text-gray-500 uppercase tracking-wider">
                       Direccion
-                    </th>
+                    </th> -->
                     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
                     font-medium text-gray-500 uppercase tracking-wider">
                       Correo
                     </th>
-                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
+                   <!--  <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 
                     font-medium text-gray-500 uppercase tracking-wider">
                       Rol
-                    </th>
+                    </th> -->
                     <th class="px-6 py-3 bg-gray-50"></th>
                   </tr>
                 </thead>
@@ -56,27 +56,23 @@
                       <div class="flex items-center">
                             <div class="ml-4">
                                 <div class="text-sm leading-5 font-medium text-gray-900">
-                                    {{ $item->nombre}}
+                                    {{ $item->name}}
                                 </div>                          
                             </div>
                       </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap">
+                   <!--  <td class="px-6 py-4 whitespace-no-wrap">
                       <div class="text-sm leading-5 text-gray-900">
                           {{ $item->direccion }}
                         </div>
-                    </td>
+                    </td> -->
                     <td class="px-6 py-4 whitespace-no-wrap">
                       <div class="text-sm leading-5 text-gray-900">
-                          {{ $item->correo }}
+                          {{ $item->email }}
                         </div>
                     </td>
-                    </td> <td class="px-6 py-4 whitespace-no-wrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      
-                        {{ $rols[ ($item->rols_id)-1 ]->nombre }}
-                      </span>
-                    </td>
+                    </td> 
+                   
                   </tr>
                   <!-- More rows... -->
                 </tbody>

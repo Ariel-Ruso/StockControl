@@ -9,34 +9,41 @@ use App\Models\User;
 
 class CajaController extends Controller
 {
-    public function cajaDiaria()
+    public function mostrarCaja()
     {
         $users= User::all();
         $todas= Factura::all();
-        //$todas= $this->mostrarTodasFact
-        //dd('$todas');
-        return view ('caja', compact('todas', 'users'));
+
+        //busco si caja inicial para este user
+        $inic= Caja::where('users_id', auth()->id())->get();
+        
+        return view ('caja.mostrarCaja', compact('todas', 'users', 'inic'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function abrirCaja()
     {
-        //
+         $inic= Caja::where('users_id', auth()->id()  )->get();
+            //dd($inic);
+        
+            return view('caja.abreCaja');
+
+            if($inic){
+                return back()->with('mensaje', 'Ya inicio Caja');
+            }
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function guardarCaja(Request $request)
     {
-        //
+        $request-> validate ([
+            'monto' => 'required',
+        ]);
+
+        $caja= new Caja();
+        $caja->users_id= auth()->id();
+        $caja->monto= $request->monto;
+        $caja->save();
+        return back()->with('mensaje', 'Monto inicial establecido');
     }
 
     /**

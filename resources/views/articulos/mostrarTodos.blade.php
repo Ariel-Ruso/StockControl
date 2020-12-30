@@ -59,6 +59,14 @@
   </nav><br><br>
 </div>
 
+<div class="container ">
+    <br>
+        <a href="{{ route('verCarrito') }}" 
+                class="btn btn-primary float-right">
+                     Ir a Carrito
+         </a>
+</div>
+
 <!-- si hay resultado armo tabla --> 
   <div class="container mt-10">
     <div class="row justify-content-center mx-auto ">

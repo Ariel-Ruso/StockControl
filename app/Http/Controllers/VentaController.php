@@ -33,7 +33,10 @@ class VentaController extends Controller
             $art= new Articulo;
             $arts= Articulo::all();
             $cantA= count($arts);
+            //dd($arts);
             $cart= new Carrito();
+            
+            
             for($x=0; $x <= $cantA; $x++){
             //si existe carrito con ese indice
                 if(isset($carrito[$x])) {
@@ -46,21 +49,41 @@ class VentaController extends Controller
     
                     $subtot= $carrito[$x]["SubTotal"];
                     $art->vender_articulo($carrito[$x]["Cantidad"], $x);
+                    
+                    $tot= $subtot;
                     $iva= $subtot * 0.21;
-                    $tot= $subtot + $iva;
-                    //escribo factura
+                    $subtot= $tot - $iva;
+                    
                     $fact->descripcion= $detalle;
                     $fact->subtotal= $subtot;
                     $fact->iva= $iva;
-                    $fact->users_id= auth()->id();    
-                    $fact->total= $tot;
+                    $fact->users_id= auth()->id();  
+                    $fact->total= $tot;  
+                    
+                     //escribo factura
+            
                     $fact->tipoPago= $request->tipoPago;
+
+                    if ($request->tipoPago==4){
+                        $fact->total= $request->noBancaria4;  
+                        //dd($request->noBancaria4);  
+                    }
+                    if ($request->tipoPago==5){
+                        
+                        $fact->total= $request->noBancaria5;    
+                       // dd($request->noBancaria5);
+                    } 
+                    
                     $fact->save();  
+                    //dd($fact);
                 }
             }
+            
         } 
-              
-        return redirect()->back()->with('mensaje', ' Venta correcta del carrito');
+        session()->forget('carrito');
+        return view ('venta/verCarrito');
+
+        //return redirect()->back()->with('mensaje', ' Venta correcta del carrito ');
     }
 
 }

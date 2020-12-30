@@ -32,15 +32,14 @@
                                     <th>
                                         Cant / Disp
                                     </th>
-                                   
                                     {{-- <th>
                                         Imagen
                                     </th> --}}
                                     <th>
-                                        Accion
+                                        SubTotal
                                     </th>
                                     <th>
-                                        SubTotal
+                                        Accion
                                     </th>
                                 </tr>
                             </thead>
@@ -59,6 +58,12 @@
                                     {{ $detalle['Cantidad'] }}
                                     / {{ $detalle['Disponible'] }}
                                 </th>
+                                <th  class="font-weight-normal" >
+                                    $ {{ number_format($detalle['SubTotal'],2) }}
+                                </th>
+                                {{-- <th>
+                                    <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
+                                </th> --}}
                                 <th>
                                     <a  href="{{ url ('agregar/' .$id )  }}"
                                         class= "btn btn-primary">
@@ -69,18 +74,12 @@
                                             -
                                     </a>
                                 </th>
-                                <th  class="font-weight-normal" >
-                                    $ {{ number_format($detalle['SubTotal'],2) }}
-                                </th>
-                                {{-- <th>
-                                    <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
-                                </th> --}}
                             </tr>
                         @endforeach
                         <tr>
                             <td colspan= "12" align="right" >
                                 <h3>
-                                    Total $ {{ number_format ($subtotal,2) }}
+                                    Total $ {{ number_format ($subtotal, 2) }}
                                 </h3>
                             </td>
                         </tr>
@@ -105,7 +104,7 @@
                         </a>
                        
                     </div> 
-                    
+                     <!-- 
                     <div name="testing">
                         <br>
                         <a  href="{{ url('verSession') }}" 
@@ -116,7 +115,7 @@
                             class= "btn btn-danger">
                                 Vaciar Carrito
                         </a>
-                        
+                          -->
                     </div> 
                     <br>
                     <tr colspane> 
@@ -146,8 +145,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-    .
     </div>
 @endsection
