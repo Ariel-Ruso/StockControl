@@ -33,6 +33,7 @@ class ArticuloFactory extends Factory
                 'precioCompra'=> rand(3,500),
                 'precioVenta'=> rand(3,5000),
                 'iva'=> rand(2,100),
+                'codbar'=> rand(8,10000),
                 'created_at'=> now(),
             
         ]; 

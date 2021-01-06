@@ -13,35 +13,32 @@
             <div class="col-md-12">
                   <br><br>
                   <table class="table">
-                    <thead class="table-success">
-                      <tr>
+                    <thead class="table-primary">
+                      <tr class="px-6 py-3 text-center text-xs leading-4 
+                        font-medium text-black-500 uppercase tracking-wider">
+                        
                         <th scope="col">
-                          <h2>
-                          Nombre 
-                          </h2>
+                            Nombre 
                         </th>
                         <th scope="col">
-                          <h2>
-                          Correo 
-                          </h2>
-                          </th>
+                            Correo 
+                        </th>
                         <th scope="col">
-                          <h2>
-                          Contacto
-                          </h2>
-                          </th>
+                            Contacto
+                        </th>
                         <th scope="col">
-                          <h2>
-                          Direccion
-                          </h2>
-                          </th>
+                            Telefono
+                        </th>
                         <th scope="col">
-                          <h2>
-                          Acciones
-                          </h2>
-                          </th>
+                            Direccion
+                        </th>
+                        <th scope="col">
+                            Acciones
+                        </th>
                       </tr>
+                      
                     </thead>
+                    
                     <tbody>
                       @foreach($proves as $item)
                         <tr>
@@ -53,6 +50,9 @@
                           </td>
                           <td>    
                               {{ $item->contacto }}
+                          </td>
+                          <td>    
+                              {{ $item->telefono }}
                           </td>
                           <td>    
                               {{ $item->direccion }}

@@ -33,6 +33,8 @@
 						<!-- traigo nombre de provee desde user -->
 						Proveedor: {{ $proves[ ($art->proveedors_id)-1 ]->nombre }} 
 						<br>
+						Codigo Barras:
+						{{ $art->codbar }} <br>
 
 					</div>
 				</div>

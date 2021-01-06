@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class TrazaSeeder extends Seeder
+class EstadoCajaSeeder extends Seeder
 {
     /**
      * Run the database seeds.

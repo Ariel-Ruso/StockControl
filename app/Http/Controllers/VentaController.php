@@ -27,15 +27,14 @@ class VentaController extends Controller
         
         $carrito= session()->get('carrito');
         $cantC= count($carrito);
-        
+        //dd($cantC);
         for($x=0; $x <= $cantC; $x++){
             $fact= new Factura;
             $art= new Articulo;
             $arts= Articulo::all();
             $cantA= count($arts);
-            //dd($arts);
+            //dd($cantA);
             $cart= new Carrito();
-            
             
             for($x=0; $x <= $cantA; $x++){
             //si existe carrito con ese indice
@@ -48,20 +47,18 @@ class VentaController extends Controller
                         " Cantidad ".$carrito[$x]["Cantidad"]; 
     
                     $subtot= $carrito[$x]["SubTotal"];
+                    //dd($subtot);
                     $art->vender_articulo($carrito[$x]["Cantidad"], $x);
                     
                     $tot= $subtot;
                     $iva= $subtot * 0.21;
                     $subtot= $tot - $iva;
-                    
+                    //escribo factura
                     $fact->descripcion= $detalle;
                     $fact->subtotal= $subtot;
                     $fact->iva= $iva;
                     $fact->users_id= auth()->id();  
                     $fact->total= $tot;  
-                    
-                     //escribo factura
-            
                     $fact->tipoPago= $request->tipoPago;
 
                     if ($request->tipoPago==4){
@@ -75,10 +72,9 @@ class VentaController extends Controller
                     } 
                     
                     $fact->save();  
-                    //dd($fact);
+                    dd($fact);
                 }
             }
-            
         } 
         session()->forget('carrito');
         return view ('venta/verCarrito');

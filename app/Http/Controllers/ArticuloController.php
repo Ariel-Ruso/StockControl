@@ -51,10 +51,12 @@ class ArticuloController extends Controller
             'modelo'  => 'required',
             'categorias_id' => 'required',
             'proveedors_id' => 'required',
+            'codbar' => 'required',
         ]);
       
         $art = new Articulo;
         $art->nombre = $request->nombre;
+        $art->descripcion = $request->descripcion;
         $art->cantidad = $request->cantidad;
         $art->precioVenta = $request->precioVenta;
         $art->precioCompra = $request->precioCompra;
@@ -64,6 +66,7 @@ class ArticuloController extends Controller
         $art->marca= $request->marca;
         $art->modelo= $request->modelo;
         $art->descripcion= $request->descripcion;
+        $art->codbar= $request->codbar;
         $art->save();
         return back()->with('mensaje', 'Articulo agregado correctamente');
         
@@ -72,9 +75,11 @@ class ArticuloController extends Controller
     public function mostrarTodos (){
        
         $arts= Articulo::paginate(5);
+        $cont= count($arts);
+        
         $cates= Categoria::all();
         $proves= Proveedor::all();
-    	return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves'));
+    	return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves', 'cont'));
     }
 
     public function detalle_articulo($id){

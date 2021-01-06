@@ -22,6 +22,8 @@ class CreateArticulosTable extends Migration
             $table->float('precioCompra');
             $table->float('iva');   
             $table->float('precioVenta');
+            $table->String('codbar')
+                    ->nullable();
             $table->foreignId('categorias_id')
                     ->references('id')
                     ->on('categorias')

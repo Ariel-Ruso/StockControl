@@ -19,6 +19,7 @@ class CreateProveedorsTable extends Migration
             $table->string('nombre');
             $table->string('contacto');
             $table->string('correo');
+            $table->string('telefono');
             $table  ->timestamp('email_verified_at')
                     ->nullable();
             $table->string('direccion');                    

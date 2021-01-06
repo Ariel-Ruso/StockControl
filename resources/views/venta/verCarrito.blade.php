@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="container col-md-6 " name= "grafica">
+        <div class="row justify-content-center ">
+            <div class="container ">
+                <img src="/Storage/ventas.png" height="600" width="500" >
+            </div>
+        </div>      
+</div>    
+<br>
+    
   
 @component('components.volver')
 @endcomponent
@@ -16,6 +26,7 @@
                         <span class="text-center mx-auto font text-2xl">
                             Tu Carrito
                         </span>
+                        
                     </div>
                     <div class="card-body">
                                   
@@ -104,7 +115,7 @@
                         </a>
                        
                     </div> 
-                     <!-- 
+                   <!--    
                     <div name="testing">
                         <br>
                         <a  href="{{ url('verSession') }}" 
@@ -115,7 +126,7 @@
                             class= "btn btn-danger">
                                 Vaciar Carrito
                         </a>
-                          -->
+                         -->  
                     </div> 
                     <br>
                     <tr colspane> 

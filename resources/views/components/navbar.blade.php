@@ -22,15 +22,7 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a  href=" {{ route('dashboard') }} "
-                        class="btn btn-outline-primary "
-                        role="button" 
-                        id="dropdownbutton"    
-                        aria-haspoppup="true" 
-                        aria-expanded="true"
-                    >
-                    Inicio
-                </a> 
+                
                 </li> 
                 <!-- menu usuarios -->
                 <div class="dropdown">   
@@ -140,10 +132,7 @@
                         Caja Diaria
                     </a> 
                 </li> 
-                 
             </ul>           
-
         </div>
-
     </nav>       
 </div>

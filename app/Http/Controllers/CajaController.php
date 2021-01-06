@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Caja;
+
 use Illuminate\Http\Request;
 use App\Models\Factura;
 use App\Models\User;
+use App\Models\Caja;
+use App\Models\EstadoCaja;
+use App\Http\Middleware;
 
 class CajaController extends Controller
 {
@@ -22,15 +25,21 @@ class CajaController extends Controller
 
     public function abrirCaja()
     {
-         $inic= Caja::where('users_id', auth()->id()  )->get();
-            //dd($inic);
-        
-            return view('caja.abreCaja');
+         $inic= Caja::all();
+         $est= EstadoCaja::all();
 
-            if($inic){
-                return back()->with('mensaje', 'Ya inicio Caja');
-            }
-        
+            //dd($est);
+
+        if($est='null')
+        {
+            return(' Podes abrir');
+            //return view('caja.abreCaja');
+
+        }
+        if($est->estado == 1){
+            return(' no Podes abrir');
+        }
+        //return view('caja.abreCaja');
     }
 
     public function guardarCaja(Request $request)
@@ -38,6 +47,7 @@ class CajaController extends Controller
         $request-> validate ([
             'monto' => 'required',
         ]);
+
 
         $caja= new Caja();
         $caja->users_id= auth()->id();

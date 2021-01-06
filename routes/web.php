@@ -11,6 +11,7 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CajaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PdfController;
+use App\Http\Middleware\CajaMiddleware;
 
  Route::get('/', function () {
     return view('welcome');
@@ -31,20 +32,20 @@ Route::get('/articulosPdfHoriz', [pdfController::class, 'articulosPdfHoriz'])
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/dash2', function () {
     return view('dash2');
-})->name('dashboard'); */
+})->name('dashboard'); 
 
 Route::get('/dash', function () {
     return view('dash2');
 })->name('dash2');
-
+*/
 //caja
 
 Route::post ('/guardarCaja',[CajaController::class, 'guardarCaja'])
     ->name('guardarCaja');  
 
 Route::get ('caja.abrirCaja',[CajaController::class, 'abrirCaja'])
-    ->name('abrirCaja')
-    ->middleware('CajaMiddleware');  
+    ->name('abrirCaja');
+//    ->middleware('CajaMiddleware');  
 
 Route::get ('caja.mostrarCaja',[CajaController::class, 'mostrarCaja'])
     ->name('mostrarCaja');  
@@ -160,6 +161,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get('/dashboard', function () {
     return view('dashboard');
     })
+
 ->name('dashboard');
 
     

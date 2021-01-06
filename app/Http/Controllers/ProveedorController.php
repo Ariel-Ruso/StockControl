@@ -19,6 +19,7 @@ class ProveedorController extends Controller
             'nombre' => 'required',
             'correo' => 'required',
             'contacto' => 'required',
+            'telefono' => 'required',
             'direccion' => 'required',
         ]);
       
@@ -26,6 +27,7 @@ class ProveedorController extends Controller
         $prove->nombre = $request->nombre;
         $prove->correo = $request->correo;
         $prove->contacto = $request->contacto;
+        $prove->telefono = $request->telefono;
         $prove->direccion = $request->direccion;
         $prove->save();
         return back()->with('mensaje', 'Proveedor agregado correctamente');

@@ -60,7 +60,13 @@
                             name="nombre"
                             placeholder="Nombre"
                             class="form-control mb-2"
-                          />                  
+                          />                
+                          <input
+                            type="text"
+                            name="descripcion"
+                            placeholder="Descripcion"
+                            class="form-control mb-2"
+                          />        
                           <input
                             type="number"
                             name="cantidad"
@@ -79,7 +85,7 @@
                             />
                             <label for="">IVA</label>
                             <input
-                              type="number"
+                              type="double"
                               name="iva"
                               placeholder="21"
                               class="form-control mb-2"
@@ -95,7 +101,7 @@
                               onchange="checkInput('precioCompra');"
                             />
                             <input
-                              type="number"
+                              type="double"
                               name="precioVenta"
                               placeholder="Precio de Venta"
                               class="form-control mb-2"
@@ -118,7 +124,7 @@
                             <div class="form-row align-items-center">
                               <div class="col-auto my-1">
                                 <svg id="barcode2"></svg>
-                                <input type="text"    
+                                <input type="text" 
                                   name="codbar"
                                   placeholder="Codigo de Barras"
                                   class="form-control mb-2"

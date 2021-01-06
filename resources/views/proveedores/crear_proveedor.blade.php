@@ -18,7 +18,6 @@
                         </span>                       
                     </div>
                     <div class="card-body">     
-                    
                       <form   action="{{ route('crear_proveedor2') }}" 
                               method="POST"
                               enctype= "multipart/form-data"
@@ -40,6 +39,11 @@
                                     Contacto obligatorio
                                 </div>
                                 @enderror
+                                @error('telefono')
+                                <div class="alert alert-success">
+                                    Telefono obligatorio
+                                </div>
+                                @enderror
                                 @error('direccion')
                                 <div class="alert alert-success">
                                     Direccion obligatoria
@@ -58,6 +62,12 @@
                                     type="text"
                                     name="correo"
                                     placeholder="Correo de Empresa"
+                                    class="form-control mb-2"
+                                />  
+                                <input
+                                    type="text"
+                                    name="telefono"
+                                    placeholder="Telefono"
                                     class="form-control mb-2"
                                 />  
                                 <input

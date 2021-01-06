@@ -66,8 +66,17 @@
                      Ir a Carrito
          </a>
 </div>
+<!-- si vuelve vacio -->
+@if($cont==0){
+<br><br>
+    <div class="text-center text-4xl font-extrabold leading-none tracking-tight">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
+            Sin productos en Stock
+        </span>
+     </div>
 
-<!-- si hay resultado armo tabla --> 
+}@else{
+      <!-- si hay resultado armo tabla --> 
   <div class="container mt-10">
     <div class="row justify-content-center mx-auto ">
       <div class="col-md-0 mx-auto">
@@ -75,9 +84,6 @@
           <table class="table " >
             <thead class="table-info font-weight-bolder font-extrabold">
               <tr>
-                <th scope="col">
-                    #Id
-                </th>
                 <th scope="col">
                     Nombre
                 </th>
@@ -88,7 +94,7 @@
                     Precio de Compra
                 </th>
                 <th scope="col">
-                    Iva
+                    Iva Ventas
                 </th>
                 <th scope="col">
                     Precio de Venta
@@ -112,10 +118,7 @@
             </thead>
             <tbody>
               @foreach($arts as $item)
-                <tr>
-                  <th scope="row">
-                    {{ $item->id }}
-                  </th>   
+                <tr> 
                   <td>  
                     <a href=" {{ route('detalle_articulo', $item) }}">
                       {{ $item->nombre }}
@@ -125,9 +128,9 @@
                     {{ $item->cantidad }}
                   </td>
                   <td>
-                  $  {{ $item->precioCompra }}
+                  $  {{ $item->precioCompra }} 
                   </td>
-                  <td>
+                  <td >
                   $  {{ $item->iva }}
                   </td>
                   <td>
@@ -171,7 +174,7 @@
           </table>
       </div>        
     </div>
-      {{ $arts->links() }}
+        {{ $arts->links() }}
   </div>
 <div class="container">
   <a href=" {{ route ('articulosPdf') }}" class="btn btn-primary" >
@@ -182,14 +185,9 @@
     </a>
 </div>
 
-  <!-- si vuelve vacio -->
-  @if(!$arts)
-    <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-            Sin productos
-        </span>
-     </div>
-@endif   
+}@endif   
+
+  
 @endsection
 
 

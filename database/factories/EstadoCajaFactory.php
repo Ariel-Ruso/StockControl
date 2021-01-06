@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Traza;
+use App\Models\EstadoCaja;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TrazaFactory extends Factory
+class EstadoCajaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Traza::class;
+    protected $model = EstadoCaja::class;
 
     /**
      * Define the model's default state.

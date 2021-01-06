@@ -12,7 +12,7 @@
     <br>
             <div class="row justify-content-center ">
                     <div class="container mx-auto ">
-                        <img src="Storage/user.png" height="700" width="600" >
+                        <img src="Storage/ventas.png" height="700" width="600" >
                     </div>
             </div>      
 </div>    
