@@ -39,15 +39,39 @@
                                   Cantidad obligatorio
                               </div>
                             @enderror
-                            @error('precio')
+                            @error('precioCompra')
                               <div class="alert alert-success">
-                                  Precio obligatorio
+                                  Precio Compra obligatorio
                               </div>
                             @enderror
-                           
+                            @error('iva')
+                              <div class="alert alert-success">
+                                Iva obligatoria
+                              </div>
+                            @enderror
+                            @error('ganancia')
+                              <div class="alert alert-success">
+                                Ganancia obligatoria
+                              </div>
+                            @enderror
+                            @error('marca')
+                              <div class="alert alert-success">
+                                Marca obligatoria
+                              </div>
+                            @enderror
+                            @error('modelo')
+                              <div class="alert alert-success">
+                                Modelo obligatoria
+                              </div>
+                            @enderror
                             @error('proveedors_id')
                               <div class="alert alert-success">
                                 Proveedor obligatorio
+                              </div>
+                            @enderror
+                            @error('categorias_id')
+                              <div class="alert alert-success">
+                                Categoria obligatoria
                               </div>
                             @enderror
                         </div>
@@ -74,12 +98,14 @@
                             class="form-control mb-2"
                           /> 
                             <label class="alert alert-info " for="">
-                            <label for="">Precio de compra</label>
+                            <label for="">
+                              Precio de compra
+                            </label>
                             <input
                               type="number"
                               id="precioCompra"
                               name="precioCompra"
-                              placeholder=""
+                              placeholder="Precio Compra"
                               class="form-control mb-2"
                               onchange="checkInput('precioCompra');"
                             />

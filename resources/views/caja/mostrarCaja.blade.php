@@ -99,7 +99,11 @@
                                          {{  $item->descripcion }}
                                     </th> 
                                     <th>
-                                         {{  $item->created_at->format('d M Y') }}<br>
+                                    <?php
+                                        //$fecha= $item->created_at->format('d M Y')->locale('es');
+                                        //$fecha=Carbon::parse($item->created_at)->locale('es');
+                                        ?>
+                                         {{ $item->created_at->format('d M Y')  }}<br>
                                     </th>
                                     <th>
                                          {{ $item->created_at->format('H : i ')  }}<br>

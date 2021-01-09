@@ -72,7 +72,7 @@ class VentaController extends Controller
                     } 
                     
                     $fact->save();  
-                    dd($fact);
+                    //dd($fact);
                 }
             }
         } 

@@ -11,11 +11,22 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\CajaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PdfController;
-use App\Http\Middleware\CajaMiddleware;
+use App\Http\Controllers\FacturaController;
+
 
  Route::get('/', function () {
     return view('welcome');
 })->name('welcome'); 
+
+//factura
+Route::post ('/importarCsv',[FacturaController::class, 'importarCsv'])
+    ->name('importarCsv');  
+    /* 
+Route::post('/procesarCsv', ,[FacturaController::class, 'procesarCsv'])
+    ->name('procesarCsv'); */
+
+Route::get ('/mostrarImportacion',[FacturaController::class, 'mostrarImportacion'])
+    ->name('mostrarImportacion');  
 
 //impresion pdfs
 
@@ -28,16 +39,6 @@ Route::get('/articulosPdf', [pdfController::class, 'articulosPdf'])
 Route::get('/articulosPdfHoriz', [pdfController::class, 'articulosPdfHoriz'])
     ->name('articulosPdfHoriz');
 ;
-/* 
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/dash2', function () {
-    return view('dash2');
-})->name('dashboard'); 
-
-Route::get('/dash', function () {
-    return view('dash2');
-})->name('dash2');
-*/
 //caja
 
 Route::post ('/guardarCaja',[CajaController::class, 'guardarCaja'])

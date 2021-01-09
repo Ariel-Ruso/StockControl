@@ -132,6 +132,19 @@
                         Caja Diaria
                     </a> 
                 </li> 
+                </li> 
+                 <!-- importar -->
+                 <li class="nav-item active">
+                    <a  href=" {{ route('mostrarImportacion') }} "
+                            class="btn btn-outline-primary"
+                            role="button" 
+                            id="dropdownbutton"    
+                            aria-haspoppup="true" 
+                            aria-expanded="true"
+                        >
+                        Importar
+                    </a> 
+                </li> 
             </ul>           
         </div>
     </nav>       

@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Caja;
 use App\Models\EstadoCaja;
 use App\Http\Middleware;
+use nesbot\Carbon;
+
 
 class CajaController extends Controller
 {
@@ -33,7 +35,7 @@ class CajaController extends Controller
         if($est='null')
         {
             return(' Podes abrir');
-            //return view('caja.abreCaja');
+            return view('caja.abreCaja');
 
         }
         if($est->estado == 1){
