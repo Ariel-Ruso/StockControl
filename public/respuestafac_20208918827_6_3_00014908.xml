@@ -1,0 +1,35 @@
+<ambiente>Produccion - Tio</ambiente>
+<fecha>2021-02-25T14:05:42.6091218-03:00</fecha>
+<id>3.4.5.0</id>
+</FEHeaderInfo>
+</soap:Header>
+<soap:Body>
+<FECAESolicitarResponse xmlns="http://ar.gov.afip.dif.FEV1/">
+<FECAESolicitarResult>
+<FeCabResp>
+<Cuit>20208918827</Cuit>
+<PtoVta>3</PtoVta>
+<CbteTipo>6</CbteTipo>
+<FchProceso>20210225140538</FchProceso>
+<CantReg>1</CantReg>
+<Resultado>A</Resultado>
+<Reproceso>N</Reproceso>
+</FeCabResp>
+<FeDetResp>
+<FECAEDetResponse>
+<Concepto>1</Concepto>
+<DocTipo>96</DocTipo>
+<DocNro>30814126</DocNro>
+<CbteDesde>14907</CbteDesde>
+<CbteHasta>14907</CbteHasta>
+<CbteFch>20210225</CbteFch>
+<Resultado>A</Resultado>
+<CAE>71087211198573</CAE>
+<CAEFchVto>20210307</CAEFchVto>
+</FECAEDetResponse>
+</FeDetResp>
+</FECAESolicitarResult>
+</FECAESolicitarResponse>
+</soap:Body>
+</soap:Envelope>
+

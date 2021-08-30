@@ -1,0 +1,38 @@
+         <Cuit>20208918827</Cuit>
+      </Auth>
+      <FeCAEReq>
+         <FeCabReq>
+            <CantReg>1</CantReg>
+            <PtoVta>3</PtoVta>
+            <CbteTipo>6</CbteTipo>
+         </FeCabReq>
+         <FeDetReq>
+            <FECAEDetRequest>
+               <Concepto>1</Concepto>
+               <DocTipo>96</DocTipo>
+               <DocNro>4430514339</DocNro>
+               <CbteDesde>14959</CbteDesde>
+               <CbteHasta>14959</CbteHasta>
+               <CbteFch>20210228</CbteFch>
+               <ImpTotal>10050.00</ImpTotal>
+               <ImpTotConc>0.00</ImpTotConc>
+               <ImpNeto>8305.78</ImpNeto>
+               <ImpOpEx>0.00</ImpOpEx>
+               <ImpTrib>0.00</ImpTrib>
+               <ImpIVA>1744.22</ImpIVA>
+               <MonId>PES</MonId>
+               <MonCotiz>1.00</MonCotiz>
+               <Iva>
+                  <AlicIva>
+                     <Id>5</Id>
+                     <BaseImp>8305.78</BaseImp>
+                     <Importe>1744.22
+</Importe>
+                  </AlicIva>
+               </Iva>
+            </FECAEDetRequest>
+         </FeDetReq>
+      </FeCAEReq>
+   </FECAESolicitar>
+</soap:Body>
+</soap:Envelope>

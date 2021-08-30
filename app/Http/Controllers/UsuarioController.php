@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use App\Models\User;
-use App\Models\Rol;
+//use App\Models\Rol;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
@@ -38,11 +39,27 @@ class UsuarioController extends Controller
         
     }
 
-    public function mostrarTodos (){
+    public function index (){
+       
+        $users= User::paginate(5);
+        $roles= Role::all();
+        $cont= count($users);
+        //$rols= Rol::all();
+        //dd($roles);
+    	return view ('usuarios.index', compact ('users', 'cont', 'roles'));
+    }
+
+    public function permisos(){
        
         $users= User::paginate(5);
         //$rols= Rol::all();
-    	return view ('usuarios.mostrarTodos', compact ('users'));
+    	return view ('usuarios.permisos', compact ('users'));
+    }
+    
+    public function edit ($id){
+
+        $user= User::FindeOrFail($id);
+        return view('usuarios.edit', compact('user'));
     }
     
 }

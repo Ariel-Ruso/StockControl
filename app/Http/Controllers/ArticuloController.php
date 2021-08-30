@@ -2,130 +2,106 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticulo;
 use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
-
-
+use App\Models\Imei;
+use \Milon\Barcode\DNS2D;
+use \Milon\Barcode\DNS1D;
+use Illuminate\Http\DB;
 use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
 {
-    public function buscaPorAr(Request $request){
+   
+    public function index (){
+       
+        $arts= Articulo::orderBy ('id', 'ASC')
+            ->paginate(15);
+        $cates= Categoria::all();
+        $proves= Proveedor::all();
+
+    	return view ('articulos.index', compact ('arts', 'cates', 'proves'));
+    }
+
+
+    public function create(){
         
-        $buscar= $request->get('buscarPor');  
-        $tipo= $request->get('tipo');  
         $cates= Categoria::all();
         $proves= Proveedor::all();
-        //invoco funcion scopeNombre
-        $arts= Articulo::buscarPor($tipo, $buscar)->paginate(5);
-        return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves'));
-    }
-
-    public function mostrarxCate (Request $request){
+        $art= new Articulo();
+        $ultArt= $art->getLastArt();
         
-        $cates_id= $request->get('categorias');
-        $arts= Articulo::BuscarporCate($cates_id)->paginate(5);
-        $proves= Proveedor::all();
-        $cates= Categoria::all();
-    	return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves'));
+        return view ('articulos.create', compact ('cates', 'proves', 'ultArt'));
     }
 
-    public function crear_articulo(){
-        $cates= Categoria::all();
-        $proves= Proveedor::all();
-        return view ('articulos.crear_articulo', compact ('cates', 'proves'));
-    }
+    public function store (StoreArticulo $request){
 
-    public function crear_articulo2 (Request $request){
         //https://www.youtube.com/watch?v=PjEutNUZjj0&ab_channel=Aprendible
         //subir imagen
         //$request->file('imagen')->store('imagenes');
-    	$request-> validate ([
-            'nombre' => 'required',
-            'cantidad' => 'required',
-            'precioVenta' => 'required',
-            'iva' => 'required',
-            'precioCompra' => 'required',
-            'marca'  => 'required',
-            'modelo'  => 'required',
-            'categorias_id' => 'required',
-            'proveedors_id' => 'required',
-            'codbar' => 'required',
-        ]);
-      
-        $art = new Articulo;
-        $art->nombre = $request->nombre;
-        $art->descripcion = $request->descripcion;
-        $art->cantidad = $request->cantidad;
-        $art->precioVenta = $request->precioVenta;
-        $art->precioCompra = $request->precioCompra;
-        $art->iva = $request->iva;
-        $art->categorias_id = $request->categorias_id;
-        $art->proveedors_id = $request->proveedors_id;
-        $art->marca= $request->marca;
-        $art->modelo= $request->modelo;
-        $art->descripcion= $request->descripcion;
-        $art->codbar= $request->codbar;
-        $art->save();
-        return back()->with('mensaje', 'Articulo agregado correctamente');
+    	
+        //dd($request);
+        Articulo::create($request->all());
+        
+        $cateCelu= Categoria::where('nombre', 'like', 'Celulares')->get();
+        //dd($cateCelu[0]->id);
+        
+        if( ($request->categorias_id) == ($cateCelu[0]->id) ){
+            //si es celu...
+            $cant= $request->cantidad;
+            return view ('imeis.create', compact ('cant'))
+                ->with('mensaje', 'Celu agregado, ahora cargue imeis ');
+
+        }
+    
+        return back()->with('mensaje', 'Artículo agregado  ');
         
     }
 
-    public function mostrarTodos (){
-       
-        $arts= Articulo::paginate(5);
-        $cont= count($arts);
-        
-        $cates= Categoria::all();
-        $proves= Proveedor::all();
-    	return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves', 'cont'));
-    }
-
-    public function detalle_articulo($id){
+    public function show($id){
 
         $art= Articulo::FindOrFail($id);
         $cates= Categoria::all();        
         $proves= Proveedor::all();
-        return view ('articulos.detalle_articulo', compact('art','cates', 'proves'));
+                
+        //traigo imeis d ese celu
+        $imeis = Imei::whereIn('articulos_id', [$id]) ->get();
+        //dd($imeis);
+
+        return view ('articulos.show', compact('imeis','art','cates', 'proves'));
     
     }  
 
-    public function editar_articulo($id){
+    public function edit($id){
         $cates= Categoria::all();        
         $arts= Articulo::FindOrFail($id);
         $proves= Proveedor::all();
-        return view ('articulos.editar_articulo', compact ('arts','cates', 'proves'));
+        $imeis = Imei::whereIn('articulos_id', [$id]) ->get();
+        
+        return view ('articulos.edit', compact ('arts','cates', 'imeis', 'proves'));
     }
 
-    public function actualizar_articulo (Request $request, $id){
+    public function update (Request $request, $id){
 
-        $request-> validate ([
-            'nombre' => 'required',
-            'cantidad' => 'required',
-            'precio' => 'required',
-            'categorias_id' => 'required',
-            'proveedors_id' => 'required',
-            ]);
         $art_up= Articulo::FindOrFail($id);
-        $art_up->nombre = $request->nombre;
-        $art_up->cantidad = $request->cantidad;
-        $art_up->precio = $request->precio;
-        $art_up->categorias_id = $request->categorias_id;
-        $art_up->proveedors_id = $request->proveedors_id;
-        $art_up->save();
-        return back()->with('mensaje', 'Editado correctamente');
+        $art_up->update ($request->all());
+
+        return back()->with('mensaje', 'Artículo editado');
 
     }
     
-    public function eliminar_articulo($id)
+    public function destroy($id)
     {
         $art= Articulo::FindOrFail($id);
         $art->delete();
-        return back()->with('mensaje', 'Articulo eliminado correctamente');    
+
+        return back()        
+            ->with('mensaje', 'Artículo Eliminado');    
     }
     
-    public function vender_articulo(Request $request, $id)
+    /* public function vender_articulo(Request $request, $id)
     {
         $request-> validate ([
             'cantidad' => 'required',
@@ -134,6 +110,53 @@ class ArticuloController extends Controller
         $art= Articulo::FindOrFail($id);
         $art->cantidad= $art->cantidad - $request->cantidad;
         $art->save();
-        return back()->with('mensaje', 'Articulo vendido correctamente');    
+        return back()->with('mensaje', 'Artículo vendido  ');    
+    } */
+    
+    public function search(Request $request){      
+
+        $nombre= $request->get('nombre');
+        $codigo= $request->get('codigo');
+        $marca= $request->get('marca');
+        $modelo= $request->get('modelo');
+        $precioi= $request->get('precioi');
+        $preciof= $request->get('preciof');
+        $categorias= $request->get('categorias');
+        $proveedores= $request->get('proveedores');
+
+        $arts= Articulo::orderBy ('id', 'ASC')
+            ->nombre ($nombre)
+            ->codigo ($codigo)
+            ->marca ($marca)
+            ->modelo ($modelo)
+            ->precioi ($precioi)
+            ->preciof ($preciof)
+            ->categorias ($categorias)
+            ->proveedores ($proveedores)
+            ->paginate (1500);
+
+        $cont= count($arts);
+        $cates= Categoria::all();
+        $proves= Proveedor::all();
+
+        return view ('articulos.index', compact ('arts', 'cates', 'proves', 'cont'));
     }
+      /* public function buscaPorAr(Request $request){
+        
+        $buscar= $request->get('buscarPor');  
+        $tipo= $request->get('tipo');  
+        $cates= Categoria::all();
+        $proves= Proveedor::all();
+        //invoco funcion scopeNombre
+         if ( ($buscar) ) {
+            $arts= Articulo::buscarPor($tipo, $buscar)
+            
+                ->paginate(5);
+            $cont= count($arts);
+        }else{
+            return back()-> with('mensaje', 'Para buscar, cargue campos. ');
+        } 
+        return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves', 'cont'));
+    }  */
+    
 }

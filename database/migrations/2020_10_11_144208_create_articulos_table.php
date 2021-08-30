@@ -15,13 +15,22 @@ class CreateArticulosTable extends Migration
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
+            $table->String('codigo')
+                    ->nullable();
             $table->String('nombre');
             $table->String('descripcion')
                     ->nullable();
+            $table->String('talle')
+                    ->nullable();
             $table->integer('cantidad');
-            $table->float('precioCompra');
-            $table->float('iva');   
-            $table->float('precioVenta');
+            $table->float('precioCompra')
+                    ->nullable();
+            $table->float('iva')
+                    ->nullable();   
+            $table->float('precioVenta')
+                    ->nullable();
+            $table->float('pVentaTarj')
+                    ->nullable();
             $table->String('codbar')
                     ->nullable();
             $table->foreignId('categorias_id')
@@ -32,8 +41,12 @@ class CreateArticulosTable extends Migration
                     ->references('id')
                     ->on('proveedors')
                     ->onDelete('cascade');   
-            $table->String('marca');       
-            $table->String('modelo');  
+            $table->String('marca')
+                    ->nullable();       
+            //$table->String('imei')
+              
+            $table->String('modelo')
+                    ->nullable();  
             $table->timestamps();
         });
     }

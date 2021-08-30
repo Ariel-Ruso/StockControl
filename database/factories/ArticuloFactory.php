@@ -23,19 +23,23 @@ class ArticuloFactory extends Factory
     {
         
          return [
+                'codigo' => rand(8,10000),
                 'nombre'=> $this->faker->sentence(1),
                 'descripcion'=> $this->faker->sentence(5),
                 'marca'=> $this->faker->sentence(1),
                 'modelo'=> $this->faker->sentence(1),
                 'categorias_id'=>rand(10, 1),
-                'proveedors_id'=>rand(4, 1),
+                'proveedors_id'=>rand(3, 1),
                 'cantidad'=>rand(2, 500),
                 'precioCompra'=> rand(3,500),
                 'precioVenta'=> rand(3,5000),
+                'pVentaTarj' => rand(3,5000),
                 'iva'=> rand(2,100),
-                'codbar'=> rand(8,10000),
+                //'iva'=> 'precioVenta' + ('precioVenta' *0.21),
+                'codbar'=> rand(8,1000000),
+                //'codbar'=> $this->faker->Barcode,
                 'created_at'=> now(),
             
-        ]; 
+        ];  
     }
 }

@@ -28,15 +28,15 @@
 	<div class="row-justify content-center">
 		<div class="col-md-8">
 			<div class="card" style="width: 25rem;" >
-				<img src="Storage/logodet.jpg" class="card-img-top" alt="">
+				<img src="Storage/HER/logodet.jpg" class="card-img-top" alt="">
 				<div class="card-body">
 					<h1 class="card-title">
 						{{ $art->nombre }} <br>
 					</h1>
 					<div class="card-text">
-						<h2>
+						<!-- <h2>
 							{{ $art->descripcion }} <br>
-						</h2>
+						</h2> -->
 						<h3>
 						 $ {{ number_format($art->precioVenta, 2) }} <br>
 						 </h3>

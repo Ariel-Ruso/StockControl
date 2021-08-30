@@ -14,7 +14,6 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-     
         $cate= new Categoria();
         $cate->nombre= "Colchones";
         $cate->save();
@@ -47,7 +46,6 @@ class CategoriaSeeder extends Seeder
         $cate->nombre= "Led";
         $cate->save();
 
-
         $cate= new Categoria();
         $cate->nombre= "Rodados";
         $cate->save();
@@ -55,6 +53,9 @@ class CategoriaSeeder extends Seeder
         $cate= new Categoria();
         $cate->nombre= "Mesas";
         $cate->save();
-    
+        
+        $cate= new Categoria();
+        $cate->nombre= "Ferreteria";
+        $cate->save(); 
     }
 }

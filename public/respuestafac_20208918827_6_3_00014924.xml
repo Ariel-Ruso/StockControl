@@ -1,0 +1,41 @@
+<ambiente>Produccion - Has</ambiente>
+<fecha>2021-02-26T16:42:49.2363266-03:00</fecha>
+<id>3.4.5.0</id>
+</FEHeaderInfo>
+</soap:Header>
+<soap:Body>
+<FECAESolicitarResponse xmlns="http://ar.gov.afip.dif.FEV1/">
+<FECAESolicitarResult>
+<FeCabResp>
+<Cuit>20208918827</Cuit>
+<PtoVta>3</PtoVta>
+<CbteTipo>6</CbteTipo>
+<FchProceso>20210226164249</FchProceso>
+<CantReg>2</CantReg>
+<Resultado>R</Resultado>
+<Reproceso>N</Reproceso>
+</FeCabResp>
+<FeDetResp>
+<FECAEDetResponse>
+<Concepto>1</Concepto>
+<DocTipo>96</DocTipo>
+<DocNro>30814126</DocNro>
+<CbteDesde>14923</CbteDesde>
+<CbteHasta>14923</CbteHasta>
+<CbteFch>20210226</CbteFch>
+<Resultado>R</Resultado>
+<CAE />
+<CAEFchVto />
+</FECAEDetResponse>
+</FeDetResp>
+<Errors>
+<Err>
+<Code>10002</Code>
+<Msg>Campo CantReg debe ser igual a lo informado en detalle. Informado: 2, Enviado:1</Msg>
+</Err>
+</Errors>
+</FECAESolicitarResult>
+</FECAESolicitarResponse>
+</soap:Body>
+</soap:Envelope>
+

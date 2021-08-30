@@ -2,7 +2,7 @@
 
 @section('content')
 
-@component('components.volver')
+@component('components.inicio-btn')
 @endcomponent
 
 @component('components.mensajes')

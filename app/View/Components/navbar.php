@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class navbar extends Component
 {
+    //public $btn;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(  )
     {
-        //
+        //$this->btn= $btn;
     }
 
     /**

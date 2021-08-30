@@ -1,0 +1,15 @@
+table th {
+    width: 2;
+}
+
+table tr {
+    margin: 6;
+}
+
+
+/* 
+<table class="table border-2 border-rounded shadow">
+<thead class="table-primary">
+  <tr class="px-6 py-3 text-center text-xs leading-4 
+    font-medium text-black-500 uppercase tracking-wider">
+    <th scope="col"> */

@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "afipsdk/afip.php": "^0.6.1",
+        "afipsdk/afip.php": "^0.7.1",
+        "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^0.8.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
+        "gonzaloalonsod/afip-bundle": "^1.2",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",
         "laravel/framework": "^8.0",
@@ -22,8 +24,13 @@
         "laravel/ui": "^3.1",
         "laraveles/spanish": "^1.5",
         "livewire/livewire": "^2.0",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "milon/barcode": "^8.0",
+        "simplesoftwareio/simple-qrcode": "~4",
+        "spatie/laravel-permission": "^4.0"
     },
+
+
     "require-dev": {
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",

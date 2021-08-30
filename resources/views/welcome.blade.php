@@ -45,21 +45,21 @@
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-4">
+           <!--  <div class="max-w-6xl mx-auto sm:px-6 lg:px-4">
                 <div class="flex justify-center pt-4 sm:justify-start sm:pt-0">
                     <h1>
                         Control Stock
                     </h1>
                 </div>
-
+            </div> -->
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-1">
                         <div class="p-4">
-                            <img src="Storage/ico-inicio.jpg" height="400" width="400" >
+                            <img src="/Storage/ico-inicio.jpg" height="100" width="500" >
                         </div>
                     </div>
                 </div>
-            </div>
+            
             
         </div>
         

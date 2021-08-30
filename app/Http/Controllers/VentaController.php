@@ -3,84 +3,211 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venta;
+use DB;
 use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Factura;
 use App\Models\Carrito;
+use App\Models\Cliente;
+use App\Models\Filecsv;
+use App\Models\FilecsvIva;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class VentaController extends Controller
 {
     
-    public function nueva_Venta()
-    {
-        //cargo su carrito con elementos
-        $arts= Articulo::paginate(15);
-        $cates= Categoria::all();
-        $proves= Proveedor::all();
-    	return view ('venta.nuevaVenta', compact ('arts', 'cates', 'proves'));
+    public function ventasXmes(){
+
+        $arts= Articulo::all();
+        $ventXmes= DB::table('facturas')
+                    
+                    ->whereMonth('created_at', '>=', 4)
+                    ->whereMonth('created_at', '<', 6)
+                    ->select('created_at', DB::raw ('SUM(total) as totales'))
+                    ->groupBy ('created_at')
+                    ->get();
+        //dd($ventXmes);                    
+
+        return view ('reportes.ventasXmes', compact ('ventXmes', 'arts'));    
     }
+
+    public function ventasXart(){
+    
+        $arts= Articulo::all();
+        
+        $cantXitem= DB::table('items')
+            
+            ->join('facturas', 'facturas.id', '=', 'items.idFactura')
+            ->select('codigo', DB::raw ('SUM(cantidad) as cantXitems'))
+            ->select('codigo', DB::raw ('SUM(cantidad) as cantXitems'))
+            ->groupBy ('codigo')
+            ->get();
+
+        return view ('reportes.ventasXart', compact ('arts', 'cantXitem'));    
+
+    }
+
+    public function cantidades(){
+
+        $cates= Categoria::all();
+        $cantArtsxCate = DB::table('articulos')
+            ->select('categorias_id', DB::raw('SUM(cantidad) as cantXcates'))
+            ->groupBy('categorias_id')
+            ->get();
+
+        return view ('reportes.cantidades', compact ('cates', 'cantArtsxCate'));
+
+    }
+
+     public function tenencias(){
+    
+        $cates= Categoria::all();
+        
+        $totArtsxCate = DB::table('articulos')
+            ->select('categorias_id', DB::raw('SUM(precioVenta) as totalXcates'))
+            ->groupBy('categorias_id')
+            ->get();
+
+    	return view ('reportes.tenencias', compact ('cates', 'totArtsxCate'));
+    } 
+
+    public function ventasTotales(){
+        
+        $user= new User();
+        $users= $user->getAll();
+       
+        $fact= new Factura();
+        $todas= $fact->mostrarTodasFact();
+        //$todas= Factura::where('created_at','>',today())->get();
+        $cont= count($todas);
+        
+        return view ('reportes.ventasTotales', compact('todas', 'cont', 'users'));
+
+    }
+
     
     public function finalizarVenta(Request $request) {
         
-        $carrito= session()->get('carrito');
-        $cantC= count($carrito);
-        //dd($cantC);
-        for($x=0; $x <= $cantC; $x++){
-            $fact= new Factura;
+        $arts= Articulo::all();
+        $cantA= count($arts);
+        $facts= Factura::all();
+        $cantF= count($facts);
+        $fact= new Factura();
+        $contItems=0;
+        $cart= new Carrito();
+        $tot=0;
+        $subtot=0;
+        $iva=0;
+        $precioNoBanc= $request->noBancaria5;
+        //art nuevos quedan fuera d carrito
+        //dd($cantA);
+
+        for($x=1; $x <= $cantA; $x++){
+
+            $carrito= session()->get('carrito');            
             $art= new Articulo;
-            $arts= Articulo::all();
-            $cantA= count($arts);
-            //dd($cantA);
-            $cart= new Carrito();
-            
-            for($x=0; $x <= $cantA; $x++){
+            $csv= new Filecsv;
+            $csvIva= new FilecsvIva;
+            $item= new Item;
+                       
             //si existe carrito con ese indice
-                if(isset($carrito[$x])) {
-                    //$detalle="";
-                    $subtot= 0;
-                    $detalle= 
-                        " Articulo: ".$carrito[$x]["Nombre"]. "-". 
-                        " Precio: ".$carrito[$x]["Precio"]. "-".
-                        " Cantidad ".$carrito[$x]["Cantidad"]; 
-    
-                    $subtot= $carrito[$x]["SubTotal"];
-                    //dd($subtot);
-                    $art->vender_articulo($carrito[$x]["Cantidad"], $x);
-                    
-                    $tot= $subtot;
-                    $iva= $subtot * 0.21;
-                    $subtot= $tot - $iva;
-                    //escribo factura
-                    $fact->descripcion= $detalle;
-                    $fact->subtotal= $subtot;
-                    $fact->iva= $iva;
-                    $fact->users_id= auth()->id();  
-                    $fact->total= $tot;  
-                    $fact->tipoPago= $request->tipoPago;
+                if (isset($carrito[$x])) 
+                {
+                    $contItems++;
+                    if($request->tipoPago==4){
 
-                    if ($request->tipoPago==4){
-                        $fact->total= $request->noBancaria4;  
-                        //dd($request->noBancaria4);  
+                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                            $carrito[$x]["Codigo"],
+                                            $carrito[$x]["Cantidad"], 
+                                            $carrito[$x]["PrecioT"],
+                                            //$carrito[$x]["Art_id"],
+                                            $carrito[$x]["Imei"],
+                                            $cantF);
+                                            
+                                            //$subtot= $subtot + $carrito[$x]["SubTotalT"];
+                                            $subtot= $subtot + 
+                                                     $carrito[$x]["SubTotalT"] -
+                                                     $carrito[$x]["Descuento"];
+
+                    }elseif($request->tipoPago==5){
+
+                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                            $carrito[$x]["Codigo"],
+                                            $carrito[$x]["Cantidad"], 
+                                            //$carrito[$x]["Art_id"],
+                                            $carrito[$x]["Imei"],
+                                            $precioNoBanc, 
+                                            $cantF);
+                                            
+                                            $subtot= $subtot + $precioNoBanc;
+
+                    }else{
+                        //dd($request);
+                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                            $carrito[$x]["Codigo"],
+                                            $carrito[$x]["Cantidad"], 
+                                            $carrito[$x]["Precio"],
+                                            //$carrito[$x]["Art_id"], 
+                                            $carrito[$x]["Imei"],
+                                            $cantF);
+                                            
+                                            //$subtot= $subtot + $carrito[$x]["SubTotal"];
+                                            $subtot= $subtot + 
+                                            $carrito[$x]["SubTotal"] -
+                                            $carrito[$x]["Descuento"];
                     }
-                    if ($request->tipoPago==5){
-                        
-                        $fact->total= $request->noBancaria5;    
-                       // dd($request->noBancaria5);
-                    } 
                     
-                    $fact->save();  
-                    //dd($fact);
-                }
-            }
-        } 
-        session()->forget('carrito');
-        return view ('venta/verCarrito');
+                    //subt= cant * precioUnit;
+                    
+                    //$subtot= $carrito[$x]["SubTotal"];
+                    
+                    /* $tot= $tot + $subtot;
+                    $iva= ($subtot * 0.173554);
+                    $subtot= $tot - $iva; */
+                    
+                    
+                    //vendo art y descuento stock
+                    $art->vender_articulo($carrito[$x]["Cantidad"], $x);
+                }   
+        }
 
-        //return redirect()->back()->with('mensaje', ' Venta correcta del carrito ');
+        $tot= $tot + $subtot;
+        $iva= ($subtot * 0.173554);
+        $subtot= $tot - $iva;
+        
+        // exporto any2cabe, any2iva, llamo any2fe, y subo resp cae           
+        //revisar tot subt e iva si es con tarjeta + 18
+        //dd($subtot, $tot, $iva);
+        $fact->generarFactura($request, $contItems, $subtot, $tot, $iva);
+        
+        /* $ufact= $fact->getLastFact();
+        $tot= $ufact->total;
+        $iva= $ufact->iva;
+        $subtot=  $ufact->subtotal; */
+
+        //dd($tot);
+        //escribo ventas
+
+        //$ven->guardarVenta($tot, $ufact->id);
+        
+        //escribo any2cabe y any2iva 
+        $cli_id= session()->get('cliente_id'); 
+        $clie= Cliente::FindorFail($cli_id);  
+        $dnicliente= $clie->dni;
+                
+        $csv->crearCsv($dnicliente, $tot, $iva);
+        $csvIva->crearCsvIva($subtot, $iva);
+
+        session()->forget('carrito');
+        session()->forget('cliente_id');
+        
+        return view ('dashboard');
     }
 
+   
 }
       

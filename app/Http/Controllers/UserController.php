@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Rol;
+//use App\Models\Rol;
+use Spatie\Permission\Models\Role;
 
 
 class userController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware();
+        
+    }
     public function mostrarTodos (){
        
-        $users= User::paginate(5);
-        $rols= Rol::all();
-    	return view ('usuarios.mostrarTodos', compact ('users', 'rols'));
+        $users= User::all();
+        $roles= Role::all();
+        //$rols= Rol::all();
+        //dd($users, $rols);
+    	return view ('usuarios.mostrarTodos', compact ('users');
+        //, 'rols'));
     }
 
     public function crear_user(){

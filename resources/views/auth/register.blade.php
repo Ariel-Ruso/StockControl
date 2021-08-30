@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="container col-md-4" name= "grafica">
+            <div class="row justify-content-center ">
+                    <div class="container mx-auto ">
+                        <img src="/Storage/registrar.jpg" height="200" width="300" >
+                    </div>
+            </div>      
+    </div> 
+<br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

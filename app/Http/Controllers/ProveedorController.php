@@ -7,13 +7,24 @@ use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
-    public function crear_proveedor()
+    
+    public function index()
     {
-        return view ('proveedores.crear_proveedor');
+        $proves= Proveedor::all();
+        $cont= count($proves);
+        return view ('proveedores.index', compact('proves', 'cont'));
         
     }
 
-    public function crear_proveedor2 (Request $request){
+    public function create()
+    {
+        return view ('proveedores.create');
+        
+    }
+
+    public function store (Request $request){
+
+        //dd($request);
         
     	$request-> validate ([
             'nombre' => 'required',
@@ -22,29 +33,51 @@ class ProveedorController extends Controller
             'telefono' => 'required',
             'direccion' => 'required',
         ]);
-      
+
+        $prove= Proveedor::create($request->all());
+      /* 
         $prove = new proveedor;
         $prove->nombre = $request->nombre;
         $prove->correo = $request->correo;
         $prove->contacto = $request->contacto;
         $prove->telefono = $request->telefono;
         $prove->direccion = $request->direccion;
-        $prove->save();
-        return back()->with('mensaje', 'Proveedor agregado correctamente');
+        $prove->save(); */
+
+        return back()->with('mensaje', 'Proveedor agregado  ');
         
     }
 
-    public function mostrar_proveedores()
+
+    public function edit($id)
     {
-        $proves= Proveedor::all();
-        return view ('proveedores.mostrar_proveedores', compact('proves'));
+        $prove= Proveedor::FindOrFail($id);
+
+        return view ('proveedores.edit', compact('prove'));
         
     }
 
-    public function eliminar_proveedor($id)
+    public function update($id, Request $request ){
+            
+        $prove= Proveedor::FindOrFail($id);
+                
+        $prove->update ([
+            'nombre' => $request->nombre,
+            'contacto' => $request->contacto,
+            'correo' => $request->correo,
+            'telefono'=> $request->telefono,
+            'direccion' => $request->direccion,
+        ]);
+
+        return back()->with('mensaje', 'Proveedor editado  ');
+
+
+    }
+
+    public function destroy($id)
     {
         $prov= Proveedor::FindOrFail($id);
         $prov->delete();
-        return back()->with('mensaje', 'Proveedor eliminado correctamente');    
+        return back()->with('mensaje', 'Proveedor eliminado  ');    
     }
 }

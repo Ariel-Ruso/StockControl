@@ -3,29 +3,29 @@
 namespace Database\Seeders;
 
 use App\Models\Categoria;
-use App\Models\Rol;
+//use App\Models\Rol;
 use App\Models\Proveedor;
 use App\Models\Articulo;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+    
     public function run()
     {
-        //Articulo::factory(10)->create();
-        //$this->call(RolSeeder::class);
+        //$articulo= Articulo::factory()->times(7)->create();
         //$user= User::factory()->times(6)->create();
-        $proveedor= Proveedor::factory()->times(3)->create();
+        //$user= User::factory()            ->times(1)->create();
+               
+        $proveedor= Proveedor::factory()            ->times(5)->create();        
         $this->call(CategoriaSeeder::class);
-        
-        $articulo= Articulo::factory()->times(7)->create();
-
+        $this->call(ClienteSeeder::class);
+        $this->call(PropietarioSeeder::class);
+        //$this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
+        Articulo::factory(10)->create();
     }
 }

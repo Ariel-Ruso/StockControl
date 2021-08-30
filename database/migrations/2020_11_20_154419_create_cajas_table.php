@@ -16,7 +16,15 @@ class CreateCajasTable extends Migration
         Schema::create('cajas', function (Blueprint $table) {
             $table->id()
                 ->unique();
-            $table->double('monto');
+            $table->boolean('estado')
+                    ->default(0);    
+            $table->double('montoIni');
+            $table->double('montoFin')
+                    ->nullable();
+            $table->double('totEfect')
+                    ->nullable();
+            $table->double('totTarj')
+                    ->nullable();
             $table->foreignId('users_id')
                     ->references('id')
                     ->on('users')

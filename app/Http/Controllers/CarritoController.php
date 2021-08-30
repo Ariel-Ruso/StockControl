@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrito;
+use App\Models\Cliente;
 use App\Models\Articulo;
 use Illuminate\Http\Request;
 
@@ -15,45 +16,62 @@ class CarritoController extends Controller
     }
 
     public function agregar($id){
+        
         $articulo= Articulo::Findorfail($id);
+        
         $carrito= session()->get('carrito');
         
         //si carro vacio, es 1 Articulo d ese tipo y verifico disponibilidad
             if(!$carrito){
                 $carrito= [
                     $id => [
-                        "Art_id" => $articulo->id,
-                        "Nombre" => $articulo->nombre,
-                        "Cantidad" => 1,
-                        "Precio" => $articulo->precioVenta,
+                        "Art_id"    => $articulo->id,
+                        "Nombre"    => $articulo->nombre,
+                        "Cantidad"  => 1,
+                        "Precio"    => $articulo->precioVenta,
+                        "PrecioT"   => $articulo->pVentaTarj,
                         "Disponible"=> $articulo->cantidad,
-                        "SubTotal" => $articulo->precioVenta,
-                        "Iva"=> $articulo->iva,
+                        "SubTotal"  => $articulo->precioVenta,
+                        "SubTotalT" => $articulo->pVentaTarj,
+                        "Iva"       => $articulo->iva,
+                        "Codigo"    => $articulo->codigo,
+                        "Descuento" => 0,
+                        "Imei"      => $articulo->imei,
+                        //"Descuento" => $articulo->descuento,
+                        //"Cliente_id"=> 0,
                         /* "Imagen" => $Articulo->Imagen */
                         ]
                     ];
-                    if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ){
+
+                    if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ||
+                        ($carrito[$id]['Disponible']) == ($carrito[$id]['Cantidad'])){
+
                         session()->put ('carrito', $carrito);
-                        return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
+                        return redirect()->back()->with('mensaje', 'Artículo agregado al carrito');
                     }else{
-                        return redirect()->back()->with('mensaje', 'Stock insuficiente');
+
+                        return redirect()->back()->with('mensaje', 'Stock insuficiente ');
                     }
             }
 
             //si carrito ya tiene ese item agrego otro 
             if(isset($carrito[$id])) {
                     $carrito[$id]['Cantidad']++;
-                    $carrito[$id]['SubTotal'] += $carrito[$id]['SubTotal'];
+                    $carrito[$id]['SubTotal'] = $carrito[$id]['Cantidad'] * $carrito[$id]['Precio'];
+                    $carrito[$id]['SubTotalT'] = $carrito[$id]['Cantidad'] * $carrito[$id]['PrecioT'];
+                    //$carrito[$id]['SubTotal']= $carrito->subtotal();
                     $carrito[$id]['Iva'] += $carrito[$id]['Iva'];
 
                     /* session()->put('carrito', $carrito);
                     return redirect()->back()->with('mensaje', ' Articulo mismo item agregado al carrito');
                      */
                     if( ($carrito[$id]['Disponible']) >= ($carrito[$id]['Cantidad']) ){
+                        
                         session()->put ('carrito', $carrito);
-                        return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
+                        return redirect()->back()->with('mensaje', 'Artículo agregado al carrito');
                     }else{
-                        return redirect()->back()->with('mensaje', 'Stock insuficiente');
+                        
+                        return redirect()->back()->with('mensaje', 'Stock insuficiente ');
                     }
             }
 
@@ -63,19 +81,46 @@ class CarritoController extends Controller
                 "Nombre" => $articulo->nombre,
                 "Cantidad" => 1,
                 "Precio" => $articulo->precioVenta,
+                "PrecioT" => $articulo->pVentaTarj,
                 "Disponible"=> $articulo->cantidad,
                 "SubTotal" => $articulo->precioVenta,
+                "SubTotalT"  => $articulo->pVentaTarj,
                 "Iva"=> $articulo->iva,
+                "Codigo"=> $articulo->codigo,
+                "Descuento" => 0,
+                "Imei"      => $articulo->imei,
+                //"Descuento" => $articulo->descuento,
+                //"Cliente_id"=> 0,
                 /* "Imagen" => $Articulo->Imagen */
                 ];
             
                 
-            if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ){
+            if( ($carrito[$id]['Disponible']) > ($carrito[$id]['Cantidad']) ||
+                ($carrito[$id]['Disponible']) == ($carrito[$id]['Cantidad'])){
+
                     session()->put ('carrito', $carrito);
                     return redirect()->back()->with('mensaje', 'Articulo agregado al carrito');
                 }else{
-                    return redirect()->back()->with('mensaje', 'Stock insuficiente g');
+
+                    return redirect()->back()->with('mensaje', 'Stock insuficiente ');
                 }
+    }
+
+    public function setDescuento(Request $request)
+    {
+        $carrito= session()->get('carrito');
+          //si carrito ya tiene ese item incluyo desc
+          if(isset($carrito[$request->id])) {
+
+            $carrito[$request->id]['Descuento']= $request->descuento;
+            session()->put ('carrito', $carrito);
+            
+          }
+          $this->subtotal();
+          $this->subtotalT();
+          
+        return redirect()->back()->with('mensaje', 'Descuento aplicado');
+
     }
     
     public function eliminarCarr($id)
@@ -86,6 +131,7 @@ class CarritoController extends Controller
         //si carrito ya tiene ese item borro uno
         if(isset($carrito[$id])) {
             $carrito[$id]['SubTotal'] = $carrito[$id]['SubTotal'] - $carrito[$id]['Precio'];
+            $carrito[$id]['SubTotalT'] = $carrito[$id]['SubTotalT'] - $carrito[$id]['PrecioT'];
             $carrito[$id]['Cantidad']--;
             if($carrito[$id]['Cantidad']== 0){
                 unset($carrito[$id]);
@@ -101,9 +147,21 @@ class CarritoController extends Controller
     }
 
     public function verCarrito()
-    {
-        $subtotal= $this->subtotal();
-        return view ('venta/verCarrito', compact('subtotal'));
+    {         
+        $total= $this->subtotal();
+        $totalTar= $this->subtotalT();
+
+        $cli_id= session()->get('cliente_id'); 
+        //$clie= Cliente::FindorFail($cli_id);   
+         
+        if (!isset ($cli_id)){
+            $clie= "Sin seleccionar";
+        }else{
+          //  $cli_id= session()->get('cliente_id'); 
+            $clie= Cliente::FindorFail($cli_id);  
+        }     
+        //dd($clie);
+        return view ('venta/verCarrito', compact('total', 'clie', 'totalTar')); 
     }
 
     //funcion d prueba para trabajar final carrito, operar e insertar datos en base
@@ -118,13 +176,25 @@ class CarritoController extends Controller
     }
 
     public function subtotal(){
+    //acumulo precios ef
         $carrito= session()->get('carrito');
         $subtotal= 0;
         foreach ($carrito as $item){
-            $subtotal += $item["SubTotal"];
-        }
-        //dd($subtotal);
+            //$subtotal += $item["SubTotal"];
+            $subtotal += $item["SubTotal"]-$item["Descuento"];
+        } 
         return $subtotal;
+    }
+
+    public function subtotalT(){
+    //acumulo precio tarj
+        $carrito= session()->get('carrito');
+        $subTar= 0;
+        foreach ($carrito as $item){
+            //$subTar += $item["SubTotalT"];
+            $subTar += $item["SubTotalT"]-$item["Descuento"];
+        } 
+        return $subTar;
     }
 
     public function iva(){
@@ -136,15 +206,28 @@ class CarritoController extends Controller
         return $iva;
     }
     
-
     public function detallePedido(){
+        
+        $carrito= session()->get('carrito');
+        $iva= $this->iva();
+        $total= $this->subtotal();
+        $totalTar= $this->subtotalT();
+        $subtotal= (($this->subtotal())- $iva);
+        $cli_id= session()->get('cliente_id'); 
+        $clie= Cliente::FindorFail($cli_id);  
+        
+        return view('venta/detallePedido', compact('subtotal', 'carrito', 'total', 
+                    'clie', 'totalTar'));
+    }
+
+    public function totalesCarrito(){
         
         $carrito= session()->get('carrito');
         $iva= $this->iva();
         $total= $this->subtotal();
         $subtotal= (($this->subtotal())- $iva);
         
-        return view('venta/detallePedido', compact('subtotal', 'carrito', 'total'));
+        //return ($subtotal, $total, $iva);
     }
 
 }

@@ -6,24 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
+            /* $table->foreignId('rols_id')
+                    ->references('id')
+                    ->on('rols')
+                    ->onDelete('cascade'); */
+                     
             $table->string('name');
-            
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')
+                    ->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->text('profile_photo_path')->nullable();
-            
+            $table->foreignId('current_team_id')
+                    ->nullable();
+            $table->text('profile_photo_path')
+                    ->nullable();
+            $table->integer('id_prop')
+                    ->nullable();
             $table->timestamps();
         });
     }

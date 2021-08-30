@@ -32,6 +32,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+       /*  $this->reportable(function (CustomException $e) {
+           return ('Error');
+        }); */
     }
 }

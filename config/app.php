@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Argentina/Buenos_Aires',
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +169,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+        //Gonzaloalonsod\AfipBundle\AfipBundle::class => ['all' => true],
+        //Afipsdk\Afip\ServiceProvider::class,
+        //Afipsdk\Afip\ServiceProvider::class,
         
 
         /*
@@ -241,6 +245,9 @@ return [
         'Image'=> Intervention\Image\Facades\Image::class,
 
         'PDF'=> Barryvdh\DomPDF\Facade::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        //'Afip' => Afipsdk\Afip\Facade::class,
     ],
 
 ];
