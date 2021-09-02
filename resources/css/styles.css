@@ -1,15 +1,16 @@
-table th {
-    width: 2;
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+HarunoUmi:wght@700&display=swap');
+th {
+    font-size: 2em;
+    font-family: 'Kaisei HarunoUmi', serif;
 }
 
-table tr {
-    margin: 6;
+table {
+    font-size: 1em;
+    font-family: 'Kaisei HarunoUmi', serif;
 }
 
-
-/* 
-<table class="table border-2 border-rounded shadow">
-<thead class="table-primary">
-  <tr class="px-6 py-3 text-center text-xs leading-4 
-    font-medium text-black-500 uppercase tracking-wider">
-    <th scope="col"> */
+td {
+    font-size: 5em;
+    font-family: 'Anton', sans-serif;
+}

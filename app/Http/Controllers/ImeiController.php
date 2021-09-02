@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Articulo;
 use App\Models\Imei;
 use App\Models\Celular;
+use App\Models\Carrito;
 use Illuminate\Http\Request;
 
 class ImeiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        if(!session()->has('imei')) session()->put('imei', array());
+    }
+    
     public function index()
     {
         $imeis= Imei::all();
@@ -22,6 +23,29 @@ class ImeiController extends Controller
         return view ('imeis.index', compact ('imeis', 'celus', 'cont'));
     }
 
+    public function select( Request $request){
+        
+        $art= Articulo::FindorFail($request->item_id);
+        //dd($art);
+
+        $art->imei= $request->imei_det;
+         
+        $art->save();  
+
+        $cart= new Carrito();
+        $cart->agregar($request->item_id);
+
+        
+        return back()         
+                ->with ('mensaje', 'Imei seleccionado');
+    
+    }
+    
+    public function verImei()
+    {
+        dd (session()->get('imei'));       
+        //dd (session());
+    }
     
     public function create()
     {
@@ -31,12 +55,6 @@ class ImeiController extends Controller
         //, compact ('cant'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //dd($request);
@@ -57,20 +75,11 @@ class ImeiController extends Controller
         ->with('mensaje', 'Cargas completas');
     }
 
-    public function cargas(Imei $imei){
 
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Imei  $imei
-     * @return \Illuminate\Http\Response
-     */
     public function show(Imei $imei)
     {
-        //
+
+        return view ('imeis.show');
     }
 
     /**

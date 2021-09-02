@@ -183,16 +183,7 @@ class VentaController extends Controller
         //revisar tot subt e iva si es con tarjeta + 18
         //dd($subtot, $tot, $iva);
         $fact->generarFactura($request, $contItems, $subtot, $tot, $iva);
-        
-        /* $ufact= $fact->getLastFact();
-        $tot= $ufact->total;
-        $iva= $ufact->iva;
-        $subtot=  $ufact->subtotal; */
-
-        //dd($tot);
-        //escribo ventas
-
-        //$ven->guardarVenta($tot, $ufact->id);
+    
         
         //escribo any2cabe y any2iva 
         $cli_id= session()->get('cliente_id'); 
@@ -206,6 +197,15 @@ class VentaController extends Controller
         session()->forget('cliente_id');
         
         return view ('dashboard');
+    }
+
+    public function VentaImpresion(Request $request) {
+    
+        $this->finalizarVenta($request);
+
+        $fact= new Factura();
+        $fact->getLastFact();
+        $fact->imprimirRemit($fact->id);
     }
 
    

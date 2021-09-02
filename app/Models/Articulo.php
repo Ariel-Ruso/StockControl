@@ -99,7 +99,21 @@ class Articulo extends Model
     
         $art= Articulo::FindOrFail($id);
         $art->cantidad -= $cant;
+        
+        //$imei= Imei::FindorFail();
+        //dd();
+        //$imei= $request->get('modelo');
+//        $imei= $art->imei;
+        $imei= Imei::query()
+            ->detalle ($art->imei)
+            ->get();
+        //dd($imei);
+        $imeiD= Imei::Find($imei[0]->id);
+        $imeiD->delete();
+
+        $art->imei= null;
         $art->save();
+        
         return back()->with('mensaje', 'Artículo vendido correctamente');    
     }
 

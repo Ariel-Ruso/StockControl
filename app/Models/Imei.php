@@ -10,12 +10,20 @@ class Imei extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['detalle' ];
+    protected $fillable = ['detalle', 'articulos_id' ];
 
 
-    public function celular(){
-        //imei pertenece a Celular
-        return $this->belongsTo (Celular::class); 
+    public function articulo(){
+        //imei pertenece a articulo
+        return $this->belongsTo (Articulo::class); 
+    }
+
+    public function scopeDetalle($query, $detalle){
+        
+        if($detalle){
+            return $query->where('detalle', 'like', "%$detalle%" );
+        }
+        
     }
 
     

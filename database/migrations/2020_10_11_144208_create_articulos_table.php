@@ -43,8 +43,8 @@ class CreateArticulosTable extends Migration
                     ->onDelete('cascade');   
             $table->String('marca')
                     ->nullable();       
-            //$table->String('imei')
-              
+            $table->String('imei')
+                    ->nullable();       
             $table->String('modelo')
                     ->nullable();  
             $table->timestamps();

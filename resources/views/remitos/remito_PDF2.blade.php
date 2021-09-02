@@ -145,6 +145,10 @@
                                     </td>
                                     <td style="text-align:center">
                                         {{ $item->descripcion }}
+                                        @isset($item->imei)
+                                            / IMEI: 
+                                            {{ $item->imei }}
+                                        @endisset
                                     </td>
                                     <td style="text-align:center">
                                         @if ( ($tipoPago) == 5)
@@ -165,7 +169,7 @@
                         @endforeach
                                         
                                 <?php 
-                                    $cont= 100- ($cont*2);
+                                    $cont= 85- ($cont*2);
                                     //revisar mas d 2 item 104, menos 108
                                 
                                 ?>
@@ -349,6 +353,10 @@
                                       </td>
                                       <td style="text-align:center">
                                           {{ $item->descripcion }}
+                                          @isset($item->imei)
+                                                / IMEI: 
+                                                {{ $item->imei }}
+                                            @endisset
                                       </td>
                                       <td style="text-align:center">
                                           @if ( ($tipoPago) == 5)
@@ -369,7 +377,7 @@
                           @endforeach
                                           
                                   <?php 
-                                      $cont= 100- ($cont*2);
+                                      $cont= 88- ($cont*2);
                                       //revisar mas d 2 item 104, menos 108
                                   
                                   ?>

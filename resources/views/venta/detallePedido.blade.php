@@ -329,6 +329,12 @@
                     type="submit">
                 Finalizar Venta
             </button>
+
+         {{--    <a  href="{{ route('ventaImpresion') }}"
+                class="btn btn-success mt-5 align-right shadow" >
+                    Venta + Impresion
+            </a> --}}
+            
         </div>
     </form>
 </div>

@@ -148,6 +148,7 @@
                 <th scope="col">
                     Proveedor                  
                 </th>
+                
                 <th scope="col-4">
                     Acciones
                 </th>
@@ -159,7 +160,7 @@
                   {{-- <td>
                     {{ $item->codigo }}
                   </td> --}}
-                  <td>  
+                  <td >  
                     <a href=" {{ route('articulos.show', $item) }}">
                       {{ $item->nombre }}
                     </a>
@@ -192,6 +193,43 @@
                   <td>
                     {{ $proves[ ($item->proveedors_id)-1 ]->nombre }}
                   </td>
+                  {{-- <td>
+                    @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+                    
+                    <form action=" {{ route('imeis.select') }}"
+                          method="POST">
+                          @method('POST')
+                          @csrf
+                        <div class="dropdown">
+                          <button class="btn btn-success dropdown-toggle" 
+                                  type="button" id="dropdownMenuButton1" 
+                                  data-bs-toggle="dropdown" aria-expanded="false">
+                            Disponibles
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          @foreach ( $imeis as $imei)                                                          
+                                @if($imei->articulos_id == $item->id) 
+                              
+                                  <li>
+                                    <a  
+                                        >
+                                      {{ $imei->detalle }}
+                                    </a>
+                                  
+                                  </li>
+
+                                @endif
+                              @endforeach 
+                            </ul>
+
+                        </div>
+                   
+
+                      </form>
+                    @endif
+                  
+                  </td> --}}
+
                   <td>
                       <a  href="{{ route ('articulos.edit', $item) }}" 
                           class="btn btn-outline-warning btn-sm shadow">
@@ -247,12 +285,103 @@
                                         </div>
                               </div>
                       
-                      <a  href=" {{ url('agregar/'.$item->id) }}" 
-                          class="btn btn-outline-primary btn-sm shadow">
-                          <i class= "fa fa-shopping-cart">
-                              Vender 
-                          </i>
-                      </a>
+                          
+
+                            <a  href=" {{ url('agregar/'.$item->id) }}" 
+                                class="btn btn-outline-primary btn-sm shadow "
+                                  @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+                                      data-toggle="modal" 
+                                      data-target="#celular{{ $item->id }}" 
+                                      
+                                  @endif
+                                >
+                                <i class= "fa fa-shopping-cart">
+                                    Vender 
+                                </i>
+                            </a>
+                          
+
+                @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+                      <div  class="modal fade" 
+                        id="celular{{ $item->id }}" 
+                        tabindex="-1" 
+                        role="dialog" 
+                        aria-labelledby="exampleModalLongTitle" 
+                        aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                          Elegir Imei
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                      <h5>
+                                          <div class="container row justify-content-center ">  
+                                            <div class="container mt-4">
+                                              <div class="row justify-content-center mx-auto ">
+                                                    <table class="table border-rounded shadow" >
+                                                      <thead class="table-warning font-normal text-center text-black-500" >
+                                                        <tr>
+                                                          <th scope="col">
+                                                              Imei
+                                                          </th>
+                                                                                                                    
+                                                          <th scope="col-4">
+                                                              Acciones
+                                                          </th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        @foreach($imeis as $imei)
+                                                          <tr class="font text-xs text-center " width= "100%"> 
+                                                            @if ($item->id == $imei->articulos_id)
+
+                                                              <form  action= "{{ route('carrito.selectImei')}}" 
+                                                                      method="post">
+                                                                      @method ('post')
+                                                                        @csrf
+                                                                <td>
+                                                                  <input type="hidden" name="item_id" 
+                                                                  value="{{ $item->id }}">
+                                                                  <input type="hidden" name="imei_det"
+                                                                  value="{{ $imei->detalle }}">
+
+                                                                  {{ $imei->detalle }}
+                                                                </td> 
+                                                                <td>
+                                                                      <button type="submit" 
+                                                                              class="btn btn-primary " 
+                                                                              >
+                                                                              Seleccionar
+                                                                      </button>
+                                                              
+                                                                </td>
+                                                              </form>
+
+                                                              @endif  
+                                                          </tr>
+                                                        @endforeach
+                                                      </tbody>
+                                                    </table>
+                                                
+                                                </div>
+                                            </div>
+                                          </div>
+                                                               
+                                      </h5>
+                                      <div class="modal-footer">
+                                        <a class="btn btn-danger" 
+                                            data-dismiss="modal">
+                                              Cancelar
+                                        </a>
+                                      
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                    @endif
+                    
                   </td>
                 </tr>
               @endforeach

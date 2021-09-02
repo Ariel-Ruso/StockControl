@@ -124,19 +124,19 @@
                                     <th>
                                          <button class="btn btn-success shadow " 
                                                  type="submit">
-                                                  <i class="fa fa-check">        
+                                                  {{-- <i class="fa fa-check">         --}}
                                                     Aplicar
-                                                  </i>
+                                                  {{-- </i> --}}
                                          </button>
                                     </th>
-                                    <th  class="text-center">
+                                   {{--  <th  class="text-center">
                                         
                                             <input  type="float(0.1)" step="any" id="descP" 
                                                     readonly name="descP" value="0.0 %" 
                                                     placeholder=" " class="form-control mb-2 col-6"  
                                                     onchange= "Descuento();"
                                             /> 
-                                    </th>
+                                    </th> --}}
                             </tr>
                         </form>
                         @endforeach
@@ -204,7 +204,7 @@
                     </div>      --}}   
                    
 
-                    <br><br>
+                    
                     <hr noshade="noshade" />
 
                     <div name="opciones cliente " 
@@ -249,13 +249,13 @@
                             </a> 
                         @endif
                         </div>
-                        <br><br>
+                        
                         <hr noshade="noshade" />
                         
                         <div class="row justify-content-center px-5 py-3">
                             @if ( session('carrito') && $clie != "Sin seleccionar")
                                 <a  href=" {{ route('detallePedido') }}" 
-                                    class="btn btn-success mx-2 mt-5 shadow" >
+                                    class="btn btn-success mx-2 mt-1 shadow" >
                                         Terminar Venta
                                 </a>
                                {{--  <a  href=" {{ route('detallePe') }}" 
@@ -264,25 +264,26 @@
                                 </a> --}}
                             @else
                                 <a  href=" {{ route('detallePedido') }}" 
-                                    class="btn btn-success mt-5 disabled" >
+                                    class="btn btn-success mt-1 disabled" >
                                         Terminar Venta
                                 </a>
                                 {{-- <a  href=" {{ route('detallePe') }}" 
                                     class="btn btn-outline-primary mx-2 mt-5 disabled " >
                                         Pedido
                                 </a> --}}
-                            @endif    
+                            @endif 
+
                             @if (session('carrito'))
                                 <a  href=" {{ route('detallePresupuesto') }}" 
-                                    class="btn btn-info mx-2 mt-5 shadow" >
+                                    class="btn btn-info mx-2 mt-1 shadow" >
                                         Presupuesto
                                 </a>
                             @else
                                 <a  href=" {{ route('detallePresupuesto') }}" 
-                                    class="btn btn-info mx-2 mt-5 disabled" >
+                                    class="btn btn-info mx-2 mt-1 disabled" >
                                     Presupuesto
                                 </a>
-                        @endif    
+                            @endif    
                         </div>
                         
                      <!-- 

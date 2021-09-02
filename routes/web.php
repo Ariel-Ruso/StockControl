@@ -35,6 +35,14 @@ Route::middleware('auth')->group (function() {
 
     Route::resource('imeis', ImeiController::class);
 
+        Route::get ('select/{id}', [ImeiController::class, 'select'])
+            ->name('imeis.select');
+        
+        
+        
+            Route::get('verImei', [ImeiController::class, 'verImei'])
+            ->name('verImei');
+
 //reclamos
 //Route::resource ();
 
@@ -159,6 +167,9 @@ Route::resource('proveedores', ProveedorController::class);
 Route::get('verSession', [CarritoController::class, 'verSession'])
     ->name('verSession');
 
+Route::post ('selectImei', [CarritoController::class, 'selectImei'])
+            ->name('carrito.selectImei');
+
 Route::resource('contable', ContableController::class);
 
     Route::get ('contable.buscaContable', [ContableController::class, 'buscaContable'])
@@ -168,7 +179,7 @@ Route::resource('clientes', ClienteController::class);
 
             Route::get ('/clientes.index', [ClienteController::class, 'search'])
                    ->name('clientes.search');
-                   
+                                      
             Route::get ('select/{id}', [ClienteController::class, 'select'])
                     ->name('clientes.select');
         
@@ -185,7 +196,7 @@ Route::resource('articulos', ArticuloController::class);
                 ->name('vender_articulo'); 
 
 
-Route::resource ('celulares', CelularController::class);
+//Route::resource ('celulares', CelularController::class);
             
  
 //ventas
@@ -211,6 +222,9 @@ Route::get ('venta/nueva_venta', [VentaController::class, 'nueva_Venta'])
 Route::post ('finalizarVenta', [VentaController::class, 'finalizarVenta'])
             ->name('finalizarVenta');          
             
+Route::post ('ventaImpresion', [VentaController::class, 'ventaImpresion'])
+            ->name('ventaImpresion'); 
+
 Route::get ('resportes/ventasTotales', [VentaController::class, 'ventasTotales'])
             ->name('ventasTotales');
             
@@ -271,7 +285,7 @@ Route::get('borrarCarr', [CarritoController::class, 'borrarCarr'])
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')

@@ -21,8 +21,9 @@ class ArticuloController extends Controller
             ->paginate(15);
         $cates= Categoria::all();
         $proves= Proveedor::all();
+        $imeis= Imei::all();
 
-    	return view ('articulos.index', compact ('arts', 'cates', 'proves'));
+    	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
     }
 
 
@@ -135,11 +136,11 @@ class ArticuloController extends Controller
             ->proveedores ($proveedores)
             ->paginate (1500);
 
-        $cont= count($arts);
         $cates= Categoria::all();
         $proves= Proveedor::all();
+        $imeis= Imei::all();
 
-        return view ('articulos.index', compact ('arts', 'cates', 'proves', 'cont'));
+        return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
     }
       /* public function buscaPorAr(Request $request){
         

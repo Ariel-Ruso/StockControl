@@ -106,6 +106,22 @@ class CarritoController extends Controller
                 }
     }
 
+    public function selectImei( Request $request){
+        
+        $art= Articulo::FindorFail($request->item_id);
+        
+        $art->imei= $request->imei_det;
+         
+        $art->save();  
+
+        //$cart= new Carrito();
+        $this->agregar($request->item_id);
+        
+        return back()         
+                ->with ('mensaje', 'Imei seleccionado');
+    
+    }
+
     public function setDescuento(Request $request)
     {
         $carrito= session()->get('carrito');

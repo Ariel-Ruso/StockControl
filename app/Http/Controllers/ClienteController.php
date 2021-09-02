@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
-use App\Models\Caja;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -69,7 +68,7 @@ class ClienteController extends Controller
     }
 
     public function select($id){
-
+        
             session(['
                 cliente_id' => $id
                 ]);
