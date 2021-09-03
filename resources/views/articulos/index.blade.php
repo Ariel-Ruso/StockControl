@@ -122,7 +122,9 @@
     <div class="row justify-content-center mx-auto ">
       
           <table class="table border-rounded shadow" >
+            
             <thead class="table-warning font-normal text-center text-black-500" >
+              
               <tr>
                 <th scope="col">
                     Nombre
@@ -193,42 +195,6 @@
                   <td>
                     {{ $proves[ ($item->proveedors_id)-1 ]->nombre }}
                   </td>
-                  {{-- <td>
-                    @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
-                    
-                    <form action=" {{ route('imeis.select') }}"
-                          method="POST">
-                          @method('POST')
-                          @csrf
-                        <div class="dropdown">
-                          <button class="btn btn-success dropdown-toggle" 
-                                  type="button" id="dropdownMenuButton1" 
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                            Disponibles
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          @foreach ( $imeis as $imei)                                                          
-                                @if($imei->articulos_id == $item->id) 
-                              
-                                  <li>
-                                    <a  
-                                        >
-                                      {{ $imei->detalle }}
-                                    </a>
-                                  
-                                  </li>
-
-                                @endif
-                              @endforeach 
-                            </ul>
-
-                        </div>
-                   
-
-                      </form>
-                    @endif
-                  
-                  </td> --}}
 
                   <td>
                       <a  href="{{ route ('articulos.edit', $item) }}" 
@@ -312,7 +278,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title">
-                                          Elegir Imei
+                                          Disponibles
                                         </h4>
                                     </div>
                                     <div class="modal-body">
@@ -320,6 +286,7 @@
                                           <div class="container row justify-content-center ">  
                                             <div class="container mt-4">
                                               <div class="row justify-content-center mx-auto ">
+                                                
                                                     <table class="table border-rounded shadow" >
                                                       <thead class="table-warning font-normal text-center text-black-500" >
                                                         <tr>
@@ -328,7 +295,7 @@
                                                           </th>
                                                                                                                     
                                                           <th scope="col-4">
-                                                              Acciones
+                                                              Elegir
                                                           </th>
                                                         </tr>
                                                       </thead>
@@ -351,7 +318,7 @@
                                                                 </td> 
                                                                 <td>
                                                                       <button type="submit" 
-                                                                              class="btn btn-primary " 
+                                                                              class="btn btn-primary btn-sm" 
                                                                               >
                                                                               Seleccionar
                                                                       </button>
@@ -364,7 +331,7 @@
                                                         @endforeach
                                                       </tbody>
                                                     </table>
-                                                
+                                               
                                                 </div>
                                             </div>
                                           </div>

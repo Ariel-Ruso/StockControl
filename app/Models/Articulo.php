@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use App\Models\Categoria;
+//use Illuminate\Http\Request;
 
 class Articulo extends Model
 {
@@ -99,20 +100,20 @@ class Articulo extends Model
     
         $art= Articulo::FindOrFail($id);
         $art->cantidad -= $cant;
-        
-        //$imei= Imei::FindorFail();
-        //dd();
-        //$imei= $request->get('modelo');
-//        $imei= $art->imei;
-        $imei= Imei::query()
+        $cates= Categoria::all();
+        //si es celular
+        if( $cates[ ($art->categorias_id)-1 ]->nombre == "Celulares" ){
+            $imei= Imei::query()
             ->detalle ($art->imei)
             ->get();
-        //dd($imei);
-        $imeiD= Imei::Find($imei[0]->id);
-        $imeiD->delete();
+            //dd($imei);
+            $imeiD= Imei::Find($imei[0]->id);
+            $imeiD->delete();
 
-        $art->imei= null;
-        $art->save();
+            $art->imei= null;
+            $art->save();
+        
+        }
         
         return back()->with('mensaje', 'Artículo vendido correctamente');    
     }

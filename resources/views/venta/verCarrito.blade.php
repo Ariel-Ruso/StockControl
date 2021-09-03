@@ -77,7 +77,7 @@
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
                                 </th>
-                                <th  class="font-weight-normal text-center col-md-2" >
+                                <th  class="font-weight-normal text-center col-md-4" >
                                     $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
                                 <th  class="font-weight-normal text-center" > 
@@ -87,22 +87,28 @@
                                 <th  class="font-weight-normal text-center col-md-2" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
                                 </th>
-                                <th  class="font-weight-normal text-center col-md-1" >
+                                <th  class="font-weight-normal text-center col-md-4" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
                                 </th>
                                 
                                 {{-- <th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
-                                <th class="font-weight-normal text-center col-md-2">
-                                    <a  href="{{ url ('agregar/' .$id )  }}"
-                                        class= "btn btn-primary">
-                                            +
+                                <th class="font-weight-normal col-md-3">
+                                    
+                                        <a  href="{{ url ('agregar/' .$id )  }}"
+                                        class= "btn btn-primary shadow btn btn-sm m-1">
+                                        <i class="fa fa-plus">        
+                                            
+                                        </i>
                                     </a>
                                     <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                        class= "btn btn-danger">
-                                            -
+                                        class= "btn btn-danger shadow btn btn-sm m-1">
+                                        <i class="fa fa-minus">       
+                                        </i>
                                     </a>
+                                    
+                                    
                                    
 
                                 </th>
@@ -115,7 +121,7 @@
                                     <th class="text-center">
                                         $
                                         <input  type="number" 
-                                                class="border border-primary col-md-8" 
+                                                class="border border-primary border-b col-8" 
                                                 name="descuento" 
                                                 id="descuento" 
                                                 onchange="Descuento();"
@@ -142,13 +148,13 @@
                         @endforeach
                         <tr>
                             <td colspan= "12" class= "text-right"> 
-                                <h3>
+                                <h4>
                                     Efectivo $ {{ number_format ($total, 2) }}
-                                </h3>
+                                </h4>
                                 
-                                <h3>
+                                <h4>
                                     Tarjeta $ {{ number_format ($totalTar, 2) }}
-                                </h3>
+                                </h4>
                                 
                             </td>
                         </tr>
@@ -163,7 +169,7 @@
                     
                     @endif        
                     <div name="opciones compra " 
-                         class=" mt-5 text-left row justify-content-center ">
+                         class=" mt-3 text-left row justify-content-center ">
                         <a  href=" {{ route('articulos.index') }}" 
                             class="btn btn-warning shadow" >
                                 Agregar Elementos

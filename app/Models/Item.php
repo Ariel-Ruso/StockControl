@@ -53,16 +53,16 @@ class Item extends Model
 
    public function cargarItemsPe( $nombre, $codigo, $cantidad, $precio, $cantP){
 
-    //escribo todos items d un Pedido
-    $item= new Item();
-    
-    $item->descripcion=  $nombre; 
-    $item->codigo=       $codigo;
-    $item->cantidad=     $cantidad; 
-    $item->precioUnit=   $precio;
-    $item->idPedido=     $cantP+1;
+        //escribo todos items d un Pedido
+        $item= new Item();
+        
+        $item->descripcion=  $nombre; 
+        $item->codigo=       $codigo;
+        $item->cantidad=     $cantidad; 
+        $item->precioUnit=   $precio;
+        $item->idPedido=     $cantP+1;
 
-    $item->save();
+        $item->save();
 
     }
 }

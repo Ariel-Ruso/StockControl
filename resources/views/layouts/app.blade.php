@@ -8,13 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     
-    {{-- <style type="text/css"> 
-    
-       
-    
-    </style>
- --}}
-
     <title>{{ config('app.name',) }}</title>
     
 <!-- si funciona en muebl 

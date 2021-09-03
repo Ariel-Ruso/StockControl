@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+HarunoUmi:wght@700&display=swap');
-th {
-    font-size: 2em;
-    font-family: 'Kaisei HarunoUmi', serif;
-}
-
-table {
+.cabe {
     font-size: 1em;
     font-family: 'Kaisei HarunoUmi', serif;
 }
 
-td {
+table {
+    font-size: 5em;
+    font-family: 'Kaisei HarunoUmi', serif;
+    background-color: brown;
+}
+
+th {
     font-size: 5em;
     font-family: 'Anton', sans-serif;
 }

@@ -260,7 +260,8 @@
                                                 </div>
                                                 <hr noshade="noshade" />
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios4" value="4">
+                                                    <input  class="form-check-input" type="radio" name="tipoPago" 
+                                                            id="exampleRadios4" value="4">
                                                     <label class="form-check-label" for="exampleRadios4">
                                                         Tarjeta Crédito 
                                                     </label>
@@ -276,42 +277,51 @@
                                                     </label>
                                                 </div>
                                                 <hr noshade="noshade" />
-                                                
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios5" value="5">
-                                                    <label class="form-check-label" for="exampleRadios5">
-                                                        Tarjeta Crédito <br>
-                                                        No Bancaria - $
-                                                            <input  type="number" 
-                                                                    name="noBancaria5" 
-                                                                    class="border border-primary ml-5 col-4">
-                                                    </label>
+                                                <div class="flex flex-column"> 
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios5" value="5">
+                                                        <label class="form-check-label" for="exampleRadios5">
+                                                            Tarjeta Crédito <br>
+                                                            No Bancaria - $
+                                                            
+                                                                <input  type="number" 
+                                                                        name="noBancaria5" 
+                                                                        class="border border-primary rounded-b shadow  ml-5 col-4">
+                                                            
+                                                        </label>
+                                                    </div>
                                                 </div>
                                                 <hr noshade="noshade" />
-                                                <div class="form-check">
-                                                    <input  class="form-check-input" type="radio" name="tipoPago" 
-                                                            onclick="PagoCompuesto();" id="exampleRadios6" value="6">
-                                                    <label class="form-check-label" for="exampleRadios5">
-                                                        Pago Compuesto -
-                                                        Total: $ {{ number_format($total ,2) }}<br>
-                                                    </label>
-                                                    <br>
-                                                    <label class="form-check-label" id="">
-                                                        Efectivo o Débito - $
-                                                    </label>
-                                                    <input  type="number" 
-                                                            name="eft" 
-                                                            class="border border-primary mt-2 ml-3 col-3" 
-                                                            onchange='PagoCompuestoControl();'>
-                                                    <br>
-                                                    <label class="form-check-label">
-                                                        Tarjeta 1 - $
-                                                    </label>
 
-                                                    <input  type="number" 
-                                                            name="tarje1" 
-                                                            class="border border-primary mt-2 ml-16 col-3">
-                                                    <br>
+                                                <div class="d-flex flex-row"> 
+                                                    <div class="form-check">
+                                                        <input  class="form-check-input" type="radio" name="tipoPago" 
+                                                                onclick="PagoCompuesto();" id="exampleRadios6" value="6">
+                                                        <label class="form-check-label" for="exampleRadios5">
+                                                            Pago Compuesto -
+                                                            Total: $ {{ number_format($total ,2) }}<br>
+                                                        </label>
+                                                        <br>
+                                                    
+                                                            <label class="form-check-label" id="">
+                                                                Efectivo o Débito - $
+                                                            </label>
+                                                            
+                                                            <input  type="number" 
+                                                                    name="eft" 
+                                                                    class="border border-primary rounded-b shadow mt-2 ml-3 col-4" 
+                                                                    onchange='PagoCompuestoControl();'>
+                                                            <br>
+                                                            <label class="form-check-label">
+                                                                Tarjeta 1 -         $
+                                                            </label>
+
+                                                            <input  type="number" 
+                                                                    name="tarje1" 
+                                                                    class="border border-primary rounded-b shadow mt-2 ml-20 col-4">
+                                                            <br>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

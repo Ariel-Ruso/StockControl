@@ -118,7 +118,7 @@ class CarritoController extends Controller
         $this->agregar($request->item_id);
         
         return back()         
-                ->with ('mensaje', 'Imei seleccionado');
+                ->with ('mensaje', 'Celular en Carrito');
     
     }
 
