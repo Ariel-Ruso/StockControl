@@ -72,7 +72,7 @@
                                     value= {{ $detalle['Art_id'] }}
                                     name= "id"
                                 />
-                        <!-- recorro carrito  -->
+                        <!-- recorro carrito  -->  
                             <tr>
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
@@ -89,7 +89,7 @@
                                 </th>
                                 <th  class="font-weight-normal text-center col-md-1" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
-                                </th>
+                                </th>  
                                 
                                 {{-- <th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
@@ -109,7 +109,7 @@
                             </tr>
                             <tr>
                                     <th class="text-center">
-                                        Descuento
+                                        Descuento  
                                     </th>
                                    
                                     <th class="text-center">
