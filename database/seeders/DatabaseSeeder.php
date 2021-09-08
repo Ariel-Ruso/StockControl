@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Categoria;
-//use App\Models\Rol;
+use App\Models\Respon;
 use App\Models\Proveedor;
 use App\Models\Articulo;
 use App\Models\User;
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PropietarioSeeder::class);
         //$this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(ResponSeeder::class);
         Articulo::factory(10)->create();
     }
 }

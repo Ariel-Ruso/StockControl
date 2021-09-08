@@ -240,6 +240,9 @@ Route::resource('pedidos', PedidoController::class);
     
     Route::get ('enviar/{id}', [PedidoController::class, 'enviar'])
         ->name('pedidos.enviar');  
+    
+    Route::post ('asignar/{id}', [PedidoController::class, 'asignar'])
+        ->name('pedidos.asignar');  
 /* 
     Route::get ('pedidos/index', [PedidoController::class, 'index'])
     ->name('indexP');

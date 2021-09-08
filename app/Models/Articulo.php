@@ -104,7 +104,7 @@ class Articulo extends Model
         //dd();
         //$imei= $request->get('modelo');
 //        $imei= $art->imei;
-        $imei= Imei::query()
+        /* $imei= Imei::query()
             ->detalle ($art->imei)
             ->get();
         //dd($imei);
@@ -112,7 +112,7 @@ class Articulo extends Model
         $imeiD->delete();
 
         $art->imei= null;
-        $art->save();
+        $art->save(); */
         
         return back()->with('mensaje', 'Artículo vendido correctamente');    
     }

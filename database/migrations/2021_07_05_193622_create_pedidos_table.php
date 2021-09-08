@@ -19,7 +19,8 @@ class CreatePedidosTable extends Migration
                     ->references('id')
                     ->on('clientes')
                     ->onDelete('cascade');
-            //$table->string('descripcion');
+            $table->string('responsables')
+                    ->nullable();
             //$table->integer('cliente_id');
             //$table->integer('items_id');
             $table->integer('cantidadItems');
@@ -29,6 +30,7 @@ class CreatePedidosTable extends Migration
                     ->nullable();
             $table->integer('tipoPago');
             $table->integer('estado');
+
             $table->timestamps();
         });
     }

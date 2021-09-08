@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Cliente;
 use App\Models\Carrito;
 use App\Models\Factura;
+use App\Models\Respon;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -33,8 +34,9 @@ class PedidoController extends Controller
         $pedis= Pedido::FindorFail($id);
         $items = Item::whereIn('idPedido', [$id]) ->get();
         $clie= Cliente::all();
+        $resp= Respon::all();
 
-        return view ('pedidos.show', compact('pedis', 'items', 'clie'));
+        return view ('pedidos.show', compact('resp', 'pedis', 'items', 'clie'));
         
     }
         
@@ -189,12 +191,18 @@ class PedidoController extends Controller
             'clie', 'totalTar'));
     }
 
-    public function entregarP($id){
+    public function entregarP( $id){
+
+        
 
         $pedi= new Pedido();
         $pedi->setEstado($id, 1);
         return back();
 
+    }
+
+    public function asignar(Request $request, $id){
+        dd($request);
     }
 
 }
