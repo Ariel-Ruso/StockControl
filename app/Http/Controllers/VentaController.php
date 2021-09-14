@@ -102,7 +102,7 @@ class VentaController extends Controller
         $tot=0;
         $subtot=0;
         $iva=0;
-        $precioNoBanc= $request->noBancaria5;
+        //$precioNoBanc= $request->noBancaria5;
         //art nuevos quedan fuera d carrito
         //dd($cantA);
 
@@ -140,10 +140,20 @@ class VentaController extends Controller
                                             $carrito[$x]["Cantidad"], 
                                             //$carrito[$x]["Art_id"],
                                             $carrito[$x]["Imei"],
-                                            $precioNoBanc, 
+                                            $request->noBancaria5,
                                             $cantF);
                                             
-                                            $subtot= $subtot + $precioNoBanc;
+                                            $subtot= $subtot + $request->noBancaria5;
+                                            
+                    }elseif($request->tipoPago==6){
+                            
+                                            $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                                $carrito[$x]["Codigo"],
+                                                                $carrito[$x]["Cantidad"], 
+                                                                $request->tarje1, 
+                                                                $carrito[$x]["Imei"],
+                                                                $cantF);
+                                            $subtot= $subtot + $request->tarje1; 
 
                     }else{
                         //dd($request);

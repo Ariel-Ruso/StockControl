@@ -193,8 +193,6 @@ class PedidoController extends Controller
 
     public function entregarP( $id){
 
-        
-
         $pedi= new Pedido();
         $pedi->setEstado($id, 1);
         return back();
@@ -202,7 +200,11 @@ class PedidoController extends Controller
     }
 
     public function asignar(Request $request, $id){
-        dd($request);
+        //dd($id);
+        $ped= Pedido::FindorFail($id);
+        $ped->responsables= $request->conduc."-".$request->cobr;
+        $ped->save();
+        return back();
     }
 
 }

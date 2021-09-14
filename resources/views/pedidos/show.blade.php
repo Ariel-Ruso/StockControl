@@ -80,13 +80,17 @@
 						<strong> 
 							Responsables:
 						</strong>
-						<button class="btn btn-outline-success btn-sm shadow" 
-                                  type="button"
-                                  data-toggle="modal" 
-                                  data-target="#respon{{$item->id}}" >                                 
-                                      Elegir     
-                        </button>
-                          <div  class="modal fade" 
+						@if($pedis->responsables != NULL )
+							{{ $pedis->responsables }}
+						@else
+
+							<button class="btn btn-success btn-sm shadow" 
+									type="button"
+									data-toggle="modal" 
+									data-target="#respon{{$item->id}}" >                                 
+										Elegir     
+							</button>
+							<div  class="modal fade" 
                                 id="respon{{$item->id}}" 
                                 tabindex="-1" 
                                 role="dialog" 
@@ -111,46 +115,33 @@
 																<thead class="table-info font-normal text-center text-black-400" >
 																<tr>
 																	<th>
-																		Responsables
+																		Responsables del envío
 																	</th>
 																</tr>
 																</thead>
 																<tbody>
 																	<tr scope= "col">
 																		<th>
-																			<select class="form-select " aria-label="Default select example">
-																				<option selected>Conductor</option>
-																				
-																				@foreach($resp as $item1)
-																				<option value="$item1->id">
-																					{{ $item1->nombre }}
-																				
-																				</option>
-																				@endforeach 
-																				
-																			</select>
-																			
-																			<select class="form-select " aria-label="Default select example">
-																				<option selected>Cobrador</option>
-																				
-																				@foreach($resp as $item2)
-																				<option value="$item2->id">
-																					{{ $item2->nombre }}
-																				
-																				</option>
-																				@endforeach 
-																				
-																			</select>
 
+																			<label for="" name="conduc">
+																				<input type="radio" name="conduc" id="" value=" Alexis" checked>Alexis
+																				<br>
+																				<input type="radio" name="conduc" id="" value=" Jose Luis">Jose Luis
+																			</label>
 
-																			<input type="hidden" name="resp1" 
-																				
-																				value= "{{ option selected }}"
-																				>
-																			<input type="hidden" name="resp2" 
-																				value="{{ $item2->id }}">
 																		</th>
+																		
 																	</tr>
+																	<tr scope= "col">
+																		<th>
+																		<label for="" name="cobr">
+																				<input type="radio" name="cobr" id="" value=" Facundo" checked>Facundo
+																				<br>
+																				<input type="radio" name="cobr" id="" value=" Gaston">Gaston
+																			</label>
+																		</th>
+
+																		</tr>
 																</tbody>
                                                     		</table>
                                                 		</div>
@@ -172,6 +163,7 @@
                                         </div>
                               		</div>
 							</div>
+						@endif
 					</div>
 				</div>
 			</div>

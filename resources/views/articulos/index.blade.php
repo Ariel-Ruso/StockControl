@@ -344,6 +344,7 @@
                                                                 <td>
                                                                   <input type="hidden" name="item_id" 
                                                                   value="{{ $item->id }}">
+                                                                  
                                                                   <input type="hidden" name="imei_det"
                                                                   value="{{ $imei->detalle }}">
 
