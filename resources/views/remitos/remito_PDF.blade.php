@@ -148,10 +148,10 @@
                                     </td>
                                     <td style="text-align:center">
                                         {{ $item->descripcion }}
-                                        @isset($item->imei)
+                                        @if($item->imei != "")
                                             / IMEI: 
                                             {{ $item->imei }}
-                                        @endisset
+                                        @endif
                                         
                                     </td>
                                     <td style="text-align:center">

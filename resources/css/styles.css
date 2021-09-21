@@ -1,16 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+HarunoUmi:wght@700&display=swap');
-th {
-    font-size: 2em;
-    font-family: 'Kaisei HarunoUmi', serif;
-}
-
 table {
     font-size: 1em;
     font-family: 'Kaisei HarunoUmi', serif;
 }
 
-td {
-    font-size: 5em;
-    font-family: 'Anton', sans-serif;
+.boton {
+    background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
+    border-radius: solid;
+    font-size: 1.5em;
+    font-family: 'Kaisei HarunoUmi', serif;
+    border-radius: 6px;
+     :hover {
+        background-color: #008CBA;
+        color: white;
+    }
+    img {
+        width: 10%;
+        height: 5%;
+        justify-content: center;
+    }
+    table thead {
+        font-size: 4em;
+        font-family: 'Kaisei HarunoUmi', serif;
+    }
+    td {
+        font-size: 5em;
+        font-family: 'Anton', sans-serif;
+    }
+    footer {
+        font-size: 2em;
+        font-family: 'Kaisei HarunoUmi', serif;
+    }
+}
+
+@media (max-width: 360px) {
+    .table {
+        width: 90%;
+    }
 }

@@ -7,7 +7,7 @@
     @endcomponent
     <br>
 </div>
-<x-grafica img="Storage/caja.jpg"/>
+<x-grafica img="Storage/caja.png"/>
   <br>
 
 <table class= "table">
@@ -232,10 +232,23 @@
                                         </a>
                                     </th> 
                                     <th>
-                                        <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                            class="btn btn-success shadow" >
-			                                    Enviar
-                                        </a>
+                                        {{-- revisar ciclos  --}}
+                                        @foreach ( $pedis as $pedi )
+                                            
+                                           {{--  @if($pedi->id == $item->id){
+                                                "Enviado"
+                                            }@else{
+                                                 --}}
+                                            @if($pedi->id == $item->id)
+                                                        {{'Exitse'}}
+                                            @else
+                                                <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                    class="btn btn-success shadow" >
+                                                        Generar
+                                                </a>
+                                            @endif
+                                        @endforeach
+                                           
                                     </th> 
                                     
                                     <!-- 

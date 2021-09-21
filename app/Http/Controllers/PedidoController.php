@@ -22,11 +22,11 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos= Pedido::all();
-        $cont= count($pedidos);
+        
         $users= User::all();
         $clientes= Cliente::all();
         $items= Item::all();
-        return view ('pedidos.index', compact('pedidos', 'users', 'clientes', 'cont'));
+        return view ('pedidos.index', compact('pedidos', 'users', 'clientes'));
     }
 
     public function show($id)
@@ -95,7 +95,8 @@ class PedidoController extends Controller
 
         session()->forget('carrito');
 
-        return view ('dashboard')->with('mensaje', 'Pedido generado');
+        // return view ('dashboard')->with('mensaje', 'Pedido generado');
+        return view ('pedidos.index')->with('mensaje', 'Pedido generado');
     }   
     
     public function store(Request $request, $contItems, $tot){
@@ -171,7 +172,11 @@ class PedidoController extends Controller
 
         $item->save();
         
-        return back()->with ('mensaje', 'Pedido generado');
+        // return back()->with ('mensaje', 'Pedido generado');
+        // return view ('pedidos.index')->with('mensaje', 'Pedido generado');
+        return redirect()->action('App\Http\Controllers\PedidoController@index')
+                        ->with('mensaje', 'Pedido generado');
+
     }
     
    

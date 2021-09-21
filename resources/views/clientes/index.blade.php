@@ -7,7 +7,7 @@
   @endcomponent
 </div>
 
-<x-grafica img="/Storage/clientes.jpg"/>
+<x-grafica img="/Storage/clientes.png"/>
 <br><br>
 
 <table class= "table mt-1">

@@ -91,6 +91,9 @@
                             <a href="{{ route('presupuestos.index')}}" class="dropdown-item">
                                 Mostrar Presupuestos
                             </a> 
+                            <a href="{{ route('ordenes.index')}}" class="dropdown-item">
+                                Orden de Compra
+                            </a> 
                     </div>
                 </div>
                 <!-- menu categorias -->

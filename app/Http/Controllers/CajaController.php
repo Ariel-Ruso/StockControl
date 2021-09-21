@@ -7,6 +7,7 @@ use App\Models\Factura;
 use App\Models\User;
 use App\Models\Caja;
 use App\Models\Gasto;
+use App\Models\Pedido;
 class CajaController extends Controller
 {
     
@@ -20,16 +21,18 @@ class CajaController extends Controller
         $users= (new User()) ->getAll();       
         $gastos= Gasto::where('created_at','>',today())->get();
         $todas= Factura::where('created_at','>',today())->get();
+        $pedis= Pedido::where('created_at','>',today())->get();;
         $cont= count($todas);
         $totDiario= $caja ->totalDia();
         $montoIni= $caja ->montoInicial();
         $totDiario = $totDiario + $montoIni;
         $estado= $caja->estado();
         $status= $caja->status($estado);
+        
         //$efect=     $cajai->totalDiaEfect();
 
         return view ('caja.index', compact('todas', 'users', 'montoIni', 'totDiario', 
-                    'status', 'estado', 'gastos', 'cont' ));
+                    'status', 'estado', 'gastos', 'cont', 'pedis' ));
     }
 
     public function store(Request $request){

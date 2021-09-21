@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script> 
 
 @component('components.botones')
 @endcomponent
 <br>
 
-@if($cont==0)
+@if($pedidos->count()<0)
+
     <br>
     <x-vacio mensaje="Sin Pedidos ahora" />    
 @else

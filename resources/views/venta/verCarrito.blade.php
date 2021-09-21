@@ -6,7 +6,7 @@
     @endcomponent
     <br>
   </div>
-<x-grafica img="/Storage/carrito.jpg" />
+<x-grafica img="/Storage/carrito.png" />
 <br>
 
 
@@ -146,9 +146,9 @@
                                     Efectivo $ {{ number_format ($total, 2) }}
                                 </h3>
                                 
-                                <h3>
+                                {{-- <h3>
                                     Tarjeta $ {{ number_format ($totalTar, 2) }}
-                                </h3>
+                                </h3> --}}
                                 
                             </td>
                         </tr>

@@ -22,7 +22,7 @@ use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\ContableController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\CelularController;
+use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ImeiController;
 //use App\Exports;
 //use App\Imports\csvImport;
@@ -44,7 +44,7 @@ Route::middleware('auth')->group (function() {
             ->name('verImei');
 
 //reclamos
-//Route::resource ();
+Route::resource ('ordenes', OrdenController::class);;
 
 Route::get ('elegir_factura/{id}', [ReclamoController::class, 'elegir_factura'])
     ->name('elegir_factura');

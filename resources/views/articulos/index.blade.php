@@ -3,10 +3,11 @@
 @section('content')
 
 <div class="float-right">
+  
       @component('components.botones')
       @endcomponent
 </div>
-<x-grafica img="/Storage/articulos.jpg" />
+<x-grafica img="/Storage/articulos.png" />
 <br><br>
 
 <table class= "table ">
@@ -106,8 +107,7 @@
       <br>
       @component('components.clientes-btn')
       @endcomponent  
-      {{-- <x-agrega-btn route="celulares"
-                destino="Celulares"/> --}}
+      
     </th>
    
   </tr>
@@ -122,7 +122,10 @@
     <div class="row justify-content-center mx-auto ">
       
           <table class="table border-rounded shadow" >
-            <thead class="table-warning font-normal text-center text-black-500" >
+            <thead 
+            
+            class="table-warning font-normal text-center text-black-500" 
+              >
               <tr>
                 <th scope="col">
                     Nombre

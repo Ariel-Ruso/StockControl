@@ -2,8 +2,15 @@
 
 @section('content')
 
-@component('components.botones')
-@endcomponent
+<div class="float-right">
+    @component('components.botones')
+    @endcomponent
+    <br>
+  </div>
+<x-grafica img="/Storage/detalles.png" />
+<br>
+
+
 
 <div class="container mt-4 col-md-10 " name="datos">
     {{-- <h3 style="text-align:center " class="mx-5 ">
@@ -12,10 +19,9 @@
     @if($errors->any())
     Hay errores
     @endif
-    <form   action="{{ route('finalizarVenta') }}" 
+    <form action="{{ route('finalizarVenta') }}" 
             method="POST" 
             name="detail">
-            
         @csrf
 {{-- 
         <div name="datosUser mt-5">
@@ -169,15 +175,18 @@
                                                 <br>
                                                 
                                                 <tr>
-                                                    <td colspan="10" align="right" >
+                                                            <td colspan="10" align="right" >
                                                         <br>
                                                         <hr noshade="noshade" class="mx-5"  />
-                                                        <h5 class="mr-5">
-                                                            Total: $ {{ number_format($detalle['SubTotal'],2) }}
-                                                        </h5>
+                                                       {{--  <h5 class="mr-1">
+                                                            Total: $ 
+                                                            {{ number_format($detalle['SubTotal'],2) }} 
+                                                            {{ number_format ($total, 2) }}
+                                                        </h5> --}}
                                                         
-                                                        <h5 class="mr-5 mt-1">
-                                                            Descuento: $ - {{ number_format($detalle['Descuento'],2) }}
+                                                        <h5 class="mr-1 mt-1">
+                                                            Descuento: $ - 
+                                                            {{ number_format($detalle['Descuento'],2) }}                                                       
                                                         </h5>
                                                     </td>
                                                 </tr>
@@ -192,7 +201,8 @@
                                                             Efectivo : $ {{ number_format ($total, 2) }}
                                                         </h4>
                                                         <h4 class="mr-5">
-                                                            Tarjeta :  $ {{ number_format ($totalTar, 2) }}
+                                                            {{-- del total con desc + 18% es total Tarj --}}
+                                                            Tarjeta :  $ {{ number_format ((($total) + (($total)* 0.18)), 2) }}
                                                         </h4>
                                                                            
                                                     </td>
@@ -267,10 +277,10 @@
                                                     <!-- <input  type="number"  name="noBancaria4" class="border border-primary" >
                                                         </input> -->
                                                     <br>
-                                                    Total $ {{ number_format($totalTar, 2) }} -
+                                                    Total $ {{ number_format(($total) + (($total)* 0.18), 2) }} -
                                                     {{-- Total $ {{ number_format( $detalle['PrecioT'])  }} - --}}
                                                     
-                                                    12 cuotas $ {{ number_format( ($totalTar) /12 ), 2  }}
+                                                    12 cuotas $ {{ number_format( (($total) + (($total)* 0.18)) /12 ), 2  }}
                                                     <br>
                                                     
                                                     </label>
@@ -291,7 +301,8 @@
                                                 <div class="form-check">
                                                     <input  class="form-check-input" type="radio" name="tipoPago" 
                                                             onclick="PagoCompuesto();" id="exampleRadios6" value="6">
-                                                    <label class="form-check-label" for="exampleRadios5">
+
+                                                    <label class="form-check-label" for="exampleRadios6">
                                                         Pago Compuesto -
                                                         Total: $ {{ number_format($total ,2) }}<br>
                                                     </label>
@@ -301,17 +312,50 @@
                                                     </label>
                                                     <input  type="number" 
                                                             name="eft" 
-                                                            class="border border-primary mt-2 ml-3 col-3" 
+                                                            class="border border-primary mt-2 ml-3 col-2" 
                                                             onchange='PagoCompuestoControl();'>
                                                     <br>
+                                                  
+                                                    <label for="cuotas" name="fpago">
+                                                        
+                                                        <input type="radio" name="fpago" value="1">
+                                                             Tarjeta - 1 cuota- $
+
+                                                            <input  type="number" 
+                                                                    name="tarje1" 
+                                                                    class="border border-primary mt-2 ml-10 col-3">
+                                                            <br>
+                                                        
+                                                        <input type="radio" name="fpago"  value="2">
+                                                            Tarjeta - en cuotas $
+                                                        
+                                                        <input  type="number" 
+                                                                name="tarje2" 
+                                                                class="border border-primary mt-2 ml-6 col-3">
+                                                        <br>
+
+                                                        <input type="radio" name="fpago" value="3">
+                                                            Tarjeta No Bancaria- en cuotas - $
+                                                    
+                                                        <input  type="number" 
+                                                                name="tarje3" 
+                                                                class="border border-primary mt-2 ml-6 col-3">
+                                                        <br>
+                                                    </label>
+                                                    {{-- 
                                                     <label class="form-check-label">
-                                                        Tarjeta 1 - $
+                                                        Tarjeta 1 cuota- $
                                                     </label>
 
-                                                    <input  type="number" 
-                                                            name="tarje1" 
-                                                            class="border border-primary mt-2 ml-16 col-3">
-                                                    <br>
+                                                    <input type="checkbox" name="6b" id="6b">
+                                                    <label class="form-check-label">
+                                                                Tarjeta + 1 cuota- $
+                                                    </label>
+        
+                                                     <input  type="number" 
+                                                                    name="tarje2" 
+                                                                    class="border border-primary mt-2 ml-6 col-2">
+                                                    <br> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -322,6 +366,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="container col-md-2">
@@ -352,7 +397,9 @@
         var end = '<?php echo $total; ?>'
         var cambio = document.detail.eft.value;
         var final = end - cambio;
+        var final18= final + (final*0.18);
         document.detail.tarje1.value = final;
+        document.detail.tarje2.value = final18;
 
     }
 </script>

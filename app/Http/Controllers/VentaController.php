@@ -115,7 +115,7 @@ class VentaController extends Controller
             $item= new Item;
                        
             //si existe carrito con ese indice
-                if (isset($carrito[$x])) 
+            if (isset($carrito[$x])) 
                 {
                     $contItems++;
                     if($request->tipoPago==4){
@@ -146,7 +146,7 @@ class VentaController extends Controller
                                             $subtot= $subtot + $request->noBancaria5;
                                             
                     }elseif($request->tipoPago==6){
-                            
+                            if($request->fpagoa==1){
                                             $item->cargarItems( $carrito[$x]["Nombre"], 
                                                                 $carrito[$x]["Codigo"],
                                                                 $carrito[$x]["Cantidad"], 
@@ -154,6 +154,27 @@ class VentaController extends Controller
                                                                 $carrito[$x]["Imei"],
                                                                 $cantF);
                                             $subtot= $subtot + $request->tarje1; 
+
+                            } elseif($request->fpagoa==2){
+                                $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                    $carrito[$x]["Codigo"],
+                                                    $carrito[$x]["Cantidad"], 
+                                                    $request->tarje1, 
+                                                    $carrito[$x]["Imei"],
+                                                    $cantF);
+                                $subtot= $subtot + $request->tarje1; 
+                                
+                            }else{
+                                $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                    $carrito[$x]["Codigo"],
+                                                    $carrito[$x]["Cantidad"], 
+                                                    $request->tarje1, 
+                                                    $carrito[$x]["Imei"],
+                                                    $cantF);
+                                    $subtot= $subtot + $request->tarje1; 
+
+                            }
+
 
                     }else{
                         //dd($request);

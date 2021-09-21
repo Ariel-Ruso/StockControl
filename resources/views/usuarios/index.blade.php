@@ -6,7 +6,7 @@
           @component('components.botones')
           @endcomponent
   </div>
-<x-grafica img="/Storage/usuarios.jpg" />
+<x-grafica img="/Storage/usuarios.png" />
 
 <br><br>
 

@@ -132,6 +132,7 @@ class Articulo extends Model
     public function getLastArt(){
         $art= Articulo::all();
         $ultArt= $art->last();
+        //$ultArt= count($art);
         if (!isset ($ultArt)){
             $res= 0;
         }else{
