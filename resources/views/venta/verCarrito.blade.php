@@ -1,24 +1,32 @@
 @extends('layouts.app')
+
+<script src="carrito.js">
+
+    </script>
 @section('content')
+
 
 <div class="float-right">
     @component('components.botones')
     @endcomponent
     <br>
-  </div>
+</div>
 <x-grafica img="/Storage/carrito.png" />
 <br>
 
 
 <table class= "table mb-1 "> 
     <th>
-      </th>
-        
+    </th>       
  </table>        
+
  @component('components.caja-btn')
  @endcomponent
 
+    <div id="app">
+        <example-component></example-component>
     
+    </div>
 
     <div class="container ">
         <div class="row justify-content-center">
@@ -28,7 +36,7 @@
                                 align-items-center">
                         <span class="text-center mx-auto font text-2xl">
                             <h3>
-                            Tus Artículos
+                                Tus Artículos
                             </h3>
                         </span>
                     </div>
@@ -105,6 +113,29 @@
                                     </a>
                                    
 
+                                </th>
+                            </tr>
+                            <tr>
+                                
+                                <th class="text-center">
+                                    Peso
+                                </th>
+                                <th class="text-center">
+                                    KG
+                                    <input  type="number" 
+                                            class="border border-primary col-md-8" 
+                                            name="descuento" 
+                                            id="descuento" 
+                                            onchange="Descuento();"
+                                            />
+                                </th>
+                                <th>
+                                     <button class="btn btn-success shadow " 
+                                             type="submit">
+                                              {{-- <i class="fa fa-check">         --}}
+                                                Aplicar
+                                              {{-- </i> --}}
+                                     </button>
                                 </th>
                             </tr>
                             <tr>
