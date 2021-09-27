@@ -49,21 +49,21 @@
                                     Dni duplicado o faltante
                                 </div>
                                 @enderror
-                                @error('cuit')
+                                {{-- @error('cuit')
                                 <div class="alert alert-success row justify-content-center">
                                     CUIT obligatorio
                                 </div>
-                                @enderror
-                                @error('email')
+                                @enderror --}}
+                               {{--  @error('email')
                                 <div class="alert alert-success row justify-content-center">
                                     Email obligatorio 
-                                </div>
-                                @enderror
-                                @error('telefono')
+                                </div> 
+                                @enderror--}}
+                               {{--  @error('telefono')
                                 <div class="alert alert-success row justify-content-center">
                                     Teléfono obligatorio
                                 </div>
-                                @enderror
+                                @enderror --}}
                             </div>
                             <div class="container " name="etiquetas">
                                 <div class="row justify-content-center ">

@@ -21,7 +21,8 @@ class CreateClientesTable extends Migration
                     ->unique();
             $table->string('cuit')
                     ->nullable();
-            $table->string('telefono');
+            $table->string('telefono')
+                    ->nullable();
             $table->string('email')
                     ->nullable();
             $table->timestamps();

@@ -44,10 +44,10 @@ class ClienteController extends Controller
     	$request-> validate ([
             'nombre' => 'required',
             'direccion'=> 'required',
-            'cuit' => 'required',
+            //'cuit' => 'required',
             'dni' => ['required', 'unique:clientes'],
-            'email' =>  'required', 
-            'telefono' => 'required',
+            //'email' =>  'required', 
+            //'telefono' => 'required',
         ]);
 
         $cliente= Cliente::create($request->all());
