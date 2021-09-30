@@ -15,6 +15,10 @@ class CarritoController extends Controller
         if(!session()->has('carrito')) session()->put('carrito', array());
     }
 
+    public function ventaPeso(Request $request){
+        dd($request);
+    }
+
     public function agregar($id){
         
         $articulo= Articulo::Findorfail($id);

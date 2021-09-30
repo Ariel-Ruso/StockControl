@@ -70,7 +70,8 @@
                             </thead>
                         @foreach (session('carrito') as $id => $detalle)
 
-                        <form action="{{ route('setDescuento') }}" 
+                        <!-- <form action="{{ route('setDescuento') }}"  -->
+                        <form action="{{ route('ventaPeso') }}" 
                                     method="POST" 
                                     enctype="multipart/form-data" 
                                     >
@@ -102,6 +103,7 @@
                                 {{-- <th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
+
                                 <th class="font-weight-normal text-center col-md-2">
                                     <a  href="{{ url ('agregar/' .$id )  }}"
                                         class= "btn btn-primary">
@@ -124,8 +126,8 @@
                                     KG
                                     <input  type="number" 
                                             class="border border-primary col-md-8" 
-                                            name="descuento" 
-                                            id="descuento" 
+                                            name="kg" 
+                                            id="kg" 
                                             onchange="Descuento();"
                                             />
                                 </th>

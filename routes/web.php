@@ -275,6 +275,9 @@ Route::get('venta/verCarrito', [CarritoController::class, 'verCarrito'])
     
 Route::get('agregar/{id}', [CarritoController::class, 'agregar'])
     ->name('agregar');
+    
+Route::post('ventaPeso', [CarritoController::class, 'ventaPeso'])
+    ->name('ventaPeso');
 
 Route::get('eliminarCarr/{id}', [CarritoController::class, 'eliminarCarr'])
     ->name('eliminarCarr');
