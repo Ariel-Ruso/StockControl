@@ -155,6 +155,7 @@
                 <th scope="col-4">
                     Acciones
                 </th>
+              
               </tr>
             </thead>
             <tbody>
@@ -305,6 +306,7 @@
                           
 
                 @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+
                       <div  class="modal fade" 
                         id="celular{{ $item->id }}" 
                         tabindex="-1" 
@@ -387,6 +389,7 @@
                     @endif
                     
                   </td>
+               
                 </tr>
               @endforeach
             </tbody>

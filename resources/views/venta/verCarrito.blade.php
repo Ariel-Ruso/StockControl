@@ -33,6 +33,7 @@
                         </span>
                     </div>
                     <div class="card-body ">
+
                     @if(session('carrito'))
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead class= "text-center bg-orange-100">
@@ -43,9 +44,9 @@
                                     <th scope="col">
                                         Precio 
                                     </th>
-                                    <th scope="col">
+                                   {{--  <th scope="col">
                                         Cant.
-                                    </th>
+                                    </th> --}}
                                     {{-- <th>
                                         Imagen
                                     </th> --}}
@@ -68,12 +69,18 @@
                                     enctype="multipart/form-data" 
                                     >
                                     @csrf --}}
-
-                            <input  type="hidden" 
-                                    value= {{ $detalle['Art_id'] }}
-                                    name= "id"
-                                />
-                        <!-- recorro carrito  -->  
+                            <form action="{{ route('ventaPeso') }}" 
+                                    method="POST" 
+                                    enctype="multipart/form-data" 
+                                    >
+                                    @csrf 
+                                    
+                                         <input  type="hidden" 
+                                                value= {{ $detalle['Art_id'] }}
+                                                name= "id"
+                                            /> 
+                                    
+                            <!-- recorro carrito  -->  
                             <tr>
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
@@ -81,13 +88,13 @@
                                 <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
-                                <th  class="font-weight-normal text-center" > 
+                             {{--    <th  class="font-weight-normal text-center" > 
                                     {{ $detalle['Cantidad'] }}
                                     / {{ $detalle['Disponible'] }}
-                                </th>
-                                <th  class="font-weight-normal text-center col-md-3" >
+                                </th> --}}
+                              {{--   <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
-                                </th>
+                                </th> --}}
                                {{--  <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
                                 </th>   --}}
@@ -95,8 +102,11 @@
                                 {{--<th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
+                                <th>
+
+                                </th>
                                  <th class="font-weight-normal text-center col-md-2">
-                                    <a  href="{{ url ('agregar/' .$id )  }}"
+                                    <a  href="{{ url ('agregar/' .$id)  }}"
                                         class= "btn btn-primary">
                                             +
                                     </a>
@@ -115,66 +125,39 @@
                                
                                 <th class="text-center">
                                     
-                                    <input  type="number" 
+                                    <input  type="float" 
                                             class="border border-primary col-md-8" 
                                             name="inpeso" 
                                             id="inpeso" 
-                                            {{-- onchange="peso();" --}}
-                                            onclick="peso();"
+                                            onchange="peso();"
+                                            {{-- onclick="peso();" --}}
                                             />
                                 </th>
                                 <th>
                                      <button class="btn btn-success btn-sm shadow " 
-                                             {{-- type="submit" --}}
-                                             id="btnpeso">
+                                             type="submit"
+                                             
+                                             >
                                               <i class="fa fa-check">        
                                                 
                                               </i>
                                      </button>
+                                    {{--  <a  href="{{ route ('setDescuento/'  )  }}"
+                                        type="submit"
+                                        class= "btn btn-info">
+                                            Peso
+                                    </a> --}}
                                 </th>
                                 <th>
-                                    <label for="" name="pxkg" id="pxkg" value= "0">
+                                    <label name="pxkg" id="pxkg" value= "$" >
 
                                     </label>
-                                    {{-- <input type="number" name="pxkg" id="pxkg" /> --}}
+                                    
                                 </th>
                               
-                        </tr>
-                            <tr>
-                                    <th class="text-center">
-                                        Descuento  ($)
-                                    </th>
-                                   
-                                    <th class="text-center">
-                                        
-                                        <input  type="number" 
-                                                class="border border-primary col-md-8" 
-                                                name="descuento" 
-                                                id="descuento" 
-                                                onchange="Descuento();"
-                                                />
-                                    </th>
-                                    <th>
-                                         <button class="btn btn-success btn-sm shadow " 
-                                                 type="submit">
-                                                  {{-- <i class="fa fa-check">         --}}
-                                                    Aplicar
-                                                  {{-- </i> --}}
-                                         </button>
-                                    </th>
-                                    <th>
-                                        - $ {{ number_format($detalle['Descuento'],2) }}
-                                    </th>
-                                   {{--  <th  class="text-center">
-                                        
-                                            <input  type="float(0.1)" step="any" id="descP" 
-                                                    readonly name="descP" value="0.0 %" 
-                                                    placeholder=" " class="form-control mb-2 col-6"  
-                                                    onchange= "Descuento();"
-                                            /> 
-                                    </th> --}}
                             </tr>
-                        {{-- </form> --}}
+                           
+                        </form>
                         @endforeach
                         <tr>
                             <td colspan= "12" class= "text-right"> 
@@ -191,6 +174,7 @@
                         </table>
                         
                     @else
+
                     <div class="text-center text-3xl font-extrabold leading-none tracking-tight">
                         <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
                             Sin productos
@@ -209,7 +193,7 @@
                    {{--
                     <br><br>
                         <hr noshade="noshade" />
-  <div name="descuento"
+                    <div name="descuento"
                         class=" mt-5 row justify-content-center ">
                         <div class="text-center text-2xl font-bold leading-none tracking-tight">
                             <span class="bg-clip-text text-transparent 
@@ -325,17 +309,17 @@
                      <!-- 
                     <div name="testing">
                         <br>
-                        <a  href="{{ url('verSession') }}" 
+                        {{-- <a  href="{{ url('verSession') }}"  --}}
                             class= "btn btn-secondary">
                                 Ver Session             
                         </a>
-                        <a  href="{{ url('borrarCarr') }}" 
+                        {{-- <a  href="{{ url('borrarCarr') }}"  --}}
                             class= "btn btn-danger">
                                 Vaciar Carrito
                         </a>
-                          -->
-                    </div> 
-                    <br>
+                          
+                    </div>--> 
+                    
                  
                     </div>
                 </div>
@@ -345,20 +329,17 @@
     </div>
     <script>
 
-      
-
         function peso(){
-        
             var precio= '<?php echo $detalle['Precio']; ?>'
+                var peso= document.getElementById('inpeso');
+                var res= (document.getElementById('pxkg'));
             
-            var peso= document.getElementById('inpeso');
-            
-            
-            var res= document.getElementById('pxkg');
-            
-            res.value= peso * precio;
-            
-            
+            //eventos
+            peso.onclick= function(e){
+                //alert(parseFloat(peso.value));
+                    //res.textContent= number (parseFloat(peso) * parseFloat(precio));
+                res.textContent=  parseFloat(peso.value) * precio;
+            }
             
         }
         

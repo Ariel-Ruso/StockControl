@@ -14,6 +14,26 @@ class CarritoController extends Controller
     {
         if(!session()->has('carrito')) session()->put('carrito', array());
     }
+    
+    public function ventaPeso(Request $request)
+    {
+        //dd($request);
+        $carrito= session()->get('carrito');
+          //si carrito ya tiene ese item incluyo desc
+          if(isset($carrito[$request->id])) {
+            $res= ($request->inpeso) * $carrito[$request->id]['Precio'];
+            //dd($res);
+            $carrito[$request->id]['Subtotal']= $res;
+
+            session()->put ('carrito', $carrito);
+            
+          }
+          ///$this->subtotal();
+          //$this->subtotalT();
+          
+        return redirect()->back()->with('mensaje', 'Subtotal Actualizado');
+
+    }
 
     public function agregar($id){
         
@@ -27,12 +47,12 @@ class CarritoController extends Controller
                     $id => [
                         "Art_id"    => $articulo->id,
                         "Nombre"    => $articulo->nombre,
-                        "Cantidad"  => 1,
+                        "Cantidad"  => 0,
                         "Precio"    => $articulo->precioVenta,
                         "PrecioT"   => $articulo->pVentaTarj,
                         "Disponible"=> $articulo->cantidad,
-                        "SubTotal"  => $articulo->precioVenta,
-                        "SubTotalT" => $articulo->pVentaTarj,
+                        "SubTotal"  => 0,
+                        "SubTotalT" => 0,
                         "Iva"       => $articulo->iva,
                         "Codigo"    => $articulo->codigo,
                         "Descuento" => 0,
@@ -124,6 +144,7 @@ class CarritoController extends Controller
 
     public function setDescuento(Request $request)
     {
+        dd($request);
         $carrito= session()->get('carrito');
           //si carrito ya tiene ese item incluyo desc
           if(isset($carrito[$request->id])) {

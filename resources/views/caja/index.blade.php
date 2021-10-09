@@ -235,20 +235,20 @@
                                         {{-- revisar ciclos  --}}
                                         @foreach ( $pedis as $pedi )
                                             
-                                           {{--  @if($pedi->id == $item->id){
+                                            {{-- @if($pedi->id == $item->id)
                                                 "Enviado"
-                                            }@else{
-                                                 --}}
-                                            @if($pedi->id == $item->id)
-                                                        {{'Exitse'}}
                                             @else
-                                                <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                    class="btn btn-success shadow" >
-                                                        Generar
-                                                </a>
-                                            @endif
+                                            --}}
+                                           {{--  @if($pedi->id == $item->id)
+                                                        {{'Existe'}}
+                                            @else --}}
+                                               
+                                            {{-- @endif --}}
                                         @endforeach
-                                           
+                                        <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                            class="btn btn-success shadow" >
+                                                Generar
+                                        </a>
                                     </th> 
                                     
                                     <!-- 

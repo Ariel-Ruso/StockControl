@@ -7,10 +7,12 @@ use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Imei;
+use GuzzleHttp\Exception\GuzzleException;
 use \Milon\Barcode\DNS2D;
 use \Milon\Barcode\DNS1D;
 use Illuminate\Http\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ArticuloController extends Controller
 {
@@ -18,12 +20,14 @@ class ArticuloController extends Controller
     public function index (){
        
         $arts= Articulo::orderBy ('id', 'ASC')
-            ->paginate(15);
+            ->paginate(15); 
         $cates= Categoria::all();
         $proves= Proveedor::all();
         $imeis= Imei::all();
+        $foto= HTTP::get('https://jsonplaceholder.typicode.com/photos');
+        $fotosA= $foto->json();
 
-    	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
+    	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis', 'fotosA'));
     }
 
 
