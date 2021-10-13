@@ -240,6 +240,7 @@
 
                                             @else
                                             
+                                            
                                             <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
                                                 class="btn btn-success shadow" >
                                                     Enviar
