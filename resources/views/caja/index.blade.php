@@ -232,10 +232,43 @@
                                         </a>
                                     </th> 
                                     <th>
-                                        <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                            class="btn btn-success shadow" >
-			                                    Enviar
-                                        </a>
+                                        
+                                         @isset ( $pedis[ ($item->id)-1]->id )
+
+                                            {{-- {{  $pedis[ ($item->id)-1]->id }} --}}
+                                            {{ "Enviado" }}   
+
+                                            @else
+                                            
+                                            <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                class="btn btn-success shadow" >
+                                                    Enviar
+                                            </a>
+
+                                        @endisset 
+                                        
+                                        
+                                        {{--  @foreach ($pedis as $item2)
+
+                                            @if ($item2->id == $item->id)
+
+                                                @if ($item2->estado == 1 )
+                                                    
+                                                    {{ "ya enviado" }}
+                                                
+                                                @else
+
+                                                    <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                        class="btn btn-success shadow" >
+                                                            Enviar
+                                                    </a>
+
+                                                @endif
+                                            @endif
+
+                                        @endforeach  --}}
+                                        
+                                      
                                     </th> 
                                     
                                     <!-- 

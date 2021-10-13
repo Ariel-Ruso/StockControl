@@ -7,6 +7,7 @@ use App\Models\Factura;
 use App\Models\User;
 use App\Models\Caja;
 use App\Models\Gasto;
+use App\Models\Pedido;
 class CajaController extends Controller
 {
     
@@ -26,10 +27,13 @@ class CajaController extends Controller
         $totDiario = $totDiario + $montoIni;
         $estado= $caja->estado();
         $status= $caja->status($estado);
-        //$efect=     $cajai->totalDiaEfect();
+        $pedis= Pedido::all();
+        //$cateCelu= Categoria::where('nombre', 'like', 'Celulares')->get();
+        
+        
 
         return view ('caja.index', compact('todas', 'users', 'montoIni', 'totDiario', 
-                    'status', 'estado', 'gastos', 'cont' ));
+                    'status', 'estado', 'gastos', 'cont', 'pedis' ));
     }
 
     public function store(Request $request){
