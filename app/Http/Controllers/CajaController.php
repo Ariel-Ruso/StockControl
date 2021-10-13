@@ -29,8 +29,6 @@ class CajaController extends Controller
         $estado= $caja->estado();
         $status= $caja->status($estado);
         
-        //$efect=     $cajai->totalDiaEfect();
-
         return view ('caja.index', compact('todas', 'users', 'montoIni', 'totDiario', 
                     'status', 'estado', 'gastos', 'cont', 'pedis' ));
     }

@@ -93,7 +93,7 @@
 	<div class="container mx-auto" >
 		<div class="col-md-12">
 			<div class="row justify-content-center">
-					{{-- 
+			{{-- 		
 		@if( $fact->numfact > 0 )
 			<a 	href= " {{ route ('generarFacturaA', $fact->id) }}" 
 				class="btn btn-outline-primary disabled mr-1" >
@@ -135,6 +135,7 @@
 		class="btn btn-info mr-1 shadow" >
 			Nota Crédito
 	</a>
+	 
 	 --}}
 	<a href=" {{ route ('imprimirRemit', $fact->id) }}" 
 		class="btn btn-warning shadow" >
