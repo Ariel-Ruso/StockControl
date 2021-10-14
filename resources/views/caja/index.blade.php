@@ -233,12 +233,12 @@
                                     </th> 
                                     <th>
                                         {{-- revisar ciclos  --}}
-                                        @foreach ( $pedis as $pedi )
+                                       {{--  @foreach ( $pedis as $pedi )
                                             
-                                           {{--  @if($pedi->id == $item->id){
+                                             @if($pedi->id == $item->id){
                                                 "Enviado"
                                             }@else{
-                                                 --}}
+                                                 
                                             @if($pedi->id == $item->id)
                                                         {{'Exitse'}}
                                             @else
@@ -246,6 +246,31 @@
                                                     class="btn btn-success shadow" >
                                                         Generar
                                                 </a>
+                                            
+                                            <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                class="btn btn-success shadow" >
+                                                    Enviar
+                                            </a>
+
+                                        @endisset  --}}
+                                        
+                                        
+                                          @foreach ($pedis as $item2)
+
+                                            @if ($item2->id == $item->id)
+
+                                                @if ($item2->estado == 1 )
+                                                    
+                                                    {{ "ya enviado" }}
+                                                
+                                                @else
+
+                                                    <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                        class="btn btn-success shadow" >
+                                                            Enviar
+                                                    </a>
+
+                                                @endif
                                             @endif
                                         @endforeach
                                            
