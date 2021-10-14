@@ -135,13 +135,15 @@
                     </div>
                 </div>
                  <!-- menu carrito -->
+
                 <?php
                    $caja= New App\Models\Caja();
                    
                    $res= $caja->estado();
                 ?>
-                {{-- @if($esta == "Cerrada") --}}
-                @if($res == 0)
+                
+                {{-- @if($esta == "Cerrada")  --}}
+              {{--   @if($res == 0)
 
                     <li class="nav-item active">
                         <a  href=" {{ route('verCarrito') }} " 
@@ -170,10 +172,11 @@
                     </li> 
 
                 @endif
-                
+                  --}}
+                  
                 <!-- importar --> 
             
-                <li>
+                
                 {{-- <div class="dropdown">   
                     <a  href=""
                         class="btn btn-outline-primary"

@@ -23,8 +23,8 @@ class CarritoController extends Controller
           if(isset($carrito[$request->id])) {
             $res= ($request->inpeso) * $carrito[$request->id]['Precio'];
             //dd($res);
-            $carrito[$request->id]['Subtotal']= $res;
-
+            $carrito[$request->id]['SubTotal']= $res;
+            $carrito[$request->id]['Cantidad']= (float)$request->inpeso;
             session()->put ('carrito', $carrito);
             
           }

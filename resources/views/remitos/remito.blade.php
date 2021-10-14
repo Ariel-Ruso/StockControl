@@ -185,6 +185,10 @@
     </thead>
     <tbody >
       <tr>
+        @php
+        $subtotal=0;  
+        @endphp
+        
         @foreach($items as $item)
           <td style="text-align:center">
               {{ $item->cantidad }}
@@ -212,8 +216,12 @@
                         $ {{ $item->precioUnit *  $item->cantidad }}
                       @endif
           </td>
-      <tr>
-			</tr>
+          @php
+
+            $subtotal= $subtotal + ($item->precioUnit *  $item->cantidad);
+          @endphp
+          
+        </tr>
         @endforeach               
         <tr>
 				  <td></td>
@@ -245,7 +253,6 @@
 				  <td></td>
           <td></td>
 			</tr>
-      
       <tr>
 				<td></td>
 				<td></td>
@@ -268,8 +275,9 @@
           </strong>
         </td>
         <td style="text-align:center" class="gray"> 
-            
-            {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+            {{-- {{ $subtotal}} --}}
+            {{-- {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+            {{ $total - $subtotal }}
         </td>
       </tr>
        

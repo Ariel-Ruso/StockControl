@@ -35,6 +35,7 @@
                     <div class="card-body ">
 
                     @if(session('carrito'))
+                    {{-- @isset(session('carrito')) --}}
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead class= "text-center bg-orange-100">
                                 <tr>
@@ -85,16 +86,16 @@
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
                                 </th>
-                                <th  class="font-weight-normal text-center col-md-3" >
+                                <th  class="font-weight-normal text-center col-md-4" >
                                     $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
                              {{--    <th  class="font-weight-normal text-center" > 
                                     {{ $detalle['Cantidad'] }}
                                     / {{ $detalle['Disponible'] }}
                                 </th> --}}
-                              {{--   <th  class="font-weight-normal text-center col-md-3" >
+                                <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
-                                </th> --}}
+                                </th> 
                                {{--  <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
                                 </th>   --}}
@@ -102,9 +103,7 @@
                                 {{--<th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
-                                <th>
-
-                                </th>
+                                {{-- 
                                  <th class="font-weight-normal text-center col-md-2">
                                     <a  href="{{ url ('agregar/' .$id)  }}"
                                         class= "btn btn-primary">
@@ -117,6 +116,7 @@
                                    
 
                                 </th>
+                                 --}}
                             </tr>
                             <tr>
                                 <th class="text-center">
@@ -129,8 +129,8 @@
                                             class="border border-primary col-md-8" 
                                             name="inpeso" 
                                             id="inpeso" 
-                                            onchange="peso();"
-                                            {{-- onclick="peso();" --}}
+                                            {{-- onchange="peso();" --}}
+                                            onclick="peso();"
                                             />
                                 </th>
                                 <th>
@@ -175,13 +175,14 @@
                         
                     @else
 
-                    <div class="text-center text-3xl font-extrabold leading-none tracking-tight">
-                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                            Sin productos
-                        </span>
-                    </div>
+                        <div class="text-center text-3xl font-extrabold leading-none tracking-tight">
+                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
+                                Sin productos
+                            </span>
+                        </div>
                     
                     @endif        
+                    {{-- @endisset --}}
                     <div name="opciones compra " 
                          class=" mt-5 text-left row justify-content-center ">
                         <a  href=" {{ route('articulos.index') }}" 
@@ -294,31 +295,36 @@
                             @endif 
 
                             @if (session('carrito'))
-                                <a  href=" {{ route('detallePresupuesto') }}" 
+                                 <a  href=" {{ route('detallePresupuesto') }}" 
                                     class="btn btn-info mx-2 mt-1 shadow" >
                                         Presupuesto
-                                </a>
+                                </a> 
                             @else
-                                <a  href=" {{ route('detallePresupuesto') }}" 
+                                 <a  href=" {{ route('detallePresupuesto') }}" 
                                     class="btn btn-info mx-2 mt-1 disabled" >
-                                    Presupuesto
-                                </a>
-                            @endif    
+                                        Presupuesto
+                                </a> 
+                            @endif   
+                            
                         </div>
                         
-                     <!-- 
+                     {{-- 
                     <div name="testing">
                         <br>
-                        {{-- <a  href="{{ url('verSession') }}"  --}}
+                        
+                         <a  href="{{ url('verSession') }}" 
                             class= "btn btn-secondary">
                                 Ver Session             
                         </a>
-                        {{-- <a  href="{{ url('borrarCarr') }}"  --}}
+
+                         <a  href="{{ url('borrarCarr') }}"  
                             class= "btn btn-danger">
                                 Vaciar Carrito
                         </a>
                           
-                    </div>--> 
+                    </div>
+                    --}}
+                
                     
                  
                     </div>
@@ -327,57 +333,28 @@
         </div>
         
     </div>
-    <script>
 
-        function peso(){
-            var precio= '<?php echo $detalle['Precio']; ?>'
-                var peso= document.getElementById('inpeso');
-                var res= (document.getElementById('pxkg'));
-            
-            //eventos
-            peso.onclick= function(e){
-                //alert(parseFloat(peso.value));
-                    //res.textContent= number (parseFloat(peso) * parseFloat(precio));
-                res.textContent=  parseFloat(peso.value) * precio;
-            }
-            
-        }
+    <script >
+        function peso() {
         
+            const precio = '<?php echo $detalle['Precio'] ?>';
+            const peso = document.getElementById('inpeso');
+            const res = document.getElementById('pxkg');
 
-        function checkInput(precioCompra) {
+            //eventos
+            peso.onclick = function() {
+                //alert(parseFloat(peso.value));
+                //res.textContent= number (parseFloat(peso) * parseFloat(precio));
+                res.textContent = parseFloat( peso.value * precio).toFixed(2);
+                //alert ( Session()->get());
+                //Session::put( 'Art_id', 'peso' );
+                //$value = $request->session()->get('key');
 
-            var Precio = document.calc.precioCompra.value;
-            var pre = document.calc.precioVenta.value;
-            var gano = pre- Precio;
-            var gano1 = Number (gano / Precio);
-            var ganof = Number (gano1 * 100);
-
-            document.calc.ganancia.value = ganof;
-
-            var finaltarjeta = Number (pre * 0.17 ) + Number (pre);
-
-            document.calc.pVentaTarj.value = Math.round(finaltarjeta);
-            document.calc.pVentaTarj.value = redondeo2 (document.calc.pVentaTarj.value);
-
-        }
-
-      /*   function Descuento2($total) {
-
-            var tot = '<?php echo $total; ?>'
-            document.detail.descuento.value = tot;
-        } */
-       
-        function Descuento($total) {
-
-            var tot= '<?php echo $total; ?>'
-            var desc = document.detail.descuento.value;
-            var porc= Number (desc * tot) /100; 
-            alert(porc);
-            //var final = tot - desc;
-            //document.detail.tot2.value = final;
-            document.detail.descP.value = porc.value;
+            }
 
         }
-        </script>
+    </script>
+
+        
     
 @endsection
