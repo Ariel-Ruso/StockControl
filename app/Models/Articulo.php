@@ -98,7 +98,9 @@ class Articulo extends Model
     public function vender_articulo($cant, $id){
     
         $art= Articulo::FindOrFail($id);
+        //dd($art);
         $art->cantidad -= $cant;
+        
         $cates= Categoria::all();
         //si es celular
         if( $cates[ ($art->categorias_id)-1 ]->nombre == "Celulares" ){
@@ -110,9 +112,10 @@ class Articulo extends Model
             $imeiD->delete();
 
             $art->imei= null;
-            $art->save();
+            //$art->save();
         
         }
+        $art->save();
         
         return back()->with('mensaje', 'Artículo vendido correctamente');    
     }

@@ -95,6 +95,7 @@ class ArticuloController extends Controller
     
     public function destroy($id)
     {
+        dd($id);
         $art= Articulo::FindOrFail($id);
         $art->delete();
 

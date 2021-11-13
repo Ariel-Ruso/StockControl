@@ -235,7 +235,7 @@
     
     document.calc.ganancia.value = ganof;
 
-    var finaltarjeta = Number (pre * 0.17 ) + Number (pre);
+    var finaltarjeta = Number (pre * 0.18 ) + Number (pre);
 
     document.calc.pVentaTarj.value = Math.round(finaltarjeta);
     document.calc.pVentaTarj.value = redondeo2 (document.calc.pVentaTarj.value);
