@@ -45,9 +45,9 @@
                                     <th scope="col">
                                         Precio 
                                     </th>
-                                   {{--  <th scope="col">
-                                        Cant.
-                                    </th> --}}
+                                     <th scope="col">
+                                        Cantidad
+                                    </th> 
                                     {{-- <th>
                                         Imagen
                                     </th> --}}
@@ -89,10 +89,10 @@
                                 <th  class="font-weight-normal text-center col-md-4" >
                                     $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
-                             {{--    <th  class="font-weight-normal text-center" > 
+                                 <th  class="font-weight-normal text-center" > 
                                     {{ $detalle['Cantidad'] }}
-                                    / {{ $detalle['Disponible'] }}
-                                </th> --}}
+                                    {{-- / {{ $detalle['Disponible'] }} --}}
+                                </th> 
                                 <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
                                 </th> 
@@ -103,7 +103,7 @@
                                 {{--<th>
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
-                                {{-- 
+                                
                                  <th class="font-weight-normal text-center col-md-2">
                                     <a  href="{{ url ('agregar/' .$id)  }}"
                                         class= "btn btn-primary">
@@ -116,7 +116,7 @@
                                    
 
                                 </th>
-                                 --}}
+                                 
                             </tr>
                             <tr>
                                 <th class="text-center">
@@ -308,9 +308,10 @@
                             
                         </div>
                         
-                     {{-- 
+                     
                     <div name="testing">
                         <br>
+                        {{-- 
                         
                          <a  href="{{ url('verSession') }}" 
                             class= "btn btn-secondary">
@@ -321,9 +322,9 @@
                             class= "btn btn-danger">
                                 Vaciar Carrito
                         </a>
-                          
+--}}                          
                     </div>
-                    --}}
+                    
                 
                     
                  
