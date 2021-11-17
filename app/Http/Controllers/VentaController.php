@@ -94,6 +94,7 @@ class VentaController extends Controller
         
         $arts= Articulo::all();
         $cantA= count($arts);
+        $ultArt= (new Articulo)->getLastArt();
         $facts= Factura::all();
         $cantF= count($facts);
         $fact= new Factura();
@@ -103,10 +104,10 @@ class VentaController extends Controller
         $subtot=0;
         $iva=0;
         //$precioNoBanc= $request->noBancaria5;
-        //art nuevos quedan fuera d carrito
-        //dd($cantA);
+        //dd($ultArt->id);
 
-        for($x=1; $x <= $cantA; $x++){
+        //for($x=1; $x <= $cantA; $x++){    
+        for($x=1; $x <= $ultArt->id; $x++){
 
             $carrito= session()->get('carrito');            
             $art= new Articulo;

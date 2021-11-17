@@ -92,7 +92,7 @@
                             <div class="container row justify-content-center ">        
                               <input
                                   type="number"
-                                  readonly
+                                  {{-- readonly --}}
                                   name="cantidad"
                                   value= "{{ $arts->cantidad }}"
                                   class="form-control mb-2 col-4 text-center"
