@@ -76,12 +76,16 @@ class ArticuloController extends Controller
     }  
 
     public function edit($id){
-        $cates= Categoria::all();        
+        //$cates= Categoria::all();      
+        
         $arts= Articulo::FindOrFail($id);
+        $cate=  Categoria::where("id", "=", $arts->categorias_id)
+        ->select ("nombre")
+        ->get();
         $proves= Proveedor::all();
         $imeis = Imei::whereIn('articulos_id', [$id]) ->get();
-        
-        return view ('articulos.edit', compact ('arts','cates', 'imeis', 'proves'));
+        //dd($cate[0]->nombre);
+        return view ('articulos.edit', compact ('arts','cate', 'imeis', 'proves'));
     }
 
     public function update (Request $request, $id){

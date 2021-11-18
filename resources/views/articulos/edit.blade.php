@@ -89,31 +89,42 @@
                             <label > 
                                 Cantidad:
                             </label>     
-                            <div class="container row justify-content-center ">        
+                            <div class="container row justify-content-center ">    
+                              {{-- si es celular no podes editar cant     --}}
+                              @if ($cate[0]->nombre == "Celulares")
                               <input
                                   type="number"
-                                  {{-- readonly --}}
+                                  readonly 
                                   name="cantidad"
                                   value= "{{ $arts->cantidad }}"
-                                  class="form-control mb-2 col-4 text-center"
-                              />
+                                  class="form-control mb-2 col-4 text-center"  
+                                />
+                               @else
+                                  <input
+                                    type="number"
+    
+                                    name="cantidad"
+                                    value= "{{ $arts->cantidad }}"
+                                    class="form-control mb-2 col-4 text-center"  
+                                />
+                              @endif
                             </div>
                             {{-- @if(isset($imeis)) --}}
                             @if(count($imeis)>0)
 							
-                            <label > 
-                              Imeis Disponibles:
-                            </label>
-                            <div class="container row justify-content-center ">
-                              @foreach ( $imeis as $imei) 
-                                                
-                                {{ $imei->detalle }}
-                                <br>
+                              <label > 
+                                Imeis Disponibles:
+                              </label>
+                              <div class="container row justify-content-center ">
+                                @foreach ( $imeis as $imei) 
+                                                  
+                                  {{ $imei->detalle }}
+                                  <br>
+                
+                                @endforeach 
+                              </div>
               
-                              @endforeach 
-                            </div>
-              
-                          @endif
+                            @endif
                         <label > 
                           Precio Venta Efectivo: 
                         </label>
