@@ -97,6 +97,19 @@
             <div class="container " name="etiquetas">
               <div class="row justify-content-center ">
                 <div class="col-md-8 ">
+
+                  <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
+                    <br>
+                    <option selected>
+                      Categorias...
+                    </option>
+                    @foreach($cates as $item)
+                    <option value="{{ $item->id }}">
+                      {{ $item->nombre }}
+                    </option>
+                    @endforeach
+                  </select>
+                  <br>
                 <label>
                     N° Id
                   </label>
@@ -166,17 +179,7 @@
                         <input type="text" name="codbar" placeholder="Codigo de Barras" class="form-control mb-2" />
                         <button type="button" onclick="randomInt();" class="btn btn-secondary">Generar
                         </button><br><br>
-                        <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
-                          <br>
-                          <option selected>
-                            Categorias...
-                          </option>
-                          @foreach($cates as $item)
-                          <option value="{{ $item->id }}">
-                            {{ $item->nombre }}
-                          </option>
-                          @endforeach
-                        </select>
+                       
                         <br>
                       </div>
                     </div>
