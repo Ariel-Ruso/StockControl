@@ -46,21 +46,21 @@
 						</strong>
 						 {{ $art->cantidad }} <br>
 
-						 @if(isset($imeis))
+							@if(count($imeis)>0)
 							
-							<strong>
-								Imeis Disponibles:
-							</strong>
-							<div class="container row justify-content-center ">
-								@foreach ( $imeis as $imei) 
-																	
-									{{ $imei->detalle }}
-									<br>
-
-								@endforeach 
-							</div>
-
-						@endif
+                              <label > 
+                                Imeis Disponibles:
+                              </label>
+                              <div class="container row justify-content-center ">
+                                @foreach ( $imeis as $imei) 
+                                                  
+                                  {{ $imei->detalle }}
+                                  <br>
+                
+                                @endforeach 
+                              </div>
+              
+                            @endif
 
 						 <strong>
 							Precio Compra:

@@ -22,7 +22,7 @@ class ArticuloController extends Controller
         $cates= Categoria::all();
         $proves= Proveedor::all();
         $imeis= Imei::all();
-
+        //dd($arts);
     	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
     }
 
@@ -62,7 +62,7 @@ class ArticuloController extends Controller
     }
 
     public function show($id){
-
+        //dd($id);
         $art= Articulo::FindOrFail($id);
         $cates= Categoria::all();        
         $proves= Proveedor::all();
@@ -99,9 +99,10 @@ class ArticuloController extends Controller
     
     public function destroy($id)
     {
-        dd($id);
+        //dd($id);
         $art= Articulo::FindOrFail($id);
-        $art->delete();
+        //$art->delete();
+        $art->destroy($id);
 
         return back()        
             ->with('mensaje', 'Artículo Eliminado');    
