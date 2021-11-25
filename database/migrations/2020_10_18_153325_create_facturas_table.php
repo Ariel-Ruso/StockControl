@@ -33,6 +33,10 @@ class CreateFacturasTable extends Migration
             $table->float('total');
             $table->float('totalNoBanc')
                     ->nullable();
+            $table->float('totalEft')
+                    ->nullable();
+            $table->float('totalCuot')
+                    ->nullable();
             $table->integer('tipoPago');
             $table->string('tipoCte')
                     ->nullable();

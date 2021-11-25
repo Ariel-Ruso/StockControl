@@ -260,6 +260,82 @@
 			</tr>
     </tbody>
     <tfoot>
+
+      <tr>
+        <td colspan="2"></td>
+        <td style="text-align:right">
+          <strong>
+              Efectivo:
+          </strong>
+        </td>
+        
+          <td style="text-align:center" class="gray"> 
+            @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
+                || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) )
+              $ {{ $eft + $desc}}
+            @else
+              $ 0
+            @endif
+          </td>
+        
+      </tr>
+      
+      <tr>
+        <td colspan="2"></td>
+        <td style="text-align:right">
+          <strong>
+              T Bancaria:
+          </strong>
+        </td>
+        
+          <td style="text-align:center" class="gray"> 
+            @if ( ($tipoPago == 31) || ($tipoPago == 51) )
+            1 cuota:
+              $ {{ $tBanc - $desc}}
+            @elseif ($tipoPago==32)  
+              3 cuotas:
+              $ {{ number_format( ($tBanc- $desc)/3, 2) }}
+            @elseif($tipoPago == 33)  
+              6 cuotas:
+              $ {{ number_format( ($tBanc- $desc)/6, 2) }}
+            @elseif($tipoPago == 34)  
+              12 cuotas:
+              $ {{ number_format( ($tBanc- $desc)/12, 2) }}
+            @elseif( $tipoPago == 52)
+              3 cuotas:
+              $ {{ number_format( ($tBanc- $desc), 2) }}
+            @elseif( $tipoPago == 53)
+              6 cuotas:
+              $ {{ number_format( ($tBanc- $desc), 2) }}
+            @elseif( $tipoPago == 54)
+              12 cuotas:
+              $ {{ number_format( ($tBanc- $desc), 2) }}
+            @else
+              $ 0
+            @endif
+          </td>
+
+      </tr>
+      
+      <tr>
+        <td colspan="2"></td>
+        <td style="text-align:right">
+          <strong>
+              T No Bancaria:
+          </strong>
+        </td>
+        
+          <td style="text-align:center" class="gray"> 
+            @if ( ($tipoPago == 4) || ($tipoPago == 5) || ($tipoPago == 51) || ($tipoPago == 52) 
+              || ($tipoPago == 53) || ($tipoPago == 54))
+              $ {{  $tnoBanc }}
+            @else
+              $ 0
+            @endif
+            </td>
+        
+      </tr>
+
       <tr>
         <td colspan="2"></td>
         <td style="text-align:right">
@@ -268,12 +344,10 @@
           </strong>
         </td>
         <td style="text-align:center" class="gray"> 
-            
-            {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+         - $ {{ $desc  }}
         </td>
       </tr>
-       
-        <tr>
+      <tr>
             <td colspan="2"></td>
             <td style="text-align:right">
               <strong>
@@ -283,7 +357,7 @@
             <td style="text-align:center" class="gray"> 
                 $ {{ $total }}
             </td>
-        </tr>
+      </tr>
     </tfoot>  
 </table>
 

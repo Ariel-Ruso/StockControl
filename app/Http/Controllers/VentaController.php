@@ -103,6 +103,7 @@ class VentaController extends Controller
         $tot=0;
         $subtot=0;
         $iva=0;
+        $tipoPago= 0;              
         //$precioNoBanc= $request->noBancaria5;
         //dd($ultArt->id);
 
@@ -114,92 +115,175 @@ class VentaController extends Controller
             $csv= new Filecsv;
             $csvIva= new FilecsvIva;
             $item= new Item;
-                       
+                     
             //si existe carrito con ese indice
             if (isset($carrito[$x])) 
                 {
                     $contItems++;
-                    if($request->tipoPago==4){
 
-                        $item->cargarItems( $carrito[$x]["Nombre"], 
-                                            $carrito[$x]["Codigo"],
-                                            $carrito[$x]["Cantidad"], 
-                                            $carrito[$x]["PrecioT"],
-                                            //$carrito[$x]["Art_id"],
-                                            $carrito[$x]["Imei"],
-                                            $cantF);
-                                            
-                                            //$subtot= $subtot + $carrito[$x]["SubTotalT"];
-                                            $subtot= $subtot + 
-                                                     $carrito[$x]["SubTotalT"] -
-                                                     $carrito[$x]["Descuento"];
-
-                    }elseif($request->tipoPago==5){
-
-                        $item->cargarItems( $carrito[$x]["Nombre"], 
-                                            $carrito[$x]["Codigo"],
-                                            $carrito[$x]["Cantidad"], 
-                                            //$carrito[$x]["Art_id"],
-                                            $carrito[$x]["Imei"],
-                                            $request->noBancaria5,
-                                            $cantF);
-                                            
-                                            $subtot= $subtot + $request->noBancaria5;
-                                            
-                    }elseif($request->tipoPago==6){
-                            if($request->fpagoa==1){
-                                            $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                                $carrito[$x]["Codigo"],
-                                                                $carrito[$x]["Cantidad"], 
-                                                                $request->tarje1, 
-                                                                $carrito[$x]["Imei"],
-                                                                $cantF);
-                                            $subtot= $subtot + $request->tarje1; 
-
-                            } elseif($request->fpagoa==2){
-                                $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                    $carrito[$x]["Codigo"],
-                                                    $carrito[$x]["Cantidad"], 
-                                                    $request->tarje1, 
-                                                    $carrito[$x]["Imei"],
-                                                    $cantF);
-                                $subtot= $subtot + $request->tarje1; 
-                                
-                            }else{
-                                $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                    $carrito[$x]["Codigo"],
-                                                    $carrito[$x]["Cantidad"], 
-                                                    $request->tarje1, 
-                                                    $carrito[$x]["Imei"],
-                                                    $cantF);
-                                    $subtot= $subtot + $request->tarje1; 
-
-                            }
-
-
-                    }else{
-                        //dd($request);
+                    if($request->tipoPago==1){
+                        //si es eft
                         $item->cargarItems( $carrito[$x]["Nombre"], 
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
                                             $carrito[$x]["Precio"],
-                                            //$carrito[$x]["Art_id"], 
                                             $carrito[$x]["Imei"],
-                                            $cantF);
+                                            $cantF,
+                                            $carrito[$x]["Descuento"]);
                                             
-                                            //$subtot= $subtot + $carrito[$x]["SubTotal"];
-                                            $subtot= $subtot + 
-                                            $carrito[$x]["SubTotal"] -
-                                            $carrito[$x]["Descuento"];
+                        $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
+                        $tipoPago= 1;
+
+                    }elseif($request->tipoPago==2){
+                        //si es debi
+                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                            $carrito[$x]["Codigo"],
+                                            $carrito[$x]["Cantidad"], 
+                                            $carrito[$x]["Precio"],
+                                            $carrito[$x]["Imei"],
+                                            $cantF,
+                                            $carrito[$x]["Descuento"]);
+                                            
+                        $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
+                        $tipoPago= 2;
+
+                                            
+                    }elseif($request->tipoPago==3){
+                        //tarj bancaria
+                            if($request->fpago==1){
+                                //1 cuota
+                                            $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                                $carrito[$x]["Codigo"],
+                                                                $carrito[$x]["Cantidad"], 
+                                                                $carrito[$x]["Precio"],
+                                                                $carrito[$x]["Imei"],
+                                                                $cantF,
+                                                                $carrito[$x]["Descuento"]);
+                                            $subtot= $subtot + $carrito[$x]["Precio"]; 
+                                            $tipoPago= 31;
+                                            
+                            }elseif($request->fpago==2){
+                                //3 cuotas
+                                            $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                                $carrito[$x]["Codigo"],
+                                                                $carrito[$x]["Cantidad"], 
+                                                                $carrito[$x]["PrecioT"],
+                                                                $carrito[$x]["Imei"],
+                                                                $cantF,
+                                                                $carrito[$x]["Descuento"]);
+                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
+                                            $tipoPago= 32;
+                                
+                            }elseif($request->fpago==3){
+                                //6 cuotas
+                                            $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                                $carrito[$x]["Codigo"],
+                                                                $carrito[$x]["Cantidad"], 
+                                                                $carrito[$x]["PrecioT"],
+                                                                $carrito[$x]["Imei"],
+                                                                $cantF,
+                                                                $carrito[$x]["Descuento"]);
+                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
+                                            $tipoPago= 33;
+
+                            }elseif($request->fpago==4){
+                                //12 cuotas
+                                            $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                                $carrito[$x]["Codigo"],
+                                                                $carrito[$x]["Cantidad"], 
+                                                                $carrito[$x]["PrecioT"],
+                                                                $carrito[$x]["Imei"],
+                                                                $cantF,
+                                                                $carrito[$x]["Descuento"]);
+                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
+                                            $tipoPago= 34;
+
+                            }
+
+                    }elseif($request->tipoPago==4){
+                            //si es noBancaria
+                                $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                    $carrito[$x]["Codigo"],
+                                                    $carrito[$x]["Cantidad"], 
+                                                    //$carrito[$x]["Art_id"],
+                                                    $request->noBanc4,
+                                                    $carrito[$x]["Imei"],
+                                                    $cantF,
+                                                    $carrito[$x]["Descuento"]);
+                                                    //$subtot= $subtot + $request->noBanc4;
+                                $subtot= $subtot +  $request->noBanc4 - $carrito[$x]["Descuento"];
+                                $tipoPago= 4;
+                   
+                    }elseif($request->tipoPago==5){
+                        //si es compuesto
+                        
+                        if($request->cpago==1){
+                            //1 cuota
+                                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                            $carrito[$x]["Codigo"],
+                                                            $carrito[$x]["Cantidad"], 
+                                                            //$carrito[$x]["Precio"],
+                                                            $request->tarje1 + $request->noBanc + $request->eft,
+                                                            $carrito[$x]["Imei"],
+                                                            $cantF,
+                                                            $carrito[$x]["Descuento"]);
+                                        $subtot= $subtot + $request->tarje1 + $request->noBanc +$request->eft; 
+                                        $tipoPago= 51;
+                                        //dd($tipoPago);
+                        }
+                        
+                        elseif($request->cpago==2){
+                            //3 cuota
+                                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                            $carrito[$x]["Codigo"],
+                                                            $carrito[$x]["Cantidad"], 
+                                                            //$carrito[$x]["Precio"],
+                                                            ($request->tarje2 * 3) + $request->noBanc + $request->eft,
+                                                            $carrito[$x]["Imei"],
+                                                            $cantF,
+                                                            $carrito[$x]["Descuento"]);
+                                        $subtot= $subtot + $request->tarje1 + $request->noBanc +$request->eft; 
+                                        $tipoPago= 52;
+                        }
+                        elseif($request->cpago==3){
+                            //6 cuota
+                                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                            $carrito[$x]["Codigo"],
+                                                            $carrito[$x]["Cantidad"], 
+                                                            //$carrito[$x]["Precio"],
+                                                            $request->tarje1 + $request->noBanc +$request->eft,
+                                                            $carrito[$x]["Imei"],
+                                                            $cantF,
+                                                            $carrito[$x]["Descuento"]);
+                                        $subtot= $subtot + $request->tarje1 + $request->noBanc +$request->eft; 
+                                        $tipoPago= 53;
+                        }
+                        elseif($request->cpago==4){
+                            //12 cuota
+                                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                                            $carrito[$x]["Codigo"],
+                                                            $carrito[$x]["Cantidad"], 
+                                                            //$carrito[$x]["Precio"],
+                                                            $request->tarje1 + $request->noBanc +$request->eft,
+                                                            $carrito[$x]["Imei"],
+                                                            $cantF,
+                                                            $carrito[$x]["Descuento"]);
+                                        $subtot= $subtot + $request->tarje1 + $request->noBanc +$request->eft; 
+                                        $tipoPago= 54;
+                        }
+                        else{
+                        $item->cargarItems( $carrito[$x]["Nombre"], 
+                                            $carrito[$x]["Codigo"],
+                                            $carrito[$x]["Cantidad"], 
+                                            $carrito[$x]["Precio"],
+                                            $carrito[$x]["Imei"],
+                                            $cantF,
+                                            $carrito[$x]["Descuento"]);
+                                            
+                        $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
+                        $tipoPago= 5;
+                        }
                     }
-                    
-                    //subt= cant * precioUnit;
-                    
-                    //$subtot= $carrito[$x]["SubTotal"];
-                    
-                    /* $tot= $tot + $subtot;
-                    $iva= ($subtot * 0.173554);
-                    $subtot= $tot - $iva; */
                     
                     
                     //vendo art y descuento stock
@@ -213,8 +297,8 @@ class VentaController extends Controller
         
         // exporto any2cabe, any2iva, llamo any2fe, y subo resp cae           
         //revisar tot subt e iva si es con tarjeta + 18
-        //dd($subtot, $tot, $iva);
-        $fact->generarFactura($request, $contItems, $subtot, $tot, $iva);
+        //dd($tipoPago);
+        $fact->generarFactura($request, $contItems, $subtot, $tot, $iva, $tipoPago);
     
         
         //escribo any2cabe y any2iva 

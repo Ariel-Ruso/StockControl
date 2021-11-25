@@ -116,7 +116,7 @@
                         id= "dni"
                         class="form-control mr-sm-2 col-2" 
                         type="search" 
-                        placeholder="Dni - Cuit" 
+                        placeholder="Dni - cuit " 
                         aria-label="Search"
                         >
               

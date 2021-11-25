@@ -77,7 +77,7 @@
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
                                 </th>
-                                <th  class="font-weight-normal text-center col-md-2" >
+                                <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Precio'],2) }}
                                 </th>
                                 <th  class="font-weight-normal text-center" > 
@@ -87,7 +87,7 @@
                                 <th  class="font-weight-normal text-center col-md-2" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
                                 </th>
-                                <th  class="font-weight-normal text-center col-md-1" >
+                                <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
                                 </th>  
                                 

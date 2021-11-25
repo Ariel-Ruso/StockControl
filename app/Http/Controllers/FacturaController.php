@@ -184,9 +184,39 @@ class FacturaController extends Controller
     {
         //traigo unica fact con id
         $fact= Factura::FindorFail($id);
-        //traigo items con mismo id
-        $items = Item::whereIn('idFactura', [$id]) ->get();
+        $eft=0;
+        $tBanc=0;
+        $tnoBanc=0;
+        if( $fact->tipoPago == 1){
+            $eft= $fact->total;
 
+        }elseif($fact->tipoPago == 2){
+            $eft= $fact->total;
+
+        }elseif( ($fact->tipoPago == 31) || ($fact->tipoPago == 32) ||
+            ($fact->tipoPago == 33) || ($fact->tipoPago == 34) ){
+            $tBanc= $fact->total;
+
+        }elseif($fact->tipoPago == 4){
+            $tnoBanc= $fact->total;
+
+        }elseif( ($fact->tipoPago == 5) || ($fact->tipoPago == 51) 
+                || ($fact->tipoPago == 52) || ($fact->tipoPago == 53) 
+                || ($fact->tipoPago == 54) ){
+            $eft= $fact->totalEft;
+            $tnoBanc= $fact->totalNoBanc;
+            $tBanc= $fact->totalCuot;
+        }
+
+        //traigo items con mismo id
+        $desc=0;
+        $items = Item::whereIn('idFactura', [$id]) ->get();
+        //dd($items[0]);
+        for ($i=0; $i<count($items); $i++) {
+            $desc= $desc + $items[$i]->descuento;
+            
+        }
+        //dd($desc);
         //reviso user y traigo datos d propiet
         $u_id= auth()->id();  
         $user= User::FindorFail($u_id);
@@ -205,8 +235,10 @@ class FacturaController extends Controller
         $subtotal= $fact->subtotal;
         $iva= $fact->iva;
         
+        
         return view ('remitos.remito', compact('fecha', 'nremit', 'nombreCli', 'iva', 'subtotal',
-                    'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro'));
+                    'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro', 'desc',
+                    'eft','tBanc', 'tnoBanc'));
     }
 
     public function generarFacturaB($id){

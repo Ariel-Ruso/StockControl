@@ -58,16 +58,17 @@ class Factura extends Model
                 }
         }
 
-    public function generarFactura(Request $request, $contItems, $subtot, $tot, $iva){
+    public function generarFactura(Request $request, $contItems, $subtot, $tot, $iva, $tipoPago){
+        
 
         $fact= new Factura();
-
+        $cpago= $request->cpago;
         $fact->cantidadItems= $contItems;
         $fact->subtotal= $subtot;
         $fact->iva= $iva;
         $fact->users_id= auth()->id();  
         $fact->total= $tot;  
-        $fact->tipoPago= $request->tipoPago;
+        $fact->tipoPago= $tipoPago;
         $fact->numfact= 0;
         $cli_id= session()->get('cliente_id'); 
         $clie= Cliente::FindorFail($cli_id);  
@@ -76,35 +77,65 @@ class Factura extends Model
         $fact->apellidoyNombre= $clie->nombre; 
         $fact->domicilioCliente=  $clie->direccion;
         $fact->cuitcliente= $clie->cuit;
-
-        /* if ($request->tipoPago==4){
-            $total= $tot + ($tot * 0.18);  
+        //dd($tipoPago);
+        if ($tipoPago==4){
+            //pago no Bancaria
+            $fact->totalNoBanc= $request->noBanc4;
+            $total= $request->noBanc4;
             $fact->total= $total;
             
             $subtotal=  $total / 1.21;
             $fact->subtotal= $subtotal;
+            $fact->iva= $total - $subtotal;    
 
-            //$iva= $iva + ($iva * 0.18);
-            $fact->iva= $total - $subtotal;
-            /* $tot= $subtot;
-            $iva= ($subtot * 0.173554);
-            $subtot= $tot - $iva; 
-            //    $fact->totalNoBanc= $request->noBancaria4;  
+        }elseif ($tipoPago==5) {
+            //pago compuesto
 
-            //$fact->save();  
-            } 
-            */
-        if ($request->tipoPago==5){
-                $fact->totalNoBanc= $request->noBancaria5;
-                $total= $request->noBancaria5;
+                $fact->totalNoBanc= $request->noBanc;
+                $fact->totalEft= $request->eft;
+                $total= $request->noBanc + $request->eft;
                 $fact->total= $total;
-                
-                $subtotal=  $total / 1.21;
-                $fact->subtotal= $subtotal;
 
-                $fact->iva= $total - $subtotal;    
-            } 
+        }elseif ($tipoPago==51){
+
+                $total= $request->noBanc + $request->eft + $request->tarje1;
+                $fact->totalCuot=  $request->tarje1;
+                $fact->totalNoBanc= $request->noBanc;
+                $fact->totalEft= $request->eft;
+                $fact->total= $total;
+         
+        }elseif ($tipoPago==52){
+
+            $total= $request->noBanc + $request->eft + ($request->tarje2 * 3);
+            $fact->totalCuot=  $request->tarje2;
+            $fact->totalNoBanc= $request->noBanc;
+            $fact->totalEft= $request->eft;
+            $fact->total= $total;
+
+        }elseif ($tipoPago==53){
+
+            $total= $request->noBanc + $request->eft + ($request->tarje3 * 6);
+            $fact->totalCuot=  $request->tarje3;
+            $fact->totalNoBanc= $request->noBanc;
+            $fact->totalEft= $request->eft;
+            $fact->total= $total;
+     
+        }elseif ($tipoPago==54){
+
+            $total= $request->noBanc + $request->eft + ($request->tarje4 * 12);
+            $fact->totalCuot=  $request->tarje4;
+            $fact->totalNoBanc= $request->noBanc;
+            $fact->totalEft= $request->eft;
+            $fact->total= $total;
+        }
+
+            $subtotal=  $total / 1.21;
+            $fact->subtotal= $subtotal;
+            $fact->iva= $total - $subtotal;    
+        
         $fact->save();  
+           
+        
 
     }
 

@@ -221,6 +221,15 @@ class CarritoController extends Controller
         }
         return $iva;
     }
+
+    public function descuento(){
+        $carrito= session()->get('carrito');
+        $desc=0;
+        foreach ($carrito as $item){
+            $desc += $item["Descuento"];
+        }
+        return $desc;
+    }
     
     public function detallePedido(){
         
@@ -229,11 +238,12 @@ class CarritoController extends Controller
         $total= $this->subtotal();
         $totalTar= $this->subtotalT();
         $subtotal= (($this->subtotal())- $iva);
+        $desc= $this->descuento();
         $cli_id= session()->get('cliente_id'); 
         $clie= Cliente::FindorFail($cli_id);  
         
         return view('venta/detallePedido', compact('subtotal', 'carrito', 'total', 
-                    'clie', 'totalTar'));
+                    'clie', 'totalTar', 'desc'));
     }
 
     public function totalesCarrito(){
