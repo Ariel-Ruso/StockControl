@@ -209,7 +209,9 @@ class CarritoController extends Controller
 
     public function borrarCarr(){
         session()->forget('carrito');
-        return view ('venta/verCarrito');
+        session()->forget('cliente_id');
+        //return view ('venta/verCarrito');
+        return view ('dashboard')->with('mensaje', 'Carrito Eliminado');
     }
 
     public function subtotal(){

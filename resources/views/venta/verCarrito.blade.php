@@ -35,7 +35,7 @@
                     <div class="card-body ">
 
                     @if(session('carrito'))
-                    {{-- @isset(session('carrito')) --}}
+                    {{-- @isset(!session('carrito')) --}}
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead class= "text-center bg-orange-100">
                                 <tr>
@@ -48,19 +48,16 @@
                                      <th scope="col">
                                         Cantidad
                                     </th> 
-                                    {{-- <th>
-                                        Imagen
-                                    </th> --}}
-                                    
+                                    <th scope="col">
+                                        Peso (Kg)
+                                    </th>                                    
                                     <th scope="col">
                                         SubTotal
                                     </th>
                                     {{-- <th scope="col">
                                         Desc.
                                     </th> --}}
-                                    <th scope="col">
-                                        Unidad
-                                    </th>
+                                    
                                 </tr>
                             </thead>
                         @foreach (session('carrito') as $id => $detalle)
@@ -86,16 +83,61 @@
                                 <th  class="font-weight-normal text-center col-md-5" >
                                     {{ $detalle['Nombre'] }}
                                 </th>
+
                                 <th  class="font-weight-normal text-center col-md-4" >
                                     $ {{ number_format($detalle['Precio'],2) }}
+                                   
                                 </th>
+
                                  <th  class="font-weight-normal text-center" > 
-                                    {{ $detalle['Cantidad'] }}
-                                    {{-- / {{ $detalle['Disponible'] }} --}}
+
+                                    <div class="row-md-2">
+                                        {{ $detalle['Cantidad'] }}
+                                        {{-- / {{ $detalle['Disponible'] }} --}}
+                             
+                                    </div>
+                                    <div class="row-md-2">
+                                                                     
+                                        <a  href="{{ url ('agregar/' .$id)  }}"
+                                        class= "btn btn-primary m-1">
+                                            
+                                            <i class="fa fa-plus fa-sm">        
+                                               
+                                            </i>
+                                    </a>
+                                    <a  href="{{ url ('eliminarCarr/' .$id )  }}"
+                                        class= "btn btn-danger m-1">
+                                            
+                                        <i class="fa fa-minus fa-sm">        
+                                               
+                                        </i>
+                                    </a>
+                                    
+                                    </div>                                   
+                                  
                                 </th> 
-                                <th  class="font-weight-normal text-center col-md-3" >
+
+                                <th  class="font-weight-normal text-center col-md-4" >
+                                                                       
+                                    <input  type="float" 
+                                            class="border border-primary col-md-8" 
+                                            name="inpeso" 
+                                            id="inpeso" 
+                                            {{-- onchange="peso();" --}}
+                                            onclick="peso();"
+                                            />
+
+                                    <button class="btn btn-success btn-sm shadow mt-2" 
+                                            type="submit"        
+                                            >
+                                             <i class="fa fa-check">        
+                                               
+                                             </i>
+                                    </button>
+                                </th> 
+                                <th  class="font-weight-normal text-center col-md-5" >
                                     $ {{ number_format($detalle['SubTotal'],2) }}
-                                </th> 
+                                </th>
                                {{--  <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Descuento'],2) }}
                                 </th>   --}}
@@ -104,58 +146,48 @@
                                     <img src= {{ $detalle['Imagen'] }} width="70" height="70"/>
                                 </th> --}}
                                 
-                                 <th class="font-weight-normal text-center col-md-2">
-                                    <a  href="{{ url ('agregar/' .$id)  }}"
-                                        class= "btn btn-primary">
-                                            +
-                                    </a>
-                                    <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                        class= "btn btn-danger">
-                                            -
-                                    </a>
-                                   
-
-                                </th>
+                                
                                  
                             </tr>
-                            <tr>
-                                <th class="text-center">
+                            
+                               {{--  <th class="text-center">
                                     Peso (Kg)
-                                </th>
+                                </th> --}}
                                
-                                <th class="text-center">
+                               {{--  <th class="text-center">
                                     
                                     <input  type="float" 
                                             class="border border-primary col-md-8" 
                                             name="inpeso" 
                                             id="inpeso" 
-                                            {{-- onchange="peso();" --}}
+                                            
                                             onclick="peso();"
                                             />
-                                </th>
-                                <th>
-                                     <button class="btn btn-success btn-sm shadow " 
+                                </th> --}}
+                                
+                                    {{--  <button class="btn btn-success btn-sm shadow " 
                                              type="submit"
                                              
                                              >
                                               <i class="fa fa-check">        
                                                 
                                               </i>
-                                     </button>
+                                     </button> --}}
+
                                     {{--  <a  href="{{ route ('setDescuento/'  )  }}"
                                         type="submit"
                                         class= "btn btn-info">
                                             Peso
                                     </a> --}}
-                                </th>
-                                <th>
+                                
+                               {{--  <th>
                                     <label name="pxkg" id="pxkg" value= "$" >
 
                                     </label>
                                     
-                                </th>
+                                </th> --}}
                               
-                            </tr>
+                            
                            
                         </form>
                         @endforeach
@@ -188,6 +220,10 @@
                         <a  href=" {{ route('articulos.index') }}" 
                             class="btn btn-warning shadow" >
                                 Agregar Elementos
+                        </a>
+                        <a  href="{{ url('borrarCarr') }}"  
+                            class= "btn btn-danger ml-4">
+                                Vaciar
                         </a>
                     </div> 
 
@@ -227,9 +263,8 @@
 
                     
                     <hr noshade="noshade" />
-
-                    <div name="opciones cliente " 
-                         class=" mt-5 row justify-content-center ">
+                    {{-- @isset ($clie ) --}}
+                    <div name="opciones cliente" class=" mt-5 row justify-content-center ">
                          <div class="text-center text-2xl font-bold leading-none tracking-tight">
                             <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-500">
                                  Cliente :
@@ -247,6 +282,7 @@
                             @endif
                         </div>   
                     </div>
+                    
                         
                     </div> 
                     <div class="row justify-content-center px-5">
@@ -307,7 +343,7 @@
                             @endif   
                             
                         </div>
-                        
+                        {{-- @endisset --}}
                      
                     <div name="testing">
                         <br>
