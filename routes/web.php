@@ -195,6 +195,8 @@ Route::resource('articulos', ArticuloController::class);
     Route::put ('articulos/vender_articulo/{id}', [ArticuloController::class, 'vender_articulo'])
                 ->name('vender_articulo'); 
 
+    Route::get ('/articulos.createZ', [ArticuloController::class, 'createZ'])
+                ->name('articulos.createZ');
 
 //Route::resource ('celulares', CelularController::class);
             

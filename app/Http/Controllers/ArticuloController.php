@@ -37,6 +37,16 @@ class ArticuloController extends Controller
         return view ('articulos.create', compact ('cates', 'proves', 'ultArt'));
     }
 
+    public function createZ(){
+        
+        $cates= Categoria::all();
+        $proves= Proveedor::all();
+        $art= new Articulo();
+        $ultArt= $art->getLastArt();
+        
+        return view ('articulos.createZ', compact ('cates', 'proves', 'ultArt'));
+    }
+
     public function store (StoreArticulo $request){
 
         //https://www.youtube.com/watch?v=PjEutNUZjj0&ab_channel=Aprendible

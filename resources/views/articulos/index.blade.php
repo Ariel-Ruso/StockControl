@@ -102,6 +102,10 @@
       <x-agrega-btn route="articulos/create" 
                     destino="Crear" />
       <br><br>
+      <x-agrega-btn route="articulos.createZ" 
+                    destino="CrearZ" />
+      <br><br>
+      
       @component('components.carrito-btn')
       @endcomponent
       <br>
