@@ -113,9 +113,16 @@
                   <input type="text" name="marca" placeholder="Marca" class="form-control mb-2" />
                   <input type="text" name="modelo" placeholder="Modelo" class="form-control mb-2" />
 
-                  <input type="number" name="numero" placeholder="Numero" class="form-control mb-2 col-5" />
-                  <input type="number" name="cantidad" placeholder="Cantidad" class="form-control mb-2 col-5" />
-                  <input type="text" name="color" placeholder="Color" class="form-control mb-2 col-5" />
+                  @for($i=33; $i<46; $i++)
+
+                    <div class="border border-dark p-2 m-1 rounded">
+
+                      <input type="number" name="numero" placeholder= {{ $i }} class="form-control mb-2 col-5" readonly />
+                      <input type="number" name="cantidad" placeholder="Cantidad" class="form-control mb-2 col-5" />
+                      <input type="text" name="color" placeholder="Color" class="form-control mb-2 col-5" />
+                      
+                    </div>
+                  @endfor
 
                   <label class="alert alert-info " for="">
                     <label for="">
