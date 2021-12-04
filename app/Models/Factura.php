@@ -58,16 +58,16 @@ class Factura extends Model
                 }
         }
 
-    public function generarFactura(Request $request, $contItems, $subtot, $tot, $iva, $tipoPago){
+    public function generarFactura(Request $request, $contItems, $subtot, $total, $iva, $tipoPago){
         
-
+//dd($request);
         $fact= new Factura();
         $cpago= $request->cpago;
         $fact->cantidadItems= $contItems;
         $fact->subtotal= $subtot;
         $fact->iva= $iva;
         $fact->users_id= auth()->id();  
-        $fact->total= $tot;  
+        $fact->total= $total;  
         $fact->tipoPago= $tipoPago;
         $fact->numfact= 0;
         $cli_id= session()->get('cliente_id'); 
@@ -129,9 +129,9 @@ class Factura extends Model
             $fact->total= $total;
         }
 
-            $subtotal=  $total / 1.21;
-            $fact->subtotal= $subtotal;
-            $fact->iva= $total - $subtotal;    
+        $subtotal=  $total / 1.21;
+        $fact->subtotal= $subtotal;
+        $fact->iva= $total - $subtotal;    
         
         $fact->save();  
            

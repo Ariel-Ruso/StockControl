@@ -21,7 +21,7 @@ class CajaController extends Controller
         $users= (new User()) ->getAll();       
         $gastos= Gasto::where('created_at','>',today())->get();
         $todas= Factura::where('created_at','>',today())->get();
-        $pedis= Pedido::where('created_at','>',today())->get();;
+        $pedis= Pedido::where('created_at','>',today())->get();
         $cont= count($todas);
         $totDiario= $caja ->totalDia();
         $montoIni= $caja ->montoInicial();
