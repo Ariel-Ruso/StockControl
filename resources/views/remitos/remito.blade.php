@@ -196,6 +196,10 @@
                 / IMEI: 
                 {{ $item->imei }}
               @endif
+              @if($item->numero != "")
+                / Numero: 
+                {{ $item->numero }}
+              @endif
               
           </td>
           <td style="text-align:center">

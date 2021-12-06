@@ -57,5 +57,9 @@ class CategoriaSeeder extends Seeder
         $cate= new Categoria();
         $cate->nombre= "Ferreteria";
         $cate->save(); 
+
+        $cate= new Categoria();
+        $cate->nombre= "Calzados";
+        $cate->save(); 
     }
 }

@@ -122,6 +122,22 @@ class CarritoController extends Controller
     
     }
 
+    public function selectNumero( Request $request){
+        //dd($request);
+        $art= Articulo::FindorFail($request->item_id);
+        
+        $art->numero= $request->num_det;
+         
+        $art->save();  
+
+        //$cart= new Carrito();
+        $this->agregar($request->item_id);
+        
+        return back()         
+                ->with ('mensaje', 'Numero seleccionado');
+    
+    }
+
     public function setDescuento(Request $request)
     {
         $carrito= session()->get('carrito');

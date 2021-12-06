@@ -46,7 +46,7 @@
 						</strong>
 						 {{ $art->cantidad }} <br>
 
-						 @if(isset($imeis))
+						 @if ($cates[ ($art->categorias_id)-1 ]->nombre == "Celulares")
 							
 							<strong>
 								Imeis Disponibles:
@@ -60,6 +60,22 @@
 								@endforeach 
 							</div>
 
+						@endif
+						@if ($cates[ ($art->categorias_id)-1 ]->nombre == "Calzados")
+						
+							<strong>
+								Pares Disponibles:
+							</strong>
+							<div class="container row justify-content-center ">
+								@foreach ( $numeros as $numero) 
+									
+									n:° {{ $numero->numero }}								
+									-  {{ $numero->cantidad }} pares -
+									{{ $numero->color }}
+									<br>
+
+								@endforeach 
+							</div>
 						@endif
 
 						 <strong>
