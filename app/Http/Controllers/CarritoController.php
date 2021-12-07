@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Carrito;
 use App\Models\Cliente;
 use App\Models\Articulo;
+use App\Models\Numero;
 use Illuminate\Http\Request;
 
 class CarritoController extends Controller
@@ -37,6 +38,7 @@ class CarritoController extends Controller
                         "Codigo"    => $articulo->codigo,
                         "Descuento" => 0,
                         "Imei"      => $articulo->imei,
+                        "Numero"      => $articulo->numero,
                         //"Descuento" => $articulo->descuento,
                         //"Cliente_id"=> 0,
                         /* "Imagen" => $Articulo->Imagen */
@@ -89,6 +91,7 @@ class CarritoController extends Controller
                 "Codigo"=> $articulo->codigo,
                 "Descuento" => 0,
                 "Imei"      => $articulo->imei,
+                "Numero"      => $articulo->numero,
                 //"Descuento" => $articulo->descuento,
                 //"Cliente_id"=> 0,
                 /* "Imagen" => $Articulo->Imagen */
@@ -125,9 +128,10 @@ class CarritoController extends Controller
     public function selectNumero( Request $request){
         //dd($request);
         $art= Articulo::FindorFail($request->item_id);
-        
-        $art->numero= $request->num_det;
-         
+        $num= Numero::FindorFail($request->num_id);
+
+        //$art->numero= "1 " .$num->color." " .$num->numero;
+        $art->numero= $request->num_id;
         $art->save();  
 
         //$cart= new Carrito();

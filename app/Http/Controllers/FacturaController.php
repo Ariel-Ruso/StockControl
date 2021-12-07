@@ -14,7 +14,7 @@ use App\Models\TestCae;
 use DB;
 use App\Models\Qr;
 use App\Models\Propietario;
-
+use App\Models\Numero;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
@@ -185,8 +185,12 @@ class FacturaController extends Controller
         //traigo unica fact con id
         $fact= Factura::FindorFail($id);
         //traigo items con mismo id
-        $items = Item::whereIn('idFactura', [$id]) ->get();
-
+        $items = Item::whereIn('idFactura', [$id])
+                 ->get();
+        /* $num= Numero::whereIn('id', $items->numero )
+                ->get();
+                dd($num); */
+        $nums= Numero::all();
         //reviso user y traigo datos d propiet
         $u_id= auth()->id();  
         $user= User::FindorFail($u_id);
@@ -206,7 +210,7 @@ class FacturaController extends Controller
         $iva= $fact->iva;
         
         return view ('remitos.remito', compact('fecha', 'nremit', 'nombreCli', 'iva', 'subtotal',
-                    'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro'));
+                    'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro', 'nums'));
     }
 
     public function generarFacturaB($id){

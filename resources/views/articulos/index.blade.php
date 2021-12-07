@@ -462,7 +462,7 @@
                                                                   value="{{ $item->id }}">
                                                                 
                                                                 <input type="hidden" name="num_id"
-                                                                  value="{{ $numero->cantidad }}">
+                                                                  value="{{ $numero->id }}">
 
                                                                 {{ $numero->cantidad }}
                                                               </td> 

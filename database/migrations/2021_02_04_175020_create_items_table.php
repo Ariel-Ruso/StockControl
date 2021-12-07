@@ -28,6 +28,8 @@ class CreateItemsTable extends Migration
             $table->float('precioUnit');
             $table->string('imei')
                     ->nullable();
+            $table->string('numero')
+                    ->nullable();
             $table->timestamps();
         });
     }

@@ -91,7 +91,7 @@ class VentaController extends Controller
 
     
     public function finalizarVenta(Request $request) {
-        
+        //dd($request);
         $arts= Articulo::all();
         $cantA= count($arts);
         $ultArt= (new Articulo)->getLastArt();
@@ -125,11 +125,10 @@ class VentaController extends Controller
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
                                             $carrito[$x]["PrecioT"],
-                                            //$carrito[$x]["Art_id"],
                                             $carrito[$x]["Imei"],
-                                            $cantF);
+                                            $cantF,
+                                            $carrito[$x]["Numero"]);
                                             
-                                            //$subtot= $subtot + $carrito[$x]["SubTotalT"];
                                             $subtot= $subtot + 
                                                      $carrito[$x]["SubTotalT"] -
                                                      $carrito[$x]["Descuento"];
@@ -139,7 +138,6 @@ class VentaController extends Controller
                         $item->cargarItems( $carrito[$x]["Nombre"], 
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
-                                            //$carrito[$x]["Art_id"],
                                             $carrito[$x]["Imei"],
                                             $request->noBancaria5,
                                             $cantF);
@@ -183,7 +181,7 @@ class VentaController extends Controller
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
                                             $carrito[$x]["Precio"],
-                                            //$carrito[$x]["Art_id"], 
+                                            
                                             $carrito[$x]["Imei"],
                                             $cantF);
                                             
