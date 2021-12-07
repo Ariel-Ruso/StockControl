@@ -101,7 +101,8 @@
       
       <x-agrega-btn route="articulos/create" 
                     destino="Crear" />
-      <br><br>
+      <br><br>     
+      
       @component('components.carrito-btn')
       @endcomponent
       <br>
@@ -171,6 +172,20 @@
                   
                   <td>
                     {{ $item->cantidad }}
+                    
+                    {{-- 
+                    @isset ($numeros)
+                     @foreach ($numeros as $numero) 
+
+								      @if ($numero->articulos_id == $item->id)
+                      
+                        n:° {{ $numero->numero }}								
+                        -  {{ $numero->cantidad }} pares -
+                        {{ $numero->color }}
+                        <br>
+                         @endif   
+                    @endforeach  
+                    @endisset --}}
                   </td>
                   <!-- <td>
                   $  {{ $item->precioCompra }} 
@@ -296,6 +311,11 @@
                                       data-toggle="modal" 
                                       data-target="#celular{{ $item->id }}" 
                                       
+                                  @elseif ($cates[ ($item->categorias_id)-1 ]->nombre == "Calzados")
+                                  
+                                      data-toggle="modal" 
+                                      data-target="#calzado{{ $item->id }}" 
+                                      
                                   @endif
                                 >
                                 <i class= "fa fa-shopping-cart">
@@ -385,7 +405,104 @@
                               </div>
                         </div>
                     @endif
+                     
+                    @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Calzados")
                     
+                    
+                    <div  class="modal fade" 
+                      id="calzado{{ $item->id }}" 
+                      tabindex="-1" 
+                      role="dialog" 
+                      aria-labelledby="exampleModalLongTitle" 
+                      aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h4 class="modal-title">
+                                        Elegir - {{ $item->nombre }}
+                                      </h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <h5>
+                                        <div class="container row justify-content-center ">  
+                                          <div class="container mt-4">
+                                            <div class="row justify-content-center mx-auto ">
+                                                  <table class="table border-rounded shadow" >
+                                                    <thead class="table-warning font-normal text-center text-black-500" >
+                                                      <tr>
+                                                        <th scope="col">
+                                                          Numero
+                                                        </th>
+                                                        <th scope="col">
+                                                            Pares
+                                                        </th>
+                                                        <th scope="col">
+                                                          Color
+                                                        </th>                                                  
+                                                        <th scope="col-4">
+                                                            Acciones
+                                                        </th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      @isset ($numeros)
+                                                      @foreach($numeros as $numero)
+                                                        <tr class="font text-xs text-center " width= "100%"> 
+                                                          @if ($numero->articulos_id == $item->id)
+
+                                                            <form  action= "{{ route('carrito.selectNumero')}}" 
+                                                                    method="post">
+                                                                    @method ('post')
+                                                                      @csrf
+                                                              <td>
+                                                                {{ $numero->numero }}
+                                                              </td>
+                                                              <td>
+                                                                <input type="hidden" name="item_id" 
+                                                                  value="{{ $item->id }}">
+                                                                
+                                                                <input type="hidden" name="num_id"
+                                                                  value="{{ $numero->id }}">
+
+                                                                {{ $numero->cantidad }}
+                                                              </td> 
+                                                              <td>
+                                                                {{ $numero->color }}
+                                                              </td>
+                                                              <td>
+                                                                    <button type="submit" 
+                                                                            class="btn btn-primary " 
+                                                                            >
+                                                                            Seleccionar
+                                                                    </button>
+                                                            
+                                                              </td>
+                                                            </form>
+
+                                                            @endif  
+                                                        </tr>
+                                                      @endforeach
+                                                      @endisset
+                                                    </tbody>
+                                                  </table>
+                                              
+                                              </div>
+                                          </div>
+                                        </div>
+                                                             
+                                    </h5>
+                                    <div class="modal-footer">
+                                      <a class="btn btn-danger" 
+                                          data-dismiss="modal">
+                                            Cancelar
+                                      </a>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                  @endif 
+
                   </td>
                 </tr>
               @endforeach

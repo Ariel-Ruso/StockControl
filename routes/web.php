@@ -24,6 +24,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ImeiController;
+use App\Http\Controllers\NumeroController;
 //use App\Exports;
 //use App\Imports\csvImport;
 
@@ -33,12 +34,19 @@ use App\Http\Controllers\ImeiController;
 
 Route::middleware('auth')->group (function() {
 
+    Route::resource('numeros', NumeroController::class);
+    
+         Route::get ('numeros.create', [NumeroController::class, 'create'])
+            ->name('numeros.create');
+        
+        Route::post ('numeros.store', [NumeroController::class, 'store'])
+            ->name('numeros.store');
+ 
+
     Route::resource('imeis', ImeiController::class);
 
         Route::get ('select/{id}', [ImeiController::class, 'select'])
-            ->name('imeis.select');
-        
-        
+            ->name('imeis.select');       
         
             Route::get('verImei', [ImeiController::class, 'verImei'])
             ->name('verImei');
@@ -170,6 +178,9 @@ Route::get('verSession', [CarritoController::class, 'verSession'])
 Route::post ('selectImei', [CarritoController::class, 'selectImei'])
             ->name('carrito.selectImei');
 
+Route::post ('selectNumero', [CarritoController::class, 'selectNumero'])
+            ->name('carrito.selectNumero');
+            
 Route::resource('contable', ContableController::class);
 
     Route::get ('contable.buscaContable', [ContableController::class, 'buscaContable'])
@@ -195,6 +206,8 @@ Route::resource('articulos', ArticuloController::class);
     Route::put ('articulos/vender_articulo/{id}', [ArticuloController::class, 'vender_articulo'])
                 ->name('vender_articulo'); 
 
+    Route::get ('/articulos.createZ', [ArticuloController::class, 'createZ'])
+                ->name('articulos.createZ');
 
 //Route::resource ('celulares', CelularController::class);
             

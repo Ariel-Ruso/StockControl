@@ -28,9 +28,14 @@ class CreateItemsTable extends Migration
             $table->float('precioUnit');
             $table->string('imei')
                     ->nullable();
+<<<<<<< HEAD
             $table->float('descuento')
                     ->nullable();
             
+=======
+            $table->string('numero')
+                    ->nullable();
+>>>>>>> calzados
             $table->timestamps();
         });
     }

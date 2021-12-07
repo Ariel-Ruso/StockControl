@@ -22,7 +22,8 @@ class CreateArticulosTable extends Migration
                     ->nullable();
             $table->String('talle')
                     ->nullable();
-            $table->integer('cantidad');
+            $table->integer('cantidad')
+                ->nullable();
             $table->float('precioCompra')
                     ->nullable();
             $table->float('iva')
@@ -44,6 +45,8 @@ class CreateArticulosTable extends Migration
             $table->String('marca')
                     ->nullable();       
             $table->String('imei')
+                    ->nullable(); 
+            $table->String('numero')
                     ->nullable();       
             $table->String('modelo')
                     ->nullable();  

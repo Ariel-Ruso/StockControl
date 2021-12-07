@@ -18,7 +18,12 @@ class Item extends Model
         return $this->belongsTo (Factura::class); 
     }
 
+/* <<<<<<< HEAD
     public function cargarItems( $nombre, $codigo, $cantidad, $precio, $imei, $cantF, $descuento ){
+======= */
+    public function cargarItems( $nombre, $codigo, $cantidad, $precio, $imei, $cantF, $descuento, 
+                                $numero ){
+//>>>>>>> calzados
          //escribo todos items d una factura
          //dd($precio);
 
@@ -30,7 +35,11 @@ class Item extends Model
          $item->precioUnit=   $precio;
          $item->imei=         $imei;  
          $item->idFactura=    $cantF+1;
+//<<<<<<< HEAD
          $item->descuento=    $descuento;
+//=======
+         $item->numero=       $numero;
+//>>>>>>> calzados
          //$item->articulos_id= $Art_id;
 
          $item->save();

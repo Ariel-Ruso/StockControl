@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 //use App\Models\Rol;
 use Spatie\Permission\Models\Role;
-
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 
 class userController extends Controller
 {

@@ -7,6 +7,7 @@ use App\Models\Articulo;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Imei;
+use App\Models\Numero;
 use \Milon\Barcode\DNS2D;
 use \Milon\Barcode\DNS1D;
 use Illuminate\Http\DB;
@@ -22,8 +23,15 @@ class ArticuloController extends Controller
         $cates= Categoria::all();
         $proves= Proveedor::all();
         $imeis= Imei::all();
+/* <<<<<<< HEAD
         //dd($arts);
     	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
+======= */
+        $numeros= Numero::all();
+        //dd($numeros);
+
+    	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis', 'numeros'));
+//>>>>>>> calzados
     }
 
 
@@ -37,6 +45,16 @@ class ArticuloController extends Controller
         return view ('articulos.create', compact ('cates', 'proves', 'ultArt'));
     }
 
+    public function createZ(){
+        
+        $cates= Categoria::all();
+        $proves= Proveedor::all();
+        $art= new Articulo();
+        $ultArt= $art->getLastArt();
+        
+        return view ('articulos.createZ', compact ('cates', 'proves', 'ultArt'));
+    }
+
     public function store (StoreArticulo $request){
 
         //https://www.youtube.com/watch?v=PjEutNUZjj0&ab_channel=Aprendible
@@ -47,6 +65,7 @@ class ArticuloController extends Controller
         Articulo::create($request->all());
         
         $cateCelu= Categoria::where('nombre', 'like', 'Celulares')->get();
+        $cateCalz= Categoria::where('nombre', 'like', 'Calzados')->get();
         //dd($cateCelu[0]->id);
         
         if( ($request->categorias_id) == ($cateCelu[0]->id) ){
@@ -56,7 +75,16 @@ class ArticuloController extends Controller
                 ->with('mensaje', 'Celu agregado, ahora cargue imeis ');
 
         }
-    
+
+        if( ($request->categorias_id) == ($cateCalz[0]->id) ){
+            //si es calzado...
+            $id= $request->id;
+            $nombre=$request->nombre;
+            $cant= $request->cantidad;
+            return view ('numeros.create', compact ('id', 'nombre', 'cant'))
+                ->with('mensaje', 'Cargue detalles ');
+
+        }
         return back()->with('mensaje', 'Artículo agregado  ');
         
     }
@@ -70,8 +98,10 @@ class ArticuloController extends Controller
         //traigo imeis d ese celu
         $imeis = Imei::whereIn('articulos_id', [$id]) ->get();
         //dd($imeis);
-
-        return view ('articulos.show', compact('imeis','art','cates', 'proves'));
+        $numeros= Numero::whereIn('articulos_id', [$id]) ->get();
+        
+        //dd($numeros);
+        return view ('articulos.show', compact('imeis','art','cates', 'proves', 'numeros'));
     
     }  
 

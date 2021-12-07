@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaSeeder::class);
         $this->call(ClienteSeeder::class);
         $this->call(PropietarioSeeder::class);
-        //$this->call(RoleSeeder::class);
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ResponSeeder::class);
         Articulo::factory(10)->create();

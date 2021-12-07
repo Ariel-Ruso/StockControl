@@ -91,7 +91,7 @@ class VentaController extends Controller
 
     
     public function finalizarVenta(Request $request) {
-        
+        //dd($request);
         $arts= Articulo::all();
         $cantA= count($arts);
         $ultArt= (new Articulo)->getLastArt();
@@ -126,20 +126,37 @@ class VentaController extends Controller
                         $item->cargarItems( $carrito[$x]["Nombre"], 
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
+//<<<<<<< HEAD
                                             $carrito[$x]["Precio"],
                                             $carrito[$x]["Imei"],
                                             $cantF,
-                                            $carrito[$x]["Descuento"]);
+                                            $carrito[$x]["Descuento"]),
+                                            $carrito[$x]["Numero"]);
                                             
                         $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
                         $tipoPago= 1;
+/* //=======
+                                            $carrito[$x]["PrecioT"],
+                                            $carrito[$x]["Imei"],
+                                            $cantF,
+                                            $carrito[$x]["Numero"]);
+                                            
+                                            $subtot= $subtot + 
+                                                     $carrito[$x]["SubTotalT"] -
+                                                     $carrito[$x]["Descuento"];
+
+                    }elseif($request->tipoPago==5){
+>>>>>>> calzados */
 
                     }elseif($request->tipoPago==2){
                         //si es debi
                         $item->cargarItems( $carrito[$x]["Nombre"], 
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
+//<<<<<<< HEAD
                                             $carrito[$x]["Precio"],
+/* =======
+>>>>>>> calzados */
                                             $carrito[$x]["Imei"],
                                             $cantF,
                                             $carrito[$x]["Descuento"]);
@@ -276,6 +293,10 @@ class VentaController extends Controller
                                             $carrito[$x]["Codigo"],
                                             $carrito[$x]["Cantidad"], 
                                             $carrito[$x]["Precio"],
+<<<<<<< HEAD
+=======
+                                            
+>>>>>>> calzados
                                             $carrito[$x]["Imei"],
                                             $cantF,
                                             $carrito[$x]["Descuento"]);

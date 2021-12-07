@@ -47,9 +47,9 @@
               </div>
               @enderror
               @error('cantidad')
-              {{-- <div class="alert alert-success">
+              <div class="alert alert-success">
                 Cantidad obligatorio
-              </div> --}}
+              </div>
               @enderror
               @error('precioCompra')
               <div class="alert alert-success">
@@ -98,7 +98,8 @@
               <div class="row justify-content-center ">
                 <div class="col-md-8 ">
 
-                  
+                
+                  <br>
                 <label>
                     N° Id
                   </label>
@@ -111,9 +112,18 @@
                   <input type="text" name="descripcion" placeholder="Descripción" class="form-control mb-2" />
                   <input type="text" name="marca" placeholder="Marca" class="form-control mb-2" />
                   <input type="text" name="modelo" placeholder="Modelo" class="form-control mb-2" />
-                  <input type="number" name="cantidad" placeholder="Cantidad" value= "0" class="form-control mb-2 col-5" />
-                  
-                  
+
+                  @for($i=33; $i<46; $i++)
+
+                    <div class="border border-dark p-2 m-1 rounded">
+
+                      <input type="number" name="numero" placeholder= {{ $i }} class="form-control mb-2 col-5" readonly />
+                      <input type="number" name="cantidad" placeholder="Cantidad" class="form-control mb-2 col-5" />
+                      <input type="text" name="color" placeholder="Color" class="form-control mb-2 col-5" />
+                      
+                    </div>
+                  @endfor
+
                   <label class="alert alert-info " for="">
                     <label for="">
                       Precio de Compra
@@ -167,7 +177,7 @@
                         <svg id="barcode2"></svg>
                         <input type="text" name="codbar" placeholder="Codigo de Barras" class="form-control mb-2" />
                         <button type="button" onclick="randomInt();" class="btn btn-secondary">Generar
-                        </button><br>
+                        </button><br><br>
                        
                         <br>
                       </div>
@@ -185,21 +195,21 @@
                         </option>
                         @endforeach
                       </select>
-                      <br><br>
-                      <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
-                        <br>
-                        <option selected>
-                          Categorias...
-                        </option>
-                        @foreach($cates as $item)
-                        <option value="{{ $item->id }}">
-                          {{ $item->nombre }}
-                        </option>
-                        @endforeach
-                      </select>
                       <br>
                     </div>
                   </div>
+
+                  <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
+                    <br>
+                    <option selected>
+                      Categorias...
+                    </option>
+                    @foreach($cates as $item)
+                    <option value="{{ $item->id }}">
+                      {{ $item->nombre }}
+                    </option>
+                    @endforeach
+                  </select>
                   <!-- <form>
                                   <div class="form-group">
                                     <label for="exampleFormControlFile1">

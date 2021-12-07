@@ -46,6 +46,7 @@
 						</strong>
 						 {{ $art->cantidad }} <br>
 
+{{-- <<<<<<< HEAD
 							@if(count($imeis)>0)
 							
                               <label > 
@@ -61,6 +62,39 @@
                               </div>
               
                             @endif
+======= --}}
+						 @if ($cates[ ($art->categorias_id)-1 ]->nombre == "Celulares")
+							
+							<strong>
+								Imeis Disponibles:
+							</strong>
+							<div class="container row justify-content-center ">
+								@foreach ( $imeis as $imei) 
+																	
+									{{ $imei->detalle }}
+									<br>
+
+								@endforeach 
+							</div>
+
+						@endif
+						@if ($cates[ ($art->categorias_id)-1 ]->nombre == "Calzados")
+						
+							<strong>
+								Pares Disponibles:
+							</strong>
+							<div class="container row justify-content-center ">
+								@foreach ( $numeros as $numero) 
+									
+									n:° {{ $numero->numero }}								
+									-  {{ $numero->cantidad }} pares -
+									{{ $numero->color }}
+									<br>
+
+								@endforeach 
+							</div>
+						@endif
+{{-- >>>>>>> calzados --}}
 
 						 <strong>
 							Precio Compra:
