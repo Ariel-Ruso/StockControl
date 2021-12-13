@@ -46,7 +46,20 @@ class PropietarioSeeder extends Seeder
         $prop->save();
                
             
-        
+        $prop= new Propietario();
+        $prop->lema= "GEMINIS ZAPATERIA";
+        $prop->nombre= "De: Pablo Padua";
+        $prop->localidad= "(1759) Gonzalez catan";
+        $prop->direccion= "Dr equiza 4215";
+        $prop->telefono= "";
+        $prop->iva= "";
+        $prop->cuit= "20-17547587-8";
+        $prop->ingbru= "";
+        $prop->jubilacion= "";
+        $prop->partmuni= "";
+        $prop->iniactiv= "";
+
+        $prop->save();
         
 
     }

@@ -41,11 +41,11 @@ class ArticuloController extends Controller
         $proves= Proveedor::all();
         $art= new Articulo();
         $ultArt= $art->getLastArt();
-        
+        //dd($ultArt);
         return view ('articulos.create', compact ('cates', 'proves', 'ultArt'));
     }
 
-    public function createZ(){
+    /* public function createZ(){
         
         $cates= Categoria::all();
         $proves= Proveedor::all();
@@ -53,7 +53,7 @@ class ArticuloController extends Controller
         $ultArt= $art->getLastArt();
         
         return view ('articulos.createZ', compact ('cates', 'proves', 'ultArt'));
-    }
+    } */
 
     public function store (StoreArticulo $request){
 
@@ -61,13 +61,13 @@ class ArticuloController extends Controller
         //subir imagen
         //$request->file('imagen')->store('imagenes');
     	
-        //dd($request);
+        
         Articulo::create($request->all());
         
         $cateCelu= Categoria::where('nombre', 'like', 'Celulares')->get();
         $cateCalz= Categoria::where('nombre', 'like', 'Calzados')->get();
         //dd($cateCelu[0]->id);
-        
+        //dd($cateCelu->id);
         if( ($request->categorias_id) == ($cateCelu[0]->id) ){
             //si es celu...
             $cant= $request->cantidad;
@@ -75,11 +75,12 @@ class ArticuloController extends Controller
                 ->with('mensaje', 'Celu agregado, ahora cargue imeis ');
 
         }
-
+        
         if( ($request->categorias_id) == ($cateCalz[0]->id) ){
-            //si es calzado...
+            //si es Calzados...
+            //dd($request);
             $id= $request->id;
-            $nombre=$request->nombre;
+            $nombre= $request->nombre;
             $cant= $request->cantidad;
             return view ('numeros.create', compact ('id', 'nombre', 'cant'))
                 ->with('mensaje', 'Cargue detalles ');

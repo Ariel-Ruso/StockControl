@@ -232,48 +232,41 @@
                                         </a>
                                     </th> 
                                     <th>
+
+                                        
                                         {{-- revisar ciclos  --}}
-                                       {{--  @foreach ( $pedis as $pedi )
-                                            
-                                             @if($pedi->id == $item->id){
-                                                "Enviado"
-                                            }@else{
-                                                 
-                                            @if($pedi->id == $item->id)
-                                                        {{'Exitse'}}
-                                            @else
-                                                <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                    class="btn btn-success shadow" >
-                                                        Generar
-                                                </a>
-                                            
-                                            <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                class="btn btn-success shadow" >
-                                                    Enviar
-                                            </a>
-
-                                        @endisset  --}}
                                         
+                                        @if ($pedis->count() > 0)
+                                        {{-- @for ($i=0; $i<$pedis->count(); $i++) --}}
                                         
-                                          @foreach ($pedis as $item2)
+                                            @foreach ( $pedis as $pedi )
+                                                
+                                                @if($pedi->id == $item->id)
 
-                                            @if ($item2->id == $item->id)
-
-                                                @if ($item2->estado == 1 )
-                                                    
-                                                    {{ "ya enviado" }}
+                                                    @if($pedi->estado == 1)
+                                                        
+                                                        "Enviado"
+                                                    @else
+                                                        Armado
+                                                                                                    
+                                                    @endif
                                                 
                                                 @else
 
-                                                    <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                        class="btn btn-success shadow" >
-                                                            Enviar
-                                                    </a>
-
+                                                    
                                                 @endif
-                                            @endif
-                                        @endforeach
-                                           
+                                                {{-- @endfor --}}
+                                                
+                                            @endforeach
+                                        @else
+                                            <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                class="btn btn-success shadow" >
+                                                    Generar
+                                            </a> 
+                                
+                                        @endif
+                                             
+                                        
                                     </th> 
                                     
                                     <!-- 

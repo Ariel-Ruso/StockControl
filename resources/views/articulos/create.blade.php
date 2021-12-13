@@ -102,11 +102,19 @@
                 <label>
                     N° Id
                   </label>
-                  <input readonly type="number" name="id" value={{ $ultArt->id + 1}} class="form-control mb-2 col-4 " />
+                 {{--  @if ($ultArt == 0)
+                    <input readonly type="number" name="id" value={{ $ultArt + 1}} class="form-control mb-2 col-4 " />
+                  @else --}}
+                    <input readonly type="number" name="id" value={{ $ultArt->id + 1}} class="form-control mb-2 col-4 " />
+                  {{-- @endif --}}
                   <label>
                     N° Código
                   </label>
-                  <input type="number" name="codigo" value={{ $ultArt->codigo + 1}} class="form-control mb-2 col-4 " />
+                 {{--  @if ($ultArt == 0)
+                    <input type="number" name="codigo" value={{ $ultArt + 1}} class="form-control mb-2 col-4 " />
+                  @else --}}
+                    <input type="number" name="codigo" value={{ $ultArt->codigo + 1}} class="form-control mb-2 col-4 " />
+                  {{-- @endif --}}
                   <input type="text" name="nombre" placeholder="Nombre" class="form-control mb-2 " />
                   <input type="text" name="descripcion" placeholder="Descripción" class="form-control mb-2" />
                   <input type="text" name="marca" placeholder="Marca" class="form-control mb-2" />

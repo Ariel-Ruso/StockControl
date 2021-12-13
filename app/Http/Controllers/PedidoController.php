@@ -32,10 +32,12 @@ class PedidoController extends Controller
     public function show($id)
     {
         $pedis= Pedido::FindorFail($id);
-        $items = Item::whereIn('idPedido', [$id]) ->get();
+        $items = Item::whereIn('idPedido', [$id])->get();
+        
+        
         $clie= Cliente::all();
         $resp= Respon::all();
-
+    //dd($id);
         return view ('pedidos.show', compact('resp', 'pedis', 'items', 'clie'));
         
     }
@@ -133,44 +135,49 @@ class PedidoController extends Controller
     }
     
     public function enviar($id){
-    
-        $total=0;
-        $fact= Factura::FindorFail($id);
-        $pedi= new Pedido();
-    
-        $pedi->cantidadItems= $fact->cantidadItems;
-        $pedi->total= $fact->total;
 
-        $clie= new Cliente();
-        $dni= $fact->dnicliente;
-        $clie2= $clie->getClientexDNI($dni);
-      
-        $pedi->clientes_id= $clie2->first()->id;
+        //if(!Pedido::FindorFail($id))
+        {
 
-        $pedi->tipoPago= $fact->tipoPago;
-        $pedi->estado= 0;
-
-        if ($fact->tipoPago==4){
-            $total= $total + ($total * 0.18);  
-            $pedi->total= $total;
+            $total=0;
+            $fact= Factura::FindorFail($id);       
             
-            }
+            $pedi= new Pedido();       
         
-            if ($fact->tipoPago==5){
-                        
-                $pedi->totalNoBanc= $fact->noBancaria5;
-                $total= $fact->noBancaria5;
+            $pedi->cantidadItems= $fact->cantidadItems;
+            $pedi->total= $fact->total;
+
+            $clie= new Cliente();
+            $dni= $fact->dnicliente;
+            $clie2= $clie->getClientexDNI($dni);
+        
+            $pedi->clientes_id= $clie2->first()->id;
+
+            $pedi->tipoPago= $fact->tipoPago;
+            $pedi->estado= 0;
+
+            if ($fact->tipoPago==4){
+                $total= $total + ($total * 0.18);  
                 $pedi->total= $total;
-             
-            } 
+                
+                }
             
-        $pedi->save();
+                if ($fact->tipoPago==5){
+                            
+                    $pedi->totalNoBanc= $fact->noBancaria5;
+                    $total= $fact->noBancaria5;
+                    $pedi->total= $total;
+                
+                } 
+                
+            $pedi->save();
 
-        $item= Item::FindorFail($id);
+            $item= Item::FindorFail($id);
 
-        $item->idPedido=  $fact->id;
+            $item->idPedido=  $fact->id;
 
-        $item->save();
+            $item->save();
+        }
         
         // return back()->with ('mensaje', 'Pedido generado');
         // return view ('pedidos.index')->with('mensaje', 'Pedido generado');
@@ -209,7 +216,8 @@ class PedidoController extends Controller
         $ped= Pedido::FindorFail($id);
         $ped->responsables= $request->conduc."-".$request->cobr;
         $ped->save();
-        return back();
+        //return back();
+        return redirect()->action('App\Http\Controllers\PedidoController@index');
     }
 
 }

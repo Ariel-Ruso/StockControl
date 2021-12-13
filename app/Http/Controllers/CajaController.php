@@ -28,6 +28,7 @@ class CajaController extends Controller
         $totDiario = $totDiario + $montoIni;
         $estado= $caja->estado();
         $status= $caja->status($estado);
+        //dd($pedis);
         
         return view ('caja.index', compact('todas', 'users', 'montoIni', 'totDiario', 
                     'status', 'estado', 'gastos', 'cont', 'pedis' ));

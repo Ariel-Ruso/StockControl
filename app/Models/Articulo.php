@@ -120,9 +120,9 @@ class Articulo extends Model
             $num= Numero::Find($art->numero);
             $num->cantidad --;
             $art->numero= null;
-                    
+            $num->save();            
         }
-        $num->save();
+        
         $art->save();
         
         return back()->with('mensaje', 'Artículo vendido correctamente');    

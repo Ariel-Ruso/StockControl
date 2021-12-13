@@ -6,8 +6,8 @@
           @component('components.botones')
           @endcomponent
   </div>
-<x-grafica img="/Storage/usuarios.png" />
-
+{{-- <x-grafica img="/Storage/usuarios.png" /> --}}
+<x-grafica $mens="Usuarios" />
 <br><br>
 
 <table class= "table">

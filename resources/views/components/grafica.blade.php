@@ -2,10 +2,15 @@
         <div class="row justify-content-center ">
                 
                     
-                    <img  src= {{$img}}  
+                    {{-- <img  src= {{$img}}  
                           height= "200" 
                           width= "300"
-                          class= "img-fluid">
+                          class= "img-fluid"> --}}
+
+                          <span>
+                                {{ $mens }}
+                          </span>
+                          
                 
         </div>      
 </div>  

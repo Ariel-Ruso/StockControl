@@ -15,6 +15,10 @@
                     <x-slot name="cuerpo">
                         <table class= "table ">
                             <tr >
+                                <h1>
+                                    Control Stock
+                                </h1>
+                                
                                 <th class="text-align:left">
                                     <div name= "info de Caja" class="container  ">
                                     <div class="col-md-8 ">
