@@ -6,7 +6,10 @@
     @component('components.botones')
     @endcomponent
   </div>
-  <x-grafica img="/Storage/categ.jpg"/>
+  {{-- <x-grafica img="/Storage/categ.jpg"/> --}}
+  <h2>
+      Categorías
+  </h2>
   <br>
   
   <table class= "table">

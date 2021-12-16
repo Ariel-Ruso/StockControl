@@ -6,7 +6,10 @@
   @endcomponent
   <br>
   </div>
-  <x-grafica img="/Storage/facturas.png"/>
+  {{-- <x-grafica img="/Storage/facturas.png"/> --}}
+  <h2>
+    Contable
+  </h2>
 
 {{-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -197,7 +200,7 @@
   <div class="row justify-content-center mx-auto ">
     
         <table class="table border-rounded shadow" >
-          <thead class="table-warning font-normal text-center text-black-500" >
+          <thead class="table-warning font-normal text-center text-black-500 index" >
             <tr>
               <th scope="col">
                     Operación

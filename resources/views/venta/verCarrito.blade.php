@@ -6,7 +6,10 @@
     @endcomponent
     <br>
   </div>
-<x-grafica img="/Storage/carrito.png" />
+{{-- <x-grafica img="/Storage/carrito.png" /> --}}
+<h2>
+    Carrito
+</h2>
 <br>
 
 
@@ -23,19 +26,27 @@
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-auto ">
-                <div class="card bg-white rounded shadow-2xl">
-                    <div class=" py-3 px-8 bg-orange-300 d-flex justify-content-between 
-                                align-items-center">
-                        <span class="text-center mx-auto font text-2xl">
+                <div class="card 
+                {{-- bg-white rounded  --}}
+                shadow-2xl">
+                
+                
+                
+                     <div class=" py-3 px-8 
+                    
+                                align-items-center 
+                                cart2">
+                        <span class="text-center mx-auto font text-2xl ">
                             <h3>
-                            Tus Artículos
+                                Tus Artículos
                             </h3>
+                          
                         </span>
-                    </div>
+                    </div> 
                     <div class="card-body ">
                     @if(session('carrito'))
                         <table class="table table-bordered border-blue-500 border-opacity-100">
-                            <thead class= "text-center">
+                            <thead class= "text-center cart">
                                 <tr>
                                     <th scope="col">
                                         Artículo
@@ -96,7 +107,7 @@
                                 </th> --}}
                                 <th class="font-weight-normal text-center col-md-2">
                                     <a  href="{{ url ('agregar/' .$id )  }}"
-                                        class= "btn btn-primary">
+                                        class= "btn btn-primary m-1">
                                             +
                                     </a>
                                     <a  href="{{ url ('eliminarCarr/' .$id )  }}"
@@ -155,10 +166,16 @@
                         </table>
                         
                     @else
-                    <div class="text-center text-3xl font-extrabold leading-none tracking-tight">
-                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                            Sin productos
-                        </span>
+                    <br>
+                    <div class="text-center 
+                    {{-- text-3xl font-extrabold leading-none tracking-tight --}}
+                    ">
+                        {{-- <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500"> --}}
+                            <h3>
+                                Sin productos
+                            </h3>
+                            
+                        {{-- </span> --}}
                     </div>
                     
                     @endif        
@@ -209,15 +226,23 @@
 
                     <div name="opciones cliente " 
                          class=" mt-5 row justify-content-center ">
-                         <div class="text-center text-2xl font-bold leading-none tracking-tight">
-                            <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-500">
-                                 Cliente :
-                            </span>
+                         <div class="text-center 
+                         {{-- text-2xl font-bold leading-none tracking-tight --}}
+                         "> 
+                            {{-- <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-500"> --}}
+                                <h3>
+                                    Cliente :
+                                </h3>
+                                 
+                            {{-- </span> --}}
                                                   
                             @if($clie == "Sin seleccionar")
+                            <h4>
                                 {{ $clie }}
+                            </h4>
+                                
                             @else
-                                <br><br>                      
+                                <br>                  
                          
                                     {{ $clie->dni }}<br>                            
                                     {{ $clie->nombre }} <br>  

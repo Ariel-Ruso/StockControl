@@ -8,7 +8,10 @@
   @endcomponent
   <br>
 </div>
-  <x-grafica img="/Storage/proveedores.png"/>
+  {{-- <x-grafica img="/Storage/proveedores.png"/> --}}
+  <h2>
+    Proveedores
+  </h2>
   <br><br>
     
 <table class= "table">
@@ -36,7 +39,7 @@
   <div class="row justify-content-center mx-auto ">
     
         <table class="table border-rounded shadow" >
-          <thead class="table-warning font-normal text-center text-black-500" >
+          <thead class="table font-normal text-center text-black-500 index" >
             <tr>
               <th scope="col">
                             Nombre 
@@ -78,7 +81,7 @@
                           </td>
                           <td>
                               <a  href="{{ route ('proveedores.edit', $item) }}" 
-                                  class="btn btn-warning btn-sm shadow">
+                                  class="btn btn-warning btn-sm shadow m-1">
                                     <i class= "fa fa-edit">
                                       Editar 
                                     </i>

@@ -6,7 +6,10 @@
     @component('components.botones')
     @endcomponent
 </div>
-<x-grafica img="/Storage/presupuestos.jpg" />
+{{-- <x-grafica img="/Storage/presupuestos.jpg" /> --}}
+<h2>
+    Presupuestos
+</h2>
 <br><br>
 
 <table class= "table">
@@ -14,10 +17,9 @@
       </th>
 </table>
 
-@if($cont==0)
-    <br>
-    <x-vacio mensaje="Sin Presupuestos ahora" />    
-@else
+@if($presu->count())
+      
+
     
 <div class="container mt-4">
     <div class="row justify-content-center mx-auto ">
@@ -82,6 +84,10 @@
                         </table>
                     </div>
                 </div>
-    @endif
+@else
+    <br>
+    <x-vacio mensaje="Sin Presupuestos ahora" /> 
+@endif
+
 @endsection
 

@@ -2,28 +2,96 @@
 
 @section('content')
 
-<div class="float-right">
+<div class="float-right 
+            contBtn
+        ">
     @component('components.botones')
     @endcomponent
     <br>
+    @if( $estado == 1 )
+                    <div class="container">
+                        <a  class= "btnn btnClose shadow  py-2 px-2 mb-1 "
+                            data-toggle="modal" 
+                            data-target="#confirm-delete" 
+                            type= "button">               
+                            
+                                Cerrar
+                        </a>   
+                    </div>
+                    <br>
+    
+                    <x-agrega-btn route="gastos/create" 
+                                destino="Gastos" />
+                
+    @else
+                    <x-agrega-btn route="caja/create" destino="Abrir" />
+    @endif
 </div>
-<x-grafica img="Storage/caja.png"/>
+{{-- <x-grafica img="Storage/caja.png"/> --}}
+<h2>
+    Caja
+</h2>
   <br>
 
-<table class= "table">
+
+<table class= "table caja">
     <tr >
         {{-- col izq --}}
-        <th class="text-align:left ">
-            <div name= "info de Caja" class="container  ">
+        <th >
+            <h4>
+                Monto Inicial: 
+            </h4>
+            
+        </th>
+        <th>
+            $ {{ $montoIni }}
+        </th>
+
+        <tr>
+            <th >
+                <h4>
+                    Estado: 
+                </h4>
+            </th>
+            <th>
+                {{ $status }}
+            </th>
+        </tr>
+        <tr>
+            <th >
+                <h4>
+                    Total Diario:
+                </h4>
+            </th>
+            <th>
+                $ {{ $totDiario }}
+            </th>
+        </tr>
+        <tr>
+            <th >
+                <h4>
+                    Fecha:
+                </h4>
+            </th>
+            <th>
+                {{ today()->format('d/m/y') }}
+            </th>
+        </tr>
+    </table>
+           {{-- class="text-align:left ">
+             <div name= "info de Caja" class="container  ">
             <div class="col-md-10 ml-5">
-                <div class="text-left text-1xl font-extrabold leading-none tracking-tight">
-                    <span class="mt-1 bg-clip-text text-transparent bg-gradient-to-r 
+                <div class="text-left text-1xl font-extrabold leading-none tracking-tight"> --}}
+                    {{-- <span class="mt-1 bg-clip-text text-transparent bg-gradient-to-r 
                                 from-teal-400 to-green-500">
-                        Monto Inicial: 
-                    </span>
-                    $ {{ $montoIni }}
-                </div>
-            </div>  
+                     --}}           
+                     
+                        
+                    {{-- </span> --}}
+                          
+               {{--  </div>
+            </div> --}}  
+            {{-- 
             <br>
             <div class="col-md-10 ml-5 ">
                 <div class="text-left text-1xl font-extrabold leading-none tracking-tight">
@@ -54,20 +122,21 @@
             </div> 
 
         </th>
-        <th class= "container col-5" >
+ --}}
+       {{--  <th class= "container col-5" >
         </th>
-        {{-- col der --}}
+        {{-- col der 
         
         <th class="text-align:right ">
                 
              <div class="container   " name="Add">
                 <div name="Movim Cajas" 
-                    {{-- class="container mt-4 float " --}}
+                    class="container mt-4 float "
                     >
                         @if( $estado == 1 )
                             <br>  
                             <a  
-                            class= "border-solid border-2 bg-green-300 border-light-blue-200
+                            class= "btnn btnClose border-solid border-2 bg-green-300 border-light-blue-200
                                     shadow text-x1 float-right
                                     hover:font-medium hover:bg-blue-300 hover:text-black 
                                     transform hover:translate-x-3 transition duration-700
@@ -79,10 +148,10 @@
                             </a>   
                             
                             <br><br>     
-                            {{-- <a href="{{ route('') }}" 
+                             <a href="{{ route('') }}" 
                                     class="btn btn-outline-primary btn-sm float-right mt-2 ">
                                         Gastos
-                            </a>                 --}}
+                            </a>                 
                             <x-agrega-btn route="gastos/create" 
                                           destino="Gastos" />
                             
@@ -92,14 +161,25 @@
                             <br><br>    
                                    
                         @endif
-                        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" 
+                        
+                        
+                </div>
+            </div>
+        </th>
+        <th>
+
+        
+        </th>
+    <tr>
+</table> --}}
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" 
                                             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">
+                                                            <h3 class="modal-title">
                                                                 Cierre de Caja
-                                                            </h4>
+                                                            </h3>
                                                         </div>
                                                         <div class="modal-body">
                                                             <label>
@@ -124,16 +204,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                        
-                </div>
-            </div>
-        </th>
-        <th>
-
-        
-        </th>
-    <tr>
-</table>
 
 <div class="container align:right">
   <hr  width= "95%" noshade="noshade"  />
@@ -149,7 +219,7 @@
     <div class="row justify-content-center mx-auto ">
       
           <table class="table border-rounded shadow" >
-            <thead class="table-warning font-normal text-center text-black-500" >
+            <thead class="table font-normal text-center text-black-500 index" >
               <tr>
                 <th scope="col">
                                         Operación
@@ -187,7 +257,9 @@
                             <tbody>
                             @foreach ($todas as $item)
                                 <thead>
-                                <tr class="text-center text-xs">
+                                <tr class="
+                                {{-- text-center text-xs  --}}
+                                tData">
                                     <th>
                                          {{  $item->id }}
                                     </th> 

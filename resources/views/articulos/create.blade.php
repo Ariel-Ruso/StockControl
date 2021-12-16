@@ -6,7 +6,10 @@
   @component('components.botones')
   @endcomponent
 </div>
-<x-grafica img="/Storage/articulos.jpg" />
+{{-- <x-grafica img="/Storage/articulos.jpg" /> --}}
+<h2>
+  Artículos
+</h2>
 
 <br><br>
 <table class= "table mt-1">
@@ -15,18 +18,24 @@
 </table>
 {{-- <x-agrega-btn route="/celulares/create" destino="Celulares" /> --}}
 
-<script type="text/javascript" src="{{ URL::asset('js/logica.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+
+
 
 <div class="container mt-10 ">
   <div class="row justify-content-center ">
     <div class="col-md-6">
-      <div class="card bg-white shadow">
-        <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-          <span class="text-center mx-auto font text-2xl">
-            Agregar
-          </span>
-        </div>
+      <div class="card shadow ">
+        
+        <div class="card-header ">
+          <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center ">
+            <span class="text-center mx-auto font text-2xl ">
+              <h3>
+                Agregar
+              </h3>
+            </span>
+          </div>
+        </div>       
+        
         <div class="card-body">
 
           <form action="{{ route('articulos.store') }}" 
@@ -234,92 +243,5 @@
 </div>
 </div>
   
-<script>
-  window.onload = randomInt();
-
-  function checkInput(precioCompra) {
-
-    var Precio = document.calc.precioCompra.value;
-    var pre = document.calc.precioVenta.value;
-    var gano = pre- Precio;
-    var gano1 = Number (gano / Precio);
-    var ganof = Number (gano1 * 100);
-    
-    document.calc.ganancia.value = ganof;
-
-    var finaltarjeta = Number (pre * 0.18 ) + Number (pre);
-
-    document.calc.pVentaTarj.value = Math.round(finaltarjeta);
-    document.calc.pVentaTarj.value = redondeo2 (document.calc.pVentaTarj.value);
-    
-  }
-
- /*  function checkInput(precioVenta){
-
-    document.calc.precioVenta.value= redondeo2 ( document.calc.precioVenta.value );
-
-  } */
-
-  
-function redondeo2( data ){
-
-  var ultdig= data.slice(-2); 
-  var resto= data-ultdig;
-  
-  //var res= Number(ultdig) - 10;
-  if(Number (ultdig < 50 )) {
-    //window.alert( '1 rango');
-    res= 50;
-    }else{
-    //window.alert( '2 rango');
-      res= 90;
-    }
-
-  return ( resto + Number (res));
-
-
-/* switch ( res ){
-  case -1:
-    //window.alert( 'Falta 1 para 10');
-    falta= 1;
-    break;
-  case -2:
-    falta= 2;
-    break;
-  case -3:
-    falta= 3;
-    break;
-  case -4:
-    falta= 4;
-    break;
-  case -5:
-    falta= 5;
-    break;
-  case -6:
-    falta= 6;
-    break;
-  case -7:
-    falta= 7;
-    break;
-  case -8:
-    falta= 8;
-    break;
-  case -9:
-    falta= 9;
-    break;
-} */
-
-//return (Number (data) + Number (falta) ) ;  
-
-}
-
-
-  function randomInt() {
-    var codbar = Math.round(Math.random() * 10) * 154657897987 * 1375;
-    document.calc.codbar.value = codbar;
-    JsBarcode("#barcode2", codbar);
-
-  }
-</script>
 
 @endsection

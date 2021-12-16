@@ -7,7 +7,8 @@
   @endcomponent
 </div>
 
-<x-grafica img="/Storage/clientes.png"/>
+{{-- <x-grafica img="/Storage/clientes.png"/> --}}
+<h2>Clientes</h2>
 <br><br>
 
 <table class= "table mt-1">
@@ -66,7 +67,7 @@
   <div class="row justify-content-center mx-auto ">
     
         <table class="table border-rounded shadow" >
-          <thead class="table-warning font-normal text-center text-black-500" >
+          <thead class="table font-normal text-center text-black-500 index" >
             <tr>
               <th scope="col">
   

@@ -23,15 +23,10 @@ class ArticuloController extends Controller
         $cates= Categoria::all();
         $proves= Proveedor::all();
         $imeis= Imei::all();
-/* <<<<<<< HEAD
-        //dd($arts);
-    	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
-======= */
         $numeros= Numero::all();
         //dd($numeros);
 
     	return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis', 'numeros'));
-//>>>>>>> calzados
     }
 
 

@@ -2,27 +2,32 @@
 
 @section('content')
 
-@component('components.inicio-btn')
-@endcomponent
-
+<div class="float-right">
+    @component('components.botones')
+    @endcomponent
+</div>
+    {{-- <x-grafica img="/Storage/articulos.png" /> --}}
+    <h2>
+        Pedidos
+    </h2>
 <br><br>
-@component('components.volver-btn')
-@endcomponent
 
-@component('components.mensajes')
-@endcomponent
      
 
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-md-5">
-				<div class="card bg-white shadow">
-					<div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-						<span class="text-center mx-auto font text-xl">
+				<div class="card 
+				{{-- bg-white  --}}
+				shadow">
+					<div class=" py-3 px-8 
+					{{-- bg-blue-200 d-flex justify-content-between align-items-center  --}}
+					cart2">
+						{{-- <span class="text-center mx-auto font text-xl"> --}}
 							<h3>
-								Detalles del Pedido
+								Detalles
 							<h3>
-						</span>						
+						{{-- </span>						 --}}
 					</div>
 					<div class="card-body">    
 						<strong>

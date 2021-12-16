@@ -2,21 +2,26 @@
 
 @section('content')
 
-@component('components.botones')
-@endcomponent
-<br>
+<div class="float-right">
+    @component('components.botones')
+    @endcomponent
+</div>
+    {{-- <x-grafica img="/Storage/articulos.png" /> --}}
+    <h2>
+        Pedidos
+    </h2>
+<br><br>
 
-@if($pedidos->count()<0)
+@if($pedidos->count())
 
-    <br>
-    <x-vacio mensaje="Sin Pedidos ahora" />    
-@else
+    
+
 
 <div class="container mt-4 col-md-8">
     <div class="row justify-content-center mx-auto ">
       
           <table class="table border-rounded shadow" >
-            <thead class="table-warning font-normal text-center text-black-500" >
+            <thead class="table font-normal text-center text-black-500 index" >
               <tr>  
                                     <th scope="col">
                                         N Pedido
@@ -91,6 +96,9 @@
                         </table>
         </div>
     </div>    
+    @else
+<br>
+    <x-vacio mensaje="Sin Pedidos ahora" />    
 @endif
 @endsection
 

@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<style >
+{{-- <style >
   .container {
     /* width: 90%;
     height: 90%; */
   }
-</style>
+</style> --}}
 
 <div class="float-right">
   @component('components.botones')
   @endcomponent
 </div>
 
-<x-grafica img="/Storage/remitos.png" />
+{{-- <x-grafica img="/Storage/remitos.png" /> --}}
+<h2>
+  Remitos
+</h2>
 <br>
 <table class= "table mb-1 "> 
   <th>
@@ -93,7 +96,11 @@
                 <div name= "letra" class="container mb-0 ">
                   <div class="container ">
                     
-                      <img src="/Storage/letraX.jpg" alt="" width="80" >
+                      <img src="/Storage/letraX.jpg" alt=""
+                       {{-- width="80" --}}
+                      
+                       {{-- class="letraFact" --}}
+                       >
                      
                   </div>
                 </div>

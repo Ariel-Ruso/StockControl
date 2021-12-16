@@ -7,14 +7,25 @@
     @endcomponent
     <br>
 </div>
+    {{-- <x-grafica img="/Storage/facturas.png"/> --}}
+    <h2>
+      Gastos
+    </h2>
+    <br>
+    <table class= "table">
+        <tr></tr>
+    </table>
 
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-4">
-                <div class="card bg-white shadow">
+                <div class="card bg-blue shadow">
                     <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
-                          Ingrese Gasto
+                            <h3>
+                                Ingrese Gasto
+                            </h3>
+                          
                         </span>                       
                     </div>
                     <div class="card-body">     
@@ -39,7 +50,7 @@
                                 type="text"
                                 name="detalle"
                                 placeholder="Detalle"
-                                class="form-control mb-2 col-6 "
+                                class="form-control mb-2 col-6 m-1 "
                             />    
                             <input
                                 type="number"

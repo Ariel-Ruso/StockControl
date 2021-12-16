@@ -6,20 +6,28 @@
 
 <x-navbar class="btn btn-outline-primary border border-dark shadow font-weight-bold" />                
 
-    <div class="py-5 ">
+    {{-- <div class="py-5 "> --}}
+    <div name= "container">
         <div class="max-w-3xl mx-auto sm:px-2 lg:px-2">
             <div class="bg-blue overflow-hidden shadow-xl border-2 sm:rounded-lg ">
                   <x-tarjeta>
                     <x-slot name="title" >  
                     </x-slot>
                     <x-slot name="cuerpo">
-                        <table class= "table ">
+                        <table >
                             <tr >
-                                <h1>
+                                <h1 hidden>
+
                                     Control Stock
                                 </h1>
-                                
+                                {{-- <<<<<<< HEAD
                                 <th class="text-align:left">
+=======
+ --}}                                    
+                                
+                                {{-- <th class="text-align:left"> --}}
+                                    <th>
+{{-- >>>>>>> 99e9d71 --}}
                                     <div name= "info de Caja" class="container  ">
                                     <div class="col-md-8 ">
                                         <div class="text-left text-1xl font-extrabold leading-none tracking-tight">

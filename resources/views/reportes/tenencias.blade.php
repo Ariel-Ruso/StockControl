@@ -9,7 +9,10 @@
     @endcomponent
     <br>
   </div>
-<x-grafica img="/Storage/reportes.jpg" />
+{{-- <x-grafica img="/Storage/reportes.jpg" /> --}}
+<h2>
+    Tenencias
+</h2>
 <br>
 <br>
 
@@ -17,18 +20,14 @@
         <div class="row justify-content-center ">
             <div class="col-md-8">
                 <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-green-200 d-flex justify-content-between align-items-center">
-                        <span class="text-center mx-auto font text-3xl">
-                          Tenencias x Categorías
-                        </span>             
-                    </div>
-                    <div class="container">
+                   
+                    
                         <table class="table">
-                            <thead >
+                            <thead class="reports">
                                 <tr class=" text-center text-xs leading-4 
                                     font-medium text-red-500 uppercase tracking-wider">
                                     <th scope="col-4">
-                                        Nombre de Categoria
+                                        Nombre de Categoría
                                     </th>
                                     <th scope="col-2">
                                         Totales en Pesos
@@ -53,7 +52,7 @@
                                
                             </tbody>
                         </table>
-                    </div>
+                    
                 </div>
             </div>
         </div>         
@@ -65,7 +64,7 @@
     <canvas id="myChart" width="400" height="200">
     </canvas>
 </div>
-
+<br><br>
 
 <script type="text/javascript">
 

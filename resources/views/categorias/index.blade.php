@@ -6,10 +6,14 @@
   @component('components.botones')
   @endcomponent
 </div>
-<x-grafica img="/Storage/categorias.png"/>
+{{-- <x-grafica img="/Storage/categorias.png"/> --}}
+<h2>
+  Categorías
+</h2>
 <br>
 
 <table class= "table">
+  
     <tr>
       <th class="container col-md-9"  >
         {{-- col izq --}}
@@ -35,7 +39,7 @@
   <div class="row justify-content-center mx-auto ">
     
         <table class="table border-rounded shadow" >
-          <thead class="table-warning font-normal text-center text-black-500" >
+          <thead class="table-warning font-normal text-center text-black-500 index" >
             <tr>  
                         <th scope="col">
                             Nombre

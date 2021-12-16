@@ -17,9 +17,9 @@ class PresupuestoController extends Controller
 
         $presu= Presupuesto::all();
         $users= User::all();
-        $cont= count($presu);
+        //$cont= count($presu);
 
-        return view ('presupuestos.index', compact('presu', 'users', 'cont'));
+        return view ('presupuestos.index', compact('presu', 'users'));
     }
 
     public function imprimirPresu($id)

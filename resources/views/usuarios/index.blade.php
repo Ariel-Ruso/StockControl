@@ -6,14 +6,22 @@
           @component('components.botones')
           @endcomponent
   </div>
-{{-- <x-grafica img="/Storage/usuarios.png" /> --}}
-<x-grafica $mens="Usuarios" />
-<br><br>
+{{-- <<<<<<< HEAD
 
-<table class= "table">
-  <th>
-  </th>
+
+
+{{-- <x-grafica nombre="Usuarios" img="/Storage/usuarios.png" /> --}}
+<h2>
+  Usuarios
+</h2>
+
+<br><br>
+<table class= "table mt-1">
+  <th></th>
 </table>
+
+
+
 {{-- 
 <div class="container ">
   <a href="{{ route('index_r') }}" 
@@ -41,16 +49,16 @@
     <div class="row justify-content-center mx-auto ">
       
           <table class="table border-rounded shadow" >
-            <thead class="table-warning font-normal text-center text-black-500" >
+            <thead class="table-warning font-normal text-center text-black-500 index" >
               <tr>  
                  <th scope="col">
-                          Nombre
+                        Nombre
                   </th>
                   <th scope="col">
-                          Correo
+                        Correo
                   </th>            
                   <th scope="col">
-                    Rol
+                      Rol
                   </th>
                   <th scope="col">
                     Accion

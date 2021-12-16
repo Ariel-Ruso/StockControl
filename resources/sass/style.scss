@@ -5,14 +5,126 @@
 
 body {
     main {
+        //container {
+        //align-items: center;
+        //margin: 5;
         img {
-            height: 400;
-            width: 300;
+            margin: auto;
+            height: 100px;
+            width: 350px;
+        }
+        .btnn {
+            margin: 3px;
+            border-radius: 15px;
+            color: black;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 500;
+            &:hover {
+                transform: scale(1.1, 1.1);
+                transition: width 2s, height 2s, transform 2s;
+                font-weight: 800;
+            }
+        }
+        .btnIni {
+            background-color: lightblue;
+        }
+        .btnBack {
+            background-color: pink;
+        }
+        .btnAdd {
+            background-color: $green;
+        }
+        .btnCart {
+            background-color: $orange2;
+        }
+        .btnCash {
+            background-color: rgb(204, 169, 180);
+        }
+        .btnClose {
+            background-color: rgb(187, 157, 151);
+        }
+        .btnClie {
+            background-color: $yellow;
+        }
+        table {
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            margin: auto;
+            tr {
+                font-size: 1em;
+                text-align: center;
+                .tData {
+                    font-size: 1em;
+                }
+            }
+            th {
+                font-weight: 800;
+                font-size: 1em;
+                margin: 5px;
+                padding: 5px;
+            }
+            img {
+                //justify-content: center;
+                height: 100px;
+                width: 300px;
+            }
+            .index {
+                background-color: $cyan;
+            }
+            .reports {
+                background-color: $teal;
+            }
+            .cart {
+                background-color: $orange;
+            }
+        }
+        .form-check-label {
+            font-family: $font4;
+            font-size: 1.2em;
+        }
+        .cart2 {
+            background-color: $orange2;
+        }
+        .caja {
+            width: 80%;
+        }
+        .card-header {
+            background-color: $orange;
+        }
+        .detail {
+            background-color: $cyan;
+        }
+        .container {
+            img {
+                width: auto;
+                height: auto;
+            }
+        }
+        .contBtn {
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            visibility: none;
+            font-size: 1em;
+        }
+        h2 {
+            font-family: $font4;
+            font-size: 5em;
+            text-align: center;
+            margin-left: 10%;
+        }
+        h3 {
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+        }
+        h4 {
+            font-size: 1em;
+            font-weight: 500;
+            margin-left: 15%;
         }
     }
-}
-
-h1 {
-    font-size: 5em;
-    justify-content: center;
 }

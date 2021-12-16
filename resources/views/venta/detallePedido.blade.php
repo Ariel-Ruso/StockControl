@@ -54,19 +54,25 @@
         </div>
         <br>
  --}}
-        <h3 style="text-align:center">
+        <h3 
+        {{-- style="text-align:center --}}
+        >
             Cliente
-        </h3><br>
+        </h3>
         <div name="datosCliente mt-5">
-            <div class="container ">
+            <div class="containerPagos ">
+
                 <div class="row justify-content-center">
                     <div class="col-md-8">
-                        <div name="DatosCli mt-5">
+                        {{-- <div name="DatosCli mt-5"> --}}
                             <div class="flex flex-col mt-1">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg">
+                                        <div class="shadow overflow-hidden detail 
+                                        {{-- bg-blue-200 border-b border-gray-400 sm:rounded-lg --}}
+                                        ">
                                             <div class="px-2 py-3 text-center">
+                                                 
                                                 <label class="form-check-label " for="dni">
                                                     <strong>
                                                         DNI:
@@ -112,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
         </div><br>
         <h3 style="text-align:center ">
@@ -126,16 +132,17 @@
                             <div class="flex flex-col mt-1">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-200">
+                                        <div class="shadow overflow-hidden detail
+                                         bg-blue-200 border-b border-gray-400 sm:rounded-lg
+                                         ">
+                                            <table class="min-w-full divide-y divide-gray-200 ">
                                                 <thead class="px-2 py-3 text-center">
                                                     <tr>
-                                                        
                                                         <th>
                                                             Artículo
                                                         </th>
                                                         <th>
-                                                            Precio Unitario
+                                                            Precio Unit
                                                         </th>
                                                         <th>
                                                             Cantidad
@@ -147,8 +154,9 @@
                                                             SubTotal
                                                         </th>
 
-                                                        </th>
+                                                        
                                                     </tr>
+                                                
                                                 </thead>
 
                                                 @foreach ($carrito as $detalle)
@@ -177,7 +185,9 @@
                                                 <tr>
                                                     <td colspan="10" align="right" >
                                                         <br>
-                                                        <hr noshade="noshade" class="mx-5"  />
+                                                        <hr noshade="noshade" 
+                                                        {{-- class="mx-5"   --}}
+                                                        />
                                                        {{--  <h5 class="mr-1">
                                                             Total: $ 
                                                             {{ number_format($detalle['SubTotal'],2) }} 
@@ -196,7 +206,9 @@
                                                     
                                                     <td colspan="12" align="right" >
                                                         
-                                                        <hr noshade="noshade" class="mx-5"  />
+                                                        <hr noshade="noshade" 
+                                                        {{-- class="mx-5"   --}}
+                                                        />
                                                           
                                                         <h4 class="mr-5">
                                                             Efectivo : $ {{ number_format ($total, 2) }}
@@ -228,7 +240,7 @@
         </div>
         <br><br>
         <h3 style="text-align:center">
-            Forma De Pago
+            Forma de Pago
         </h3><br>
         <div name="datosPago mt-5">
             <div class="container ">
@@ -238,7 +250,9 @@
                             <div class="flex flex-col mt-1">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg">
+                                        <div class="shadow  detail
+                                        {{-- overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg --}}
+                                        ">
                                             <div class="px-4 py-3 ">
                                                 <div class="form-check" name="check pagos">
 
@@ -246,8 +260,9 @@
                                                             checked>
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Efectivo <br>
-                                                        1 pago de $ {{ number_format( $total, 2) }}<br>
-                                                    </label>
+                                                        
+                                                    </label><br>
+                                                    1 pago de $ {{ number_format( $total, 2) }}<br>
                                                 </div>
                                                 <div class="w-500"></div>
                                                 <hr noshade="noshade" />
@@ -256,9 +271,9 @@
                                                     <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios2" value="2">
                                                     <label class="form-check-label" for="exampleRadios2">
                                                         Débito - <br>
-                                                        1 pago de $ {{ number_format($total ,2) }}
-                                                    </label>
-                                                 
+                                                        
+                                                    </label><br>
+                                                    1 pago de $ {{ number_format($total ,2) }}
                                                 </div>
                                                 <hr noshade="noshade" />
                                                
@@ -306,11 +321,12 @@
                                                     <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios5" value="4">
                                                     <label class="form-check-label" for="exampleRadios5">
                                                         Tarjeta Crédito <br>
+                                                    </label><br>
                                                         No Bancaria - $
                                                             <input  type="number" 
                                                                     name="noBanc4" 
                                                                     class="border border-danger ml-5 col-4 text-center">
-                                                    </label>
+                                                    
                                                 </div>
                                                 <hr noshade="noshade" />
 
@@ -322,25 +338,25 @@
                                                         Pago Compuesto -
                                                         Total: $ {{ number_format($total ,2) }}<br>
                                                     </label>
-                                                    <br>                                                                                                       
+                                                    <br>    <br>                                                                                                         
                                                         
-                                                    <label class="form-check-label" id="">
+                                                    {{-- <label class="form-check-label" id=""> --}}
                                                             No Bancaria - $
-                                                    </label>
+                                                    {{-- </label> --}}
                                                    
                                                     <input  type="number" 
                                                             name="noBanc" 
                                                             id="noBanc" 
-                                                            class="border border-dark mt-2 ml-3 col-2 text-center" 
+                                                            class="border border-dark mt-2 ml-3 col-3 text-center" 
                                                             onchange='PagoCompuesto2();' 
                                                             >
                                                     <br>
-                                                    <label class="form-check-label" id="">
+                                                    {{-- <label class="form-check-label" id=""> --}}
                                                         Efectivo o Débito - $
-                                                    </label>
+                                                    {{-- </label> --}}
                                                     <input  type="number" 
                                                             name="eft" 
-                                                            class="border border-dark mt-2 ml-3 col-2 text-center " 
+                                                            class="border border-dark mt-2 ml-3 col-3 text-center " 
                                                             onchange='PagoCompuestoControl();'>
                                                     <br>
                                                   
@@ -352,7 +368,7 @@
                                                             <input  type="number" 
                                                                     name="tarje1" 
                                                                     readonly
-                                                                    class="border rounded-pill border-success mt-2 ml-10 col-3 text-center">
+                                                                    class="border rounded-pill border-success mt-2 ml-10 col-4 text-center">
                                                             <br>
                                                         
                                                             <input type="radio" name="cpago"  value="2">
@@ -361,7 +377,7 @@
                                                                 <input  type="number" 
                                                                         name="tarje2" 
                                                                         readonly
-                                                                        class="border rounded-pill border-success mt-2 ml-6 col-3 text-center"> 
+                                                                        class="border rounded-pill border-success mt-2 ml-6 col-4 text-center"> 
                                                                     <br>
     
                                                             <input type="radio" name="cpago" value="3">
@@ -370,7 +386,7 @@
                                                                 <input  type="number" 
                                                                         name="tarje3" 
                                                                         readonly
-                                                                        class="border rounded-pill border-success mt-2 ml-6 col-3 text-center"> 
+                                                                        class="border rounded-pill border-success mt-2 ml-6 col-4 text-center"> 
                                                                         <br>
     
                                                             <input type="radio" name="cpago" value="4">
@@ -379,7 +395,7 @@
                                                                 <input  type="number" 
                                                                         name="tarje4" 
                                                                         readonly
-                                                                        class="border rounded-pill border-success mt-2 ml-6 col-3 text-center"> 
+                                                                        class="border rounded-pill border-success mt-2 ml-6 col-4 text-center"> 
                                                                 <br>
                                                        
                                                     </label>
@@ -411,43 +427,39 @@
         </div>
     </form>
 </div>
-
 <script>
-    
+function PagoCompuesto($total) {
 
-    function PagoCompuesto($total) {
+    //window.alert($total);
+    var tote = '<?php echo $total; ?>';
+    //let tote = $total;
+    //var tote = $total;
 
-        let tote = '<?php echo $total; ?>'
-        document.detail.eft.value = tote;
-        document.detail.noBanc.value = tote - document.detail.eft.value;
+    document.detail.eft.value = tote;
+
+    document.detail.noBanc.value = tote - document.detail.eft.value;
+}
+
+function PagoCompuestoControl($total) {
+
+    let tot = '<?php echo $total; ?>'
+    let eft = document.detail.eft.value;
+    let noBanc = document.detail.noBanc.value;
+    //document.detail.noBanc.value= tot - eft;
+    //si a + b <> tot
+    //calculo cuotas
+
+    let final = tot - eft - noBanc;
+    if (final > 0) {
+        let final18 = final + (final * 0.18);
+        document.detail.tarje1.value = final;
+        let finalRed = redondeo2(String(final18));
+        //window.alert(finalRed);
+        document.detail.tarje2.value = (finalRed / 3).toFixed(2);
+        document.detail.tarje3.value = (finalRed / 6).toFixed(2);
+        document.detail.tarje4.value = (finalRed / 12).toFixed(2);
     }
-    
-    function PagoCompuesto2($total) {
-/* 
-        let tot = '<?php echo $total; ?>'
-        let noBanc= document.detail.noBanc.value;
-        let eft= document.detail.eft.value;
-
-        document.detail.eft.value = tot - document.detail.noBanc.value; */
-        }
-
-    function PagoCompuestoControl($total) {
-        let tot = '<?php echo $total; ?>'
-        let eft = document.detail.eft.value ;
-        let noBanc= document.detail.noBanc.value;
-        //document.detail.noBanc.value= tot - eft;
-        //si a + b <> tot
-        //calculo cuotas
-        
-        let final = tot - eft - noBanc;
-        if (final>0){
-            let final18= final + (final*0.18);
-            document.detail.tarje1.value = final;
-            document.detail.tarje2.value = (final18/3).toFixed(2);
-            document.detail.tarje3.value = (final18/6).toFixed(2);
-            document.detail.tarje4.value = (final18/12).toFixed(2);
-        }
-        
     }
 </script>
+
 @endsection

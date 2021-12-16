@@ -6,8 +6,10 @@
     @component('components.botones')
     @endcomponent
   </div>
-<x-grafica img="/Storage/clientes.png"/>
-
+{{-- <x-grafica img="/Storage/clientes.png"/> --}}
+<h2>
+    Clientes
+</h2>
 <br><br>
 <table class= "table mt-1">
     <th>
@@ -20,12 +22,20 @@
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-5">
-                <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-                        <span class="text-center mx-auto font text-2xl">
-                          Agregar Cliente
-                        </span>                       
+                <div class="card 
+                {{-- bg-white  --}}
+                shadow">
+                    <div class=" py-3 px-8 cart2
+                    {{-- bg-blue-200 d-flex justify-content-between align-items-center --}}
+                    ">
+                        {{-- <span class="text-center mx-auto font text-2xl"> --}}
+                            <h3>
+                                Agregar Cliente
+                            </h3>
+                          
+                        {{-- </span>                        --}}
                     </div>
+                    
                     <div class="card-body">     
                      
                       <form   action="{{ route('clientes.store') }}" 

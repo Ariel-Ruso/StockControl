@@ -7,7 +7,10 @@
       @component('components.botones')
       @endcomponent
 </div>
-<x-grafica img="/Storage/articulos.png" />
+{{-- <x-grafica img="/Storage/articulos.png" /> --}}
+<h2>
+  Artículos
+</h2>
 <br><br>
 
 <table class= "table ">
@@ -101,7 +104,7 @@
       
       <x-agrega-btn route="articulos/create" 
                     destino="Crear" />
-      <br><br>     
+      <br>
       
       @component('components.carrito-btn')
       @endcomponent
@@ -125,7 +128,7 @@
           <table class="table border-rounded shadow" >
             <thead 
             
-            class="table-warning font-normal text-center text-black-500" 
+            class="table font-normal text-center text-black-500 index" 
               >
               <tr>
                 <th scope="col">

@@ -26,6 +26,7 @@ class PedidoController extends Controller
         $users= User::all();
         $clientes= Cliente::all();
         $items= Item::all();
+        //dd($pedidos);
         return view ('pedidos.index', compact('pedidos', 'users', 'clientes'));
     }
 

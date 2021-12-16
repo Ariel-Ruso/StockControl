@@ -5,11 +5,14 @@
                     {{-- <img  src= {{$img}}  
                           height= "200" 
                           width= "300"
-                          class= "img-fluid"> --}}
 
-                          <span>
-                                {{ $mens }}
-                          </span>
+                          class= "img-fluid">
+
+                           {{-- <span>
+                                {{$nombre}}
+                          </span>  --}}
+                                  
+
                           
                 
         </div>      

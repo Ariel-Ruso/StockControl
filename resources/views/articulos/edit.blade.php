@@ -1,32 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="text/javascript" src="{{ URL::asset('app.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ URL::asset('app.js') }}"></script> --}}
 
 <div class="float-right">
   @component('components.botones')
   @endcomponent
 </div>
 @if(count($imeis)>0)
-  <x-grafica img="/Storage/celulares.jpeg" />
+  {{-- <x-grafica img="/Storage/celulares.jpeg" /> --}}
+  <h2>
+    Celulares
+  </h2>
 @else
-  <x-grafica img="/Storage/articulos.jpg" />
+  {{-- <x-grafica img="/Storage/articulos.jpg" /> --}}
+  <h2>
+    Editar
+  </h2> 
 @endif
 <br><br>
 <table class= "table mt-1">
   <th>
   </th>
 </table>
-
-  <div class="container mt-10 ">
-        <div class="row justify-content-center ">
-            <div class="col-md-6">
-                <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-                        <span class="text-center mx-auto font text-2xl">
-                            Artículo #{{$arts-> id }}
-                        </span>
-                    </div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card 
+      {{-- bg-white  --}}
+       shadow">
+        <div class=" py-3 px-8 cart2
+        {{-- bg-blue-200 d-flex justify-content-between align-items-center --}}
+        ">
+          {{-- <span class="text-center mx-auto font text-xl"> --}}
+            <h3>
+              Artículo #{{$arts-> id }}
+            <h3>
+          {{-- </span>						 --}}
+        </div>
                     <div class="card-body">     
                       
                       <form  action="{{ route('articulos.update', $arts->id) }}" 
