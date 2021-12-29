@@ -127,8 +127,9 @@
       
           <table class="table border-rounded shadow" >
             <thead 
-            
-            class="table font-normal text-center text-black-500 index" 
+                  class="table                
+                  index
+                  " 
               >
               <tr>
                 <th scope="col">
@@ -163,7 +164,9 @@
             </thead>
             <tbody>
               @foreach($arts as $item)
-                <tr class="font text-xs text-center " width= "100%"> 
+                <tr 
+                {{-- class="font text-xs text-center " width= "100%" --}}
+                > 
                   {{-- <td>
                     {{ $item->codigo }}
                   </td> --}}

@@ -7,7 +7,10 @@
     @endcomponent
   </div>
   <br>
-  <x-grafica img="/Storage/prove.jpg"/>
+  {{-- <x-grafica img="/Storage/prove.jpg"/> --}}
+  <h2>
+      Proveedores
+  </h2>
   <br>
   
   <table class= "table mt-1">
@@ -16,15 +19,20 @@
   </table>
   
 
-    <div class="container mt-3 ">
-        <div class="row justify-content-center ">
-            <div class="col-md-6">
-                <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-                        <span class="text-center mx-auto font text-2xl">
-                          Agregar
-                        </span>                       
-                    </div>
+  <div class="container mt-10 ">
+    <div class="row justify-content-center ">
+      <div class="col-md-6">
+        <div class="card shadow ">
+          
+          <div class="card-header ">
+            <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center ">
+              <span class="text-center mx-auto font text-2xl ">
+                <h3>
+                  Agregar
+                </h3>
+              </span>
+            </div>
+          </div>       
                     <div class="card-body">     
                       <form   action="{{ route('proveedores.store') }}" 
                               method="POST"
@@ -59,7 +67,7 @@
                                 @enderror
                             </div>
                             <div class="container row justify-content-center" name="etiquetas">
-                            <br>
+                            <br><br>
                                 <input
                                     type="text"
                                     name="nombre"

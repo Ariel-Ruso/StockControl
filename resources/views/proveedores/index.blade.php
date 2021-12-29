@@ -51,10 +51,10 @@
                             Contacto
                         </th>
                         <th scope="col">
-                            Telefono
+                            Teléfono
                         </th>
                         <th scope="col">
-                            Direccion
+                            Dirección
                         </th>
                         <th scope="col">
                             Acciones

@@ -2,8 +2,18 @@
 
 @section('content')
 
-@component('components.botones')
-@endcomponent
+<div class="float-right 
+            contBtn
+        ">
+    @component('components.botones')
+    @endcomponent
+    <br>
+</div>
+<h2>
+    Caja
+</h2>
+  <br><br>
+
 
 <div name="tabla facturacion" class="container mt-10 ">
         <div class="row justify-content-center ">
@@ -11,8 +21,12 @@
                 <div class="card bg-white shadow">
                     <div class=" py-3 px-8 bg-green-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
+                            <h3>
+
+                          
                           Movimientos -
                           {{ today()->format('d/m/y') }}
+                        </h3>
                         </span>             
                     </div>
                     <div class="container">
@@ -113,6 +127,7 @@
             </div>
         </div>
     </div>    
+    <br><br>
 
 
 <div name="tabla facturacion" class="container mt-10 ">
@@ -121,7 +136,10 @@
             <div class="card bg-white shadow">
                 <div class=" py-3 px-8 bg-green-200 d-flex justify-content-between align-items-center">
                     <span class="text-center mx-auto font text-2xl">
-                        Final de Caja
+                        <h3>
+                            Final de Caja
+                        </h3>
+                        
                     </span>             
                 </div>
                 <div class="container">

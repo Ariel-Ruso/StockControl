@@ -5,9 +5,6 @@
 
 body {
     main {
-        //container {
-        //align-items: center;
-        //margin: 5;
         img {
             margin: auto;
             height: 100px;
@@ -68,10 +65,11 @@ body {
             img {
                 //justify-content: center;
                 height: 100px;
-                width: 300px;
+                width: 400px;
             }
             .index {
                 background-color: $cyan;
+                font-size: 1.3em;
             }
             .reports {
                 background-color: $teal;

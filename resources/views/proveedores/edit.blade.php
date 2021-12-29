@@ -7,7 +7,10 @@
     @endcomponent
     <br>
   </div>
-    <x-grafica img="/Storage/prove.jpg"/>
+    {{-- <x-grafica img="/Storage/prove.jpg"/> --}}
+    <h2>
+        Proveedores
+    </h2>
     <br><br>
       
   <table class= "table">
@@ -15,15 +18,21 @@
       </th>
   </table>
   
-    <div class="container mt-3 ">
-        <div class="row justify-content-center ">
-            <div class="col-md-6">
-                <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-                    <span class="text-center mx-auto font text-2xl">
-                            Proveedor # {{ $prove-> id }}
-                        </span>                   
-                    </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card 
+        {{-- bg-white  --}}
+         shadow">
+          <div class=" py-3 px-8 cart2
+          {{-- bg-blue-200 d-flex justify-content-between align-items-center --}}
+          ">
+            {{-- <span class="text-center mx-auto font text-xl"> --}}
+              <h3>
+                Proveedor # {{ $prove-> id }}
+              <h3>
+            {{-- </span>						 --}}
+          </div>
                     <div class="card-body">     
                       <form   action="{{ route('proveedores.update', $prove->id) }}" 
                               method="POST"
@@ -111,10 +120,12 @@
                                     class="form-control mb-2"
                                 />  
                             </div>
-                            <button class="btn btn-success mt-3" 
-                                    type="submit">
-                                Editar
-                          </button>
+                            <div class="row justify-content-center">
+                                <button class="btn btn-primary mt-3 my-3" 
+                                        type="submit">
+                                            Editar
+                                </button>
+                              </div>
                       </form>
                     </div>
                 </div>
