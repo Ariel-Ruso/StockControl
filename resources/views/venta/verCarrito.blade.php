@@ -298,9 +298,15 @@
                                 </a> --}}
                             @endif 
 
+                            
                             @if (session('carrito'))
+                                
                                 <a  href=" {{ route('detallePresupuesto') }}" 
-                                    class="btn btn-info mx-2 mt-1 shadow" >
+                                    class="btn btn-info mx-2 mt-1 shadow" 
+                                    @if (Auth::user()->name == 'Geminis') 
+                                        style="display: none"
+                                    @endif
+                                    >
                                         Presupuesto
                                 </a>
                             @else

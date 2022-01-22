@@ -277,6 +277,27 @@
     <tfoot>
 
       <tr>
+        @if (Auth::user()->name == 'Geminis') 
+          <td colspan="2"></td>
+          <td style="text-align:right">
+            <strong>
+                Efectivo:
+            </strong>
+          </td>
+        
+          <td style="text-align:center" class="gray"> 
+            @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
+                || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) )
+              $ {{ $eft + $desc}}
+            @else
+              $ 0
+            @endif
+          </td>
+
+        @else
+
+        
+
         <td colspan="2"></td>
         <td style="text-align:right">
           <strong>
@@ -350,7 +371,7 @@
             </td>
         
       </tr>
-
+      @endif
       <tr>
         <td colspan="2"></td>
         <td style="text-align:right">
@@ -395,12 +416,20 @@
 <br>
 <br>
 <div class="container">
+  @if (Auth::user()->name == 'Geminis') 
+    <a href=" {{ route ('imprimirRemitPDF',$id) }}" class="btn btn-primary" >
+      Imprimir 1 pdf
+    </a>
+  @else
+  
   <a href=" {{ route ('imprimirRemitPDF',$id) }}" class="btn btn-primary" >
         Imprimir 1 pdf
   </a>
   <a href=" {{ route ('imprimirRemitPDF2',$id) }}" class="btn btn-info" >
     Imprimir 2 pdf
-</a>
+  </a>
+
 </div>
+@endif
 
 @endsection

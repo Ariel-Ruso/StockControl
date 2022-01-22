@@ -36,7 +36,7 @@ class ArticuloController extends Controller
         $proves= Proveedor::all();
         $art= new Articulo();
         $ultArt= $art->getLastArt();
-        //dd($ultArt);
+        //dd($cates[11]);
         return view ('articulos.create', compact ('cates', 'proves', 'ultArt'));
     }
 

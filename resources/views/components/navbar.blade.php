@@ -26,7 +26,11 @@
                 
                 </li> 
                 <!-- menu usuarios -->
-                <div class="dropdown" >   
+                <div class="dropdown "
+                    @if (Auth::user()->name == 'Geminis') 
+                        style="display: none"
+                    @endif
+                    >
                     <a  href=""
                         {{ $attributes }}
                         role="button" 
@@ -43,6 +47,7 @@
                             </a>
                     </div>
                 </div>
+                
                 <!-- menu clientes -->
                 <div class="dropdown">   
                     <a  href=""
@@ -97,7 +102,11 @@
                     </div>
                 </div>
                 <!-- menu categorias -->
-                <div class="dropdown">   
+                <div class="dropdown" 
+                    @if (Auth::user()->name == 'Geminis') 
+                        style="display: none"
+                    @endif
+                    >   
                     <a  href=""
                         {{ $attributes }}
                         role="button" 
@@ -116,7 +125,11 @@
                     </div>
                 </div>
                  <!-- menu proveedores -->
-                 <div class="dropdown">   
+                 <div class="dropdown"
+                    @if (Auth::user()->name == 'Geminis') 
+                        style="display: none"
+                    @endif
+                    >   
                     <a  href=""
                         {{ $attributes }}
                         role="button" 

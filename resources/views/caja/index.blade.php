@@ -221,7 +221,27 @@
           <table class="table border-rounded shadow" >
             <thead class="table font-normal text-center text-black-500 index" >
               <tr>
-                <th scope="col">
+                @if (Auth::user()->name == 'Geminis') 
+                    <th scope="col">
+                        Operación
+                    </th>
+                    <th scope="col">
+                        Fecha
+                    </th>
+                    <th scope="col">
+                        Cliente
+                    </th>
+                    <th scope="col">
+                        Det de Gasto
+                    </th>
+                    <th scope="col">
+                        Efectivo  
+                    </th>
+                    <th scope="col">
+                        Remito
+                    </th> 
+                @else
+                    <th scope="col">
                                         Operación
                                     </th>
                                     <th scope="col">
@@ -252,14 +272,42 @@
                                     <th scope="col">
                                         Pedidos
                                     </th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($todas as $item)
-                                <thead>
-                                <tr class="
-                                {{-- text-center text-xs  --}}
-                                tData">
+                @endif
+                </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($todas as $item)
+                            <thead>
+                                <tr class="tData">  
+                                    @if (Auth::user()->name == 'Geminis') 
+                                        <th>
+                                            {{  $item->id }}
+                                        </th> 
+                                        <th>                                      
+                                            {{ $item->created_at->format('d/m/y')  }}<br>
+                                        </th>
+                                        <th>
+                                            {{  $item->apellidoyNombre }}
+                                        </th>
+                                        <th></th>
+                                        <th>
+                                            @if($item->tipoPago==1)
+                                                $ {{  $item->total }}
+                                                @else
+                                                $ {{'-' }}
+                                            @endif
+                                        </th>
+                                        
+                                        <th>
+                                            <a href=" {{ route ('imprimirRemit', $item->id) }}" 
+                                                class="btn btn-warning shadow" >
+                                                    Ver
+                                            </a>
+                                        </th> 
+                                    @else
+                                    
+
+                                                            
                                     <th>
                                          {{  $item->id }}
                                     </th> 
@@ -354,13 +402,26 @@
                                         </a>
                                     </th> 
                                       -->
-                                   
+                                      @endif
                                 </tr>
                                 </thead>
                             @endforeach
                             @foreach ($gastos as $item2)
                                 <thead>
                                     <tr class="text-center text-xs">
+                                        @if (Auth::user()->name == 'Geminis') 
+                                            <th></th>
+                                            <th>
+                                                {{ $item2->created_at->format('d/m/y')  }}<br>
+                                            </th>   
+                                            <th></th>                                          
+                                            <th>
+                                                {{  $item2->detalle }}
+                                            </th>
+                                            <th>
+                                                - $ {{  $item2->monto }}
+                                            </th>
+                                        @else
                                     <th>
 
                                     </th> 
@@ -390,6 +451,7 @@
                                     <th>
                                         
                                     </th> 
+                                    @endif
                                 </thead>
 
                             @endforeach

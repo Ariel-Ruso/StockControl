@@ -6,7 +6,10 @@
     @component('components.botones')
     @endcomponent
   </div>
-  <x-grafica img="/Storage/articulos.jpg"/>
+  {{-- <x-grafica img="/Storage/articulos.jpg"/> --}}
+  <h2>
+    Artículos
+  </h2>
   <br>
   
   <table class= "table">
@@ -16,11 +19,14 @@
 
     <div class="container mt-3 ">
         <div class="row justify-content-center ">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
+                    <div class=" cart2 py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
-                            {{ $nombre }} - Agregar {{ $cant }} Pares 
+                            <h3>
+                                {{ $nombre }} - Agregar {{ $cant }} Pares 
+                            </h3>
+                            
                         </span>                       
                     </div>
                     <div class="card-body">     
@@ -44,8 +50,8 @@
 
                                             <input type="number" name="numero[]"  placeholder= "Numero"
                                                     class="form-control mb-2 col-4" />
-                                            <input type="number" name="cantidad[]"  placeholder="Cantidad" 
-                                                class="form-control mb-2 col-5" />
+                                            <input type="number" name="cantidad[]"  value= "1" placeholder="Cantidad" 
+                                                class="form-control mb-2 col-5" readonly/>
                                             <input type="text" name="color[]"  placeholder="Color" 
                                                 class="form-control mb-2 col-6" />
                                             
@@ -61,6 +67,7 @@
                                         type= "hidden"
                                         name= "cant"
                                         value= {{ $cant }}
+                                        
                                         class= "form-control"
                                     />     
 

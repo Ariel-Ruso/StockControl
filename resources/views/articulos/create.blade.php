@@ -203,17 +203,27 @@
                         @endforeach
                       </select>
                       <br><br>
-                      <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
-                        <br>
-                        <option selected>
-                          Categorias...
-                        </option>
-                        @foreach($cates as $item)
-                        <option value="{{ $item->id }}">
-                          {{ $item->nombre }}
-                        </option>
-                        @endforeach
-                      </select>
+                      @if (Auth::user()->name == 'Geminis') 
+                            
+                          <input type="hidden" name="categorias_id" id="categorias_id"
+                                  value="{{ $cates[11]->id }}">
+
+                      @else  
+                          <select class="custom-select mr-sm-2" id="categorias_id" name="categorias_id">
+                            <br>
+                                
+                            <option selected>
+                              Categorias...
+                            </option>
+
+                            @foreach($cates as $item)
+                              <option value="{{ $item->id }}">
+                                {{ $item->nombre }}
+                              </option>
+                            @endforeach
+
+                      @endif
+                        </select>
                       <br>
                     </div>
                   </div>

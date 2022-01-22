@@ -254,6 +254,7 @@
                                         {{-- overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg --}}
                                         ">
                                             <div class="px-4 py-3 ">
+                                                @if (Auth::user()->name == 'Geminis') 
                                                 <div class="form-check" name="check pagos">
 
                                                     <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 
@@ -263,6 +264,19 @@
                                                         
                                                     </label><br>
                                                     1 pago de $ {{ number_format( $total, 2) }}<br>
+                                                    
+                                                </div>
+                                                @else
+                                                <div class="form-check" name="check pagos">
+
+                                                    <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 
+                                                            checked>
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        Efectivo <br>
+                                                        
+                                                    </label><br>
+                                                    1 pago de $ {{ number_format( $total, 2) }}<br>
+                                                    
                                                 </div>
                                                 <div class="w-500"></div>
                                                 <hr noshade="noshade" />
@@ -401,6 +415,7 @@
                                                     </label>
                                                     
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

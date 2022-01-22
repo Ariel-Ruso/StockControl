@@ -20,7 +20,34 @@
         <label class="alert alert-primary border shadow mx-5" >
         <nav class="d-flex navbar navbar-light float-right tablet: d-flex flex-col">
           <form  class="form-inline col-auto " action="{{ route('articulos.search') }}" >
-              <input    name="nombre" 
+
+            @if (Auth::user()->name == 'Geminis') 
+                    <input    name="nombre" 
+                        id= "nombre"
+                        class="form-control mr-sm-2 col-4" 
+                        type="search" 
+                        placeholder="Nombre" 
+                        aria-label="Search"
+                        >
+                    <input    name="marca" 
+                        id= "marca"
+                        class="form-control mr-sm-2 col-2" 
+                        type="search" 
+                        placeholder="Marca" 
+                        aria-label="Search"
+                        >
+                    <input    name="color" 
+                        id= "color"
+                        class="form-control mr-sm-2 col-2" 
+                        type="search" 
+                        placeholder="Color" 
+                        aria-label="Search"
+                        >
+             
+            @else
+
+                        
+            <input    name="nombre" 
                         id= "nombre"
                         class="form-control mr-sm-2 col-4" 
                         type="search" 
@@ -87,6 +114,8 @@
                               </option>
                             @endforeach
               </select>
+              @endif
+
               <button class="btn btn-success sm shadow " 
                       type="submit" 
                       >
@@ -131,53 +160,98 @@
                   index
                   " 
               >
+              @if (Auth::user()->name == 'Geminis') 
               <tr>
                 <th scope="col">
                     Nombre
                 </th>
                 <th scope="col">
                     Cantidad
-                  </th>
-                <th scope="col">
-                    Efectivo
                 </th>
                 <th scope="col">
-                  Tarjeta
-              </th>
+                    Precio
+                </th>
+                <th scope="col">
+                      Modelo
+                 </th> 
                 <th scope="col">
                     Marca
-                </th>
-               {{--  <th scope="col">
-                    Modelo
-                </th> --}}
-                <th scope="col">
-                    Categoría
-                </th>
-                <th scope="col">
-                    Proveedor                  
                 </th>
                 
                 <th scope="col-4">
                     Acciones
                 </th>
               </tr>
+              @else
+                    <th scope="col">
+                      Nombre
+                  </th>
+                  <th scope="col">
+                      Cantidad
+                    </th>
+                  <th scope="col">
+                      Efectivo
+                  </th>
+                  <th scope="col">
+                    Tarjeta
+                </th>
+                  <th scope="col">
+                      Marca
+                  </th>
+                {{--  <th scope="col">
+                      Modelo
+                  </th> --}}
+                  <th scope="col">
+                      Categoría
+                  </th>
+                  <th scope="col">
+                      Proveedor                  
+                  </th>
+                  
+                  <th scope="col-4">
+                      Acciones
+                  </th>
+                </tr>
+              @endif
             </thead>
             <tbody>
               @foreach($arts as $item)
-                <tr 
-                {{-- class="font text-xs text-center " width= "100%" --}}
-                > 
-                  {{-- <td>
-                    {{ $item->codigo }}
-                  </td> --}}
+              
+                @if (Auth::user()->name == 'Geminis') 
                   <td >  
                     <a href=" {{ route('articulos.show', $item) }}">
                       {{ $item->nombre }}
                     </a>
                   </td>
-                  
                   <td>
                     {{ $item->cantidad }}
+                  </td>
+                  <td>
+                    $  {{ $item->precioVenta }}
+                  </td>
+                  <td>
+                    {{ $item->modelo }}
+                  </td>
+                  <td>
+                    {{ $item->marca }}
+                  </td>
+                @else
+
+                
+                  <tr 
+                  {{-- class="font text-xs text-center " width= "100%" --}}
+                  > 
+                    {{-- <td>
+                      {{ $item->codigo }}
+                    </td> --}}
+                    <td >  
+                      <a href=" {{ route('articulos.show', $item) }}">
+                        {{ $item->nombre }}
+                      </a>
+                    </td>
+                  
+                    <td>
+                      {{ $item->cantidad }}
                     
                     {{-- 
                     @isset ($numeros)
@@ -192,69 +266,69 @@
                          @endif   
                     @endforeach  
                     @endisset --}}
-                  </td>
-                  <!-- <td>
-                  $  {{ $item->precioCompra }} 
-                  </td>
-                  <td >
-                  $  {{ $item->iva }}
-                  </td> -->
-                  <td>
-                  $  {{ $item->precioVenta }}
-                  </td>
-                  <td>
-                    $  {{ $item->pVentaTarj }}
                     </td>
-                  <td>
-                    {{ $item->marca }}
-                  </td>
-                 {{--  <td>
-                    {{ $item->modelo }}
-                  </td> --}}
-                  <td>
-                    {{ $cates[ ($item->categorias_id)-1 ]->nombre }}
-                  </td>
-                  <td>
-                    {{ $proves[ ($item->proveedors_id)-1 ]->nombre }}
-                  </td>
-                  {{-- <td>
-                    @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+                    <!-- <td>
+                    $  {{ $item->precioCompra }} 
+                    </td>
+                    <td >
+                    $  {{ $item->iva }}
+                    </td> -->
+                    <td>
+                    $  {{ $item->precioVenta }}
+                    </td>
+                    <td>
+                      $  {{ $item->pVentaTarj }}
+                      </td>
+                    <td>
+                      {{ $item->marca }}
+                    </td>
+                  {{--  <td>
+                      {{ $item->modelo }}
+                    </td> --}}
+                    <td>
+                      {{ $cates[ ($item->categorias_id)-1 ]->nombre }}
+                    </td>
+                    <td>
+                      {{ $proves[ ($item->proveedors_id)-1 ]->nombre }}
+                    </td>
+                    {{-- <td>
+                      @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
+                      
+                      <form action=" {{ route('imeis.select') }}"
+                            method="POST">
+                            @method('POST')
+                            @csrf
+                          <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" 
+                                    type="button" id="dropdownMenuButton1" 
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                              Disponibles
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @foreach ( $imeis as $imei)                                                          
+                                  @if($imei->articulos_id == $item->id) 
+                                
+                                    <li>
+                                      <a  
+                                          >
+                                        {{ $imei->detalle }}
+                                      </a>
+                                    
+                                    </li>
+
+                                  @endif
+                                @endforeach 
+                              </ul>
+
+                          </div>
                     
-                    <form action=" {{ route('imeis.select') }}"
-                          method="POST">
-                          @method('POST')
-                          @csrf
-                        <div class="dropdown">
-                          <button class="btn btn-success dropdown-toggle" 
-                                  type="button" id="dropdownMenuButton1" 
-                                  data-bs-toggle="dropdown" aria-expanded="false">
-                            Disponibles
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          @foreach ( $imeis as $imei)                                                          
-                                @if($imei->articulos_id == $item->id) 
-                              
-                                  <li>
-                                    <a  
-                                        >
-                                      {{ $imei->detalle }}
-                                    </a>
-                                  
-                                  </li>
 
-                                @endif
-                              @endforeach 
-                            </ul>
-
-                        </div>
-                   
-
-                      </form>
+                        </form>
+                      @endif
+                    
+                    </td> --}}
                     @endif
-                  
-                  </td> --}}
-
-                  <td>
+                    <td>
                       <a  href="{{ route ('articulos.edit', $item) }}" 
                           class="btn btn-outline-warning btn-sm shadow">
                           <i class= "fa fa-edit">
@@ -424,9 +498,12 @@
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
-                                      <h4 class="modal-title">
-                                        Elegir - {{ $item->nombre }}
-                                      </h4>
+                                       
+                                        <h3 class="modal-title">
+                                          Elegir - {{ $item->nombre }}
+                                        </h3>
+                                        
+                                      
                                   </div>
                                   <div class="modal-body">
                                     <h5>
@@ -511,6 +588,8 @@
 
                   </td>
                 </tr>
+                
+
               @endforeach
             </tbody>
           </table>
