@@ -250,23 +250,64 @@
                             <div class="flex flex-col mt-1">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow  detail
-                                        {{-- overflow-hidden bg-blue-200 border-b border-gray-400 sm:rounded-lg --}}
-                                        ">
+                                        <div class="shadow  detail">
                                             <div class="px-4 py-3 ">
                                                 @if (Auth::user()->name == 'Geminis') 
-                                                <div class="form-check" name="check pagos">
 
-                                                    <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 
-                                                            checked>
-                                                    <label class="form-check-label" for="exampleRadios1">
-                                                        Efectivo <br>
+                                                    <div class="form-check" name="check pagos">
+
+                                                        <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 
+                                                                checked>
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            Efectivo <br>
+                                                            
+                                                        </label><br>
+                                                        1 pago de $ {{ number_format( $total, 2) }}<br>
                                                         
-                                                    </label><br>
-                                                    1 pago de $ {{ number_format( $total, 2) }}<br>
-                                                    
-                                                </div>
+                                                    </div>
+                                                    <hr noshade="noshade" />
+                                                
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios4" value="3">
+                                                        <label class="form-check-label" for="exampleRadios4">
+                                                            Tarjeta Crédito Bancaria
+                                                        </label>
+                                                        
+                                                        <br><br>
+                                                                                                        
+                                                        <label for="cuotas" name="fpago">
+                                                            
+                                                            <input type="radio" name="fpago" value="1">
+                                                                
+                                                                Total: $ {{ number_format($total ,2) }}
+                                                                - 1 cuota (Sin interes) 
+                                                                <br>
+                                                            
+                                                            <input type="radio" name="fpago"  value="2">
+                                                                
+                                                                Total $ {{ number_format($totalTar, 2) }}
+                                                                - 3 cuotas - $
+                                                                {{ number_format($totalTar/3, 2) }}
+                                                            <br>
+
+                                                        </label>
+                                                    </div>
+                                                @elseif (Auth::user()->name == 'Akihay') 
+
+                                                    <div class="form-check" name="check pagos">
+
+                                                        <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 
+                                                                checked>
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            Efectivo <br>
+                                                            
+                                                        </label><br>
+                                                        1 pago de $ {{ number_format( $total, 2) }}<br>
+                                                        
+                                                    </div>
+
                                                 @else
+
                                                 <div class="form-check" name="check pagos">
 
                                                     <input class="form-check-input" type="radio" name="tipoPago" id="exampleRadios1" value="1" 

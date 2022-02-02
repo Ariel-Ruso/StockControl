@@ -199,7 +199,8 @@
                             </td>
                             <td style="text-align:center" class="gray"> 
                                 
-                                $ {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+                                {{-- $ {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+                                {{ $desc}}
                             </td>
                         </tr>
                         <tr>

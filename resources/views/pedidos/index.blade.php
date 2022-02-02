@@ -6,7 +6,6 @@
     @component('components.botones')
     @endcomponent
 </div>
-    {{-- <x-grafica img="/Storage/articulos.png" /> --}}
     <h2>
         Pedidos
     </h2>
@@ -14,15 +13,12 @@
 
 @if($pedidos->count())
 
-    
-
-
-<div class="container mt-4 col-md-8">
-    <div class="row justify-content-center mx-auto ">
-      
-          <table class="table border-rounded shadow" >
-            <thead class="table font-normal text-center text-black-500 index" >
-              <tr>  
+    <div class="container mt-4 col-md-8">
+        <div class="row justify-content-center mx-auto ">
+        
+            <table class="table border-rounded shadow" >
+                <thead class="table font-normal text-center text-black-500 index" >
+                <tr>  
                                     <th scope="col">
                                         N Pedido
                                     </th>

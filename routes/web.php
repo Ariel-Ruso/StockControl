@@ -280,6 +280,9 @@ Route::resource('presupuestos', PresupuestoController::class);
 Route::post('venta/verCarrito', [CarritoController::class, 'setDescuento'])
         ->name('setDescuento');
 
+Route::post('venta/verCarrito', [CarritoController::class, 'ventaPeso'])
+        ->name('ventaPeso');
+
 Route::get ('venta/detallePedido', [CarritoController::class, 'detallePedido'])
     ->name('detallePedido');
 

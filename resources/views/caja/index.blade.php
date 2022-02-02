@@ -353,40 +353,42 @@
                                     </th> 
                                     <th>
 
-                                        
+                                       
+
                                         {{-- revisar ciclos  --}}
                                         
                                         @if ($pedis->count() > 0)
-                                        {{-- @for ($i=0; $i<$pedis->count(); $i++) --}}
+                                            
+                                            {{-- @for ($i=0; $i<$pedis->count(); $i++) --}}
+
                                         
                                             @foreach ( $pedis as $pedi )
                                                 
                                                 @if($pedi->id == $item->id)
 
                                                     @if($pedi->estado == 1)
-                                                        
-                                                        "Enviado"
+                                                        Enviado
+                                                        @break
                                                     @else
-                                                        Armado
-                                                                                                    
+                                                        Armado                         
                                                     @endif
-                                                
-                                                @else
+                                                @else   
 
                                                     
+                                                    @break
                                                 @endif
-                                                {{-- @endfor --}}
-                                                
+                                                                                                
                                             @endforeach
+
                                         @else
+
                                             <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
                                                 class="btn btn-success shadow" >
                                                     Generar
                                             </a> 
-                                
+
                                         @endif
-                                             
-                                        
+
                                     </th> 
                                     
                                     <!-- 

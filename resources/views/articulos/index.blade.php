@@ -26,23 +26,27 @@
                         id= "nombre"
                         class="form-control mr-sm-2 col-4" 
                         type="search" 
-                        placeholder="Nombre" 
+                        placeholder="Articulo" 
                         aria-label="Search"
                         >
                     <input    name="marca" 
                         id= "marca"
-                        class="form-control mr-sm-2 col-2" 
+                        class="form-control mr-sm-2 col-2 " 
                         type="search" 
                         placeholder="Marca" 
                         aria-label="Search"
                         >
-                    <input    name="color" 
+
+                        
+                    {{-- si pide color agregar a descripcion arti
+
+                      <input    name="color" 
                         id= "color"
                         class="form-control mr-sm-2 col-2" 
                         type="search" 
                         placeholder="Color" 
                         aria-label="Search"
-                        >
+                        > --}}
              
             @else
 
@@ -115,12 +119,14 @@
                             @endforeach
               </select>
               @endif
+              
+                <button class="mr-1 ml-5 btn btn-success sm shadow  " 
+                        type="submit" 
+                        >
+                            Buscar
+                </button>
+              
 
-              <button class="btn btn-success sm shadow " 
-                      type="submit" 
-                      >
-                          Buscar
-              </button>
         </nav>
       </label>
     </th>
@@ -163,7 +169,10 @@
               @if (Auth::user()->name == 'Geminis') 
               <tr>
                 <th scope="col">
-                    Nombre
+                    Artículo
+                </th>
+                <th scope="col">
+                  Detalles
                 </th>
                 <th scope="col">
                     Cantidad
@@ -222,6 +231,30 @@
                     <a href=" {{ route('articulos.show', $item) }}">
                       {{ $item->nombre }}
                     </a>
+                  </td>
+                  <td>
+                    
+						{{-- 
+                    <strong>
+                      Pares Disponibles:
+                    </strong> --}}
+                    <div class="container row justify-content-center ">
+                       @foreach ( $numeros as $numero) 
+                      
+
+                       @if ($numero->articulos_id == $item->id)
+                       {{-- {{ $numero->articulos_id }} --}}
+                       N:° {{ $numero->numero }}								
+                       -  {{ $numero->cantidad }} pares -
+                       {{ $numero->color }}
+                       <br>
+
+                      @endif
+
+								      @endforeach 
+							      </div> 
+						        
+
                   </td>
                   <td>
                     {{ $item->cantidad }}
@@ -553,11 +586,14 @@
                                                                 {{ $numero->color }}
                                                               </td>
                                                               <td>
-                                                                    <button type="submit" 
-                                                                            class="btn btn-primary " 
-                                                                            >
+                                                                @if( $numero->cantidad > 0)
+                                                                 
+                                                                  <button type="submit" 
+                                                                          class="btn btn-primary sm shadow">                                                                             
                                                                             Seleccionar
-                                                                    </button>
+                                                                  </button>
+                                                                @endif
+                                                                    
                                                             
                                                               </td>
                                                             </form>
@@ -575,7 +611,7 @@
                                                              
                                     </h5>
                                     <div class="modal-footer">
-                                      <a class="btn btn-danger" 
+                                      <a class="btn btn-danger sm shadow" 
                                           data-dismiss="modal">
                                             Cancelar
                                       </a>

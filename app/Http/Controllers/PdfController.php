@@ -187,6 +187,17 @@ class PdfController extends Controller
 
         $fecha= $fact->created_at;
         $nremit= "0002-0002318";
+        if( $fact->tipoPago == 1){
+            $eft= $fact->total;
+        }
+        
+        $desc=0;
+        $items = Item::whereIn('idFactura', [$id]) ->get();
+        //dd($items[0]);
+        for ($i=0; $i<count($items); $i++) {
+            $desc= $desc + $items[$i]->descuento;
+            
+        }
 
         $nombreCli= $fact->apellidoyNombre;
         $direccionCli= $fact->domicilioCliente;
@@ -195,10 +206,10 @@ class PdfController extends Controller
         
         $total= $fact->total;
         
-        $pdf= \PDF::loadView ('remitos.remito_PDF', compact('fecha', 'nremit', 'dniCli', 
+        $pdf= \PDF::loadView ('remitos.remito_PDF', compact('fecha', 'nremit', 'dniCli', 'desc',
                 'tipoPago', 'direccionCli', 'total', 'id', 'items', 'nombreCli', 'pro', 'src'));
             
-        return $pdf->download ('Rm-' .$nombreCli .'.pdf', compact('fecha', 'nremit', 'dniCli', 
+        return $pdf->download ('Rm-' .$nombreCli .'.pdf', compact('fecha', 'nremit', 'dniCli', 'desc',
             'direccionCli', 'total', 'id', 'items', 'nombreCli', 'tipoPago', 'pro', 'src'));
                 
     }

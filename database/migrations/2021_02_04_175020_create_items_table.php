@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
                     ->nullable();
             $table->string('descripcion');
             $table->string('codigo');
-            $table->integer('cantidad');
+            $table->float('cantidad');
             $table->float('precioUnit');
             $table->string('imei')
                     ->nullable();

@@ -134,17 +134,6 @@ class ArticuloController extends Controller
             ->with('mensaje', 'Artículo Eliminado');    
     }
     
-    /* public function vender_articulo(Request $request, $id)
-    {
-        $request-> validate ([
-            'cantidad' => 'required',
-            ]);
-
-        $art= Articulo::FindOrFail($id);
-        $art->cantidad= $art->cantidad - $request->cantidad;
-        $art->save();
-        return back()->with('mensaje', 'Artículo vendido  ');    
-    } */
     
     public function search(Request $request){      
 
@@ -156,9 +145,11 @@ class ArticuloController extends Controller
         $preciof= $request->get('preciof');
         $categorias= $request->get('categorias');
         $proveedores= $request->get('proveedores');
-
+        //$color= $request->get('color');
+        //dd($color);
         $arts= Articulo::orderBy ('id', 'ASC')
             ->nombre ($nombre)
+            //->nombre ($color)
             ->codigo ($codigo)
             ->marca ($marca)
             ->modelo ($modelo)
@@ -166,30 +157,16 @@ class ArticuloController extends Controller
             ->preciof ($preciof)
             ->categorias ($categorias)
             ->proveedores ($proveedores)
+            
             ->paginate (1500);
 
         $cates= Categoria::all();
         $proves= Proveedor::all();
         $imeis= Imei::all();
+        $numeros= Numero::all();
 
-        return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis'));
+        return view ('articulos.index', compact ('arts', 'cates', 'proves', 'imeis', 'numeros'));
     }
-      /* public function buscaPorAr(Request $request){
-        
-        $buscar= $request->get('buscarPor');  
-        $tipo= $request->get('tipo');  
-        $cates= Categoria::all();
-        $proves= Proveedor::all();
-        //invoco funcion scopeNombre
-         if ( ($buscar) ) {
-            $arts= Articulo::buscarPor($tipo, $buscar)
-            
-                ->paginate(5);
-            $cont= count($arts);
-        }else{
-            return back()-> with('mensaje', 'Para buscar, cargue campos. ');
-        } 
-        return view ('articulos.mostrarTodos', compact ('arts', 'cates', 'proves', 'cont'));
-    }  */
+      
     
 }

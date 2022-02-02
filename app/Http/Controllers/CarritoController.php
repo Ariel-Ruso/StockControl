@@ -16,6 +16,26 @@ class CarritoController extends Controller
         if(!session()->has('carrito')) session()->put('carrito', array());
     }
 
+    public function ventaPeso(Request $request)
+    {
+        //dd($request);
+        $carrito= session()->get('carrito');
+          //si carrito ya tiene ese item incluyo desc
+          if(isset($carrito[$request->id])) {
+            $res= ($request->inpeso) * $carrito[$request->id]['Precio'];
+            //dd($res);
+            $carrito[$request->id]['SubTotal']= $res;
+            $carrito[$request->id]['Cantidad']= (float)$request->inpeso;
+            session()->put ('carrito', $carrito);
+            
+          }
+          ///$this->subtotal();
+          //$this->subtotalT();
+          
+        return redirect()->back()->with('mensaje', 'Subtotal Actualizado');
+
+    }
+
     public function agregar($id){
         
         $articulo= Articulo::Findorfail($id);
