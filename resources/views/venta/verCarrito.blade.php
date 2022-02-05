@@ -86,7 +86,8 @@
                         <!-- recorro carrito  -->  
                             <tr>
                                 <th  class="font-weight-normal text-center col-md-5" >
-                                    {{ $detalle['Nombre'] }}
+                                    {{ $detalle['Nombre'] }}-
+                                    N° {{ $detalle['Numero'] }}
                                 </th>
                                 <th  class="font-weight-normal text-center col-md-3" >
                                     $ {{ number_format($detalle['Precio'],2) }}

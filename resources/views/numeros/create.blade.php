@@ -24,7 +24,7 @@
                     <div class=" cart2 py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
                             <h3>
-                                {{ $nombre }} - Agregar {{ $cant }} Pares 
+                                {{ $nombre }} - Agregar  Pares 
                             </h3>
                             
                         </span>                       
@@ -50,8 +50,8 @@
 
                                             <input type="number" name="numero[]"  placeholder= "Numero"
                                                     class="form-control mb-2 col-4" />
-                                            <input type="number" name="cantidad[]"  value= "1" placeholder="Cantidad" 
-                                                class="form-control mb-2 col-5" readonly/>
+                                            <input type="number" name="cantidad[]"  value= "0" placeholder="Cantidad" 
+                                                class="form-control mb-2 col-5" />
                                             <input type="text" name="color[]"  placeholder="Color" 
                                                 class="form-control mb-2 col-6" />
                                             

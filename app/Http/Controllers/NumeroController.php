@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\numero;
+use App\Models\Articulo;
 use Illuminate\Http\Request;
 
 class NumeroController extends Controller
@@ -24,35 +25,39 @@ class NumeroController extends Controller
      */
     public function create()
     {
-        
         return view ('numeros.create', compact('id','nombre'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //dd($request);
-        //del 19 al 36
+        $cont= 0;
+
         for ($i=0; $i<$request->cant; $i++ ){
             
+            
             if($request->color[$i] != null){
+
                 $num= new Numero();
                 $num->numero= $request->numero[$i];    
                 $num->color= $request->color[$i];    
                 $num->cantidad= $request->cantidad[$i];
                 $num->articulos_id= $request->id; 
                 $num->save();
+                
             }
 
+            $cont = $cont + $request->cantidad[$i];
+                        
         }
+
+        $art= Articulo::findorfail($request->id);
+        $art->cantidad= $cont;
+        $art->save();
+
                 
         return back()
-        ->with('mensaje', 'Cargas completas');
+                ->with('mensaje', 'Cargas completas');
     }
 
     /**

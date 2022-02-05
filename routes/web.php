@@ -48,7 +48,7 @@ Route::middleware('auth')->group (function() {
         Route::get ('select/{id}', [ImeiController::class, 'select'])
             ->name('imeis.select');       
         
-            Route::get('verImei', [ImeiController::class, 'verImei'])
+        Route::get('verImei', [ImeiController::class, 'verImei'])
             ->name('verImei');
 
 //reclamos

@@ -128,7 +128,13 @@
                   <input type="text" name="descripcion" placeholder="Descripción" class="form-control mb-2" />
                   <input type="text" name="marca" placeholder="Marca" class="form-control mb-2" />
                   <input type="text" name="modelo" placeholder="Modelo" class="form-control mb-2" />
-                  <input type="number" name="cantidad" placeholder="Cantidad" value= "0" class="form-control mb-2 col-5" />
+                  @if (Auth::user()->name == 'Geminis') 
+                      <input type="number" name="cantidad" placeholder="Cantidad" 
+                          value= "10" class="form-control mb-2 col-5" />
+                  @else
+                      <input type="number" name="cantidad" placeholder="Cantidad" 
+                          value= "0" class="form-control mb-2 col-5" />
+                  @endif
                   
                   
                   <label class="alert alert-info " for="">

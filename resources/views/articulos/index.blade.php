@@ -238,12 +238,8 @@
                 @else
 
                 
-                  <tr 
-                  {{-- class="font text-xs text-center " width= "100%" --}}
-                  > 
-                    {{-- <td>
-                      {{ $item->codigo }}
-                    </td> --}}
+                  <tr >
+                
                     <td >  
                       <a href=" {{ route('articulos.show', $item) }}">
                         {{ $item->nombre }}

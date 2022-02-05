@@ -209,7 +209,7 @@ class FacturaController extends Controller
         }
 
         //traigo items con mismo id
-//<<<<<<< HEAD
+
         $desc=0;
         $items = Item::whereIn('idFactura', [$id]) ->get();
         //dd($items[0]);
@@ -217,15 +217,7 @@ class FacturaController extends Controller
             $desc= $desc + $items[$i]->descuento;
             
         }
-        //dd($desc);
-/* =======
-        $items = Item::whereIn('idFactura', [$id])
-                 ->get();
-        /* $num= Numero::whereIn('id', $items->numero )
-                ->get();
-                dd($num); */
-  
-//>>>>>>> calzados */
+
         $nums= Numero::all();
         //reviso user y traigo datos d propiet
         $u_id= auth()->id();  
@@ -247,12 +239,9 @@ class FacturaController extends Controller
         
         
         return view ('remitos.remito', compact('fecha', 'nremit', 'nombreCli', 'iva', 'subtotal',
-//<<<<<<< HEAD
                     'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro', 'desc', 'nums',
                     'eft','tBanc', 'tnoBanc'));
-//=======
-                    //'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro', 'nums'));
-//>>>>>>> calzados
+
     }
 
     public function generarFacturaB($id){
