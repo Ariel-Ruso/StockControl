@@ -27,6 +27,8 @@ class CreateClientesTable extends Migration
                     ->nullable();
             $table->string('email')
                     ->nullable();
+            $table->double('ctaCte')
+                    ->nullable();
             $table->timestamps();
         });
     }

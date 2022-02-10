@@ -121,6 +121,13 @@
                                             class= "form-control mb-2  "
                                         />     
                                     </div>
+                                        <input
+                                             type="number"
+                                             name="ctaCte"
+                                             placeholder= "Cta Cte"
+                                             value= "{{ old ('ctaCte') }}"
+                                             class="form-control mb-2"
+                                         />   
                                 </div>
                             </div>
                             <div class="container text-center row justify-content-center" >
