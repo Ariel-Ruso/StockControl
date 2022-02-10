@@ -35,7 +35,10 @@
                         </span>
                     </div> 
                     <div class="card-body ">
-                    @if(session('carrito'))
+
+                     @if(session('carrito')) 
+                    
+
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead class= "text-center cart">
                                 @if (Auth::user()->name == 'Akihay') 
@@ -67,10 +70,13 @@
                                             P Unitario
                                         </th>
                                         <th scope="col">
-                                            Cant.
+                                            Cantidad
                                         </th>
                                         <th scope="col">
-                                            Desc.
+                                            SubTotal
+                                        </th>
+                                        <th scope="col">
+                                            Descuento
                                         </th> 
                                         <th scope="col">
                                             Acción
@@ -79,8 +85,10 @@
                                 @endif
                                    
                             </thead>
+
                         @if (Auth::user()->name == 'Akihay') 
                           @if(session('carrito'))
+
                             @foreach (session('carrito') as $id => $detalle)
 
                                     <form action="{{ route('ventaPeso') }}" 
@@ -94,76 +102,80 @@
                                                 name= "id"
                                             />
 
-                                    <!-- recorro carrito  -->  
-                        
-                                <tr>
-                                    <th  class="font-weight-normal text-center col-md-5" >
-                                        {{ $detalle['Nombre'] }}
-                                    </th>
-                                    <th  class="font-weight-normal text-center col-md-3" >
-                                        $ {{ number_format($detalle['Precio'],2) }}
-                                    </th>
+                                            <!-- recorro carrito  -->  
                                 
-                                    <th  class="font-weight-normal text-center" > 
-
-                                        <div class="row-md-2">
-                                            {{ $detalle['Cantidad'] }}
-                                            {{-- / {{ $detalle['Disponible'] }} --}}
-                                
-                                        </div>
-                                        <div class="row-md-2">
-                                                                        
-                                            <a  href="{{ url ('agregar/' .$id)  }}"
-                                            class= "btn btn-primary m-1">
-                                                
-                                                <i class="fa fa-plus fa-sm">        
-                                                
-                                                </i>
-                                        </a>
-                                        <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                            class= "btn btn-danger m-1">
-                                                
-                                            <i class="fa fa-minus fa-sm">        
-                                                
-                                            </i>
-                                        </a>
+                                        <tr>
+                                            <th  class="font-weight-normal text-center col-md-5" >
+                                                {{ $detalle['Nombre'] }}
+                                            </th>
+                                            <th  class="font-weight-normal text-center col-md-3" >
+                                                $ {{ number_format($detalle['Precio'],2) }}
+                                            </th>
                                         
-                                        </div>                                   
-                                    
-                                    </th> 
-                                    <th  class="font-weight-normal text-center col-md-4" >
-                                                                                
-                                        <input  type="float" 
-                                                class="border border-primary col-md-8" 
-                                                name="inpeso" 
-                                                id="inpeso" 
-                                                {{-- onchange="peso();" --}}
-                                                onclick="peso();"
-                                                />
+                                            <th  class="font-weight-normal text-center" > 
 
-                                        <button class="btn btn-success btn-sm shadow mt-2" 
-                                                type="submit"        
-                                                >
-                                                <i class="fa fa-check">        
+                                                <div class="row-md-2">
+                                                    {{ $detalle['Cantidad'] }}
+                                                    {{-- / {{ $detalle['Disponible'] }} --}}
+                                        
+                                                </div>
+                                                <div class="row-md-2">
+                                                                                
+                                                    <a  href="{{ url ('agregar/' .$id)  }}"
+                                                    class= "btn btn-primary m-1">
+                                                        
+                                                        <i class="fa fa-plus fa-sm">        
+                                                        
+                                                        </i>
+                                                </a>
+                                                <a  href="{{ url ('eliminarCarr/' .$id )  }}"
+                                                    class= "btn btn-danger m-1">
+                                                        
+                                                    <i class="fa fa-minus fa-sm">        
+                                                        
+                                                    </i>
+                                                </a>
                                                 
-                                                </i>
-                                        </button>
-                                    </th>
-                                    <th  class="font-weight-normal text-center col-auto" >
-                                        $ {{ number_format($detalle['SubTotal'],2) }}
-                                    </th>
-                                </tr> 
+                                                </div>                                   
+                                            
+                                            </th> 
+                                            <th  class="font-weight-normal text-center col-md-4" >
+                                                                                        
+                                                <input  type="float" 
+                                                        class="border border-primary col-md-8" 
+                                                        name="inpeso" 
+                                                        id="inpeso" 
+                                                        {{-- onchange="peso();" --}}
+                                                        onclick="peso();"
+                                                        />
+
+                                                <button class="btn btn-success btn-sm shadow mt-2" 
+                                                        type="submit"        
+                                                        >
+                                                        <i class="fa fa-check">        
+                                                        
+                                                        </i>
+                                                </button>
+                                            </th>
+                                            <th  class="font-weight-normal text-center col-md-6" >
+                                                $ {{ number_format($detalle['SubTotal'],2) }}
+                                            </th>
+                                        </tr> 
                             
-                            </form>
-                            @endforeach                                       
+                                    </form>
+                            @endforeach  
+
                            @endif
+
                         @else
-                        
                          @if(session('carrito'))
+                        
+                         {{-- @if(session('carrito')) --}}
+
                             @foreach (session('carrito') as $id => $detalle)
 
                                 <form 
-                                        {{-- action="{{ route('setDescuento') }}"  --}}
+                                        action="{{ route('setDescuento') }}" 
                                         method="POST" 
                                         enctype="multipart/form-data" 
                                         >
@@ -174,72 +186,86 @@
                                                 name= "id"
                                             />
                             
-                                 <!-- recorro carrito  -->  
-                                <tr>
-                                    <th  class="font-weight-normal text-center col-md-5" >
-                                        {{ $detalle['Nombre'] }}
-                                    </th>
-                                    <th  class="font-weight-normal text-center col-md-3" >
-                                        $ {{ number_format($detalle['Precio'],2) }}
-                                    </th>
-                                    
-                                    <th  class="font-weight-normal text-center" > 
-                                        {{ $detalle['Cantidad'] }}
-                                        / {{ $detalle['Disponible'] }}
-                                    </th>
-                                    <th  class="font-weight-normal text-center col-md-2" >
-                                        $ {{ number_format($detalle['SubTotal'],2) }}
-                                    </th>
-                                    <th  class="font-weight-normal text-center col-md-3" >
-                                        $ {{ number_format($detalle['Descuento'],2) }}
-                                    </th>  
-                                    <th class="font-weight-normal text-center col-md-2">
-                                        <a  href="{{ url ('agregar/' .$id )  }}"
-                                            class= "btn btn-primary m-1">
-                                                +
-                                        </a>
-                                        <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                            class= "btn btn-danger">
-                                                -
-                                        </a>
-
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">
-                                        Descuento  
-                                    </th>
-                                
-                                    <th class="text-center">
-                                        $
-                                        <input  type="number" 
-                                                class="border border-primary col-md-8" 
-                                                name="descuento" 
-                                                id="descuento" 
-                                                onchange="Descuento();"
-                                                />
-                                    </th>
-                                    <th>
-                                        <button class="btn btn-success shadow " 
-                                                type="submit">
-                                                {{-- <i class="fa fa-check">         --}}
-                                                    Aplicar
-                                                {{-- </i> --}}
-                                        </button>
-                                    </th>
-                                {{--  <th  class="text-center">
+                                        <!-- recorro carrito  -->  
                                         
-                                            <input  type="float(0.1)" step="any" id="descP" 
-                                                    readonly name="descP" value="0.0 %" 
-                                                    placeholder=" " class="form-control mb-2 col-6"  
-                                                    onchange= "Descuento();"
-                                            /> 
-                                    </th> --}}
-                                </tr>
+                                        <tr>
+                                            <th  class="font-weight-normal text-center col-md-5" >
+                                                {{ $detalle['Nombre'] }}
+                                            </th>
+                                            <th  class="font-weight-normal text-center col-md-3" >
+                                                $ {{ number_format($detalle['Precio'],2) }}
+                                            </th>
+                                            
+                                            <th  class="font-weight-normal text-center" > 
+                                                {{ $detalle['Cantidad'] }}
+                                                / {{ $detalle['Disponible'] }}
+                                            </th>
+                                            <th  class="font-weight-normal text-center col-md-2" >
+                                                $ {{ number_format($detalle['SubTotal'],2) }}
+                                            </th>
+                                            <th  class="font-weight-normal text-center col-md-2" >
+                                                {{-- $ {{ number_format($detalle['Descuento'],2) }} --}}
+                                                {{-- <th class="text-center"> --}}
+                                                    $
+                                                    <input  type="number" 
+                                                            class="border border-primary col" 
+                                                            name="descuento" 
+                                                            id="descuento" 
+                                                            onchange="Descuento();"
+                                                            onclick="Descuento();"
+                                                            />
+                                                {{-- </th> --}}
+                                            </th>  
+                                            <th class="font-weight-normal text-center col-md-2">
+                                                <a  href="{{ url ('agregar/' .$id )  }}"
+                                                    class= "btn btn-primary m-1">
+                                                        +
+                                                </a>
+                                                <a  href="{{ url ('eliminarCarr/' .$id )  }}"
+                                                    class= "btn btn-danger">
+                                                        -
+                                                </a>
+
+                                            </th>
+                                        </tr>
+                                        {{-- <tr>
+                                            <th class="text-center">
+                                                Descuento  
+                                            </th>
+                                        
+                                            <th class="text-center">
+                                                $
+                                                <input  type="number" 
+                                                        class="border border-primary col-md-8" 
+                                                        name="descuento" 
+                                                        id="descuento" 
+                                                        onchange="Descuento();"
+                                                        onclick="Descuento();"
+                                                        />
+                                            </th>
+                                            <th>
+                                                <button class="btn btn-success shadow " 
+                                                        type="submit">
+                                                        
+                                                            Aplicar
+                                                        
+                                                </button>
+                                            </th>
+                                            <th  class="text-center">
+                                                
+                                                    <input  type="float(0.1)" step="any" id="descP" 
+                                                            readonly name="descP" value="0.0 %" 
+                                                            placeholder=" " class="form-control mb-2 col-6"  
+                                                            onchange= "Descuento();"
+                                                    /> 
+                                            </th> 
+                                        </tr>--}}
                             
                                 </form>
                             @endforeach
+
                          @endif
+
                         @endif
                         <tr>
                             <td colspan= "12" class= "text-right"> 
@@ -256,12 +282,12 @@
                         </table>
                         
                     @else
-                    <br>
-                    <div class="text-center ">
-                            <h3>
-                                Sin productos
-                            </h3>
-                    </div>
+                        <br>
+                        <div class="text-center ">
+                                <h3>
+                                    Sin productos
+                                </h3>
+                        </div>
                     
                     @endif        
                     <div name="opciones compra " 
@@ -422,6 +448,31 @@
             }
 
         }
+
+        function Descuento($total) {
+
+            const tot= '<?php echo $total; ?>'
+            const desc = document.getElementById('descuento');
+            const porc= Number (desc * tot) /100; 
+
+            const final = tot - desc;
+            
+            
+            //eventos
+                descuento.onclick = function() {
+                    //alert(final);
+                    document.detail.tot2.value = final;
+                    //document.detail.descP.value = porc.value;
+//                    alert(sessionStorage.length()) );
+                    //alert(localStorage.getItem("Precio") );
+                    //sessionStorage.setItem('Descuento', 'final');
+                    //sessionStorage.setItem('test', 1);
+                    //alert( sessionStorage.getItem(Carrito) );
+                    
+                    //alert( pre) ;
+                    }
+
+            }
         function checkInput(precioCompra) {
 
             var Precio = document.calc.precioCompra.value;
@@ -445,17 +496,7 @@
             document.detail.descuento.value = tot;
         } */
        
-        function Descuento($total) {
-
-            var tot= '<?php echo $total; ?>'
-            var desc = document.detail.descuento.value;
-            var porc= Number (desc * tot) /100; 
-            alert(porc);
-            //var final = tot - desc;
-            //document.detail.tot2.value = final;
-            document.detail.descP.value = porc.value;
-
-        }
+       
         </script>
     
 @endsection

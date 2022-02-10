@@ -204,6 +204,16 @@ class CarritoController extends Controller
 
     public function verCarrito()
     {         
+        $data = session()->all();
+        
+        /* if(session('carrito')){
+            dd(session('carrito'));
+            
+
+        }else{
+            dd('no');
+        } */
+
         $total= $this->subtotal();
         $totalTar= $this->subtotalT();
 
@@ -216,8 +226,12 @@ class CarritoController extends Controller
           //  $cli_id= session()->get('cliente_id'); 
             $clie= Cliente::FindorFail($cli_id);  
         }     
-        //dd($clie);
-        return view ('venta/verCarrito', compact('total', 'clie', 'totalTar')); 
+        
+        if(empty($data))
+            $data=0;
+        
+        
+        return view ('venta/verCarrito', compact('total', 'clie', 'totalTar', 'data')); 
     }
 
     //funcion d prueba para trabajar final carrito, operar e insertar datos en base
@@ -228,7 +242,8 @@ class CarritoController extends Controller
 
     public function borrarCarr(){
         session()->forget('carrito');
-        return view ('venta/verCarrito');
+        return redirect()->action('App\Http\Controllers\CarritoController@verCarrito');
+        //return view ('venta/verCarrito');
     }
 
     public function subtotal(){
