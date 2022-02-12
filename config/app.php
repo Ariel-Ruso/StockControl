@@ -170,6 +170,7 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         //Gonzaloalonsod\AfipBundle\AfipBundle::class => ['all' => true],
         //Afipsdk\Afip\ServiceProvider::class,
         //Afipsdk\Afip\ServiceProvider::class,
@@ -247,6 +248,7 @@ return [
         'PDF'=> Barryvdh\DomPDF\Facade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         //'Afip' => Afipsdk\Afip\Facade::class,
     ],
 

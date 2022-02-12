@@ -18,21 +18,60 @@ class CarritoController extends Controller
 
     public function ventaPeso(Request $request)
     {
-        //dd($request);
         $carrito= session()->get('carrito');
           //si carrito ya tiene ese item incluyo desc
           if(isset($carrito[$request->id])) {
-            $res= ($request->inpeso) * $carrito[$request->id]['Precio'];
-            //dd($res);
-            $carrito[$request->id]['SubTotal']= $res;
-            $carrito[$request->id]['Cantidad']= (float)$request->inpeso;
+
+           
+            if($request->descuento)
+            //si es descuento
+            {
+                $carrito[$request->id]['Descuento']= (float)$request->descuento;
+                $carrito[$request->id]['SubTotal']= $carrito[$request->id]['Precio'] *
+                          $carrito[$request->id]['Cantidad']-$carrito[$request->id]['Descuento'];
+                session()->put ('carrito', $carrito);
+                
+               
+            }else
+            //si es x peso
+            {
+                $res= ($request->inpeso) * $carrito[$request->id]['Precio'];
+                $carrito[$request->id]['SubTotal']= $res;
+                $carrito[$request->id]['Cantidad']= (float)$request->inpeso;
+                session()->put ('carrito', $carrito);
+            }
+            
+            
+          }
+          //$this->subtotal();
+            //$this->subtotalT();
+        return redirect()->back()->with('mensaje', 'Subtotal Actualizado');
+
+    }
+
+    public function descuento(){
+        $carrito= session()->get('carrito');
+        $desc=0;
+        foreach ($carrito as $item){
+            $desc += $item["Descuento"];
+        }
+        return $desc;
+    }
+
+    public function setDescuento(Request $request)
+    {
+        $carrito= session()->get('carrito');
+          //si carrito ya tiene ese item incluyo desc
+          if(isset($carrito[$request->id])) {
+
+            $carrito[$request->id]['Descuento']= $request->descuento;
             session()->put ('carrito', $carrito);
             
           }
-          ///$this->subtotal();
-          //$this->subtotalT();
+          $this->subtotal();
+          $this->subtotalT();
           
-        return redirect()->back()->with('mensaje', 'Subtotal Actualizado');
+        return redirect()->back()->with('mensaje', 'Descuento aplicado');
 
     }
 
@@ -162,23 +201,6 @@ class CarritoController extends Controller
     
     }
 
-    public function setDescuento(Request $request)
-    {
-        $carrito= session()->get('carrito');
-          //si carrito ya tiene ese item incluyo desc
-          if(isset($carrito[$request->id])) {
-
-            $carrito[$request->id]['Descuento']= $request->descuento;
-            session()->put ('carrito', $carrito);
-            
-          }
-          $this->subtotal();
-          $this->subtotalT();
-          
-        return redirect()->back()->with('mensaje', 'Descuento aplicado');
-
-    }
-    
     public function eliminarCarr($id)
     {
         $articulo= Articulo::Findorfail($id);
@@ -204,16 +226,6 @@ class CarritoController extends Controller
 
     public function verCarrito()
     {         
-        $data = session()->all();
-        
-        /* if(session('carrito')){
-            dd(session('carrito'));
-            
-
-        }else{
-            dd('no');
-        } */
-
         $total= $this->subtotal();
         $totalTar= $this->subtotalT();
 
@@ -227,11 +239,7 @@ class CarritoController extends Controller
             $clie= Cliente::FindorFail($cli_id);  
         }     
         
-        if(empty($data))
-            $data=0;
-        
-        
-        return view ('venta/verCarrito', compact('total', 'clie', 'totalTar', 'data')); 
+        return view ('venta/verCarrito', compact('total', 'clie', 'totalTar')); 
     }
 
     //funcion d prueba para trabajar final carrito, operar e insertar datos en base
@@ -242,8 +250,9 @@ class CarritoController extends Controller
 
     public function borrarCarr(){
         session()->forget('carrito');
-        return redirect()->action('App\Http\Controllers\CarritoController@verCarrito');
-        //return view ('venta/verCarrito');
+        return redirect()
+            ->action('App\Http\Controllers\ArticuloController@index')
+            ->with('mensaje', 'Carrito Vacío');
     }
 
     public function subtotal(){
@@ -277,14 +286,7 @@ class CarritoController extends Controller
         return $iva;
     }
 
-    public function descuento(){
-        $carrito= session()->get('carrito');
-        $desc=0;
-        foreach ($carrito as $item){
-            $desc += $item["Descuento"];
-        }
-        return $desc;
-    }
+  
     
     public function detallePedido(){
         

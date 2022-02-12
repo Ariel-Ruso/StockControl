@@ -21,8 +21,6 @@
  @component('components.caja-btn')
  @endcomponent
 
-    
-
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-auto ">
@@ -41,8 +39,7 @@
 
                         <table class="table table-bordered border-blue-500 border-opacity-100">
                             <thead class= "text-center cart">
-                                @if (Auth::user()->name == 'Akihay') 
-
+                                
                                     <tr>
                                         <th scope="col">
                                             Artículo
@@ -51,17 +48,23 @@
                                             P Unitario
                                         </th>
                                         <th scope="col">
-                                            Cant.
+                                            Cantidad
                                         </th>
+                                        @if (Auth::user()->name == 'Akihay') 
+                                            <th scope="col">
+                                                Peso (Kg)
+                                            </th>        
+                                        @endif 
                                         <th scope="col">
-                                            Peso (Kg)
-                                        </th>         
+                                            Descuento
+                                        </th> 
                                         <th scope="col">
                                             SubTotal
                                         </th>
+                                       
                                     </tr>
 
-                                @else
+                                {{-- @else
                                     <tr>
                                         <th scope="col">
                                             Artículo
@@ -82,12 +85,12 @@
                                             Acción
                                         </th>
                                     </tr>
-                                @endif
+                                 --}}
                                    
                             </thead>
 
-                        @if (Auth::user()->name == 'Akihay') 
-                          @if(session('carrito'))
+                            {{-- @if (Auth::user()->name == 'Akihay')  --}}
+                          {{-- @if(session('carrito')) --}}
 
                             @foreach (session('carrito') as $id => $detalle)
 
@@ -105,10 +108,10 @@
                                             <!-- recorro carrito  -->  
                                 
                                         <tr>
-                                            <th  class="font-weight-normal text-center col-md-5" >
+                                            <th  class="font-weight-normal text-center col-md-3" >
                                                 {{ $detalle['Nombre'] }}
                                             </th>
-                                            <th  class="font-weight-normal text-center col-md-3" >
+                                            <th  class="font-weight-normal text-center col-md-2" >
                                                 $ {{ number_format($detalle['Precio'],2) }}
                                             </th>
                                         
@@ -119,45 +122,60 @@
                                                     {{-- / {{ $detalle['Disponible'] }} --}}
                                         
                                                 </div>
-                                                <div class="row-md-2">
+                                                <div class="row-md-1">
                                                                                 
                                                     <a  href="{{ url ('agregar/' .$id)  }}"
-                                                    class= "btn btn-primary m-1">
+                                                    class= "btn-sm btn-primary shadow m-1">
                                                         
                                                         <i class="fa fa-plus fa-sm">        
                                                         
                                                         </i>
-                                                </a>
-                                                <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                                    class= "btn btn-danger m-1">
-                                                        
-                                                    <i class="fa fa-minus fa-sm">        
-                                                        
-                                                    </i>
-                                                </a>
+                                                    </a>
+                                                    <a  href="{{ url ('eliminarCarr/' .$id )  }}"
+                                                        class= "btn-sm btn-danger shadow m-1 ">
+                                                            
+                                                        <i class="fa fa-minus fa-sm">        
+                                                            
+                                                        </i>
+                                                    </a>
                                                 
                                                 </div>                                   
                                             
-                                            </th> 
-                                            <th  class="font-weight-normal text-center col-md-4" >
-                                                                                        
-                                                <input  type="float" 
-                                                        class="border border-primary col-md-8" 
-                                                        name="inpeso" 
-                                                        id="inpeso" 
-                                                        {{-- onchange="peso();" --}}
-                                                        onclick="peso();"
-                                                        />
-
-                                                <button class="btn btn-success btn-sm shadow mt-2" 
-                                                        type="submit"        
-                                                        >
-                                                        <i class="fa fa-check">        
-                                                        
-                                                        </i>
-                                                </button>
                                             </th>
-                                            <th  class="font-weight-normal text-center col-md-6" >
+                                            @if (Auth::user()->name == 'Akihay')  
+                                                <th  class="font-weight-normal text-center col-md-4" >
+                                                     {{ number_format($detalle['Cantidad'],2) }}  
+                                                     <br>                   
+                                                    <input  type="float" 
+                                                            class="border border-primary col-md-4" 
+                                                            name="inpeso" 
+                                                            id="inpeso" 
+                                                            {{-- onchange="peso();" --}}
+                                                            onclick="peso();"
+                                                            />
+
+                                                    <button class="btn btn-success btn-sm shadow mt-1" 
+                                                            type="submit"        
+                                                            >
+                                                            <i class="fa fa-check">   </i>     
+                                                            
+                                                            
+                                                    </button>
+                                                </th>
+                                            @endif
+                                            <th  class="font-weight-normal text-center col-md-4" >
+                                                $ {{ number_format($detalle['Descuento'],2) }}
+                                                
+                                                    <br>
+                                                    <input  type="number" 
+                                                            class="border border-primary col-md-6" 
+                                                            name="descuento" 
+                                                            id="descuento" 
+                                                            onchange="Descuento();"
+                                                            onclick="Descuento();"
+                                                            />
+                                            </th>  
+                                            <th  class="font-weight-normal text-center col-md-4" >
                                                 $ {{ number_format($detalle['SubTotal'],2) }}
                                             </th>
                                         </tr> 
@@ -165,123 +183,22 @@
                                     </form>
                             @endforeach  
 
-                           @endif
-
-                        @else
-                         @if(session('carrito'))
                         
-                         {{-- @if(session('carrito')) --}}
-
-                            @foreach (session('carrito') as $id => $detalle)
-
-                                <form 
-                                        action="{{ route('setDescuento') }}" 
-                                        method="POST" 
-                                        enctype="multipart/form-data" 
-                                        >
-                                        @csrf
-
-                                        <input  type="hidden" 
-                                                value= {{ $detalle['Art_id'] }}
-                                                name= "id"
-                                            />
-                            
-                                        <!-- recorro carrito  -->  
-                                        
-                                        <tr>
-                                            <th  class="font-weight-normal text-center col-md-5" >
-                                                {{ $detalle['Nombre'] }}
-                                            </th>
-                                            <th  class="font-weight-normal text-center col-md-3" >
-                                                $ {{ number_format($detalle['Precio'],2) }}
-                                            </th>
-                                            
-                                            <th  class="font-weight-normal text-center" > 
-                                                {{ $detalle['Cantidad'] }}
-                                                / {{ $detalle['Disponible'] }}
-                                            </th>
-                                            <th  class="font-weight-normal text-center col-md-2" >
-                                                $ {{ number_format($detalle['SubTotal'],2) }}
-                                            </th>
-                                            <th  class="font-weight-normal text-center col-md-2" >
-                                                {{-- $ {{ number_format($detalle['Descuento'],2) }} --}}
-                                                {{-- <th class="text-center"> --}}
-                                                    $
-                                                    <input  type="number" 
-                                                            class="border border-primary col" 
-                                                            name="descuento" 
-                                                            id="descuento" 
-                                                            onchange="Descuento();"
-                                                            onclick="Descuento();"
-                                                            />
-                                                {{-- </th> --}}
-                                            </th>  
-                                            <th class="font-weight-normal text-center col-md-2">
-                                                <a  href="{{ url ('agregar/' .$id )  }}"
-                                                    class= "btn btn-primary m-1">
-                                                        +
-                                                </a>
-                                                <a  href="{{ url ('eliminarCarr/' .$id )  }}"
-                                                    class= "btn btn-danger">
-                                                        -
-                                                </a>
-
-                                            </th>
-                                        </tr>
-                                        {{-- <tr>
-                                            <th class="text-center">
-                                                Descuento  
-                                            </th>
-                                        
-                                            <th class="text-center">
-                                                $
-                                                <input  type="number" 
-                                                        class="border border-primary col-md-8" 
-                                                        name="descuento" 
-                                                        id="descuento" 
-                                                        onchange="Descuento();"
-                                                        onclick="Descuento();"
-                                                        />
-                                            </th>
-                                            <th>
-                                                <button class="btn btn-success shadow " 
-                                                        type="submit">
-                                                        
-                                                            Aplicar
-                                                        
-                                                </button>
-                                            </th>
-                                            <th  class="text-center">
-                                                
-                                                    <input  type="float(0.1)" step="any" id="descP" 
-                                                            readonly name="descP" value="0.0 %" 
-                                                            placeholder=" " class="form-control mb-2 col-6"  
-                                                            onchange= "Descuento();"
-                                                    /> 
-                                            </th> 
-                                        </tr>--}}
-                            
-                                </form>
-                            @endforeach
-
-                         @endif
-
-                        @endif
-                        <tr>
-                            <td colspan= "12" class= "text-right"> 
-                                <h3>
-                                    Efectivo $ {{ number_format ($total, 2) }}
-                                </h3>
-                                
-                                {{-- <h3>
-                                    Tarjeta $ {{ number_format ($totalTar, 2) }}
-                                </h3> --}}
-                                
-                            </td>
-                        </tr>
+                            <tr>
+                                <td colspan= "12" class= "text-right"> 
+                                    <h3>
+                                        Efectivo $ {{ number_format ($total, 2) }}
+                                    </h3>
+                                    
+                                    {{-- <h3>
+                                        Tarjeta $ {{ number_format ($totalTar, 2) }}
+                                    </h3> --}}
+                                    
+                                </td>
+                            </tr>
                         </table>
                         
-                    @else
+                     @else
                         <br>
                         <div class="text-center ">
                                 <h3>
@@ -289,7 +206,8 @@
                                 </h3>
                         </div>
                     
-                    @endif        
+                     @endif   
+
                     <div name="opciones compra " 
                          class=" mt-5 text-left row justify-content-center ">
                         <a  href=" {{ route('articulos.index') }}" 
@@ -302,38 +220,6 @@
                         </a>
                     </div> 
 
-                   {{--
-                    <br><br>
-                        <hr noshade="noshade" />
-                    <div name="descuento"
-                        class=" mt-5 row justify-content-center ">
-                        <div class="text-center text-2xl font-bold leading-none tracking-tight">
-                            <span class="bg-clip-text text-transparent 
-                                        bg-gradient-to-r from-green-500 to-teal-500">
-                                Descuento :
-                            </span>
-                        </div>
-                        <input  type="number" 
-                        class="border border-primary col-md-2 mx-3" 
-                        name="descuento" 
-                        id="descuento" 
-                        value="0"
-                        onchange='Descuento();'
-                >    
-                        <div class="text-center text-2xl font-bold leading-none tracking-tight">
-                            <span class="bg-clip-text text-transparent 
-                                        bg-gradient-to-r from-green-500 to-teal-500">
-                                Precio Final :
-                            </span>
-                        </div>
-                        <input  type="text" 
-                                class="border border-primary col-md-2 mx-3" 
-                                name="tot2" 
-                                id="tot2" 
-                                onchange= "Descuento2();"
-                        />
-
-                    </div>      --}}   
                                        
                     <hr noshade="noshade" />
 
@@ -354,6 +240,7 @@
                                     {{ $clie->dni }}<br>                            
                                     {{ $clie->nombre }} <br>  
                                     {{ $clie->direccion }}  <br> 
+                                    {{ $clie->ctaCte }}  <br> 
                                 
                             @endif
                         </div>   
@@ -385,6 +272,7 @@
                         <hr noshade="noshade" />
                         
                         <div class="row justify-content-center px-5 py-3">
+                           
                             @if ( session('carrito') && $clie != "Sin seleccionar")
                                 <a  href=" {{ route('detallePedido') }}" 
                                     class="btn btn-success mx-2 mt-1 shadow" >
@@ -406,7 +294,7 @@
                             @endif 
 
                             
-                            @if (session('carrito'))
+                            {{-- @if (session('carrito'))
                                 
                                 <a  href=" {{ route('detallePresupuesto') }}" 
                                     class="btn btn-info mx-2 mt-1 shadow" 
@@ -421,7 +309,8 @@
                                     class="btn btn-info mx-2 mt-1 disabled" >
                                     Presupuesto
                                 </a>
-                            @endif    
+                            @endif    --}}
+
                         </div>                
                 
                 </div>

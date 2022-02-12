@@ -1,9 +1,10 @@
 <?php
     $caja= New App\Models\Caja();
     $estado= $caja->estado();
+    $carrito= session()->get('carrito');
 ?>
     <div class="container" >
-        @if ($estado==1)
+        @if ( $estado==1  && $carrito )
             <a href="{{ route('verCarrito') }}"                 
                 class= "btnn btnCart 
                  float-right
