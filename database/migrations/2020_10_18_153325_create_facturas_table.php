@@ -42,6 +42,8 @@ class CreateFacturasTable extends Migration
                     ->nullable();
             $table->string('numfact')
                     ->nullable();
+            $table->boolean('pedido')
+                    ->nullable();
             $table->timestamps();
         });
     }

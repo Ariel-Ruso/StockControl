@@ -58,9 +58,9 @@
                                         <th scope="col">
                                             Descuento
                                         </th> 
-                                        <th scope="col">
+                                       {{--  <th scope="col">
                                             SubTotal
-                                        </th>
+                                        </th> --}}
                                        
                                     </tr>
 
@@ -175,9 +175,9 @@
                                                             onclick="Descuento();"
                                                             />
                                             </th>  
-                                            <th  class="font-weight-normal text-center col-md-4" >
+                                            {{-- <th  class="font-weight-normal text-center col-md-4" >
                                                 $ {{ number_format($detalle['SubTotal'],2) }}
-                                            </th>
+                                            </th> --}}
                                         </tr> 
                             
                                     </form>

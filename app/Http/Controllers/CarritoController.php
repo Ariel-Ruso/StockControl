@@ -27,8 +27,9 @@ class CarritoController extends Controller
             //si es descuento
             {
                 $carrito[$request->id]['Descuento']= (float)$request->descuento;
-                $carrito[$request->id]['SubTotal']= $carrito[$request->id]['Precio'] *
-                          $carrito[$request->id]['Cantidad']-$carrito[$request->id]['Descuento'];
+                //$carrito[$request->id]['SubTotal']= $carrito[$request->id]['SubTotal'] -
+                   //       $carrito[$request->id]['Descuento'];
+                          //dd($request->descuento);
                 session()->put ('carrito', $carrito);
                 
                
@@ -43,9 +44,10 @@ class CarritoController extends Controller
             
             
           }
-          //$this->subtotal();
-            //$this->subtotalT();
-        return redirect()->back()->with('mensaje', 'Subtotal Actualizado');
+        
+        return redirect()
+            ->action('App\Http\Controllers\CarritoController@verCarrito')
+            ->with('mensaje', 'Descuento aplicado');
 
     }
 
@@ -68,11 +70,12 @@ class CarritoController extends Controller
             session()->put ('carrito', $carrito);
             
           }
-          $this->subtotal();
-          $this->subtotalT();
+          //$this->subtotal();
+          //$this->subtotalT();
           
-        return redirect()->back()->with('mensaje', 'Descuento aplicado');
-
+        return redirect()
+            ->action('App\Http\Controllers\CarritoController@verCarrito')
+            ->with('mensaje', 'Descuento aplicado');
     }
 
     public function agregar($id){

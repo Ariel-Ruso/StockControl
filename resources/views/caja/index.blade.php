@@ -241,7 +241,7 @@
                         Remito
                     </th> 
                 @else
-                    <th scope="col">
+                                    <th scope="col">
                                         Operación
                                     </th>
                                     <th scope="col">
@@ -273,10 +273,11 @@
                                         Pedidos
                                     </th> 
                 @endif
-                </tr>
-                    </thead>
-                    <tbody>
+              </tr>
+            </thead>
+            <tbody>
                         @foreach ($todas as $item)
+                           
                             <thead>
                                 <tr class="tData">  
                                     @if (Auth::user()->name == 'Geminis') 
@@ -305,8 +306,6 @@
                                             </a>
                                         </th> 
                                     @else
-                                    
-
                                                             
                                     <th>
                                          {{  $item->id }}
@@ -344,7 +343,6 @@
                                             $ {{ '-' }}
                                         @endif
                                     </th>
-                                 
                                     <th>
                                         <a href=" {{ route ('imprimirRemit', $item->id) }}" 
                                             class="btn btn-warning shadow" >
@@ -352,43 +350,42 @@
                                         </a>
                                     </th> 
                                     <th>
-
-                                       
-
                                         {{-- revisar ciclos  --}}
                                         
-                                        @if ($pedis->count() > 0)
-                                            
-                                            {{-- @for ($i=0; $i<$pedis->count(); $i++) --}}
-
-                                        
-                                            @foreach ( $pedis as $pedi )
-                                                
-                                                @if($pedi->id == $item->id)
-
-                                                    @if($pedi->estado == 1)
-                                                        Enviado
-                                                        @break
-                                                    @else
-                                                        Armado                         
-                                                    @endif
-                                                @else   
-
-                                                    
-                                                    @break
-                                                @endif
-                                                                                                
-                                            @endforeach
-
-                                        @else
-
+                                        @if($item->pedido != 1)
                                             <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
                                                 class="btn btn-success shadow" >
                                                     Generar
                                             </a> 
-
+                                        @else
+                                            Enviado
                                         @endif
+                                        {{-- @foreach ( $pedis as $pedi ) --}}
+                                                                                    
+                                                {{-- @foreach ( $pedis as $pedi ) --}}
+                                                
+                                               {{--  @if($pedi->id == $item->id)
+                                                 {{ $pedi->id }}
 
+                                                    @if($pedi->estado == 1)
+                                                        Enviado
+                                                        
+                                                     @else
+                                                        Armado                     
+                                                    @endif
+                                                @else   
+                                                    <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                                        class="btn btn-success shadow" >
+                                                            Generar
+                                                    </a> 
+                                                    
+                                                    
+                                                @endif --}}
+
+                                             {{-- @endfor                                                 --}}
+                                        
+                                        
+                                        
                                     </th> 
                                     
                                     <!-- 
@@ -404,10 +401,12 @@
                                         </a>
                                     </th> 
                                       -->
-                                      @endif
+                                      {{-- @endif --}}
                                 </tr>
-                                </thead>
-                            @endforeach
+                            </thead>
+                        @endforeach
+                            
+                            
                             @foreach ($gastos as $item2)
                                 <thead>
                                     <tr class="text-center text-xs">
@@ -457,16 +456,10 @@
                                 </thead>
 
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-{{-- 
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>    
-     --}}
-{{-- @endif --}}
 
 @endsection
 

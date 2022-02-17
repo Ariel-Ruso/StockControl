@@ -74,7 +74,9 @@ class ClienteController extends Controller
                 ]);
             session()->put ('cliente_id', $id);
             
-            return back()->with ('mensaje', 'Cliente seleccionado');
+            return redirect()
+                ->action('App\Http\Controllers\CarritoController@verCarrito')
+                ->with ('mensaje', 'Cliente seleccionado');
         
     }
 
