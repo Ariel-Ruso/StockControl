@@ -144,7 +144,7 @@ class PedidoController extends Controller
             $fact= Factura::FindorFail($id);       
             
             $pedi= new Pedido();       
-        
+            $fact->pedido= 1;
             $pedi->cantidadItems= $fact->cantidadItems;
             $pedi->total= $fact->total;
 
@@ -173,7 +173,7 @@ class PedidoController extends Controller
                 } 
                 
             $pedi->save();
-
+            $fact->save();
             $item= Item::FindorFail($id);
 
             $item->idPedido=  $fact->id;

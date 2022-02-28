@@ -178,7 +178,7 @@
                                 
                                 ?>
 
-                        @for ($i = 1; $i <= $cont; $i++)
+                        @for ($i = 1; $i <= 20 + $items->count() ; $i++)
                             <tr>
                                 <td></td>
                                 <td></td>

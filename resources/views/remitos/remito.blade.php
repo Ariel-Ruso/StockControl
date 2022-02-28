@@ -203,15 +203,15 @@
                 / IMEI: 
                 {{ $item->imei }}
               @endif
-              @if($item->numero != "")
+              {{-- @if($item->numero != "")
                 /  
                 
                 n°
                 {{ $nums [$item->numero-1] ->numero }}
                 -
                 {{ $nums [$item->numero-1] ->color  }}
-              @endif
-              
+               @endif
+              --}}
           </td>
           <td style="text-align:center">
                     @if ( ($tipoPago) == 5)

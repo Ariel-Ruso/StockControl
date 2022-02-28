@@ -27,7 +27,7 @@
                     <x-agrega-btn route="caja/create" destino="Abrir" />
     @endif
 </div>
-{{-- <x-grafica img="Storage/caja.png"/> --}}
+
 <h2>
     Caja
 </h2>
@@ -208,221 +208,199 @@
 <div class="container align:right">
   <hr  width= "95%" noshade="noshade"  />
 </div>
+   
 
-{{-- @if ( ($cont == 0) || ($gastos < 0 ) )
-
-    <br>
-    <x-vacio mensaje="Sin Movimientos x ahora" />
-@else --}}
-{{-- @if  ($todas->count()) --}}
-<div class="container mt-4">
-    <div class="row justify-content-center mx-auto ">
-      
-          <table class="table border-rounded shadow" >
-            <thead class="table font-normal text-center text-black-500 index" >
-              <tr>
-                @if (Auth::user()->name == 'Geminis') 
-                    <th scope="col">
-                        Operación
-                    </th>
-                    <th scope="col">
-                        Fecha
-                    </th>
-                    <th scope="col">
-                        Cliente
-                    </th>
-                    <th scope="col">
-                        Det de Gasto
-                    </th>
-                    <th scope="col">
-                        Efectivo  
-                    </th>
-                    <th scope="col">
-                        Remito
-                    </th> 
-                @else
-                                    <th scope="col">
-                                        Operación
-                                    </th>
-                                    <th scope="col">
-                                        N Fact
-                                    </th>
-                                    <th scope="col">
-                                        Fecha
-                                    </th>
-                                    <th scope="col">
-                                        Hora
-                                    </th>
-                                    <th scope="col">
-                                        Vendedor
-                                    </th>
-                                    <th scope="col">
-                                        Cliente
-                                    </th>
-                                    <th scope="col">
-                                        Efectivo  
-                                    </th>
-                                    <th scope="col">
-                                        Tarjetas
-                                    </th>
-                                     <th scope="col">
-                                        Remito
-                                    </th> 
+@if  ( $todas->count() || $gastos->count() ) 
+    <div class="container mt-4">
+        <div class="row justify-content-center mx-auto ">
+            <table class="table border-rounded shadow" >
+                <thead class="table font-normal text-center text-black-500 index" >
+                <tr>
+                    @if (Auth::user()->name == 'Akihay') 
+                        <th scope="col">
+                            Operación
+                        </th>
+                        <th scope="col">
+                            N Fact
+                        </th>
+                        <th scope="col">
+                            Fecha
+                        </th>
+                        <th scope="col">
+                            Hora
+                        </th>
+                        <th scope="col">
+                            Vendedor
+                        </th>
+                        <th scope="col">
+                            Cliente
+                        </th>
+                        <th scope="col">
+                            Efectivo  
+                        </th>
+                        <th scope="col">
+                            Tarjetas
+                        </th>
+                        <th scope="col">
+                            Remito
+                        </th> 
+                        <th scope="col">
+                            Pedidos
+                        </th> 
+                    @else
+                        <th scope="col">
+                            Operación
+                        </th>
+                        <th scope="col">
+                            N Fact
+                        </th>
+                        <th scope="col">
+                            Fecha
+                        </th>
+                        <th scope="col">
+                            Hora
+                        </th>
+                        <th scope="col">
+                            Vendedor
+                        </th>
+                        <th scope="col">
+                            Cliente
+                        </th>
+                        <th scope="col">
+                            Efectivo  
+                        </th>
+                        <th scope="col">
+                            Tarjetas
+                        </th>
+                        <th scope="col">
+                            Remito
+                        </th> 
                                     
-                                    <th scope="col">
-                                        Pedidos
-                                    </th> 
-                @endif
-              </tr>
-            </thead>
-            <tbody>
-                        @foreach ($todas as $item)
-                           
-                            <thead>
-                                <tr class="tData">  
-                                    @if (Auth::user()->name == 'Geminis') 
-                                        <th>
-                                            {{  $item->id }}
-                                        </th> 
-                                        <th>                                      
-                                            {{ $item->created_at->format('d/m/y')  }}<br>
-                                        </th>
-                                        <th>
-                                            {{  $item->apellidoyNombre }}
-                                        </th>
-                                        <th></th>
-                                        <th>
-                                            @if($item->tipoPago==1)
-                                                $ {{  $item->total }}
-                                                @else
-                                                $ {{'-' }}
-                                            @endif
-                                        </th>
-                                        
-                                        <th>
-                                            <a href=" {{ route ('imprimirRemit', $item->id) }}" 
-                                                class="btn btn-warning shadow" >
-                                                    Ver
-                                            </a>
-                                        </th> 
+                    @endif
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($todas as $item)    
+                    <thead>
+                        <tr class="tData">  
+                            @if (Auth::user()->name == 'Akihay')
+                                <th>
+                                    {{  $item->id }}
+                                </th> 
+                                <th>
+                                    @if( $item->numfact > 0 )
+                                        {{  $item->numfact }}                                        
                                     @else
-                                                            
-                                    <th>
-                                         {{  $item->id }}
-                                    </th> 
-                                    <th>
-                                        @if( $item->numfact > 0 )
-                                            {{  $item->numfact }}                                        
+                                        {{ ' No Generada '}} 
+                                    @endif 
+                                </th> 
+                                <th>                                      
+                                    {{ $item->created_at->format('d/m/y')  }}<br>
+                                </th>
+                                <th>
+                                    {{ $item->created_at->format('H : i ')  }}<br>
+                                </th>
+                                <th>
+                                    {{  $users[ ($item->users_id)-1]->name }}
+                                </th>
+                                <th>
+                                    {{  $item->apellidoyNombre }}
+                                </th>
+                                <th>
+                                    @if($item->tipoPago==1)
+                                        $ {{  $item->total }}
                                         @else
-                                             {{ ' No Generada '}} 
-                                        @endif 
-                                    </th> 
-                                    <th>                                      
-                                         {{ $item->created_at->format('d/m/y')  }}<br>
-                                    </th>
-                                    <th>
-                                         {{ $item->created_at->format('H : i ')  }}<br>
-                                    </th>
-                                    <th>
-                                         {{  $users[ ($item->users_id)-1]->name }}
-                                    </th>
-                                    <th>
-                                         {{  $item->apellidoyNombre }}
-                                    </th>
-                                    <th>
-                                        @if($item->tipoPago==1)
-                                            $ {{  $item->total }}
-                                            @else
-                                            $ {{'-' }}
-                                        @endif
-                                    </th>
-                                    <th>
-                                        @if($item->tipoPago!=1)
-                                            $ {{  $item->total }}
-                                            @else
-                                            $ {{ '-' }}
-                                        @endif
-                                    </th>
-                                    <th>
-                                        <a href=" {{ route ('imprimirRemit', $item->id) }}" 
-                                            class="btn btn-warning shadow" >
-			                                    Ver
-                                        </a>
-                                    </th> 
-                                    <th>
-                                        {{-- revisar ciclos  --}}
-                                        
-                                        @if($item->pedido != 1)
-                                            <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                class="btn btn-success shadow" >
-                                                    Generar
-                                            </a> 
-                                        @else
-                                            Enviado
-                                        @endif
-                                        {{-- @foreach ( $pedis as $pedi ) --}}
-                                                                                    
-                                                {{-- @foreach ( $pedis as $pedi ) --}}
-                                                
-                                               {{--  @if($pedi->id == $item->id)
-                                                 {{ $pedi->id }}
-
-                                                    @if($pedi->estado == 1)
-                                                        Enviado
-                                                        
-                                                     @else
-                                                        Armado                     
-                                                    @endif
-                                                @else   
-                                                    <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
-                                                        class="btn btn-success shadow" >
-                                                            Generar
-                                                    </a> 
-                                                    
-                                                    
-                                                @endif --}}
-
-                                             {{-- @endfor                                                 --}}
-                                        
-                                        
-                                        
-                                    </th> 
-                                    
-                                    <!-- 
-                                     <th>
-                                        <a  href=" {{ route ('exportarCsv', $item->id) }}" 
-                                            class="btn btn-outline-success" >
-			                                    Cabe
-                                        </a>
-                                        
-                                        <a  href=" {{ route ('exportarCsvIva', $item->id) }}" 
-                                            class="btn btn-outline-success" >
-			                                    Iva
-                                        </a>
-                                    </th> 
-                                      -->
-                                      {{-- @endif --}}
-                                </tr>
-                            </thead>
-                        @endforeach
+                                        $ {{'-' }}
+                                    @endif
+                                </th>
+                                <th>
+                                    @if($item->tipoPago!=1)
+                                        $ {{  $item->total }}
+                                    @else
+                                        $ {{ '-' }}
+                                    @endif
+                                </th>
+                                <th>
+                                    <a href=" {{ route ('imprimirRemit', $item->id) }}" 
+                                        class="btn btn-warning shadow" >
+                                            Ver
+                                    </a>
+                                </th>
+                                <th>
+                                    @if($item->pedido != 1)
+                                        <a href=" {{ route ('pedidos.enviar', $item->id) }}" 
+                                            class="btn btn-success shadow" >
+                                                Generar
+                                        </a> 
+                                    @else
+                                        Enviado
+                                    @endif
+                                </th> 
                             
-                            
-                            @foreach ($gastos as $item2)
-                                <thead>
-                                    <tr class="text-center text-xs">
-                                        @if (Auth::user()->name == 'Geminis') 
-                                            <th></th>
-                                            <th>
-                                                {{ $item2->created_at->format('d/m/y')  }}<br>
-                                            </th>   
-                                            <th></th>                                          
-                                            <th>
-                                                {{  $item2->detalle }}
-                                            </th>
-                                            <th>
-                                                - $ {{  $item2->monto }}
-                                            </th>
+                            @else
+                                <th>
+                                    {{  $item->id }}
+                                </th> 
+                                <th>
+                                    @if( $item->numfact > 0 )
+                                        {{  $item->numfact }}                                        
+                                    @else
+                                        {{ ' No Generada '}} 
+                                    @endif 
+                                </th> 
+                                <th>                                      
+                                    {{ $item->created_at->format('d/m/y')  }}<br>
+                                </th>
+                                <th>
+                                    {{ $item->created_at->format('H : i ')  }}<br>
+                                </th>
+                                <th>
+                                    {{  $users[ ($item->users_id)-1]->name }}
+                                </th>
+                                <th>
+                                    {{  $item->apellidoyNombre }}
+                                </th>
+                                <th>
+                                    @if($item->tipoPago==1)
+                                        $ {{  $item->total }}
                                         @else
+                                        $ {{'-' }}
+                                    @endif
+                                </th>
+                                <th>
+                                    @if($item->tipoPago!=1)
+                                        $ {{  $item->total }}
+                                    @else
+                                        $ {{ '-' }}
+                                    @endif
+                                </th>
+                                
+                                <th>
+                                    <a href=" {{ route ('imprimirRemit', $item->id) }}" 
+                                        class="btn btn-warning shadow" >
+                                            Ver
+                                    </a>
+                                </th>       
+                            @endif
+                        </tr>
+                    </thead>
+                    @endforeach
+                    @foreach ($gastos as $item2)
+                        <thead>
+                            <tr class="text-center text-xs">
+                                @if (Auth::user()->name == 'Geminis') 
+                                    <th></th>
+                                    <th>
+                                        {{ $item2->created_at->format('d/m/y')  }}<br>
+                                    </th>   
+                                    <th></th>                                          
+                                    <th>
+                                        {{  $item2->detalle }}
+                                    </th>
+                                    <th>
+                                        - $ {{  $item2->monto }}
+                                    </th>
+                                @else
                                     <th>
 
                                     </th> 
@@ -449,17 +427,37 @@
                                     <th>
                                     
                                     </th> 
-                                    <th>
-                                        
-                                    </th> 
-                                    @endif
-                                </thead>
-
-                            @endforeach
-                    </tbody>
-                </table>
-            </div>
+                                
+                                @endif
+                            </tr>
+                        </thead>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
+@else                                       
+   <br>
+    <x-vacio mensaje="Sin Movimientos x ahora" />
+@endif                              
+                                 
+                                    <!-- 
+                                     <th>
+                                        <a  href=" 
+                                        {{-- {{ route ('exportarCsv', $item->id) }}"  --}}
+                                            class="btn btn-outline-success" >
+			                                    Cabe
+                                        </a>
+                                        
+                                        <a  href=" 
+                                        {{-- {{ route ('exportarCsvIva', $item->id) }}"  --}}
+                                            class="btn btn-outline-success" >
+			                                    Iva
+                                        </a>
+                                    </th> 
+                                      -->
+                                    
+                           
 
 @endsection
 
