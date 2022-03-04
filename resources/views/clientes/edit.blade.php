@@ -126,8 +126,10 @@
                                      />   
                                  </div>
                                 <div class="container text-center row justify-content-center" >
+                                   
                                     <button class="btn btn-success mt-3" 
                                             type="submit">
+                                          
                                         Editar
                                     </button>
                                 </div>
