@@ -99,21 +99,29 @@
                             <strong>
                                  Cliente:     
                             </strong>
-                                     {{ $dniCli }}           
+                                     {{ $clie->dni }}           
                             <br><br>
                             <strong>
                             Razon Social:     
                             </strong>
-                           {{ $nombreCli }}
+                           {{ $clie->nombre }}
                             <br><br>
                             <strong>
                             Domicilio:     
                             </strong>
-                                {{ $direccionCli }}
+                                {{ $clie->direccion }}
                             <br><br>
                         </p>
                 <!-- columna derecha -->
-                </table>
+                    <td style="text-align:left">
+                        <p style="font: 80% ">   
+                            <strong>
+                            Cta Cte:     
+                            </strong>
+                                    $ {{ $clie->ctaCte }}
+                        </p>   
+                    </td>
+                    </table>
             </div>
         </div>
     </div>
@@ -195,7 +203,8 @@
                             </td>
                             <td style="text-align:center" class="gray"> 
                                 
-                                $ {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+                                {{-- $ {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+                                $ {{ $desc}}
                             </td>
                           </tr>
                         <tr>
@@ -304,23 +313,31 @@
                   <!-- columna izquierda -->
                       <td style="text-align:left">
                           <p style="font: 80% ">         
-                              <strong>
-                                   Cliente:     
-                              </strong>
-                                       {{ $dniCli }}           
-                              <br><br>
-                              <strong>
-                              Razon Social:     
-                              </strong>
-                             {{ $nombreCli }}
-                              <br><br>
-                              <strong>
-                              Domicilio:     
-                              </strong>
-                                  {{ $direccionCli }}
-                              <br><br>
+                            <strong>
+                                Cliente:     
+                           </strong>
+                                    {{ $clie->dni }}           
+                           <br><br>
+                           <strong>
+                           Razon Social:     
+                           </strong>
+                          {{ $clie->nombre }}
+                           <br><br>
+                           <strong>
+                           Domicilio:     
+                           </strong>
+                               {{ $clie->direccion }}
+                           <br><br>
                           </p>
                   <!-- columna derecha -->
+                    <td style="text-align:left">
+                        <p style="font: 80% ">   
+                            <strong>
+                            Cta Cte:     
+                            </strong>
+                                    $ {{ $clie->ctaCte }}
+                        </p>   
+                    </td>
                   </table>
               </div>
           </div>
@@ -403,7 +420,8 @@
                             </td>
                             <td style="text-align:center" class="gray"> 
                                 
-                                $ {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+                                {{-- $ {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+                                $ {{ $desc}}
                             </td>
                           </tr>
                           <tr>

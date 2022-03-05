@@ -16,6 +16,7 @@ use App\Models\Propietario;
 use App\Models\Presupuesto;
 use App\Models\FilecsvCae;
 use App\Models\Filecsv;
+use App\Models\Cliente;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Qr;
 
@@ -199,18 +200,23 @@ class PdfController extends Controller
             
         }
 
-        $nombreCli= $fact->apellidoyNombre;
-        $direccionCli= $fact->domicilioCliente;
-        $dniCli= $fact->dnicliente;
+        $clie= Cliente::FindorFail($fact->clie_id);
+
+        // $nombreCli= $fact->apellidoyNombre;
+        // $direccionCli= $fact->domicilioCliente;
+        // $dniCli= $fact->dnicliente;
+       
         $tipoPago= $fact->tipoPago;
         
         $total= $fact->total;
         
-        $pdf= \PDF::loadView ('remitos.remito_PDF', compact('fecha', 'nremit', 'dniCli', 'desc',
-                'tipoPago', 'direccionCli', 'total', 'id', 'items', 'nombreCli', 'pro', 'src'));
+        $pdf= \PDF::loadView ('remitos.remito_PDF', compact('fecha', 'nremit', 'desc', 'clie',
+                //'dniCli', 'direccionCli', 'nombreCli',
+                'tipoPago', 'total', 'id', 'items', 'pro', 'src'));
             
-        return $pdf->download ('Rm-' .$nombreCli .'.pdf', compact('fecha', 'nremit', 'dniCli', 'desc',
-            'direccionCli', 'total', 'id', 'items', 'nombreCli', 'tipoPago', 'pro', 'src'));
+        return $pdf->download ('Rm-' .$clie->nombre .'.pdf', compact('fecha', 'nremit', 'desc', 'clie',
+            //'dniCli','direccionCli', 'nombreCli',
+             'total', 'id', 'items', 'tipoPago', 'pro', 'src'));
                 
     }
 
@@ -231,22 +237,34 @@ class PdfController extends Controller
 
         $fecha= $fact->created_at;
         $nremit= "0002-0002318";
-
+        
+        $desc=0;
+        $items = Item::whereIn('idFactura', [$id]) ->get();
+        //dd($items[0]);
+        for ($i=0; $i<count($items); $i++) {
+            $desc= $desc + $items[$i]->descuento;
+            
+        }
+        $clie= Cliente::FindorFail($fact->clie_id);
+/* 
         $nombreCli= $fact->apellidoyNombre;
         $direccionCli= $fact->domicilioCliente;
         $dniCli= $fact->dnicliente;
+         */
         $tipoPago= $fact->tipoPago;
         
         $total= $fact->total;
         
         $pdf= \PDF::loadView ('remitos.remito_PDF2', 
-                compact('fecha', 'nremit', 'dniCli', 'tipoPago', 'direccionCli',
-                         'total', 'id', 'items', 'nombreCli', 'pro', 'src'));
-            
-        return $pdf->download ('Rm-' .$nombreCli .'.pdf', 
-                        compact('fecha', 'nremit', 'dniCli', 'tipoPago', 'direccionCli',
-                    'total', 'id', 'items', 'nombreCli', 'pro', 'src'));
-                
+            compact('fecha', 'nremit', 'desc', 'clie',
+                //'dniCli', 'direccionCli', 'nombreCli',
+                'tipoPago', 'total', 'id', 'items', 'pro', 'src'));
+                    
+        return $pdf->download ('Rm-' .$clie->nombre .'.pdf', 
+            compact('fecha', 'nremit', 'desc', 'clie',
+                //'dniCli','direccionCli', 'nombreCli',
+                'total', 'id', 'items', 'tipoPago', 'pro', 'src'));
+                    
     }
 
     public function imprimirPresuPdf($id)

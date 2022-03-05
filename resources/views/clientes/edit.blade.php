@@ -106,6 +106,15 @@
                                         value= "{{ $clie->telefono }}"
                                         class="form-control mb-2"
                                     />   
+                                    <label > 
+                                        Cta Cte:          
+                                     </label>
+                                         <input
+                                             type="float"
+                                             name="ctaCte"
+                                             value= "{{ $clie->ctaCte }}"
+                                             class="form-control mb-2"
+                                         />   
                                 </div>
                                 <div class="container text-center row justify-content-center" >
                                     <button class="btn btn-success mt-3" 

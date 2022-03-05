@@ -111,6 +111,12 @@
 
                                                 <br>
 
+                                                <label class="form-check-label " for="dni">
+                                                    <strong>
+                                                        Cta Cte:
+                                                    </strong>
+                                                </label>
+                                                $ {{ $clie->ctaCte }}
                                             </div>
                                         </div>
                                     </div>

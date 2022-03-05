@@ -240,7 +240,7 @@
                                     {{ $clie->dni }}<br>                            
                                     {{ $clie->nombre }} <br>  
                                     {{ $clie->direccion }}  <br> 
-                                    {{ $clie->ctaCte }}  <br> 
+                                   $ {{ $clie->ctaCte }}  <br> 
                                 
                             @endif
                         </div>   

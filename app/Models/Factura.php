@@ -60,7 +60,7 @@ class Factura extends Model
 
     public function generarFactura(Request $request, $contItems, $subtot, $total, $iva, $tipoPago){
         
-//dd($request);
+
         $fact= new Factura();
         $cpago= $request->cpago;
         $fact->cantidadItems= $contItems;
@@ -72,7 +72,8 @@ class Factura extends Model
         $fact->numfact= 0;
         $cli_id= session()->get('cliente_id'); 
         $clie= Cliente::FindorFail($cli_id);  
-
+        
+        $fact->clie_id= $clie->id;
         $fact->dnicliente= $clie->dni;
         $fact->apellidoyNombre= $clie->nombre; 
         $fact->domicilioCliente=  $clie->direccion;

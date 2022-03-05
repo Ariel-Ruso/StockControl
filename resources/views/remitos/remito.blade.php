@@ -150,25 +150,31 @@
           <td style="text-align:left">
             <strong> Cliente:     
             </strong>
-                         {{ $dniCli }}           
+                         {{ $clie->dni }}           
             <br><br>
             <strong>
             Razon Social:     
             </strong>
-               {{ $nombreCli }}
+               {{ $clie->nombre }}
             <br><br>
             <strong>
             Domicilio:     
             </strong>
-                    {{ $direccionCli }}
+                    {{ $clie->direccion }}
             <br><br>
             <!-- <strong>
                 Condic. Venta:
             </strong>
               Contado
           </td> -->
-<!-- columna derecha -->
-         
+          <!-- columna derecha -->
+          <td style="text-align:left">
+            <strong>
+              Cta Cte:     
+            </strong>
+                      $ {{ $clie->ctaCte }}
+              
+          </td>
         </table>
     </div>
   </div>
