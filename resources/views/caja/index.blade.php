@@ -314,7 +314,7 @@
                                     @endif
                                 </th>
                                 <th>
-                                    @if($item->tipoPago!=1)
+                                    @if( $item->tipoPago!=1 && $item->tipoPago!=6 )
                                         $ {{  $item->total }}
                                     @else
                                         $ {{ '-' }}
@@ -368,7 +368,7 @@
                                     @endif
                                 </th>
                                 <th>
-                                    @if($item->tipoPago!=1)
+                                    @if( $item->tipoPago!=1 && $item->tipoPago!=6 )
                                         $ {{  $item->total }}
                                     @else
                                         $ {{ '-' }}
