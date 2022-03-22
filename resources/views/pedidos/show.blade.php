@@ -6,13 +6,12 @@
     @component('components.botones')
     @endcomponent
 </div>
-    {{-- <x-grafica img="/Storage/articulos.png" /> --}}
     <h2>
         Pedidos
     </h2>
 <br><br>
 
-     
+@if($items->count())
 
 	<div class="container mt-5">
 		<div class="row justify-content-center">
@@ -230,6 +229,12 @@
 </div>
 <br>
 <br><br>
+
+@else
+
+	<x-vacio mensaje="Sin Items ahora" />    
+
+@endif
 
 	
 @endsection

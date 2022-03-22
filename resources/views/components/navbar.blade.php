@@ -26,7 +26,7 @@
                 
                 </li> 
                 <!-- menu usuarios -->
-                <div class="dropdown "
+                {{-- <div class="dropdown "
                     @if (Auth::user()->name == 'Geminis') 
                         style="display: none"
                     @endif
@@ -46,7 +46,7 @@
                                 Mostrar
                             </a>
                     </div>
-                </div>
+                </div> --}}
                 
                 <!-- menu clientes -->
                 <div class="dropdown">   
@@ -82,24 +82,30 @@
                     >
                         Articulos
                     </a>
-                    <div  class="dropdown-menu" aria-labelledby="dropdownbutton">
-                            
+                    <div  aria-labelledby="dropdownbutton" class="dropdown-menu">     
                             <a href="{{ route('articulos.index')}}" class="dropdown-item">
                                 Mostrar
                             </a>
-                            <a href="{{ route('articulosPdf')}}" class="dropdown-item">
-                                Lista Difusión
-                            </a>
-                            <a href="{{ route('pedidos.index')}}" class="dropdown-item">
-                                Mostrar Pedidos
-                            </a> 
-                            <a href="{{ route('presupuestos.index')}}" class="dropdown-item">
-                                Mostrar Presupuestos
-                            </a> 
-                            <a href="{{ route('ordenes.index')}}" class="dropdown-item">
-                                Orden de Compra
-                            </a> 
+                            <div class="container"
+                                @if (Auth::user()->name == 'Geminis') 
+                                    style="display: none"
+                                @endif
+                                >
+                                <a href="{{ route('articulosPdf')}}" class="dropdown-item">
+                                    Lista Difusión
+                                </a>
+                                <a href="{{ route('pedidos.index')}}" class="dropdown-item">
+                                    Mostrar Pedidos
+                                </a> 
+                                <a href="{{ route('presupuestos.index')}}" class="dropdown-item">
+                                    Mostrar Presupuestos
+                                </a> 
+                                <a href="{{ route('ordenes.index')}}" class="dropdown-item">
+                                    Orden de Compra
+                                </a> 
+                            </div>
                     </div>
+                    
                 </div>
                 <!-- menu categorias -->
                 <div class="dropdown" 
@@ -155,7 +161,7 @@
                 ?>
                 {{-- @if($esta == "Cerrada") --}}
                 @if($res == 0)
-
+{{-- 
                     <li class="nav-item active">
                         <a  href=" {{ route('verCarrito') }} " 
                                 class="btn btn-outline-primary nav-link disabled"
@@ -168,7 +174,9 @@
                             
                         </a> 
                     </li> 
+                     --}}
                 @else
+                {{-- 
                     <li class="nav-item active">
                         <a  href=" {{ route('verCarrito') }} " 
                             {{ $attributes }}
@@ -180,7 +188,7 @@
                             Ver Carrito  
                             
                         </a> 
-                    </li> 
+                    </li>  --}}
 
                 @endif
                 
@@ -287,7 +295,10 @@
                      </div> 
                  </li> -->
                  <li>
-                    <div class="dropdown">   
+                    <div class="dropdown"
+                        @if (Auth::user()->name == 'Geminis') 
+                                style="display: none"
+                        @endif >   
                         <a  href=""
                             {{ $attributes }}
                             role="button" 
@@ -299,6 +310,7 @@
                             Contable
                         </a>
                         <div  class="dropdown-menu" aria-labelledby="dropdownbutton">
+                            
                             <a href="{{ route('contable.index')}}" class="dropdown-item">
                                 Facturar
                             </a> 

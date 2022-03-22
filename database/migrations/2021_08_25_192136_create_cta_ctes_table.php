@@ -20,6 +20,7 @@ class CreateCtaCtesTable extends Migration
                     ->on('clientes')
                     ->onDelete('cascade');
             $table->float('monto');
+            
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class CreateFacturasTable extends Migration
                     ->on('users')
                     ->onDelete('cascade');
             //$table->string('descripcion');
+            $table->integer('clie_id');
             $table->string('apellidoyNombre');
             $table->string('domicilioCliente');
             $table->string('dnicliente');
@@ -41,6 +42,8 @@ class CreateFacturasTable extends Migration
             $table->string('tipoCte')
                     ->nullable();
             $table->string('numfact')
+                    ->nullable();
+            $table->boolean('pedido')
                     ->nullable();
             $table->timestamps();
         });

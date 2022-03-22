@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Numero;
 use Illuminate\Http\Request;
 
 class Articulo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'cantidad', 'precioCompra', 'precioVenta', 'pVentaTarj', 'marca', 
+    protected $fillable = ['nombre', 'descripcion', 'cantidad', 'precioCompra', 'precioVenta', 'pVentaTarj', 'marca', 
             'modelo', 'categorias_id', 'proveedors_id', 'codbar', 'codigo', 'imei', 'iva',
     ];
     
@@ -48,9 +49,23 @@ class Articulo extends Model
         }
     }   
 
+    public function scopeColor($query, $color){
+
+        if($color){
+             $num= Numero::where('color', 'like', "%$color%")
+                ->get();
+        $num="rojo";
+                
+            return $query->where('color', 'like', "%$color%");
+
+        }
+
+    }
+
     public function scopeNombre($query, $nombre){
 
         if($nombre){
+            
             return $query->where('nombre','like',"%$nombre%");
         }
 
@@ -128,18 +143,7 @@ class Articulo extends Model
         return back()->with('mensaje', 'Artículo vendido correctamente');    
     }
 
-    /* public function getCantidad($id){
-
-        $art= Articulo::FindOrFail($id);
-        if ($art->cantidad > 0 )
-        {
-            $res= 1;
-        }else{
-            $res= 0;
-        }
-
-    } */
-    
+        
     public function getLastArt(){
         $art= Articulo::all();
         $ultArt= $art->last();

@@ -102,20 +102,28 @@
                             <strong>
                                  Cliente:     
                             </strong>
-                                     {{ $dniCli }}           
+                                     {{ $clie->dni }}           
                             <br><br>
                             <strong>
                             Razon Social:     
                             </strong>
-                           {{ $nombreCli }}
+                           {{ $clie->nombre }}
                             <br><br>
                             <strong>
                             Domicilio:     
                             </strong>
-                                {{ $direccionCli }}
+                                {{ $clie->direccion }}
                             <br><br>
                         </p>
                 <!-- columna derecha -->
+                    <td style="text-align:left">
+                        <p style="font: 80% ">   
+                            <strong>
+                            Cta Cte:     
+                            </strong>
+                                    $ {{ $clie->ctaCte }}
+                        </p>    
+                    </td>
                 </table>
             </div>
         </div>
@@ -177,16 +185,27 @@
                                     //revisar mas d 2 item 104, menos 108
                                 
                                 ?>
+                        @if($items->count() > 14)
+                            @for ($i = 1; $i <= 20 + $items->count() ; $i++)
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            @endfor
+                        @else    
+                            @for ($i = 1; $i <=  $items->count() + $cont ; $i++)
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            @endfor                               
 
-                        @for ($i = 1; $i <= $cont; $i++)
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        @endfor                                   
-                
+                        @endif
+                    
                         </tr>
                     </tbody>
                     <tfoot>
@@ -199,7 +218,8 @@
                             </td>
                             <td style="text-align:center" class="gray"> 
                                 
-                                $ {{ $total - ($item->precioUnit *  $item->cantidad)  }}
+                                {{-- $ {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+                                {{ $desc}}
                             </td>
                         </tr>
                         <tr>

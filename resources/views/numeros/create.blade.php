@@ -50,7 +50,7 @@
 
                                             <input type="number" name="numero[]"  placeholder= "Numero"
                                                     class="form-control mb-2 col-4" />
-                                            <input type="number" name="cantidad[]"  value= "0" placeholder="Cantidad" 
+                                            <input type="number" name="cantidad[]"  value= "1" placeholder="Cantidad" 
                                                 class="form-control mb-2 col-5" />
                                             <input type="text" name="color[]"  placeholder="Color" 
                                                 class="form-control mb-2 col-6" />

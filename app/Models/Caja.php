@@ -28,12 +28,17 @@ class Caja extends Model
         $totFact= 0;
         $gas= new Gasto();
         $totGas= $gas->total();
+        
         //dd($totGas);
         
         $todas= Factura::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
+        //dd($todas);
         
         foreach($todas as $valu){
-            $totFact= $totFact + $valu->total;
+            if($valu->tipoPago!=6){
+                $totFact= $totFact + $valu->total;
+            }
+            
         }
         
         return ($totFact - $totGas);

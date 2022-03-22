@@ -150,25 +150,31 @@
           <td style="text-align:left">
             <strong> Cliente:     
             </strong>
-                         {{ $dniCli }}           
+                         {{ $clie->dni }}           
             <br><br>
             <strong>
             Razon Social:     
             </strong>
-               {{ $nombreCli }}
+               {{ $clie->nombre }}
             <br><br>
             <strong>
             Domicilio:     
             </strong>
-                    {{ $direccionCli }}
+                    {{ $clie->direccion }}
             <br><br>
             <!-- <strong>
                 Condic. Venta:
             </strong>
               Contado
           </td> -->
-<!-- columna derecha -->
-         
+          <!-- columna derecha -->
+          <td style="text-align:left">
+            <strong>
+              Cta Cte:     
+            </strong>
+                      $ {{ $clie->ctaCte }}
+              
+          </td>
         </table>
     </div>
   </div>
@@ -203,15 +209,15 @@
                 / IMEI: 
                 {{ $item->imei }}
               @endif
-              @if($item->numero != "")
+              {{-- @if($item->numero != "")
                 /  
                 
                 n°
                 {{ $nums [$item->numero-1] ->numero }}
                 -
                 {{ $nums [$item->numero-1] ->color  }}
-              @endif
-              
+               @endif
+              --}}
           </td>
           <td style="text-align:center">
                     @if ( ($tipoPago) == 5)
@@ -278,6 +284,47 @@
 
       <tr>
         @if (Auth::user()->name == 'Geminis') 
+
+          <td colspan="2"></td>
+          <td style="text-align:right">
+            <strong>
+                Efectivo:
+            </strong>
+          </td>
+        
+          <td style="text-align:center" class="gray"> 
+            @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
+                || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) )
+              $ {{ $eft + $desc}}
+            @else
+              $ 0
+            @endif
+          </td>
+          <tr>
+            <td colspan="2"></td>
+            <td style="text-align:right">
+              <strong>
+                  T Bancaria:
+              </strong>
+            </td>
+            
+              <td style="text-align:center" class="gray"> 
+                @if ( ($tipoPago == 31) || ($tipoPago == 51) )
+                1 cuota:
+                  $ {{ $tBanc - $desc}}
+                @elseif ($tipoPago==32)  
+                  3 cuotas:
+                  $ {{ number_format( ($tBanc- $desc)/3, 2) }}
+               
+                @else
+                  $ 0
+                @endif
+              </td>
+    
+          </tr>
+
+        @elseif (Auth::user()->name == 'Akihay')   
+           
           <td colspan="2"></td>
           <td style="text-align:right">
             <strong>
@@ -295,8 +342,6 @@
           </td>
 
         @else
-
-        
 
         <td colspan="2"></td>
         <td style="text-align:right">

@@ -34,7 +34,7 @@ class PedidoController extends Controller
     {
         $pedis= Pedido::FindorFail($id);
         $items = Item::whereIn('idPedido', [$id])->get();
-        
+        //dd($items);
         
         $clie= Cliente::all();
         $resp= Respon::all();
@@ -144,7 +144,7 @@ class PedidoController extends Controller
             $fact= Factura::FindorFail($id);       
             
             $pedi= new Pedido();       
-        
+            $fact->pedido= 1;
             $pedi->cantidadItems= $fact->cantidadItems;
             $pedi->total= $fact->total;
 
@@ -156,6 +156,7 @@ class PedidoController extends Controller
 
             $pedi->tipoPago= $fact->tipoPago;
             $pedi->estado= 0;
+            $pedi->id= $fact->id;
 
             if ($fact->tipoPago==4){
                 $total= $total + ($total * 0.18);  
@@ -172,7 +173,7 @@ class PedidoController extends Controller
                 } 
                 
             $pedi->save();
-
+            $fact->save();
             $item= Item::FindorFail($id);
 
             $item->idPedido=  $fact->id;

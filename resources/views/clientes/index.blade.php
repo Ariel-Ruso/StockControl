@@ -90,7 +90,7 @@
                         </th>
                         <th scope="col">
                           Cta Cte
-                        </th>
+                      </th>
                         <th scope="col">
                             Acciones
                         </th>
@@ -118,9 +118,8 @@
                           <td>    
                               {{ $item->email }}
                           </td>
-                          <td>    
-                            {{ $item->ctaCte }}
-                          </td>
+                          <td> 
+                              $ {{ $item->ctaCte }}
                           <td>
                           <a   href=" {{ route('clientes.select', $item->id) }}" 
                               class="btn btn-outline-primary btn-sm shadow">

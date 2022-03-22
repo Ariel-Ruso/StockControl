@@ -10,7 +10,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Filecsv;
 use App\Models\FilecsvIva;
 use App\Models\FilecsvCae;
-use App\Models\TestCae;
+use App\Models\Cliente;
 use DB;
 use App\Models\Qr;
 use App\Models\Propietario;
@@ -209,7 +209,7 @@ class FacturaController extends Controller
         }
 
         //traigo items con mismo id
-
+        //<<<<<<< HEAD
         $desc=0;
         $items = Item::whereIn('idFactura', [$id]) ->get();
         //dd($items[0]);
@@ -217,7 +217,15 @@ class FacturaController extends Controller
             $desc= $desc + $items[$i]->descuento;
             
         }
-
+        //dd($desc);
+        /* =======
+        $items = Item::whereIn('idFactura', [$id])
+                 ->get();
+        /* $num= Numero::whereIn('id', $items->numero )
+                ->get();
+                dd($num); */
+  
+        //>>>>>>> calzados */
         $nums= Numero::all();
         //reviso user y traigo datos d propiet
         $u_id= auth()->id();  
@@ -228,18 +236,22 @@ class FacturaController extends Controller
         $fecha= $fact->created_at;
         $nremit= "0002-00023". $id;
        
-        $nombreCli= $fact->apellidoyNombre;
-        $direccionCli= $fact->domicilioCliente;
-        $dniCli= $fact->dnicliente;
+        $clie= Cliente::FindorFail($fact->clie_id);
+
+        // $nombreCli= $fact->apellidoyNombre;
+        // $direccionCli= $fact->domicilioCliente;
+        // $dniCli= $fact->dnicliente;
+        
         $tipoPago= $fact->tipoPago;
 
         $total= $fact->total;
         $subtotal= $fact->subtotal;
         $iva= $fact->iva;
+        //dd($clie);
         
-        
-        return view ('remitos.remito', compact('fecha', 'nremit', 'nombreCli', 'iva', 'subtotal',
-                    'direccionCli', 'total', 'id', 'items', 'dniCli', 'tipoPago', 'pro', 'desc', 'nums',
+        return view ('remitos.remito', compact('fecha', 'nremit',  'iva', 'subtotal', 'clie',
+                    //'direccionCli', 'nombreCli', 'dniCli', 
+                    'total', 'id', 'items',  'tipoPago', 'pro', 'desc', 'nums',
                     'eft','tBanc', 'tnoBanc'));
 
     }

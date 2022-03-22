@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class gasto extends Model
 {
@@ -19,14 +20,16 @@ class gasto extends Model
 
     public function total(){
 
-        $gas= Gasto::all();
-        $tot= 0;
+        //$gas= Gasto::all();
+        $total= 0;
+        $tot= Gasto::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->get();
 
-        foreach($gas as $item){
+        foreach($tot as $item){
             
-            $tot= $tot + $item->monto; 
+            $total= $total + $item->monto; 
         }
-        return $tot;
+        //dd($total);
+        return $total;
     }
 
 
