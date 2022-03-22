@@ -35,7 +35,10 @@ class Caja extends Model
         //dd($todas);
         
         foreach($todas as $valu){
-            $totFact= $totFact + $valu->total;
+            if($valu->tipoPago!=6){
+                $totFact= $totFact + $valu->total;
+            }
+            
         }
         
         return ($totFact - $totGas);
