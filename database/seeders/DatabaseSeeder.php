@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Respon;
 use App\Models\Proveedor;
 use App\Models\Articulo;
+use App\Models\Cliente;
 use App\Models\User;
 use Spatie\Permission\Models\Permission;
 
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
                
         $proveedor= Proveedor::factory()            ->times(5)->create();        
         $this->call(CategoriaSeeder::class);
-        $this->call(ClienteSeeder::class);
+        //$this->call(ClienteSeeder::class);
+        Cliente::factory(5)->create();
         $this->call(PropietarioSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);

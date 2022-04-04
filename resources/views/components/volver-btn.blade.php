@@ -1,6 +1,6 @@
-<div class="container ">
+{{-- <div class="container "> --}}
     {{-- <a href="{{ URL::previous() }}"  --}}
-    
+<div class="btn-ini">
     <a href="javascript:history.back()" 
             
             class= "btnn btnBack border-solid border bg-orange-200 

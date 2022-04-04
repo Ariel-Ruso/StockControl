@@ -5,6 +5,23 @@
 
 body {
     main {
+        .header {
+            /* display: grid;
+            grid-template-columns: 1fr 1fr;
+             */
+            //border: 1px solid rgb(170, 73, 73);
+            display: flex;
+            //flex-direction: column;
+            // background-color: aqua;
+            .titulo {
+                flex: auto;
+                //width: 70%;
+            }
+            .btn-ini {
+                //width: 30%;
+                flex: auto;
+            }
+        }
         img {
             margin: auto;
             height: 100px;
@@ -47,7 +64,7 @@ body {
         table {
             justify-content: center;
             align-items: center;
-            padding: 25px;
+            padding: 20px;
             margin: auto;
             tr {
                 font-size: 1em;
@@ -90,6 +107,9 @@ body {
         }
         .card-header {
             background-color: $orange;
+        }
+        .card-header-caja {
+            background-color: $orange2;
         }
         .detail {
             background-color: $cyan;

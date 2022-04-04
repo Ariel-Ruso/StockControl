@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CtaCte;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class CtaCteController extends Controller
@@ -14,7 +15,9 @@ class CtaCteController extends Controller
      */
     public function index()
     {
-        //
+        $ctas= CtaCte::all();
+        $clie= Cliente::all();
+        return view('ctacte.index', compact('ctas','clie'));
     }
 
     /**
@@ -44,9 +47,16 @@ class CtaCteController extends Controller
      * @param  \App\Models\CtaCte  $ctaCte
      * @return \Illuminate\Http\Response
      */
-    public function show(CtaCte $ctaCte)
+    public function show($clie_id)
     {
-        //
+        $cta= new CtaCte();
+        $total= $cta->totalxCliente($clie_id);
+        //dd($total);
+        $movim= CtaCte::all();
+        $clie= Cliente::FindorFail($clie_id);
+        //$ctaShow= CtaCte::FindorFail();
+        return view ('ctacte.show', compact('movim','total','clie_id','clie' ));
+
     }
 
     /**

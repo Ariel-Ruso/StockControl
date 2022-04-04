@@ -314,6 +314,10 @@
                             <a href="{{ route('contable.index')}}" class="dropdown-item">
                                 Facturar
                             </a> 
+                            <a href="{{ route('ctacte.index')}}" class="dropdown-item">
+                                Cta Cte
+                            </a> 
+                            
                         </div>
                     </div>
                  </li>  

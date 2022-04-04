@@ -18,19 +18,12 @@
 
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
-            
                 <div class="col-md-6">
-                    <div class="card 
-                    {{-- bg-white  --}}
-                     shadow">
-                      <div class=" py-3 px-8 cart2
-                      {{-- bg-blue-200 d-flex justify-content-between align-items-center --}}
-                      ">
-                        {{-- <span class="text-center mx-auto font text-xl"> --}}
+                    <div class="card shadow">                     
+                      <div class=" py-3 px-8 cart2">
                           <h3>
                             Cliente # {{ $clie-> id }}
                           <h3>
-                        {{-- </span>						 --}}
                       </div>
                     <div class="card-body">     
                       <form   action="{{ route('clientes.update', $clie->id) }}" 

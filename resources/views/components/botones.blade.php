@@ -1,4 +1,5 @@
-<div class="container float">
+<div 
+class="container float">
                 
     @component('components.inicio-btn')
     @endcomponent

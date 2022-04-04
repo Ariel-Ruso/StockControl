@@ -202,7 +202,7 @@ class FacturaController extends Controller
 
         }elseif( ($fact->tipoPago == 5) || ($fact->tipoPago == 51) 
                 || ($fact->tipoPago == 52) || ($fact->tipoPago == 53) 
-                || ($fact->tipoPago == 54) ){
+                || ($fact->tipoPago == 54) || ($fact->tipoPago == 7)){
             $eft= $fact->totalEft;
             $tnoBanc= $fact->totalNoBanc;
             $tBanc= $fact->totalCuot;

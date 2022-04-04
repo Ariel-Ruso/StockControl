@@ -19,15 +19,27 @@
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-4">
+                <div class="card-header">
+                    <div class=" 
+                        py-2 px-8  bg-green-100 d-flex justify-content-between align-items-center 
+                        ">
+                      <span class="text-center mx-auto  ">
+                        <h3>
+                            Apertura Caja
+                        </h3>
+                      </span>
+                    </div>
+                </div> 
+
                 <div class="card bg-white shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
+                    {{-- <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
                             <h3>
-                                Apertura Caja
+                                
                             </h3>
                           
                         </span>                       
-                    </div>
+                    </div> --}}
                     <div class="card-body">     
                      
                       <form   action="{{ route('caja.store') }}" 

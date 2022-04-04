@@ -205,10 +205,10 @@
           <td style="text-align:center">
             {{ $item->descripcion }}
             
-              @if($item->imei != "")
+             {{--  @if($item->imei != "")
                 / IMEI: 
                 {{ $item->imei }}
-              @endif
+              @endif --}}
               {{-- @if($item->numero != "")
                 /  
                 
@@ -334,7 +334,7 @@
         
           <td style="text-align:center" class="gray"> 
             @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
-                || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) )
+                || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) || ($tipoPago == 7))
               $ {{ $eft + $desc}}
             @else
               $ 0

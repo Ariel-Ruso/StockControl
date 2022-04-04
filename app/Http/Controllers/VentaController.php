@@ -14,7 +14,9 @@ use App\Models\Filecsv;
 use App\Models\FilecsvIva;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\CtaCte;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Session;
 
 class VentaController extends Controller
@@ -106,9 +108,10 @@ class VentaController extends Controller
         $precio=0;
         $subto= 0;
         $tipoPago= 0;              
-        //$precioNoBanc= $request->noBancaria5;
-        //dd($ultArt->id);
-
+                
+        $cli_id= session()->get('cliente_id'); 
+        $cta= new CtaCte();
+        $clie= Cliente::FindorFail($cli_id);  
         //for($x=1; $x <= $cantA; $x++){    
         for($x=1; $x <= $ultArt->id; $x++){
 
@@ -125,116 +128,44 @@ class VentaController extends Controller
 
                     if($request->tipoPago==1){
                         //si es eft
-                       /*  $item->cargarItems( $carrito[$x]["Nombre"], 
-                                            $carrito[$x]["Codigo"],
-                                            $carrito[$x]["Cantidad"], 
-                                            $carrito[$x]["Precio"],
-                                            $carrito[$x]["Imei"],
-                                            $cantF,
-                                            $carrito[$x]["Descuento"],
-                                            $carrito[$x]["Numero"]);
-                                            
-                        $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
-                         */
+                      
                         $precio= $carrito[$x]["Precio"];
                         $subto= $carrito[$x]["SubTotal"];
                         $tipoPago= 1;
-                        /* //=======
-                                                                    $carrito[$x]["PrecioT"],
-                                                                    $carrito[$x]["Imei"],
-                                                                    $cantF,
-                                                                    $carrito[$x]["Numero"]);
-                                                                    
-                                                                    $subtot= $subtot + 
-                                                                            $carrito[$x]["SubTotalT"] -
-                                                                            $carrito[$x]["Descuento"];
-
-                                            }elseif($request->tipoPago==5){
-                        >>>>>>> calzados */
-
+                       
                     }elseif($request->tipoPago==2){
                         //si es debi
-                       /*  $item->cargarItems( $carrito[$x]["Nombre"], 
-                                            $carrito[$x]["Codigo"],
-                                            $carrito[$x]["Cantidad"], 
-
-                                            $carrito[$x]["Precio"],
-
-
-                                            $carrito[$x]["Imei"],
-                                            $cantF,
-                                            $carrito[$x]["Descuento"]);
-                                            
-                        $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
-                        */
+                       
                         $precio= $carrito[$x]["Precio"];
                         $subto= $carrito[$x]["SubTotal"];
                         $tipoPago= 2;
-
                                             
                     }elseif($request->tipoPago==3){
                         //tarj bancaria
                             if($request->fpago==1){
                                 //1 cuota
-                                            /* $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                                $carrito[$x]["Codigo"],
-                                                                $carrito[$x]["Cantidad"], 
-                                                                $carrito[$x]["Precio"],
-                                                                $carrito[$x]["Imei"],
-                                                                $cantF,
-                                                                $carrito[$x]["Descuento"]);
-                                            $subtot= $subtot + $carrito[$x]["Precio"]; 
-                                             */
+                                           
                                             $precio= $carrito[$x]["Precio"];
                                             $subto= $carrito[$x]["SubTotal"];
                                             $tipoPago= 31;
                                             
                             }elseif($request->fpago==2){
                                 //3 cuotas
-                                /* 
-                                            $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                                $carrito[$x]["Codigo"],
-                                                                $carrito[$x]["Cantidad"], 
-
-                                                                $carrito[$x]["PrecioT"],
-
-                                                                $carrito[$x]["Imei"],
-                                                                $cantF,
-                                                                $carrito[$x]["Descuento"]);
-
-                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
-                            */
+                                
                                             $precio= $carrito[$x]["PrecioT"];
                                             $subto= $carrito[$x]["SubTotalT"];
                                             $tipoPago= 32;
                                 
                             }elseif($request->fpago==3){
                                 //6 cuotas
-                                           /*  $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                                $carrito[$x]["Codigo"],
-                                                                $carrito[$x]["Cantidad"], 
-                                                                $carrito[$x]["PrecioT"],
-                                                                $carrito[$x]["Imei"],
-                                                                $cantF,
-                                                                $carrito[$x]["Descuento"]);
-                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
-                         */
+                                           
                                             $precio= $carrito[$x]["PrecioT"];
                                             $subto= $carrito[$x]["SubTotalT"];
                                             $tipoPago= 33;
 
                             }elseif($request->fpago==4){
                                 //12 cuotas
-                            /* 
-                                            $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                                $carrito[$x]["Codigo"],
-                                                                $carrito[$x]["Cantidad"], 
-                                                                $carrito[$x]["PrecioT"],
-                                                                $carrito[$x]["Imei"],
-                                                                $cantF,
-                                                                $carrito[$x]["Descuento"]);
-                                            $subtot= $subtot + $carrito[$x]["PrecioT"]; 
-                        */
+                            
                                             $precio= $carrito[$x]["PrecioT"];
                                             $subto= $carrito[$x]["SubTotalT"];
                                             $tipoPago= 34;
@@ -243,18 +174,7 @@ class VentaController extends Controller
 
                     }elseif($request->tipoPago==4){
                             //si es noBancaria
-                             /* 
-                                $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                    $carrito[$x]["Codigo"],
-                                                    $carrito[$x]["Cantidad"], 
-                                                    //$carrito[$x]["Art_id"],
-                                                    $request->noBanc4,
-                                                    $carrito[$x]["Imei"],
-                                                    $cantF,
-                                                    $carrito[$x]["Descuento"]);
-                                                    //$subtot= $subtot + $request->noBanc4;
-                                $subtot= $subtot +  $request->noBanc4 - $carrito[$x]["Descuento"];
-                            */
+                            
                                 $precio= $request->noBanc4;
                                 $subto= $carrito[$x]["SubTotal"];
                                 $tipoPago= 4;
@@ -317,35 +237,13 @@ class VentaController extends Controller
                         }
                         elseif($request->cpago==4){
                             //12 cuota
-                            /* 
-                                        $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                            $carrito[$x]["Codigo"],
-                                                            $carrito[$x]["Cantidad"], 
-                                                            //$carrito[$x]["Precio"],
-                                                            $request->tarje1 + $request->noBanc +$request->eft,
-                                                            $carrito[$x]["Imei"],
-                                                            $cantF,
-                                                            $carrito[$x]["Descuento"]);
-                                        $subtot= $subtot + $request->tarje1 + $request->noBanc +$request->eft; 
-                                         */
+                            
                                         $precio= $request->tarje1 + $request->noBanc +$request->eft;
                                         $subto= $carrito[$x]["SubTotal"];
                                         $tipoPago= 54;
                         }
                         else{
-                            /* 
-                            $item->cargarItems( $carrito[$x]["Nombre"], 
-                                                $carrito[$x]["Codigo"],
-                                                $carrito[$x]["Cantidad"], 
-                                                $carrito[$x]["Precio"],
-    //<<<<<<< HEAD
-    //======= calzados
-                                                $carrito[$x]["Imei"],
-                                                $cantF,
-                                                $carrito[$x]["Descuento"]);
-                                                
-                            $subtot= $subtot +  $carrito[$x]["SubTotal"] - $carrito[$x]["Descuento"];
-                            */
+                            
                             $precio= $carrito[$x]["Precio"];
                             $subto= $carrito[$x]["SubTotal"];
                             $tipoPago= 5;
@@ -353,10 +251,15 @@ class VentaController extends Controller
                     }elseif($request->tipoPago==6){
                         $precio= $carrito[$x]["Precio"];
                         $subto= $carrito[$x]["SubTotal"];
-                        $tipoPago= 6;
+                        $tipoPago= 6; 
+                        
+                    }elseif($request->tipoPago==7){
+                        //$precio= $carrito[$x]["Precio"];
+                        $precio= $request->ctacte + $request->eft7;
+                        $subto= $carrito[$x]["SubTotal"];
+                        $tipoPago= 7; 
                         
                     }
-
                     
                     $item->cargarItems( $carrito[$x]["Nombre"], 
                                         $carrito[$x]["Codigo"],
@@ -369,7 +272,6 @@ class VentaController extends Controller
                                         
                     $subtot= $subtot +  $subto - $carrito[$x]["Descuento"];
 
-                    
                     //vendo art y descuento stock
                     $art->vender_articulo($carrito[$x]["Cantidad"], $x);
                 }   
@@ -379,22 +281,17 @@ class VentaController extends Controller
         $iva= ($subtot * 0.173554);
         $subtot= $tot - $iva;
         
-        // exporto any2cabe, any2iva, llamo any2fe, y subo resp cae           
+              
         //revisar tot subt e iva si es con tarjeta + 18
         //dd($tipoPago);
         $fact->generarFactura($request, $contItems, $subtot, $tot, $iva, $tipoPago);
-    
         
-        //escribo any2cabe y any2iva 
-        $cli_id= session()->get('cliente_id'); 
-        $clie= Cliente::FindorFail($cli_id);  
         $dnicliente= $clie->dni;
-        //cargo a cte cte la factura completa
-        if ($tipoPago= 6){
-            $clie->ctaCte= $clie->ctaCte + $tot; 
-            $clie->save();
-            
-        }
+        
+        $cta->nuevoMov($fact->getLastFact());
+
+        // exporto any2cabe, any2iva, llamo any2fe, y subo resp cae     
+        //escribo any2cabe y any2iva 
         $csv->crearCsv($dnicliente, $tot, $iva);
         $csvIva->crearCsvIva($subtot, $iva);
 

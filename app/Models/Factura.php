@@ -58,10 +58,11 @@ class Factura extends Model
                 }
         }
 
-    public function generarFactura(Request $request, $contItems, $subtot, $total, $iva, $tipoPago){
-        
+    public function generarFactura(Request $request, $contItems, $subtot, $total, 
+                    $iva, $tipoPago){
 
         $fact= new Factura();
+        $cta= new CtaCte();
         $cpago= $request->cpago;
         $fact->cantidadItems= $contItems;
         $fact->subtotal= $subtot;
@@ -79,6 +80,8 @@ class Factura extends Model
         $fact->domicilioCliente=  $clie->direccion;
         $fact->cuitcliente= $clie->cuit;
         //dd($tipoPago);
+        
+
         if ($tipoPago==4){
             //pago no Bancaria
             $fact->totalNoBanc= $request->noBanc4;
@@ -128,6 +131,12 @@ class Factura extends Model
             $fact->totalNoBanc= $request->noBanc;
             $fact->totalEft= $request->eft;
             $fact->total= $total;
+
+        }elseif ($tipoPago==7){
+        //cta cte + eft
+            $total= $request->ctacte + $request->eft7;
+            $fact->totalEft= $request->eft7;
+            $fact->total= $total;
         }
 
         $subtotal=  $total / 1.21;
@@ -135,8 +144,6 @@ class Factura extends Model
         $fact->iva= $total - $subtotal;    
         
         $fact->save();  
-           
-        
 
     }
 

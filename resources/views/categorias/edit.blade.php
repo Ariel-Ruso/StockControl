@@ -6,14 +6,17 @@
     @component('components.botones')
     @endcomponent
   </div>
-  <x-grafica img="/Storage/categ.jpg"/>
+  
+    <h2>
+    Categorías
+  </h2>
   <br>
   
   <table class= "table">
       <th>
       </th>
   </table>
-
+{{-- 
     <div class="container mt-3 ">
         <div class="row justify-content-center ">
             <div class="col-md-6">
@@ -23,6 +26,18 @@
                             Categoria # {{ $cate-> id }}
                         </span>                   
                     </div>
+ --}}
+
+                    <div class="container mt-10 ">
+                        <div class="row justify-content-center ">
+                                <div class="col-md-6">
+                                    <div class="card shadow">                     
+                                      <div class=" py-3 px-8 cart2">
+                                          <h3>
+                                             # {{ $cate-> id }}
+                                          <h3>
+                                      </div>
+                                        
                     <div class="card-body">     
                       <form   action="{{ route('categorias.update', $cate->id) }}" 
                               method="POST"

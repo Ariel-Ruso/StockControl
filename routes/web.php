@@ -25,6 +25,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ImeiController;
 use App\Http\Controllers\NumeroController;
+use App\Http\Controllers\CtaCteController;
 //use App\Exports;
 //use App\Imports\csvImport;
 
@@ -33,6 +34,8 @@ use App\Http\Controllers\NumeroController;
 })->name('welcome'); 
 
 Route::middleware('auth')->group (function() {
+
+    Route::resource('ctacte', CtaCteController::class);
 
     Route::resource('numeros', NumeroController::class);
     

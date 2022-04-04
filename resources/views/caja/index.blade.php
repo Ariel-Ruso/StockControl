@@ -31,10 +31,10 @@
 <h2>
     Caja
 </h2>
-  <br>
+  <br><br>
 
 
-<table class= "table caja">
+<table class= "table caja col-md-4">
     <tr >
         {{-- col izq --}}
         <th >
@@ -220,9 +220,7 @@
                         <th scope="col">
                             Operación
                         </th>
-                        <th scope="col">
-                            N Fact
-                        </th>
+                        
                         <th scope="col">
                             Fecha
                         </th>
@@ -251,9 +249,7 @@
                         <th scope="col">
                             Operación
                         </th>
-                        <th scope="col">
-                            N Fact
-                        </th>
+                        
                         <th scope="col">
                             Fecha
                         </th>
@@ -287,13 +283,7 @@
                                 <th>
                                     {{  $item->id }}
                                 </th> 
-                                <th>
-                                    @if( $item->numfact > 0 )
-                                        {{  $item->numfact }}                                        
-                                    @else
-                                        {{ ' No Generada '}} 
-                                    @endif 
-                                </th> 
+                               
                                 <th>                                      
                                     {{ $item->created_at->format('d/m/y')  }}<br>
                                 </th>

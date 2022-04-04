@@ -1,16 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="float-right">
+  @component('components.botones')
+  @endcomponent
+  <br>
+  </div>
+  
+  <h2>
+    Contable
+  </h2>
+<table class= "table">
+	<th>
 
-@component('components.botones')
-@endcomponent
+	</th>
+</table>
 
 
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-md-5">
 				<div class="card bg-white shadow">
-					<div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
+					<div class=" cart2 py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
 						<span class="text-center mx-auto font text-xl">
 							<h3>
 								Detalles de Operación

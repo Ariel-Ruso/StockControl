@@ -368,14 +368,14 @@
                               Editar 
                             </i>
                         </a>
-                            <button class="btn btn-outline-danger btn-sm shadow" 
+                            {{-- <button class="btn btn-outline-danger btn-sm shadow" 
                                     type="button"
                                     data-toggle="modal" 
                                     data-target="#confirm-delete{{$item->id}}" >
                                     <i class= "fa fa-trash">
                                         Eliminar         
                                     </i> 
-                            </button>
+                            </button> --}}
                             <div  class="modal fade" 
                                   id="confirm-delete{{$item->id}}" 
                                   tabindex="-1" 

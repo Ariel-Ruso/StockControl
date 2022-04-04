@@ -1,5 +1,6 @@
 {{-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> --}}
-<div class="container ">
+{{-- <div class="container "> --}}
+<div class="btn-ini">
         <a href="{{ route('dashboard') }}" 
                 
                  class= "btnn btnIni border-solid border-1 bg-blue-200 
