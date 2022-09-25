@@ -11,13 +11,16 @@ use DB;
 
 class FerretController extends Controller
 {
-   /*  [8:45 p. m., 27/1/2021] Claudito: 1 . comas . puntos
-[8:45 p. m., 27/1/2021] Claudito: en el excel
-[8:45 p. m., 27/1/2021] Claudito: 2, en el csv  punto y coma ( ;) por comas (;)
-[8:45 p. m., 27/1/2021] Claudito: 3 borrar la ultima linea de abajo vacia
+   /*   [8:45 p. m., 27/1/2021] Claudito: 1 . comas . puntos
+        [8:45 p. m., 27/1/2021] Claudito: en el excel
+        [8:45 p. m., 27/1/2021] Claudito: 2, en el csv  punto y coma ( ;) por comas (;)
+        [8:45 p. m., 27/1/2021] Claudito: 3 borrar la ultima linea de abajo vacia
  */
     public function importarLista(Request $request)
     {
+        DB::table('ferrets')
+        ->delete();
+        
         $lista= new Ferret();
 
         $est= $lista->importarLista( $request);
@@ -46,7 +49,9 @@ class FerretController extends Controller
         $ferr= Ferret::all();
 
         foreach($ferr as $ferret){
+
             $art= new Articulo();
+            /* 
             $art->codigo= $ferret->codigo;
             $art->descripcion= $ferret->rubro;
             $art->nombre= $ferret->articulo;
@@ -54,6 +59,19 @@ class FerretController extends Controller
             $art->cantidad= 1000;
             $art->categorias_id= 11;
             $art->proveedors_id= 2;
+             */
+            $art->codigo= $ferret->codigo;
+            $art->precioVenta= $ferret->precioVenta;
+            /* 
+            $art->nombre= $ferret->articulo;
+            $art->cantidad= $ferret->cantidad;
+            $art->precioCompra= $ferret->precioCompra;
+            $art->iva=  $ferret->iva;
+            $art->pVentaTarj= $ferret->pVentaTarj; */
+
+            $art->categorias_id= 11;
+            $art->proveedors_id= 2;
+
             $art->save();
         }
         return back()->with('mensage', 'Importacion correcta');
@@ -62,6 +80,8 @@ class FerretController extends Controller
     public function actualizarP (){
 
         //actualiz precios
+        
+
         $ferr= Ferret::all();
         $articulos= Articulo::all();
 
@@ -70,7 +90,8 @@ class FerretController extends Controller
             foreach($articulos as $arts){
                 DB::table('articulos')
                 ->where('codigo', '=', $ferrs->codigo)
-                ->update(['precioVenta' => $ferrs->plista 
+                //->update(['precioVenta' => $ferrs->plista 
+                ->update(['precioVenta' => $ferrs->precioVenta
                     ]);
             }
         }

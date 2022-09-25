@@ -161,7 +161,7 @@
                 ?>
                 {{-- @if($esta == "Cerrada") --}}
                 @if($res == 0)
-{{-- 
+                {{-- 
                     <li class="nav-item active">
                         <a  href=" {{ route('verCarrito') }} " 
                                 class="btn btn-outline-primary nav-link disabled"
@@ -194,8 +194,8 @@
                 
                 <!-- importar --> 
             
-                <li>
-                {{-- <div class="dropdown">   
+                <li class="nav-item active">
+                <div class="dropdown">   
                     <a  href=""
                         class="btn btn-outline-primary"
                         role="button" 
@@ -221,7 +221,7 @@
                             </a>
                     </div>
                 
-                </li>  --}}
+                </li>  
                  <!-- caja -->
                  <li class="nav-item active">
                     <a  href=" {{ route('caja.index') }} "

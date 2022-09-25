@@ -10,17 +10,12 @@ body {
             grid-template-columns: 1fr 1fr;
              */
             //border: 1px solid rgb(170, 73, 73);
-            display: flex;
-            //flex-direction: column;
+            // display: flex;
+            // flex-direction: column;
+            // flex-wrap: wrap;
             // background-color: aqua;
-            .titulo {
-                flex: auto;
-                //width: 70%;
-            }
-            .btn-ini {
-                //width: 30%;
-                flex: auto;
-            }
+            .titulo {}
+            .btn-ini {}
         }
         img {
             margin: auto;
@@ -35,7 +30,7 @@ body {
             font-size: 1em;
             font-weight: 500;
             &:hover {
-                transform: scale(1.1, 1.1);
+                transform: scale(1.1, 1.2);
                 transition: width 2s, height 2s, transform 2s;
                 font-weight: 800;
             }
@@ -82,67 +77,75 @@ body {
             img {
                 //justify-content: center;
                 height: 100px;
-                width: 400px;
+                // width: 400px;
+                width: 40px;
+            }
+            .reports {
+                background-color: $teal;
+                font-size: 4.2em;
             }
             .index {
                 background-color: $cyan;
                 font-size: 1.3em;
             }
-            .reports {
-                background-color: $teal;
+            .search {
+                justify-content: center;
+                font-size: 5em;
+                font-family: fantasy;
+                margin: 50px;
             }
-            .cart {
-                background-color: $orange;
-            }
         }
-        .form-check-label {
-            font-family: $font4;
-            font-size: 1.2em;
-        }
-        .cart2 {
-            background-color: $orange2;
-        }
-        .caja {
-            width: 80%;
-        }
-        .card-header {
+        .cart {
             background-color: $orange;
         }
-        .card-header-caja {
-            background-color: $orange2;
+    }
+    .form-check-label {
+        font-family: $font4;
+        font-size: 1.2em;
+    }
+    .cart2 {
+        background-color: $orange2;
+    }
+    .caja {
+        width: 80%;
+    }
+    .card-header {
+        background-color: $orange;
+    }
+    .card-header-caja {
+        background-color: $orange2;
+    }
+    .detail {
+        background-color: $cyan;
+    }
+    .container {
+        img {
+            width: auto;
+            height: auto;
         }
-        .detail {
-            background-color: $cyan;
-        }
-        .container {
-            img {
-                width: auto;
-                height: auto;
-            }
-        }
-        .contBtn {
-            display: flex;
-            flex-direction: column;
-        }
-        h1 {
-            visibility: none;
-            font-size: 1em;
-        }
-        h2 {
-            font-family: $font4;
-            font-size: 5em;
-            text-align: center;
-            margin-left: 10%;
-        }
-        h3 {
-            font-size: 2em;
-            font-weight: 700;
-            text-align: center;
-        }
-        h4 {
-            font-size: 1em;
-            font-weight: 500;
-            margin-left: 15%;
-        }
+    }
+    .contBtn {
+        display: flex;
+        flex-direction: column;
+    }
+    h1 {
+        visibility: none;
+        font-size: 1em;
+    }
+    h2 {
+        font-family: $font4;
+        font-size: 5em;
+        text-align: center;
+        margin-left: 10%;
+    }
+    h3 {
+        font-size: 2em;
+        font-weight: 700;
+        text-align: center;
+    }
+    h4 {
+        font-size: 1em;
+        font-weight: 500;
+        margin-left: 15%;
     }
 }

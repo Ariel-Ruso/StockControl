@@ -20,15 +20,6 @@ class CtaCteController extends Controller
         return view('ctacte.index', compact('ctas','clie'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +29,18 @@ class CtaCteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $cta= new Ctacte();
+                
+        //$caja->users_id= auth()->id();
+        $cta->monto= $request->monto;
+        $cta->clientes_id= $request->cliente_id;
+        $cta->facturas_id= 1m ;
+        $cta->save();
+        
+        return redirect()
+            ->back()
+            ->with('mensaje', 'Monto cargado');
     }
 
     /**

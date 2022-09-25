@@ -11,7 +11,7 @@ use App\Models\Filecsv;
 use App\Models\FilecsvIva;
 use App\Models\FilecsvCae;
 use App\Models\Cliente;
-use DB;
+use App\Models\CtaCte;
 use App\Models\Qr;
 use App\Models\Propietario;
 use App\Models\Numero;
@@ -187,6 +187,9 @@ class FacturaController extends Controller
         $eft=0;
         $tBanc=0;
         $tnoBanc=0;
+        $cta= new CtaCte();
+        $montoAnt= $cta->montoAnt($id);
+
         if( $fact->tipoPago == 1){
             $eft= $fact->total;
 
@@ -209,15 +212,15 @@ class FacturaController extends Controller
         }
 
         //traigo items con mismo id
-        //<<<<<<< HEAD
+        
         $desc=0;
         $items = Item::whereIn('idFactura', [$id]) ->get();
-        //dd($items[0]);
+        
         for ($i=0; $i<count($items); $i++) {
             $desc= $desc + $items[$i]->descuento;
             
         }
-        //dd($desc);
+        
         /* =======
         $items = Item::whereIn('idFactura', [$id])
                  ->get();
@@ -238,20 +241,14 @@ class FacturaController extends Controller
        
         $clie= Cliente::FindorFail($fact->clie_id);
 
-        // $nombreCli= $fact->apellidoyNombre;
-        // $direccionCli= $fact->domicilioCliente;
-        // $dniCli= $fact->dnicliente;
-        
         $tipoPago= $fact->tipoPago;
 
         $total= $fact->total;
         $subtotal= $fact->subtotal;
         $iva= $fact->iva;
-        //dd($clie);
-        
+                
         return view ('remitos.remito', compact('fecha', 'nremit',  'iva', 'subtotal', 'clie',
-                    //'direccionCli', 'nombreCli', 'dniCli', 
-                    'total', 'id', 'items',  'tipoPago', 'pro', 'desc', 'nums',
+                    'total', 'id', 'items',  'tipoPago', 'pro', 'desc', 'nums', 'montoAnt',
                     'eft','tBanc', 'tnoBanc'));
 
     }

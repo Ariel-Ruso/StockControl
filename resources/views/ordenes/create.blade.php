@@ -2,17 +2,7 @@
 
 @section('content')
 
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-  </div>
-  <x-grafica img="/Storage/orden.png"/>
-  <br>
-  
-  <table class= "table">
-        <th class="container col-md-9"  >
-        </th>
-  </table>
+<x-header titulo="Ordenes" />  
 
     <div class="container mt-3 ">
         <div class="row justify-content-center ">

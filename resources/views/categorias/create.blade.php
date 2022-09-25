@@ -2,30 +2,36 @@
 
 @section('content')
 
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-  </div>
-  {{-- <x-grafica img="/Storage/categ.jpg"/> --}}
-  <h2>
-      Categorías
-  </h2>
-  <br>
-  
-  <table class= "table">
-        <th class="container col-md-9"  >
-        </th>
-  </table>
+
+  <x-header titulo="Categorías" />  
 
     <div class="container mt-3 ">
         <div class="row justify-content-center ">
             <div class="col-md-5">
                 <div class="card bg-white shadow">
+        {{-- 
                     <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
                         <span class="text-center mx-auto font text-2xl">
                             Agregar
                         </span>                       
-                    </div>
+                    </div> --}}
+                    {{-- 
+                    <div class="card-header ">
+                        <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center ">
+                          <span class="text-center mx-auto font text-2xl ">
+                            <h3>
+                              Agregar
+                            </h3>
+                          </span>
+                        </div>
+                      </div> 
+ --}}
+                      <div class="card shadow">
+                        <div class=" py-3 px-8 cart2">
+                                <h3>
+                                    Agregar 
+                                </h3>
+                        </div>
                     <div class="card-body">     
                      
                       <form   action="{{ route('categorias.store') }}" 

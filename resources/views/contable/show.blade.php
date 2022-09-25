@@ -1,20 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="float-right">
-  @component('components.botones')
-  @endcomponent
-  <br>
-  </div>
-  
-  <h2>
-    Contable
-  </h2>
-<table class= "table">
-	<th>
 
-	</th>
-</table>
+	<x-header titulo="Contable" />  
 
 
 	<div class="container mt-5">

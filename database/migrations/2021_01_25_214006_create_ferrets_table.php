@@ -13,7 +13,7 @@ class CreateFerretsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ferrets', function (Blueprint $table) {
+        /* Schema::create('ferrets', function (Blueprint $table) {
             $table->string('codigo');
                     //->unique();
             $table->string('articulo');
@@ -21,6 +21,21 @@ class CreateFerretsTable extends Migration
             $table->integer('bulto');
             $table->integer('plista');
             $table->integer('ppublico');
+            $table->timestamps();
+        });
+         */
+        Schema::create('ferrets', function (Blueprint $table) {
+            $table->string('codigo');
+            $table->integer('precioVenta');
+/* 
+                    //->unique();
+            $table->string('articulo');
+            $table->integer('cantidad');
+            $table->integer('precioCompra');
+            $table->integer('iva');
+            
+            $table->integer('pVentaTarj');
+             */
             $table->timestamps();
         });
     }

@@ -2,30 +2,19 @@
 
 @section('content')
   
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-    <br>
-  </div>
-{{-- <x-grafica img="/Storage/reportes.jpg" /> --}}
-<h2>
-    Ventas 
-</h2>
-<br>
-<br>
+    <x-header titulo="Ventas" />  
 
-
-
-<div name="tabla facturacion" class="container mt-10 ">
+    <div name="tabla facturacion" class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-12">
-                <div class="card bg-white shadow">
-                   
-                  
-                        <table class="table">
+                <div class=" card bg-white shadow">
+                        <table class="table ">
+
                             <thead class="reports">
-                            <tr class=" text-center text-xs leading-4 
-                                font-medium text-red-500 uppercase tracking-wider">
+                                <tr class=
+                                {{-- " text-center text-xs leading-4 
+                                font-medium text-red-500 uppercase tracking-wider" --}}
+                                >
                                     {{-- <th scope="col">
                                         Operación
                                     </th> --}}
@@ -57,97 +46,98 @@
                                         Factura
                                     </th>  --}}
                                 </tr>
+                                                        
+                            
                             </thead>
                             <tbody>
-                            @foreach ($todas as $item)
-                                <thead>
-                                <tr class="text-center text-xs font-medium text-black-500">
-                                   {{--  <th>
-                                         {{  $item->id }}
-                                    </th>  --}}
-                                    <th>
+                                @foreach ($todas as $item)
+                                    <thead>
+                                    <tr class="text-center text-xs font-medium text-black-500">
+                                    {{--  <th>
+                                            {{  $item->id }}
+                                        </th>  --}}
+                                        <th>
 
-                                        @if( $item->numfact > 0 )
-                                            {{  $item->numfact }}                                        
-                                        @else
-                                             {{ ' No Generada '}} 
-                                        @endif 
-                                       
-                                    </th> 
-                                    <th>                                      
-                                         {{ $item->created_at->format('d/m/y')  }}<br>
-                                    </th>
-                                    <th>
-                                         {{ $item->created_at->format('H : i ')  }}<br>
-                                    </th>
-                                    <th>
-                                         {{  $users[ ($item->users_id)-1]->name }}
-                                    </th>
-                                    <th>
-                                         {{  $item->apellidoyNombre }}
-                                    </th>
-                                    <th>
-                                        @if($item->tipoPago==1)
-                                            $ {{  $item->total }}
+                                            @if( $item->numfact > 0 )
+                                                {{  $item->numfact }}                                        
                                             @else
-                                            $ {{'-' }}
-                                        @endif
-                                    </th>
-                                    <th>
-                                        @if($item->tipoPago!=1)
-                                            $ {{  $item->total }}
+                                                {{ ' No Generada '}} 
+                                            @endif 
+                                        
+                                        </th> 
+                                        <th>                                      
+                                            {{ $item->created_at->format('d/m/y')  }}<br>
+                                        </th>
+                                        <th>
+                                            {{ $item->created_at->format('H : i ')  }}<br>
+                                        </th>
+                                        <th>
+                                            {{  $users[ ($item->users_id)-1]->name }}
+                                        </th>
+                                        <th>
+                                            {{  $item->apellidoyNombre }}
+                                        </th>
+                                        <th>
+                                            @if($item->tipoPago==1)
+                                                $ {{  $item->total }}
+                                                @else
+                                                $ {{'-' }}
+                                            @endif
+                                        </th>
+                                        <th>
+                                            @if($item->tipoPago!=1)
+                                                $ {{  $item->total }}
+                                                @else
+                                                $ {{ '-' }}
+                                            @endif
+                                        </th>
+                                    
+                                        {{-- <th>
+                                            <a href=" {{ route ('imprimirRemit', $item->id) }}" 
+                                                class="btn btn-outline-warning" >
+                                                    Ver
+                                            </a>
+                                        </th>  --}}
+                                        {{--
+                                        <th>
+                                            
+                                            @if( $item->numfact > 0 )
+                                                <a href=" {{ route ('generarFactura', $item->id) }}" 
+                                                    class="btn btn-outline-danger disabled " >
+                                                        Generar 
+                                                </a> 
                                             @else
-                                            $ {{ '-' }}
-                                        @endif
-                                    </th>
-                                 
-                                    {{-- <th>
-                                        <a href=" {{ route ('imprimirRemit', $item->id) }}" 
-                                            class="btn btn-outline-warning" >
-			                                    Ver
-                                        </a>
-                                    </th>  --}}
-{{--
-                                    <th>
-                                         
-                                        @if( $item->numfact > 0 )
-                                            <a href=" {{ route ('generarFactura', $item->id) }}" 
-                                                class="btn btn-outline-danger disabled " >
-                                                    Generar 
-                                            </a> 
-                                        @else
-                                            <a href=" {{ route ('generarFactura', $item->id) }}" 
-                                                class="btn btn-outline-danger " >
-                                                    Generar 
-                                            </a>
-                                        @endif
+                                                <a href=" {{ route ('generarFactura', $item->id) }}" 
+                                                    class="btn btn-outline-danger " >
+                                                        Generar 
+                                                </a>
+                                            @endif
 
-                                    </th> 
-                                    --}}
-                                    {{-- <th>
-                                        @if( $item->numfact > 0 )
-                                            <a href=" {{ route ('imprimirFact', $item->id) }}" 
-                                                class="btn btn-outline-primary " >
-                                                    Ver 
-                                            </a>
-                                        @else
-                                            <a href=" {{ route ('imprimirFact', $item->id) }}" 
-                                                class="btn btn-outline-primary disabled " >
-                                                    Ver 
-                                            </a>
-                                        @endif
+                                        </th> 
+                                        --}}
+                                        {{-- <th>
+                                            @if( $item->numfact > 0 )
+                                                <a href=" {{ route ('imprimirFact', $item->id) }}" 
+                                                    class="btn btn-outline-primary " >
+                                                        Ver 
+                                                </a>
+                                            @else
+                                                <a href=" {{ route ('imprimirFact', $item->id) }}" 
+                                                    class="btn btn-outline-primary disabled " >
+                                                        Ver 
+                                                </a>
+                                            @endif
 
-                                    </th>  --}}
-                                </tr>
-                                </thead>
+                                        </th>  --}}
+                                    </tr>
+                                    </thead>
                                 @endforeach
                             </tbody>
                         </table>
-                    
                 </div>
             </div>
         </div>
     </div>    
-    <br><br>
+    
 
 @endsection

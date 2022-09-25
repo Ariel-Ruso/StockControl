@@ -3,74 +3,64 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @section('content')
-  
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-    <br>
-  </div>
-{{-- <x-grafica img="/Storage/reportes.jpg" /> --}}
-<h2>
-    Ventas
-</h2>
-<br>
-<br>
-
-<div name="tabla facturacion" class="container mt-6 ">
-        <div class="row justify-content-center ">
-            <div class="col-md-8">
-                <div class="card bg-white shadow">
-                        <table class="table">
-                            <thead class="reports">
-                                <tr class=" text-center text-xs leading-4 
-                                    font-medium text-red-500 uppercase tracking-wider">
-                                    <th scope="col-4">
-                                        Fecha
-                                    </th>
-                                    <th scope="col-2">
-                                        Ventas
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($ventXmes as $item)
-                                    
-                                <tr class="px-6 py-3 text-center ">
-                                    <td>    
-                                       {{ $item->created_at }}                             
-                                    </td>
-                                  {{--  <td>
-                                        @foreach($arts as $item2)
- 
-                                              @if($item->codigo == $item2->codigo)                   
-                                                 {{  $item2->nombre }}  
-                                             @endif                 
-  
-                                         @endforeach     
-                                     </td>
-                                   --}}
-                                     <td>
-                                         $ {{ $item->totales }}
-                                     </td>
-                                </tr>
-                                
-                                @endforeach
-                               
-                            </tbody>
-                        </table>
-                    
-                </div>
-            </div>
-        </div>         
-    </div>
-</div>
-
-<div class="container mt-5 mb-10 col-md-8" >
-
-    <canvas id="myChart" width="400" height="200">
-    </canvas>
     
-</div>
+    <x-header titulo="Ventas" />  
+
+    <div name="tabla facturacion" class="container mt-6 ">
+            <div class="row justify-content-center ">
+                <div class="col-md-8">
+                    <div class="card bg-white shadow">
+                            <table class="table">
+                                <thead class="reports">
+                                    <tr class=" text-center text-xs leading-4 
+                                        font-medium text-red-500 uppercase tracking-wider">
+                                        <th scope="col-4">
+                                            Fecha
+                                        </th>
+                                        <th scope="col-2">
+                                            Ventas
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($ventXmes as $item)
+                                        
+                                    <tr class="px-6 py-3 text-center ">
+                                        <td>    
+                                        {{ $item->created_at }}                             
+                                        </td>
+                                    {{--  <td>
+                                            @foreach($arts as $item2)
+    
+                                                @if($item->codigo == $item2->codigo)                   
+                                                    {{  $item2->nombre }}  
+                                                @endif                 
+    
+                                            @endforeach     
+                                        </td>
+                                    --}}
+                                        <td>
+                                            $ {{ $item->totales }}
+                                        </td>
+                                    </tr>
+                                    
+                                    @endforeach
+                                
+                                </tbody>
+                            </table>
+                        
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+
+    {{-- <div class="container mt-5 mb-10 col-md-8" >
+
+        <canvas id="myChart" width="400" height="200">
+        </canvas>
+        
+    </div> --}}
 
 
 {{-- 

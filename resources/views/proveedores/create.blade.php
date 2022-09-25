@@ -2,22 +2,8 @@
 
 @section('content')
 
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-  </div>
-  <br>
-  {{-- <x-grafica img="/Storage/prove.jpg"/> --}}
-  <h2>
-      Proveedores
-  </h2>
-  <br>
-  
-  <table class= "table mt-1">
-        <th >
-        </th>
-  </table>
-  
+
+  <x-header titulo="Proveedores" />  
 
   <div class="container mt-10 ">
     <div class="row justify-content-center ">

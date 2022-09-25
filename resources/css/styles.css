@@ -39,12 +39,13 @@ table {
         font-family: 'Anton', sans-serif;
     }
     footer {
-        font-size: 2em;
+        font-size: 1em;
         font-family: 'Kaisei HarunoUmi', serif;
     }
 }
 
-@media (max-width: 360px) {
+/* @media (max-width: 360px) { */
+    @media (max-width: 36px) {
     .table {
         width: 90%;
     }

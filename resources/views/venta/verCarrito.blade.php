@@ -1,25 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="float-right">
-    @component('components.botones')
+    <x-header titulo="Carrito" />  
+    @component('components.caja-btn')
     @endcomponent
-    <br>
-  </div>
-
-<h2>
-    Carrito
-</h2>
-<br>
-
-
-<table class= "table mb-1 "> 
-    <th>
-      </th>
-        
- </table>        
- @component('components.caja-btn')
- @endcomponent
 
     <div class="container ">
         <div class="row justify-content-center">
@@ -352,7 +336,7 @@
                     //alert(final);
                     document.detail.tot2.value = final;
                     //document.detail.descP.value = porc.value;
-//                    alert(sessionStorage.length()) );
+        //                    alert(sessionStorage.length()) );
                     //alert(localStorage.getItem("Precio") );
                     //sessionStorage.setItem('Descuento', 'final');
                     //sessionStorage.setItem('test', 1);

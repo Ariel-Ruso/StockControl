@@ -10,13 +10,29 @@ class CtaCte extends Model
     use HasFactory;
 
 
-protected $filablle= ['monto','clientes_id', 'facturas_id'
+protected $filablle= ['monto','clientes_id', 'facturas_id', 'montoAnt'
 
     ];
     
     public function cliente(){
         //cta pertenece a una Cliente
         return $this->belongsTo (Cliente::class); 
+    }
+
+    public function montoAnt($id){
+        
+        $fact= Factura::FindorFail($id);
+        $ctas= CtaCte::all();
+
+        
+        foreach($ctas as $item){
+            if($item->facturas_id == $fact->id){
+                //return $item->montoAnt;
+                return $item->total;
+            }
+        }
+
+
     }
 
     public function totalxCliente($clie_id){
@@ -37,36 +53,41 @@ protected $filablle= ['monto','clientes_id', 'facturas_id'
     public function nuevoMov($fact)
     {
         $cta= new CtaCte();
+        $cta->clientes_id= $fact->clie_id;
+        $cta->facturas_id= $fact->id;
+
+
+        
+        if($cta->monto != 0){
+            $cta->montoAnt= $cta->monto;
+        }else{
+            $cta->montoAnt= 0;
+        }  
+
 
         if ($fact->tipoPago==1){
-             
-            $cta->clientes_id= $fact->clie_id;
-            $cta->facturas_id= $fact->id;
-            $cta->monto= $fact->total;
-            $cta->total= $this->totalxCliente($fact->clie_id);
+             //pago completo ef
             
-            $cta->save();
+            $cta->monto= 0;
+            $cta->total= $this->totalxCliente($fact->clie_id);
             
         }elseif($fact->tipoPago==6){
-            $cta->clientes_id= $fact->clie_id;
-            $cta->facturas_id= $fact->id;
+            //pago a cta cte
+            
             $cta->monto= -$fact->total;
             $cta->total= $this->totalxCliente($fact->clie_id);
+            //$cta->montoAnt= $cta->monto;
             
-            $cta->save();
-
         }elseif($fact->tipoPago==7){
-            $cta->clientes_id= $fact->clie_id;
-            $cta->facturas_id= $fact->id;
-            //$fact->totalEft
+            //pago compuesto
+            
             $cta->monto= -($fact->total-$fact->totalEft);
             $cta->total= $this->totalxCliente($fact->clie_id);
             
-            $cta->save();
-
             }  
+
+        $cta->save();
         
     }
        
-
 }

@@ -22,8 +22,11 @@ class CreateCtaCtesTable extends Migration
             $table->foreignId('facturas_id')
                     ->references('id')        
                     ->on('facturas')
-                    ->onDelete('cascade');
+                    ->onDelete('cascade')
+                    ->nullable();  
             $table->float('monto');
+            $table->float('montoAnt')
+                    ->default(0);
             $table->float('total')
                     ->default(0);
             $table->timestamps();

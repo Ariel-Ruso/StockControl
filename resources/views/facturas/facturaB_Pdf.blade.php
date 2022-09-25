@@ -193,7 +193,9 @@
                               <td></td>
                               <td></td>
                           </tr>
-                      @endfor      
+                     
+                      @endfor  
+                      
                     </tr>
                     </tbody>
                     <tfoot>

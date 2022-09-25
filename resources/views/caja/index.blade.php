@@ -2,12 +2,9 @@
 
 @section('content')
 
-<div class="float-right 
-            contBtn
-        ">
-    @component('components.botones')
-    @endcomponent
-    <br>
+    <x-header titulo="Caja" />  
+    
+
     @if( $estado == 1 )
                     <div class="container">
                         <a  class= "btnn btnClose shadow  py-2 px-2 mb-1 "
@@ -24,17 +21,10 @@
                                 destino="Gastos" />
                 
     @else
-                    <x-agrega-btn route="caja/create" destino="Abrir" />
+        <x-agrega-btn route="caja/create" destino="Abrir" />            
     @endif
-</div>
 
-<h2>
-    Caja
-</h2>
-  <br><br>
-
-
-<table class= "table caja col-md-4">
+<table class= "table-sm caja col-md-4">
     <tr >
         {{-- col izq --}}
         <th >
@@ -78,100 +68,7 @@
             </th>
         </tr>
     </table>
-           {{-- class="text-align:left ">
-             <div name= "info de Caja" class="container  ">
-            <div class="col-md-10 ml-5">
-                <div class="text-left text-1xl font-extrabold leading-none tracking-tight"> --}}
-                    {{-- <span class="mt-1 bg-clip-text text-transparent bg-gradient-to-r 
-                                from-teal-400 to-green-500">
-                     --}}           
-                     
-                        
-                    {{-- </span> --}}
-                          
-               {{--  </div>
-            </div> --}}  
-            {{-- 
-            <br>
-            <div class="col-md-10 ml-5 ">
-                <div class="text-left text-1xl font-extrabold leading-none tracking-tight">
-                    <span class=" mt-1 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-green-500">
-                        Caja: 
-                    </span>
-                    {{ $status }}
-                </div>
-            </div>  
-            <br>
-            <div class="col-md-10 ml-5">
-                <div class=" text-left text-1xl font-extrabold leading-none tracking-tight">
-                    <span class=" mt-1 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-green-500">
-                        Total Diario:
-                        <!-- calculo php inicio caja + totales (ef+tarj) - gastos -->
-                    </span>
-                    $ {{ $totDiario }}
-                </div>
-            </div> 
-            <br>
-            <div class="col-md-10 ml-5">
-                <div class=" text-left text-1xl font-extrabold leading-none tracking-tight">
-                    <span class="mt-1 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-green-500">
-                        Fecha:
-                    </span>
-                     {{ today()->format('d/m/y') }}
-                </div>
-            </div> 
-
-        </th>
- --}}
-       {{--  <th class= "container col-5" >
-        </th>
-        {{-- col der 
-        
-        <th class="text-align:right ">
-                
-             <div class="container   " name="Add">
-                <div name="Movim Cajas" 
-                    class="container mt-4 float "
-                    >
-                        @if( $estado == 1 )
-                            <br>  
-                            <a  
-                            class= "btnn btnClose border-solid border-2 bg-green-300 border-light-blue-200
-                                    shadow text-x1 float-right
-                                    hover:font-medium hover:bg-blue-300 hover:text-black 
-                                    transform hover:translate-x-3 transition duration-700
-                                    rounded-full py-2 px-2"
-                                data-toggle="modal" 
-                                data-target="#confirm-delete" 
-                                type= "button">               
-                                    Cerrar
-                            </a>   
-                            
-                            <br><br>     
-                             <a href="{{ route('') }}" 
-                                    class="btn btn-outline-primary btn-sm float-right mt-2 ">
-                                        Gastos
-                            </a>                 
-                            <x-agrega-btn route="gastos/create" 
-                                          destino="Gastos" />
-                            
-                        @else
-                          
-                            <x-agrega-btn route="caja/create" destino="Abrir" />
-                            <br><br>    
-                                   
-                        @endif
-                        
-                        
-                </div>
-            </div>
-        </th>
-        <th>
-
-        
-        </th>
-    <tr>
-</table> --}}
+          
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" 
                                             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                                 <div class="modal-dialog">

@@ -1,22 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="float-right">
-  @component('components.botones')
-  @endcomponent
-  <br>
-  </div>
+
+  <x-header titulo="Cta Cte" />  
   
-  <h2>
-    Cuenta Corriente
-  </h2>
-  <br><br>
-
-  <table>
-    <td></td>
-  </table>
-  <br>
-
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">

@@ -1,19 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+  
+  <x-header titulo="Articulos" />  
 
-  <div class="float-right">
-    
-        @component('components.botones')
-        @endcomponent
-  </div>
-  {{-- <x-grafica img="/Storage/articulos.png" /> --}}
-  <h2>
-    Artículos
-  </h2>
-  <br><br>
-
-  <table class= "table" name="busqueda">
+  <table 
+  {{-- class= "table"  --}}
+  name="busqueda">
     <tr>
       <th>
       {{-- col izq --}}
@@ -154,19 +147,16 @@
 
   <!-- si vuelve vacio -->
   @if($arts->count())
-      
 
         <!-- si hay resultado armo tabla --> 
     <div class="container mt-4">
       <div class="row justify-content-center mx-auto ">
         
             <table class="table border-rounded shadow" >
-              <thead 
-                    class="table                
-                    index
-                    " 
-                >
-                @if (Auth::user()->name == 'Geminis') 
+              <thead class="table index " >
+                                    
+                @if (Auth::user()->name == 'Geminis')
+
                   <tr>
                     <th scope="col">
                         Artículo
@@ -192,7 +182,7 @@
                     </th>
                   </tr>
                 @else
-                      <th scope="col">
+                    <th scope="col">
                         Nombre
                     </th>
                     <th scope="col">
@@ -201,9 +191,11 @@
                     <th scope="col">
                         Efectivo
                     </th>
-                    <th scope="col">
-                      Tarjeta
-                  </th>
+                    @if (Auth::user()->name != 'Akihay')
+                      <th scope="col">
+                        Tarjeta
+                      </th>
+                    @endif
                     <th scope="col">
                         Marca
                     </th>
@@ -234,7 +226,7 @@
                     </td>
                     <td>
                       
-                  {{-- 
+                    {{-- 
                       <strong>
                         Pares Disponibles:
                       </strong> --}}
@@ -268,12 +260,9 @@
                     <td>
                       {{ $item->marca }}
                     </td>
-                  @else
-
-                  
-                    <tr 
-                    {{-- class="font text-xs text-center " width= "100%" --}}
-                    > 
+                  @else                 
+                    <tr> 
+                    
                       {{-- <td>
                         {{ $item->codigo }}
                       </td> --}}
@@ -285,20 +274,6 @@
                     
                       <td>
                         {{ $item->cantidad }}
-                      
-                      {{-- 
-                        @isset ($numeros)
-                        @foreach ($numeros as $numero) 
-
-                          @if ($numero->articulos_id == $item->id)
-                          
-                            n:° {{ $numero->numero }}								
-                            -  {{ $numero->cantidad }} pares -
-                            {{ $numero->color }}
-                            <br>
-                            @endif   
-                        @endforeach  
-                        @endisset --}}
                       </td>
                       <!-- <td>
                       $  {{ $item->precioCompra }} 
@@ -309,10 +284,13 @@
                       <td>
                       $  {{ $item->precioVenta }}
                       </td>
-                      <td>
-                        $  {{ $item->pVentaTarj }}
+                      @if (Auth::user()->name != 'Akihay')
+                        <td>
+                          $  {{ $item->pVentaTarj }}
                         </td>
-                      <td>
+                      @endif
+                        <td>
+                      
                         {{ $item->marca }}
                       </td>
                     {{--  <td>
@@ -436,11 +414,11 @@
 
                   @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Celulares")
                         <div  class="modal fade" 
-                          id="celular{{ $item->id }}" 
-                          tabindex="-1" 
-                          role="dialog" 
-                          aria-labelledby="exampleModalLongTitle" 
-                          aria-hidden="true">
+                              id="celular{{ $item->id }}" 
+                              tabindex="-1" 
+                              role="dialog" 
+                              aria-labelledby="exampleModalLongTitle" 
+                              aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
@@ -514,11 +492,9 @@
                                     </div>
                                 </div>
                           </div>
-                      @endif
+                  @endif
                       
-                      @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Calzados")
-                      
-                        
+                  @if ($cates[ ($item->categorias_id)-1 ]->nombre == "Calzados")  
                         <div  class="modal fade" 
                           id="calzado{{ $item->id }}" 
                           tabindex="-1" 
@@ -628,6 +604,7 @@
           
     </div>
     {{ $arts->links() }}
+
     <!-- 
     <div class="container">
       <a href=" {{ route ('articulosPdf') }}" class="btn btn-primary" >
@@ -637,6 +614,7 @@
             Imprimir pdf Horizontal
         </a>
     </div> -->
+
   @else
     <br>
       <x-vacio mensaje="Sin productos en Stock" />

@@ -1,20 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-  </div>
-{{-- <x-grafica img="/Storage/clientes.png"/> --}}
-<h2>
-    Clientes
-</h2>
 
-<br><br>
-<table class= "table mt-1">
-    <th>
-    </th>
-</table>
+<x-header titulo="Clientes" />  
 
     <div class="container mt-10 ">
         <div class="row justify-content-center ">

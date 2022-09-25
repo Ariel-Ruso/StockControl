@@ -13,10 +13,14 @@ class Ferret extends Model
     use HasFactory;
     
     protected $fillable = [
-        'codigo', 'articulo', 'rubro', 'bulto', 'plista', 'ppublico'
+        //'codigo', 'articulo', 'rubro', 'bulto', 'plista', 'ppublico'
+        'codigo', 'precioVenta'
+        //'articulo', 'cantidad', 'precioCompra', 'iva', 'pVentaTarj'
+        
     ];
 
     public $timestamps = false;
+    
 
     public function importarLista( $request)
     {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale= 0.5">
@@ -16,8 +16,6 @@
 	</style>
 </head>
 <body>
-   
-    <br>
     
 <div class="container mt-5">
   <div class="table table-bordered border-primary rounded">
@@ -113,7 +111,7 @@
                             Domicilio:     
                             </strong>
                                 {{ $clie->direccion }}
-                            <br><br>
+                            <br>
                         </p>
                 <!-- columna derecha -->
                     <td style="text-align:left">
@@ -147,7 +145,7 @@
                             $cont= 0;
                         ?>
                         @foreach($items as $item)
-                            <tr style="font: 90% ">
+                            <tr style="font: 70% ">
                                 <?php 
                                     $cont ++;
                                 ?>
@@ -185,8 +183,17 @@
                                     //revisar mas d 2 item 104, menos 108
                                 
                                 ?>
-                        @if($items->count() > 14)
+                        {{-- @if($items->count() > 14)
                             @for ($i = 1; $i <= 20 + $items->count() ; $i++)
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr> 
+                            @endfor--}}
+                        @if($items->count() > 5)
+                            @for ($i = 1; $i <= 30 + $items->count() ; $i++)
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -194,8 +201,10 @@
                                     <td></td>
                                 </tr>
                             @endfor
+                        
                         @else    
-                            @for ($i = 1; $i <=  $items->count() + $cont ; $i++)
+                        {{-- muchos items para akihay --}}
+                            @for ($i = 1; $i <=  $items->count() + $cont + 25 ; $i++)
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -205,11 +214,169 @@
                             @endfor                               
 
                         @endif
-                    
+                        
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
+                    <tfoot style="font: 80% ">
+                        <tr >
+                            @if (Auth::user()->name == 'Akihay')
+                                <td colspan="2"></td>
+                                
+                                <td style="text-align:right">
+                                    <strong>
+                                        Cta Cte Anterior:
+                                    </strong>
+                                </td>
+                                
+                                <td style="text-align:center" class="gray"> 
+                                    $ {{ $clie->ctaCte }}
+                                </td>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            Total Boleta
+                                        </strong>
+                                    </td>
+                                    <td style="text-align:center" class="gray"> 
+                                        $ {{ $total }}
+                                    </td>
+                                </tr> 
+                                {{-- </tr> --}}
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td style="text-align:right">
+                                    <strong>
+                                        Paga Efectivo:
+                                    </strong>
+                                    </td>
+                                
+                                    <td style="text-align:center" class="gray"> 
+                                        @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
+                                            || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) || ($tipoPago == 7))
+                                            $ {{ $eft + $desc}}
+                                        @else
+                                            $ 0
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                        Cta Cte Actual:
+                                        </strong>
+                                    </td>
+                                    
+                                    <td style="text-align:center" class="gray"> 
+                                        
+                                        $ {{ ($eft + $desc) - $total + $clie->ctaCte}}
+                                    </td>
+                                </tr>   
+                            @else
+                            
+                                <td colspan="2"></td>
+                                <td style="text-align:right">
+                                <strong>
+                                    Efectivo:
+                                </strong>
+                                </td>
+                            
+                                <td style="text-align:center" class="gray"> 
+                                @if ( ( $tipoPago == 1) || ($tipoPago == 2 ) || ($tipoPago == 5 ) || ($tipoPago == 51)
+                                    || ($tipoPago == 52) || ($tipoPago == 53) || ($tipoPago == 54) )
+                                    $ {{ $eft + $desc}}
+                                @else
+                                    $ 0
+                                @endif
+                                </td>
+                            
+                                </tr>
+                                
+                                <tr>
+                                <td colspan="2"></td>
+                                <td style="text-align:right">
+                                    <strong>
+                                        T Bancaria:
+                                    </strong>
+                                </td>
+                                
+                                    <td style="text-align:center" class="gray"> 
+                                    @if ( ($tipoPago == 31) || ($tipoPago == 51) )
+                                    1 cuota:
+                                        $ {{ $tBanc - $desc}}
+                                    @elseif ($tipoPago==32)  
+                                        3 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc)/3, 2) }}
+                                    @elseif($tipoPago == 33)  
+                                        6 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc)/6, 2) }}
+                                    @elseif($tipoPago == 34)  
+                                        12 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc)/12, 2) }}
+                                    @elseif( $tipoPago == 52)
+                                        3 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc), 2) }}
+                                    @elseif( $tipoPago == 53)
+                                        6 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc), 2) }}
+                                    @elseif( $tipoPago == 54)
+                                        12 cuotas:
+                                        $ {{ number_format( ($tBanc- $desc), 2) }}
+                                    @else
+                                        $ 0
+                                    @endif
+                                    </td>
+
+                                </tr>
+                                
+                                <tr>
+                                <td colspan="2"></td>
+                                <td style="text-align:right">
+                                    <strong>
+                                        T No Bancaria:
+                                    </strong>
+                                </td>
+                                
+                                    <td style="text-align:center" class="gray"> 
+                                    @if ( ($tipoPago == 4) || ($tipoPago == 5) || ($tipoPago == 51) || ($tipoPago == 52) 
+                                        || ($tipoPago == 53) || ($tipoPago == 54))
+                                        $ {{  $tnoBanc }}
+                                    @else
+                                        $ 0
+                                    @endif
+                                    </td>
+                                
+                                </tr>
+                            @endif
+                            @if (Auth::user()->name != 'Akihay')   
+                                <tr>
+                                <td colspan="2"></td>
+                                <td style="text-align:right">
+                                    <strong>
+                                        Descuento:
+                                    </strong>
+                                </td>
+                                <td style="text-align:center" class="gray"> 
+                                - $ {{ $desc  }}
+                                </td>
+                                </tr>
+                            
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            Total 
+                                        </strong>
+                                    </td>
+                                    <td style="text-align:center" class="gray"> 
+                                        $ {{ $total }}
+                                    </td>
+                                </tr>
+                            @endif
+
+
+                        {{-- 
                             <td colspan="2"></td>
                             <td style="text-align:right">
                             <strong>
@@ -218,30 +385,33 @@
                             </td>
                             <td style="text-align:center" class="gray"> 
                                 
-                                {{-- $ {{ $total - ($item->precioUnit *  $item->cantidad)  }} --}}
+                                
                                 {{ $desc}}
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td style="text-align:right">
-                            <strong>
-                                Total: 
-                            </strong>
-                            </td>
-                            <td style="text-align:center" class="gray">
-                                $ {{ $total }}
-                             </td>
-                        </tr>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td style="text-align:right">
+                                <strong>
+                                    Total: 
+                                </strong>
+                                </td>
+                                <td style="text-align:center" class="gray">
+                                    $ {{ $total }}
+                                </td>
+                            </tr> 
+                        --}}
+
+
                     </tfoot>  
                 </table>
             
                 <div>
                     <div class="container mt-1 " style="text-align:left">
                             Firma: 
-                        <br><br>
+                        <br>
                             Aclaración:
-                        <br><br>
+                        <br>
                     </div>
                 </div>
             </div>

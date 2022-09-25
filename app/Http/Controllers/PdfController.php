@@ -177,6 +177,29 @@ class PdfController extends Controller
         $fact= Factura::FindorFail($id);
         //traigo items con mismo id
         $items = Item::whereIn('idFactura', [$id]) ->get();
+        $eft=0;
+        $tBanc=0;
+        $tnoBanc=0;
+        if( $fact->tipoPago == 1){
+            $eft= $fact->total;
+
+        }elseif($fact->tipoPago == 2){
+            $eft= $fact->total;
+
+        }elseif( ($fact->tipoPago == 31) || ($fact->tipoPago == 32) ||
+            ($fact->tipoPago == 33) || ($fact->tipoPago == 34) ){
+            $tBanc= $fact->total;
+
+        }elseif($fact->tipoPago == 4){
+            $tnoBanc= $fact->total;
+
+        }elseif( ($fact->tipoPago == 5) || ($fact->tipoPago == 51) 
+                || ($fact->tipoPago == 52) || ($fact->tipoPago == 53) 
+                || ($fact->tipoPago == 54) || ($fact->tipoPago == 7)){
+            $eft= $fact->totalEft;
+            $tnoBanc= $fact->totalNoBanc;
+            $tBanc= $fact->totalCuot;
+        }
 
         //reviso user y traigo datos d propiet
         $u_id= auth()->id();  
@@ -211,62 +234,92 @@ class PdfController extends Controller
         $total= $fact->total;
         
         $pdf= \PDF::loadView ('remitos.remito_PDF', compact('fecha', 'nremit', 'desc', 'clie',
-                //'dniCli', 'direccionCli', 'nombreCli',
-                'tipoPago', 'total', 'id', 'items', 'pro', 'src'));
+            
+                'tipoPago', 'total', 'id', 'items', 'pro', 'src',
+                'eft','tBanc', 'tnoBanc'));
             
         return $pdf->download ('Rm-' .$clie->nombre .'.pdf', compact('fecha', 'nremit', 'desc', 'clie',
-            //'dniCli','direccionCli', 'nombreCli',
-             'total', 'id', 'items', 'tipoPago', 'pro', 'src'));
+            
+             'total', 'id', 'items', 'tipoPago', 'pro', 'src',
+             'eft','tBanc', 'tnoBanc'));
                 
     }
 
     public function imprimirRemitPdf2($id)
     {
-        //traigo unica fact con id
-        $fact= Factura::FindorFail($id);
-        //traigo items con mismo id
-        $items = Item::whereIn('idFactura', [$id]) ->get();
-        
-        //reviso user y traigo datos d propiet
-        $u_id= auth()->id();  
-        $user= User::FindorFail($u_id);
-        $u_prop= $user->id_prop;
+       //traigo unica fact con id
+       $fact= Factura::FindorFail($id);
+       //traigo items con mismo id
+       $items = Item::whereIn('idFactura', [$id]) ->get();
+       $eft=0;
+       $tBanc=0;
+       $tnoBanc=0;
+       if( $fact->tipoPago == 1){
+           $eft= $fact->total;
 
-        $pro= Propietario::FindorFail($u_prop);        
-        $src= 'Storage/'.$pro->id.'/logodet.jpg'; 
+       }elseif($fact->tipoPago == 2){
+           $eft= $fact->total;
 
-        $fecha= $fact->created_at;
-        $nremit= "0002-0002318";
-        
-        $desc=0;
-        $items = Item::whereIn('idFactura', [$id]) ->get();
-        //dd($items[0]);
-        for ($i=0; $i<count($items); $i++) {
-            $desc= $desc + $items[$i]->descuento;
-            
-        }
-        $clie= Cliente::FindorFail($fact->clie_id);
-/* 
-        $nombreCli= $fact->apellidoyNombre;
-        $direccionCli= $fact->domicilioCliente;
-        $dniCli= $fact->dnicliente;
-         */
-        $tipoPago= $fact->tipoPago;
-        
-        $total= $fact->total;
-        
-        $pdf= \PDF::loadView ('remitos.remito_PDF2', 
-            compact('fecha', 'nremit', 'desc', 'clie',
-                //'dniCli', 'direccionCli', 'nombreCli',
-                'tipoPago', 'total', 'id', 'items', 'pro', 'src'));
-                    
-        return $pdf->download ('Rm-' .$clie->nombre .'.pdf', 
-            compact('fecha', 'nremit', 'desc', 'clie',
-                //'dniCli','direccionCli', 'nombreCli',
-                'total', 'id', 'items', 'tipoPago', 'pro', 'src'));
+       }elseif( ($fact->tipoPago == 31) || ($fact->tipoPago == 32) ||
+           ($fact->tipoPago == 33) || ($fact->tipoPago == 34) ){
+           $tBanc= $fact->total;
+
+       }elseif($fact->tipoPago == 4){
+           $tnoBanc= $fact->total;
+
+       }elseif( ($fact->tipoPago == 5) || ($fact->tipoPago == 51) 
+               || ($fact->tipoPago == 52) || ($fact->tipoPago == 53) 
+               || ($fact->tipoPago == 54) || ($fact->tipoPago == 7)){
+           $eft= $fact->totalEft;
+           $tnoBanc= $fact->totalNoBanc;
+           $tBanc= $fact->totalCuot;
+       }
+
+       //reviso user y traigo datos d propiet
+       $u_id= auth()->id();  
+       $user= User::FindorFail($u_id);
+       $u_prop= $user->id_prop;
+       
+       $pro= Propietario::FindorFail($u_prop);        
+       $src= 'Storage/'.$pro->id.'/logodet.jpg'; 
+
+       $fecha= $fact->created_at;
+       $nremit= "0002-0002318";
+       if( $fact->tipoPago == 1){
+           $eft= $fact->total;
+       }
+       
+       $desc=0;
+       $items = Item::whereIn('idFactura', [$id]) ->get();
+       //dd($items[0]);
+       for ($i=0; $i<count($items); $i++) {
+           $desc= $desc + $items[$i]->descuento;
+           
+       }
+
+       $clie= Cliente::FindorFail($fact->clie_id);
+
+       // $nombreCli= $fact->apellidoyNombre;
+       // $direccionCli= $fact->domicilioCliente;
+       // $dniCli= $fact->dnicliente;
+      
+       $tipoPago= $fact->tipoPago;
+       
+       $total= $fact->total;
+       
+       $pdf= \PDF::loadView ('remitos.remito_PDF2', compact('fecha', 'nremit', 'desc', 'clie',
+           
+               'tipoPago', 'total', 'id', 'items', 'pro', 'src',
+               'eft','tBanc', 'tnoBanc'));
+           
+       return $pdf->download ('Rm-' .$clie->nombre .'.pdf', compact('fecha', 'nremit', 'desc', 'clie',
+           
+            'total', 'id', 'items', 'tipoPago', 'pro', 'src',
+            'eft','tBanc', 'tnoBanc'));
                     
     }
 
+    
     public function imprimirPresuPdf($id)
     {
         //traigo presu con id

@@ -2,34 +2,15 @@
 
 @section('content')
 
-<div class="float-right">
-  @component('components.botones')
-  @endcomponent
-</div>
-<x-grafica img="/Storage/orden.png"/>
-<br>
+  <x-header titulo="Ordenes" />  
 
-<table class= "table">
-    <tr>
-      <th class="container col-md-9"  >
-        {{-- col izq --}}
-      </th>
-      <th class="container mt-3 col-md-2">
-        
-        
-      </th>
-      <th class="container mt-3 col-md-1">
-        <x-agrega-btn route="ordenes/create" 
-                      destino="Crear" />
-      </th>
-    </tr>
-</table>
-
-@if($orders->count()>0)
+  <x-agrega-btn route="ordenes/create" 
+  destino="Crear" />
+  @if($orders->count()>0)
 
 
-<div class="container mt-4 col-md-6">
-  <div class="row justify-content-center mx-auto ">
+  <div class="container mt-4 col-md-6">
+   <div class="row justify-content-center mx-auto ">
     
         <table class="table border-rounded shadow" >
           <thead class="table-warning font-normal text-center text-black-500" >
