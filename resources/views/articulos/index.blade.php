@@ -7,7 +7,7 @@
         @component('components.botones')
         @endcomponent
   </div>
-  {{-- <x-grafica img="/Storage/articulos.png" /> --}}
+  
   <h2>
     Artículos
   </h2>
@@ -623,11 +623,11 @@
               </tbody>
               
             </table>
-            
+                  
       </div>
-          
+            
     </div>
-    {{ $arts->links() }}
+    {{ $arts->links() }}  
     <!-- 
     <div class="container">
       <a href=" {{ route ('articulosPdf') }}" class="btn btn-primary" >

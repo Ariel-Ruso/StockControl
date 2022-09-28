@@ -2902,7 +2902,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link {
-  font-weight: 400;
+  font-weight: 100;
   color: #007bff;
   text-decoration: none;
 }
@@ -3708,7 +3708,7 @@ input[type="button"].btn-block {
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 100;
   line-height: 1.5;
   color: #495057;
   vertical-align: middle;

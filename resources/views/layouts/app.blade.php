@@ -40,18 +40,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="sweetalert2.min.css">
 {{-- <<<<<<< HEAD
+
     <link rel="stylesheet" href="{{ asset('sass/style.scss') }}">
     <link rel="stylesheet" href="{{ asset('sass/app.scss') }}">
     
-======= --}}
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
+
+
 {{-- >>>>>>> 99e9d71 --}}
+<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/app.css') }}"> 
 
 </head>
 <body>
-    <div 
-    id="app"
+    <div id="app"
     >
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
