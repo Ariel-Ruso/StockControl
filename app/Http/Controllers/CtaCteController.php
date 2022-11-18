@@ -35,7 +35,7 @@ class CtaCteController extends Controller
         //$caja->users_id= auth()->id();
         $cta->monto= $request->monto;
         $cta->clientes_id= $request->cliente_id;
-        $cta->facturas_id= 1m ;
+        $cta->facturas_id= 1 ;
         $cta->save();
         
         return redirect()

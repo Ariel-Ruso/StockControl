@@ -16,4 +16,13 @@ class Proveedor extends Model
         //Proveedor tiene varios articulos
         return $this->hasmany (Articulo::class);
     }
+
+    public function scopeNombre($query, $nombre){
+
+        if($nombre){
+            
+            return $query->where('nombre','like',"%$nombre%");
+        }
+
+    }
 }

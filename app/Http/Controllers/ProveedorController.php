@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use Illuminate\Http\DB;
 
 class ProveedorController extends Controller
 {
     
     public function index()
     {
-        $proves= Proveedor::all();
-        $cont= count($proves);
-        return view ('proveedores.index', compact('proves', 'cont'));
+        $proves= Proveedor::orderBy ('id', 'ASC')
+            ->paginate(15);
+        
+        return view ('proveedores.index', compact('proves'));
         
     }
 
@@ -24,8 +26,7 @@ class ProveedorController extends Controller
 
     public function store (Request $request){
 
-        //dd($request);
-        
+                
     	$request-> validate ([
             'nombre' => 'required',
             'correo' => 'required',
@@ -80,4 +81,28 @@ class ProveedorController extends Controller
         $prov->delete();
         return back()->with('mensaje', 'Proveedor eliminado  ');    
     }
+
+    
+    
+    public function search(Request $request){      
+
+        $nombre= $request->get('nombre');
+        /* $correo= $request->get('correo');
+        $contacto= $request->get('contacto');
+        $telefono= $request->get('telefono');
+        $direccion= $request->get('direccion');
+         */
+        $proves= Proveedor::orderBy ('id', 'ASC')
+            ->nombre ($nombre)
+            /* ->correo ($correo)
+            ->contacto ($contacto)
+            ->telefono ($telefono)
+            ->direccion ($direccion) */
+            
+            ->paginate (150);
+
+
+        return view ('proveedores.index', compact ('proves'));
+    }
+      
 }

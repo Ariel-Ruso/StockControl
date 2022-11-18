@@ -2,32 +2,21 @@
 
 @section('content')
 
-<div class="float-right">
-    @component('components.botones')
-    @endcomponent
-    <br>
-</div>
-    {{-- <x-grafica img="/Storage/facturas.png"/> --}}
-    <h2>
-      Gastos
-    </h2>
-    <br>
-    <table class= "table">
-        <tr></tr>
-    </table>
+<x-header titulo="Gastos" />  
 
     <div class="container mt-10 ">
         <div class="row justify-content-center ">
             <div class="col-md-4">
                 <div class="card bg-blue shadow">
-                    <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center">
-                        <span class="text-center mx-auto font text-2xl">
+                    <div class="card-header ">
+                        <div class=" py-3 px-8 bg-blue-200 d-flex justify-content-between align-items-center ">
+                            <span class="text-center mx-auto font text-2xl ">
                             <h3>
-                                Ingrese Gasto
+                                Agregar
                             </h3>
-                          
-                        </span>                       
-                    </div>
+                            </span>
+                        </div>
+                    </div>      
                     <div class="card-body">     
                      
                       <form   action="{{ route('gastos.store') }}" 

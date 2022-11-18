@@ -175,6 +175,9 @@ Route::resource('categorias', CategoriaController::class);
 
 Route::resource('proveedores', ProveedorController::class);
 
+    Route::get ('/proveedores.index', [ProveedorController::class, 'search'])
+    ->name('proveedores.search');
+
 Route::get('verSession', [CarritoController::class, 'verSession'])
     ->name('verSession');
 

@@ -1,21 +1,63 @@
 @extends('layouts.app')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 @section('content')
 
   <x-header titulo="Proveedores" />  
 
-  
-  <x-agrega-btn route="proveedores/create" 
-                      destino="Crear"/>
+  <table name="search">
+    <tr>
+      <th class="container col-md-9 "  >
+        {{-- col izq --}}
+        <label class="alert alert-primary border shadow mx-5" >
+          <nav class="d-flex navbar navbar-light float-left tablet: d-flex flex-col">
+            <form  class="form-inline col-auto " action="{{ route('proveedores.search') }}" >
+                <input    name="nombre" 
+                          id= "nombre"
+                          class="form-control mr-sm-2" 
+                          type="search" 
+                          placeholder="Nombre" 
+                          aria-label="Search"
+                          >
+                <!-- <input    name="dni" 
+                          id= "dni"
+                          class="form-control mr-sm-2 " 
+                          type="search" 
+                          placeholder="Dni" 
+                          aria-label="Search"
+                          > -->
+              
+                <button class="btn btn-success sm shadow" 
+                      type="submit" 
+                      >
+                            Buscar
+                </button>
+              </form>
+          </nav>
+        
+      </label>
+
+      </th>
+      
+      <th class="container mt-3 col-md-2 "> 
+        {{-- col cent --}}
+      </th  >
+      <th class="container mt-3 col-md-1">
+        {{-- col der --}}
+        
+        <x-agrega-btn route="proveedores/create" 
+                      destino="Agregar"/>
                       <br>
-    
-  @if($cont==0)
-
-    <br>
-    <x-vacio mensaje="Sin Proveedores ahora" />
-  @else
-
+        <br><br>
+        @component('components.carrito-btn')
+        @endcomponent
+      
+      </th>
+    </tr>
+  </table>
+  
+  @if($proves->count())
+  
     <div class="container mt-4">
       <div class="row justify-content-center mx-auto ">
             <table class="table border-rounded shadow" >
@@ -115,11 +157,17 @@
                 @endforeach
               </tbody>
             </table>
-      </div>                             
+      </div>                        
+      {{ $proves->links() }}         
     </div>
-  @endif
-                                    
+    
 
+  @else
+
+    <br>
+    <x-vacio mensaje="Sin Proveedores ahora" />
+    @endif
+                  
 @endsection
 
 

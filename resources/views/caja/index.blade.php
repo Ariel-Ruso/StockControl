@@ -7,16 +7,23 @@
 
     @if( $estado == 1 )
                     <div class="container">
-                        <a  class= "btnn btnClose shadow  py-2 px-2 mb-1 "
+                             <!-- class= "   btnn btnClose shadow  py-2 px-2 mb-1 "" -->
+                             
+                        
+                    <a  
+                            class= "btnn btnClose shadow
+                                float-right
+                                py-2 px-2"
                             data-toggle="modal" 
                             data-target="#confirm-delete" 
                             type= "button">               
                             
                                 Cerrar
-                        </a>   
+                        </a>    
                     </div>
+                    
                     <br>
-    
+                    <br>
                     <x-agrega-btn route="gastos/create" 
                                 destino="Gastos" />
                 
