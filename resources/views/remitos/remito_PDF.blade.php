@@ -17,32 +17,35 @@
 </head>
 <body>
     
-<div class="container mt-5">
+    
+<div class="container mt-1">
   <div class="table table-bordered border-primary rounded">
 
-    <div class="container ">
+    <div class="container p-1">
       <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-12 ">
 
                 <table class="table table-bordered table-responsive" width="100%" >
                     <!-- columna izquierda -->
                     
                     <td style="text-align:center" 
                         width= 45%>
-                        <h4 >  
+                        <h5>  
                             {{ $pro->lema }}
-                        </h4>
+                        </h5>
                         <div class="row justify-content-left">
                             <div name= "logo" class= "container" style="text-align:center">                            
-                                <img src= "{{ $src }}" class="img" width="200"  />
+                                <img src= "{{ $src }}" class="img" width="100"  />
                             </div> 
-                        </div> 
-                                <p>
+                        </div > 
+                                <p style="font: 80% ">
+                                    
                                     {{ $pro->nombre }}<br><br> 
                                     {{ $pro->direccion }}<br>
                                     {{ $pro->localidad }}<br>
                                     Tel: {{ $pro->telefono }}<br><br>
                                     {{ $pro->iva }}
+                                    
                                 </p>
                     </td>
                     
@@ -68,13 +71,13 @@
                         width=  5% 
                         >
                             <td style="text-align:left">
-                                <h3 >  
+                                <h3 style="font: 90% ">  
                                         REMITO<br>
                                         N° {{ $nremit }}<br>
                                 </h3><br>
                                 Fecha:           {{ $fecha->format('d/m/y') }}
                             
-                                <h6 class="mt-4">
+                                <h6 class="mt-2">
                                     C.U.I.T N°                       {{ $pro->cuit }}<br>
                                     INGRESOS BRUTOS:      {{ $pro->ingbru }}<br>
                                     JUBILACION:                 {{ $pro->jubilacion }}<br>
@@ -90,10 +93,10 @@
       </div>
     </div>      
 
-    <div class="container ">
-        <div class="row justify-content-center">
+    <div class="container p-1" >
+        <div class="row justify-content-center ">
             <div class="col-md-12">
-                <table class="table table-bordered" width="100%"  >
+                <table class="table table-bordered " width="100%"  >
                 <!-- columna izquierda -->
                     <td style="text-align:left">
                         <p style="font: 80% ">         
@@ -127,8 +130,8 @@
         </div>
     </div>
 
-    <div class="container ">
-        <div class="row justify-content-center">
+    <div class="container mt-1">
+        <div class="row justify-content-center mt-1">
             <div class="col-md-12">
             
                 <table class="table table-bordered"  style="text-align:center" width="100%" >
@@ -145,7 +148,7 @@
                             $cont= 0;
                         ?>
                         @foreach($items as $item)
-                            <tr style="font: 70% ">
+                            <tr style="font: 90% ">
                                 <?php 
                                     $cont ++;
                                 ?>

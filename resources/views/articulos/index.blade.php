@@ -4,9 +4,7 @@
   
   <x-header titulo="Articulos" />  
 
-  <table 
-  {{-- class= "table"  --}}
-  name="busqueda">
+  <table class= "table" name="busqueda">
     <tr>
       <th>
       {{-- col izq --}}
@@ -145,7 +143,7 @@
     </tr>
   </table>
 
-  <!-- si vuelve vacio -->
+  
   @if($arts->count())
 
         <!-- si hay resultado armo tabla --> 
@@ -599,10 +597,11 @@
               </tbody>
               
             </table>
-            
+                  
       </div>
-          
+            
     </div>
+    
     {{ $arts->links() }}
 
     <!-- 

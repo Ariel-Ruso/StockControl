@@ -12,7 +12,7 @@
   <table class= "table mt-1">
     <th>
     </th>
-  </table
+  </table>
 
 
 <div class="container mt-5" >
